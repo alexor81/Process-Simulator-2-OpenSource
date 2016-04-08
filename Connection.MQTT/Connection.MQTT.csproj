@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6FE628F6-DB51-4F17-8202-46B440EB561F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Connection.MQTT</RootNamespace>
+    <AssemblyName>Connection.MQTT</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\_BinDebug\Connections\</OutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\_BinRelease\Connections\</OutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="API">
+      <HintPath>C:\Program Files (x86)\Process Simulator 2\API.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v12.2, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Process Simulator 2\DevExpress.Data.v12.2.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v12.2.Core, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Process Simulator 2\DevExpress.Printing.v12.2.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v12.2, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Process Simulator 2\DevExpress.Utils.v12.2.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Process Simulator 2\DevExpress.XtraEditors.v12.2.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\M2Mqtt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Utils">
+      <HintPath>C:\Program Files (x86)\Process Simulator 2\Utils.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connection.cs" />
+    <Compile Include="ConnectionSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConnectionSetupForm.Designer.cs">
+      <DependentUpon>ConnectionSetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataItem.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="ItemSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemSetupForm.Designer.cs">
+      <DependentUpon>ItemSetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConnectionSetupForm.resx">
+      <DependentUpon>ConnectionSetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemSetupForm.resx">
+      <DependentUpon>ItemSetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="M2Mqtt.Net.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

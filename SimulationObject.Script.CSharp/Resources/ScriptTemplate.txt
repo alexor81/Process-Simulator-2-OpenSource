@@ -1,0 +1,62 @@
+using System;
+
+namespace SciptNamespace
+{
+	public class ScriptClass
+	{
+		public void					ScriptMethod(long aMSFromLastCall)
+		{
+			MSFromLastCall = aMSFromLastCall;
+			try
+			{
+#R2#
+			}
+			catch (System.Threading.ThreadAbortException)
+			{
+				return;
+			}
+			catch (Exception lExc)
+			{
+				ReportException(lExc);
+			}			
+		}
+
+		public long					MSFromLastCall;
+
+		public event EventHandler	ScriptEvent;
+        private void				raiseScriptEvent()
+        {
+            EventHandler lEvent = ScriptEvent;
+            if (lEvent != null) lEvent(null, EventArgs.Empty);
+        }
+		public object[]				mEventArgs;
+
+		private void				ReportError(string aMessage)
+		{
+			mEventArgs		= new object[2];
+			mEventArgs[0]	= 1;
+			mEventArgs[1]	= aMessage;
+			raiseScriptEvent();
+		}
+
+		private void				LogMessage(string aMessage)
+		{
+			mEventArgs		= new object[2];
+			mEventArgs[0]	= 2;
+			mEventArgs[1]	= aMessage;
+			raiseScriptEvent();
+		}
+
+		private void				ReportException(Exception aExc)
+		{
+			mEventArgs		= new object[2];
+			mEventArgs[0]	= 3;
+			mEventArgs[1]	= aExc;
+			raiseScriptEvent();
+		}
+
+		public object[]				mVarValues;
+		public bool[]				mVarValuesChanged; 
+#R1#
+	}
+}

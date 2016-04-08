@@ -1,0 +1,79 @@
+﻿using System;
+using System.Windows.Forms;
+using Utils;
+
+namespace Connection.Internal
+{
+    public partial class ConnectionSetupForm : Form
+    {
+        private Connection          mConnection;
+
+        public                      ConnectionSetupForm(Connection aConnection, bool aNew)
+        {
+            mConnection = aConnection;
+            InitializeComponent();
+
+            if (aNew == false)
+            {
+                okCancelButton.setOkOnlyStyle();
+            }
+            
+            mConnection.ConnectionState += new EventHandler(onConnectionStateChanged);
+            updateForm();
+        }
+
+        private void                onConnectionStateChanged(object aSender, EventArgs aEventArgs)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke((Action)(() => { updateForm(); }));
+            }
+            else
+            {
+                updateForm();
+            }
+        }
+
+        private void                updateForm()
+        {
+            if (mConnection.Connected)
+            {
+                label_Status.Text = "Status: Connected";
+            }
+            else
+            {
+                label_Status.Text = "Status: Disconnected";
+            }
+
+            button_Connect.Enabled      = !mConnection.Connected;
+            button_Disconnect.Enabled   = mConnection.Connected;
+
+            label_CountN.Text           = StringUtils.ObjectToString(mConnection.NumberOfItems);
+        }
+
+        private void                button_Connect_Click(object aSender, EventArgs aEventArgs)
+        {
+            mConnection.connect();
+        }
+
+        private void                button_Disconnect_Click(object aSender, EventArgs aEventArgs)
+        {
+            mConnection.disconnect();
+        }
+
+        private void                okCancelButton_ButtonClick(object aSender, EventArgs aEventArgs)
+        {
+            DialogResult = okCancelButton.DialogResult;
+        }
+
+        private void                ConnectionSetupForm_FormClosed(object aSender, FormClosedEventArgs aEventArgs)
+        {
+            mConnection.ConnectionState -= onConnectionStateChanged;
+        }
+
+        private void                ConnectionSetupForm_Load(object aSender, EventArgs aEventArgs)
+        {
+            ClientSize = FormUtils.calcClientSize(ClientSize, Controls);
+        }
+    }
+}
