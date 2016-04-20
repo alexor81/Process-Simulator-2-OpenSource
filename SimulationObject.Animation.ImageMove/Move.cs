@@ -1,6 +1,7 @@
 ﻿using API;
 using SimulationObject.Animation.ImageMove.Panel;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -13,17 +14,21 @@ namespace SimulationObject.Animation.ImageMove
     {
         #region Properties
 
-            public int                                          mXValueItemHandle = -1;
-            public int                                          mXValue;
-
-            public int                                          mYValueItemHandle = -1;
-            public int                                          mYValue;
-
             public MemoryStream                                 mImgMemStrm;
+            public Bitmap                                       mBmp;
 
         #endregion
 
         #region IItemUser
+
+            public int                                          mXValueItemHandle   = -1;
+            public int                                          mXValue;
+
+            public int                                          mYValueItemHandle   = -1;
+            public int                                          mYValue;
+
+            public int                                          mVisibleItemHandle  = -1;
+            public bool                                         mVisible            = true;
 
             private IItemBrowser                                mItemBrowser;
             public IItemBrowser                                 ItemBrowser
@@ -35,7 +40,18 @@ namespace SimulationObject.Animation.ImageMove
             {
                 get
                 {
-                    return new int[] { mXValueItemHandle, mYValueItemHandle };
+                    List<int> lResult = new List<int>();
+
+                    lResult.Add(mXValueItemHandle);
+                    lResult.Add(mYValueItemHandle);
+
+
+                    if (mVisibleItemHandle != -1)
+                    {
+                        lResult.Add(mVisibleItemHandle);
+                    }
+
+                    return lResult.ToArray();
                 }
             }
 
@@ -103,6 +119,27 @@ namespace SimulationObject.Animation.ImageMove
 
                     return;
                 }
+
+                if (aItemHandle == mVisibleItemHandle)
+                {
+                    bool lValue;
+                    try
+                    {
+                        lValue = Convert.ToBoolean(aItemValue);
+                    }
+                    catch (Exception lExc)
+                    {
+                        throw new ArgumentException("Value conversion error for image to change visibile state. ", lExc);
+                    }
+
+                    if (mVisible != lValue)
+                    {
+                        mVisible = lValue;
+                        raiseValuesChanged();     
+                    }    
+
+                    return;
+                }
             }
 
         #endregion
@@ -167,6 +204,10 @@ namespace SimulationObject.Animation.ImageMove
                 lChecker.addItemName(lItem);
                 mYValueItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
+                lItem = lReader.getAttribute<String>("Visible", "");
+                lChecker.addItemName(lItem);
+                mVisibleItemHandle = mItemBrowser.getItemHandleByName(lItem);
+
                 if (aXMLTextReader.IsEmptyElement == false)
                 {
                     aXMLTextReader.Read();
@@ -185,11 +226,9 @@ namespace SimulationObject.Animation.ImageMove
                     throw new ArgumentException("Image does not exist. ");
                 }
 
-                Bitmap lBmp;
                 try
                 {
-                    lBmp = new Bitmap(mImgMemStrm);
-                    lBmp.Dispose();
+                    mBmp = new Bitmap(mImgMemStrm);
                 }
                 catch(Exception lExc)
                 {
@@ -203,6 +242,7 @@ namespace SimulationObject.Animation.ImageMove
             {
                 aXMLTextWriter.WriteAttributeString("X", mItemBrowser.getItemNameByHandle(mXValueItemHandle));
                 aXMLTextWriter.WriteAttributeString("Y", mItemBrowser.getItemNameByHandle(mYValueItemHandle));
+                aXMLTextWriter.WriteAttributeString("Visible", mItemBrowser.getItemNameByHandle(mVisibleItemHandle));
                 aXMLTextWriter.WriteStartElement("Image");
                     aXMLTextWriter.WriteString(Convert.ToBase64String(mImgMemStrm.ToArray()));
                 aXMLTextWriter.WriteEndElement();
@@ -259,7 +299,13 @@ namespace SimulationObject.Animation.ImageMove
                 {
                     if (aDisposing)
                     {
-                        if(mImgMemStrm != null)
+                        if (mBmp != null)
+                        {
+                            mBmp.Dispose();
+                            mBmp = null;
+                        }
+
+                        if (mImgMemStrm != null)
                         {
                             mImgMemStrm.Close();
                             mImgMemStrm = null;

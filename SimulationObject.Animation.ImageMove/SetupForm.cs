@@ -15,6 +15,7 @@ namespace SimulationObject.Animation.ImageMove
         private Move                mMove;
         private IItemBrowser        mBrowser;
         private MemoryStream        mImgMemStrm;
+        private Bitmap              mBmp;
 
         public                      SetupForm(Move aMove, IItemBrowser aBrowser)
         {
@@ -34,10 +35,17 @@ namespace SimulationObject.Animation.ImageMove
                 itemEditBox_Y.ItemToolTip   = mBrowser.getItemToolTipByHandle(mMove.mYValueItemHandle);
             }
 
-            if(mMove.mImgMemStrm != null)
+            if (mMove.mVisibleItemHandle != -1)
+            {
+                itemEditBox_Visible.ItemName    = mBrowser.getItemNameByHandle(mMove.mVisibleItemHandle);
+                itemEditBox_Visible.ItemToolTip = mBrowser.getItemToolTipByHandle(mMove.mVisibleItemHandle);
+            }
+
+            if (mMove.mBmp != null)
             {
                 mImgMemStrm         = mMove.mImgMemStrm;
-                pictureBox.Image    = new Bitmap(mImgMemStrm);
+                mBmp                = mMove.mBmp;
+                pictureBox.Image    = mMove.mBmp;
             }
         }
 
@@ -95,19 +103,21 @@ namespace SimulationObject.Animation.ImageMove
 
                     Bitmap lBmp = new Bitmap(lMemStrm);
 
-                    if (pictureBox.Image != null)
+                    if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
                     {
-                        pictureBox.Image.Dispose();
-                        pictureBox.Image = null;
+                        mBmp.Dispose();
+                        mBmp                = null;
+                        pictureBox.Image    = null;
                     }
 
-                    if (ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
+                    if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
                     {
                         mImgMemStrm.Close();
                         mImgMemStrm = null;
                     }
 
                     mImgMemStrm         = lMemStrm;
+                    mBmp                = lBmp;
                     pictureBox.Image    = lBmp;
                 }
                 catch (Exception lExc)
@@ -124,7 +134,14 @@ namespace SimulationObject.Animation.ImageMove
         {
             if (okCancelButton.DialogResult == DialogResult.Cancel)
             {
-                if (ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
+                if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
+                {
+                    mBmp.Dispose();
+                    mBmp                = null;
+                    pictureBox.Image    = null;
+                }
+
+                if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
                 {
                     mImgMemStrm.Close();
                     mImgMemStrm = null;
@@ -146,7 +163,7 @@ namespace SimulationObject.Animation.ImageMove
                         throw new ArgumentException("Y position Item is missing. ");
                     }
 
-                    if(mImgMemStrm == null)
+                    if(mImgMemStrm == null || mBmp == null)
                     {
                         throw new ArgumentException("Image is empty. ");
                     }
@@ -154,16 +171,31 @@ namespace SimulationObject.Animation.ImageMove
                     var lChecker = new RepeatItemNameChecker();
                     lChecker.addItemName(itemEditBox_X.ItemName);
                     lChecker.addItemName(itemEditBox_Y.ItemName);
+                    lChecker.addItemName(itemEditBox_Visible.ItemName);
 
-                    mMove.mXValueItemHandle = mBrowser.getItemHandleByName(itemEditBox_X.ItemName);
-                    mMove.mYValueItemHandle = mBrowser.getItemHandleByName(itemEditBox_Y.ItemName);
+                    mMove.mXValueItemHandle     = mBrowser.getItemHandleByName(itemEditBox_X.ItemName);
+                    mMove.mYValueItemHandle     = mBrowser.getItemHandleByName(itemEditBox_Y.ItemName);
+                    mMove.mVisibleItemHandle    = mBrowser.getItemHandleByName(itemEditBox_Visible.ItemName);
 
-                    if(ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
+                    if(mMove.mVisibleItemHandle == -1)
                     {
-                        mMove.mImgMemStrm.Close();
-                        mMove.mImgMemStrm = mImgMemStrm;
-                        mMove.raisePropertiesChanged();
+                        mMove.mVisible = true;
                     }
+
+                    if (mMove.mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
+                    {
+                        mMove.mBmp.Dispose();
+                    }
+
+                    if (mMove.mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
+                    {
+                        mMove.mImgMemStrm.Close();   
+                    }
+
+                    mMove.mImgMemStrm   = mImgMemStrm;
+                    mMove.mBmp          = mBmp;
+                    mMove.raiseValuesChanged();
+                    mMove.raisePropertiesChanged();
                 }
                 catch (Exception lExc)
                 {

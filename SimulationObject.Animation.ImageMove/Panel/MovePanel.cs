@@ -81,6 +81,18 @@ namespace SimulationObject.Animation.ImageMove.Panel
             if (mDemo == false)
             {
                 Location = new Point(mMove.mXValue, mMove.mYValue);
+                if (pictureBox.Enabled)
+                {
+                    Visible = mMove.mVisible;
+                }
+                else
+                {
+                    Visible = true;
+                }
+            }
+            else
+            {
+                Visible = true;
             }
         }
 
@@ -97,33 +109,26 @@ namespace SimulationObject.Animation.ImageMove.Panel
         }
         private void            updateP()
         {
-            if (mMove.mImgMemStrm != null)
+            if (mMove.mBmp != null)
             {
-                if(pictureBox.Image != null)
-                {
-                    pictureBox.Image.Dispose();
-                    pictureBox.Image = null;
-                }
-
-                pictureBox.Image    = new Bitmap(mMove.mImgMemStrm);
-                Size                = pictureBox.Image.Size;
+                pictureBox.Image    = mMove.mBmp;
+                Size                = mMove.mBmp.Size;
             }
             else
             {
-                Log.Error("Image is empty in ImgMove panel. ");
+                Log.Error("Error in panel for Animation.ImageMove. Image is empty. ");
             }
+        }
+
+        private void            pictureBox_EnabledChanged(object aSender, EventArgs aEventArgs)
+        {
+            updateV();
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                if(pictureBox.Image != null)
-                {
-                    pictureBox.Image.Dispose();
-                    pictureBox.Image = null;
-                }
-
                 mMove = null;
                 toolTip.RemoveAll();
 

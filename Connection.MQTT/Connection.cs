@@ -250,8 +250,13 @@ namespace Connection.MQTT
             private Dictionary<string, DataItem>            mItemList       = new Dictionary<string, DataItem>();
             private ReaderWriterLockSlim                    mItemListLock   = new ReaderWriterLockSlim();
 
-            public DataItem                                 addItem(string aTopic, bool aSubscribe, bool aPublish, string aValue)
+            private void                                    checkItemArguments(string aTopic)
             {
+                if(String.IsNullOrWhiteSpace(aTopic))
+                {
+                    throw new ArgumentException("Topic name is empty. ");
+                }
+
                 if (aTopic.Contains("+"))
                 {
                     throw new ArgumentException("There is wrong symbol [+] in Topic name '" + aTopic + "'. ");
@@ -261,6 +266,11 @@ namespace Connection.MQTT
                 {
                     throw new ArgumentException("There is wrong symbol [#] in Topic name '" + aTopic + "'. ");
                 }
+            }
+
+            public DataItem                                 addItem(string aTopic, bool aSubscribe, bool aPublish, string aValue)
+            {
+                checkItemArguments(aTopic);
 
                 DataItem lItem      = new DataItem();
                 lItem.mTopic        = aTopic;
@@ -299,15 +309,7 @@ namespace Connection.MQTT
 
             public void                                     modifyItem(DataItem aItem, string aNewTopic, bool aSubscribe, bool aPublish)
             {
-                if (aNewTopic.Contains("+"))
-                {
-                    throw new ArgumentException("There is wrong symbol [+] in Topic name '" + aNewTopic + "'. ");
-                }
-
-                if (aNewTopic.Contains("#"))
-                {
-                    throw new ArgumentException("There is wrong symbol [#] in Topic name '" + aNewTopic + "'. ");
-                }
+                checkItemArguments(aNewTopic);
 
                 if (aItem.mTopic.Equals(aNewTopic, StringComparison.Ordinal) == false)
                 {

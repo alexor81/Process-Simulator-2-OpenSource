@@ -15,8 +15,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -29,6 +28,7 @@
             this.pictureBox.Size = new System.Drawing.Size(38, 38);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            this.pictureBox.EnabledChanged += new System.EventHandler(this.pictureBox_EnabledChanged);
             // 
             // MovePanel
             // 
@@ -36,6 +36,7 @@
             this.Controls.Add(this.pictureBox);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
+            this.MinimumSize = new System.Drawing.Size(10, 10);
             this.Name = "MovePanel";
             this.Size = new System.Drawing.Size(38, 38);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
