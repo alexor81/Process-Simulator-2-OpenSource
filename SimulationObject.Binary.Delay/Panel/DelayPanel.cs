@@ -1,8 +1,8 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using API;
 using Utils;
 using Utils.DialogForms;
 
@@ -16,6 +16,8 @@ namespace SimulationObject.Binary.Delay.Panel
         {
             mDelay = aDelay;
             InitializeComponent();
+
+            BackColor = SystemColors.Control;
         }
 
         public void             fillForDemo()

@@ -147,6 +147,7 @@ namespace Connection.S7PLCSim
             {
                 Connection lConnection  = (Connection)aConnection;
                 DataItem lItem          = new DataItem();
+
                 using (var lSetupForm = new ItemSetupForm(lConnection, lItem))
                 {
                     if (lSetupForm.ShowDialog(aOwner) == DialogResult.OK)

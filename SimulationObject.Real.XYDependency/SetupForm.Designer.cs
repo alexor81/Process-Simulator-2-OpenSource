@@ -43,9 +43,11 @@
             this.splitContainerControl_Points = new DevExpress.XtraEditors.SplitContainerControl();
             this.listBox_Points = new System.Windows.Forms.ListBox();
             this.toolStrip_Points = new System.Windows.Forms.ToolStrip();
+            this.tsLabel_Points = new System.Windows.Forms.ToolStripLabel();
             this.tsButton_Add = new System.Windows.Forms.ToolStripButton();
             this.tsButton_Delete = new System.Windows.Forms.ToolStripButton();
             this.tsButton_Setup = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.panel_OkCancel.SuspendLayout();
             this.panel_Items.SuspendLayout();
@@ -106,7 +108,7 @@
             series1.Name = "Series1";
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             this.chart.Series.Add(series1);
-            this.chart.Size = new System.Drawing.Size(500, 388);
+            this.chart.Size = new System.Drawing.Size(520, 388);
             this.chart.TabIndex = 57;
             this.chart.Text = "chart";
             this.chart.PrePaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.chart_PrePaint);
@@ -194,7 +196,7 @@
             this.splitContainerControl_Points.Panel2.Controls.Add(this.chart);
             this.splitContainerControl_Points.Panel2.Text = "Panel2";
             this.splitContainerControl_Points.Size = new System.Drawing.Size(668, 388);
-            this.splitContainerControl_Points.SplitterPosition = 162;
+            this.splitContainerControl_Points.SplitterPosition = 142;
             this.splitContainerControl_Points.TabIndex = 1;
             // 
             // listBox_Points
@@ -205,7 +207,7 @@
             this.listBox_Points.ItemHeight = 16;
             this.listBox_Points.Location = new System.Drawing.Point(0, 25);
             this.listBox_Points.Name = "listBox_Points";
-            this.listBox_Points.Size = new System.Drawing.Size(162, 363);
+            this.listBox_Points.Size = new System.Drawing.Size(142, 363);
             this.listBox_Points.TabIndex = 2;
             this.listBox_Points.TabStop = false;
             this.listBox_Points.SelectedIndexChanged += new System.EventHandler(this.listBox_Points_SelectedIndexChanged);
@@ -215,14 +217,23 @@
             // 
             this.toolStrip_Points.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip_Points.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsLabel_Points,
+            this.toolStripSeparator1,
             this.tsButton_Add,
             this.tsButton_Delete,
             this.tsButton_Setup});
             this.toolStrip_Points.Location = new System.Drawing.Point(0, 0);
             this.toolStrip_Points.Name = "toolStrip_Points";
-            this.toolStrip_Points.Size = new System.Drawing.Size(162, 25);
+            this.toolStrip_Points.Size = new System.Drawing.Size(142, 25);
             this.toolStrip_Points.TabIndex = 0;
-            this.toolStrip_Points.Text = "toolStrip1";
+            this.toolStrip_Points.Text = "Points";
+            // 
+            // tsLabel_Points
+            // 
+            this.tsLabel_Points.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tsLabel_Points.Name = "tsLabel_Points";
+            this.tsLabel_Points.Size = new System.Drawing.Size(50, 22);
+            this.tsLabel_Points.Text = "Points";
             // 
             // tsButton_Add
             // 
@@ -256,6 +267,11 @@
             this.tsButton_Setup.Size = new System.Drawing.Size(23, 22);
             this.tsButton_Setup.Text = "Setup";
             this.tsButton_Setup.Click += new System.EventHandler(this.tsButton_Setup_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // SetupForm
             // 
@@ -304,5 +320,7 @@
         private System.Windows.Forms.ToolStripButton tsButton_Delete;
         private System.Windows.Forms.ListBox listBox_Points;
         private System.Windows.Forms.ToolStripButton tsButton_Setup;
+        private System.Windows.Forms.ToolStripLabel tsLabel_Points;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

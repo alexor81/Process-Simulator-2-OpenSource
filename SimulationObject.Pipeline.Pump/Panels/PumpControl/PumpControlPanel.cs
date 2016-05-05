@@ -1,8 +1,8 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using API;
 using Utils;
 using Utils.DialogForms;
 
@@ -15,7 +15,9 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
         public                  PumpControlPanel(Pump aPump)
         {
             mPump = aPump;
-            InitializeComponent();   
+            InitializeComponent();
+
+            BackColor = SystemColors.Control;
         }
 
         public void             fillForDemo()
@@ -105,7 +107,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             }
             else
             {
-                label_OnCMD.BackColor = this.BackColor;
+                label_OnCMD.BackColor = BackColor;
             }
 
             if (mPump.mOffCMD == true)
@@ -114,7 +116,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             }
             else
             {
-                label_OffCMD.BackColor = this.BackColor;
+                label_OffCMD.BackColor = BackColor;
             }
 
             if (mPump.mEsdCMD == true)
@@ -123,7 +125,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             }
             else
             {
-                label_EsdCMD.BackColor = this.BackColor;
+                label_EsdCMD.BackColor = BackColor;
             }
 
             checkBox_Alarm.Checked = mPump.Alarm;
@@ -133,7 +135,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             }
             else
             {
-                checkBox_Alarm.BackColor = this.BackColor;
+                checkBox_Alarm.BackColor = BackColor;
             }
 
             checkBox_OnBtn.Checked = mPump.OnBtn;
@@ -143,7 +145,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             }
             else
             {
-                checkBox_OnBtn.BackColor = this.BackColor;
+                checkBox_OnBtn.BackColor = BackColor;
             }
 
             checkBox_OffBtn.Checked = mPump.OffBtn;
@@ -153,7 +155,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             }
             else
             {
-                checkBox_OffBtn.BackColor = this.BackColor;
+                checkBox_OffBtn.BackColor = BackColor;
             }
 
             if (mPump.IgnoreCommands != (label_Control.Font.Strikeout))

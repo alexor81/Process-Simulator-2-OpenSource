@@ -34,7 +34,6 @@
             this.itemEditBox_Y = new Utils.SpecialControls.ItemEditBox();
             this.itemEditBox_X = new Utils.SpecialControls.ItemEditBox();
             this.okCancelButton = new Utils.SpecialControls.OKCancelButton();
-            this.open_file = new System.Windows.Forms.OpenFileDialog();
             this.panel_OkCancel = new System.Windows.Forms.Panel();
             this.panel_Items = new System.Windows.Forms.Panel();
             this.itemEditBox_Visible = new Utils.SpecialControls.ItemEditBox();
@@ -106,12 +105,6 @@
             this.okCancelButton.TabIndex = 0;
             this.okCancelButton.ButtonClick += new System.EventHandler(this.okCancelButton_ButtonClick);
             // 
-            // open_file
-            // 
-            this.open_file.Filter = "Images|*.bmp;*.png;*.gif;*.exif;*.jpg;*.tif";
-            this.open_file.InitialDirectory = "C:\\";
-            this.open_file.RestoreDirectory = true;
-            // 
             // panel_OkCancel
             // 
             this.panel_OkCancel.Controls.Add(this.okCancelButton);
@@ -169,6 +162,7 @@
             // 
             // pictureBox
             // 
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(0, 25);
             this.pictureBox.Name = "pictureBox";
@@ -234,7 +228,6 @@
         private Utils.SpecialControls.OKCancelButton okCancelButton;
         private System.Windows.Forms.Label label_XItem;
         private System.Windows.Forms.Label label_YItem;
-        private System.Windows.Forms.OpenFileDialog open_file;
         private Utils.SpecialControls.ItemEditBox itemEditBox_X;
         private Utils.SpecialControls.ItemEditBox itemEditBox_Y;
         private System.Windows.Forms.Panel panel_OkCancel;

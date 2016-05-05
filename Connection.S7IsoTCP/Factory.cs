@@ -132,6 +132,7 @@ namespace Connection.S7IsoTCP
             {
                 var lConnection = (Connection)aConnection;
                 var lItem       = new DataItem();
+
                 using (var lSetupForm = new ItemSetupForm(lConnection, lItem))
                 {
                     if (lSetupForm.ShowDialog(aOwner) == DialogResult.OK)

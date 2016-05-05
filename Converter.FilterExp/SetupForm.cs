@@ -18,7 +18,7 @@ namespace Converter.FilterExp
             textBox_Alfa.Text = StringUtils.ObjectToString(mFilterExp.Alfa);
         }
 
-        private void        okCancelButton_ButtonClick(object sender, EventArgs e)
+        private void        okCancelButton_ButtonClick(object aSender, EventArgs aEventArgs)
         {
             try
             {

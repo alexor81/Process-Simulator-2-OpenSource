@@ -1,7 +1,8 @@
-﻿using System;
+﻿using API;
+using System;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using API;
 using Utils;
 using Utils.DialogForms;
 
@@ -16,6 +17,7 @@ namespace SimulationObject.Real.Generator.Panel
             mGenerator = aGenerator;
             InitializeComponent();
 
+            BackColor = SystemColors.Control;
             comboBox_Signal.Items.AddRange(Generator.Signals);
         }
 

@@ -16,6 +16,7 @@ namespace SimulationObject.Animation.ImageMove
         private IItemBrowser        mBrowser;
         private MemoryStream        mImgMemStrm;
         private Bitmap              mBmp;
+        private string              mPath;
 
         public                      SetupForm(Move aMove, IItemBrowser aBrowser)
         {
@@ -90,42 +91,60 @@ namespace SimulationObject.Animation.ImageMove
 
         private void                tsButton_Import_Click(object aSender, EventArgs aEventArgs)
         {
-            if (open_file.ShowDialog() == DialogResult.OK)
+            using (var lOpenDlg = new OpenFileDialog())
             {
-                MemoryStream lMemStrm = new MemoryStream();
+                lOpenDlg.CheckFileExists    = true;
+                lOpenDlg.AddExtension       = true;
+                lOpenDlg.Filter             = "Images|*.bmp;*.png;*.gif;*.exif;*.jpg;*.tif";
+                lOpenDlg.Multiselect        = false;
 
-                try
+                if (String.IsNullOrWhiteSpace(mPath))
                 {
-                    using (FileStream lFileStrm = new FileStream(open_file.FileName, FileMode.Open))
+                    if (String.IsNullOrWhiteSpace(MiscUtils.ProjectPath) == false)
                     {
-                        lFileStrm.CopyTo(lMemStrm);
+                        lOpenDlg.InitialDirectory = MiscUtils.ProjectPath;
                     }
-
-                    Bitmap lBmp = new Bitmap(lMemStrm);
-
-                    if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
-                    {
-                        mBmp.Dispose();
-                        mBmp                = null;
-                        pictureBox.Image    = null;
-                    }
-
-                    if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
-                    {
-                        mImgMemStrm.Close();
-                        mImgMemStrm = null;
-                    }
-
-                    mImgMemStrm         = lMemStrm;
-                    mBmp                = lBmp;
-                    pictureBox.Image    = lBmp;
                 }
-                catch (Exception lExc)
+
+                if (lOpenDlg.ShowDialog() == DialogResult.OK)
                 {
-                    lMemStrm.Close();
-                    Log.Error("Unable to load image from '" + open_file.FileName + "'. " + lExc.Message, lExc.ToString());
-                    MessageForm.showMessage(lExc.Message, this);
-                    return;
+                    MemoryStream lMemStrm = new MemoryStream();
+
+                    try
+                    {
+                        using (FileStream lFileStrm = new FileStream(lOpenDlg.FileName, FileMode.Open))
+                        {
+                            lFileStrm.CopyTo(lMemStrm);
+                        }
+
+                        Bitmap lBmp = new Bitmap(lMemStrm);
+
+                        if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
+                        {
+                            mBmp.Dispose();
+                            mBmp                = null;
+                            pictureBox.Image    = null;
+                        }
+
+                        if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
+                        {
+                            mImgMemStrm.Close();
+                            mImgMemStrm = null;
+                        }
+
+                        mImgMemStrm         = lMemStrm;
+                        mBmp                = lBmp;
+                        pictureBox.Image    = lBmp;
+
+                        mPath               = Path.GetDirectoryName(lOpenDlg.FileName);
+                    }
+                    catch (Exception lExc)
+                    {
+                        lMemStrm.Close();
+                        Log.Error("Unable to load image from '" + lOpenDlg.FileName + "'. " + lExc.Message, lExc.ToString());
+                        MessageForm.showMessage(lExc.Message, this);
+                        return;
+                    }
                 }
             }
         }

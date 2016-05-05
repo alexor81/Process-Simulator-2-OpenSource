@@ -1,8 +1,8 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using API;
 using Utils;
 using Utils.DialogForms;
 
@@ -15,7 +15,9 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
         public                  ValveControlPanel(Valve aValve)
         {
             mValve = aValve;
-            InitializeComponent();        
+            InitializeComponent();
+
+            BackColor = SystemColors.Control;
         }
 
         public void             fillForDemo()
@@ -94,7 +96,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
             }
             else
             {
-                trackBar_Position.BackColor = this.BackColor;
+                trackBar_Position.BackColor = BackColor;
             }
             trackBar_Position.Value = (int)Math.Truncate(mValve.Position);
 
@@ -113,7 +115,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
                 }
                 else
                 {
-                    label_Closed.BackColor = this.BackColor;
+                    label_Closed.BackColor = BackColor;
                 }
 
                 if (mValve.OpenLimit)
@@ -122,7 +124,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
                 }
                 else
                 {
-                    label_Open.BackColor = this.BackColor;
+                    label_Open.BackColor = BackColor;
                 }
             }
 
@@ -136,7 +138,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
             }
             else
             {
-                checkBox_Alarm1.BackColor = this.BackColor;
+                checkBox_Alarm1.BackColor = BackColor;
             }
             checkBox_Alarm2.Checked = mValve.Alarm2;
             if (checkBox_Alarm2.Checked)
@@ -145,7 +147,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
             }
             else
             {
-                checkBox_Alarm2.BackColor = this.BackColor;
+                checkBox_Alarm2.BackColor = BackColor;
             }
 
             if (mValve.mAnalogCtrl)
@@ -160,7 +162,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
                 }
                 else
                 {
-                    label_OpenCMD.BackColor = this.BackColor;
+                    label_OpenCMD.BackColor = BackColor;
                 }
 
                 if (mValve.mCloseCMD == true)
@@ -169,7 +171,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
                 }
                 else
                 {
-                    label_CloseCMD.BackColor = this.BackColor;
+                    label_CloseCMD.BackColor = BackColor;
                 }
 
                 if (mValve.mStopCMD == true)
@@ -178,7 +180,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
                 }
                 else
                 {
-                    label_StopCMD.BackColor = this.BackColor;
+                    label_StopCMD.BackColor = BackColor;
                 }
             }
 
@@ -188,7 +190,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
             }
             else
             {
-                label_EsdCMD.BackColor = this.BackColor;
+                label_EsdCMD.BackColor = BackColor;
             }
 
             if (mValve.IgnoreCommands != (label_Control.Font.Strikeout))

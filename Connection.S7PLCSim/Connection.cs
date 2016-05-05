@@ -235,58 +235,58 @@ namespace Connection.S7PLCSim
 
                         #endregion
 
-                            if (mQLength > 0)
+                        if (mQLength > 0)
+                        {
+                            Task lQ = new Task(MC_Q_Read);
+                            lQ.Start();
+
+                            Task lIMDB = new Task(MC_IMDB_WriteRead);
+                            lIMDB.Start();
+
+                            Task.WaitAll(lQ, lIMDB);
+                        }
+                        else
+                        {
+                            int lCount = mItemRWList.Count;
+
+                            for (int i = 0; i < lCount; i++)
                             {
-                                Task lQ = new Task(MC_Q_Read);
-                                lQ.Start();
+                                mCurrentItem = mItemRWList[i];
 
-                                Task lIMDB = new Task(MC_IMDB_WriteRead);
-                                lIMDB.Start();
+                                if (mDisconnect) { break; }
 
-                                Task.WaitAll(lQ, lIMDB);
-                            }
-                            else
-                            {
-                                int lCount = mItemRWList.Count;
+                                #region Write
 
-                                for (int i = 0; i < lCount; i++)
-                                {
-                                    mCurrentItem = mItemRWList[i];
-
-                                    if (mDisconnect) { break; }
-
-                                    #region Write
-
-                                        if (mCurrentItem.mNeedWrite)
-                                        {
-                                            mWriteRequests = mWriteRequests + 1;
-                                            mCurrentItem.write(mS7ProSim);
-                                        }
-
-                                    #endregion
-
-                                    if (mDisconnect) { break; }
-
-                                    #region Read
-
-                                        if (mCurrentItem.mNeedWrite != true)
-                                        {
-                                            mCurrentItem.read(mS7ProSim);
-                                        }
-
-                                    #endregion
-
-                                    if (mDisconnect) { break; }
-
-                                    mSlowCounter = mSlowCounter + mDeltaSlow;
-                                    if (mSlowCounter >= 1.0D)
+                                    if (mCurrentItem.mNeedWrite)
                                     {
-                                        mSlowCounter = mSlowCounter - 1.0D;
-                                        Thread.Sleep(MiscUtils.TimeSlice);
+                                        mWriteRequests = mWriteRequests + 1;
+                                        mCurrentItem.write(mS7ProSim);
                                     }
-                                }
 
-                                mCurrentItem = null;
+                                #endregion
+
+                                if (mDisconnect) { break; }
+
+                                #region Read
+
+                                    if (mCurrentItem.mNeedWrite != true)
+                                    {
+                                        mCurrentItem.read(mS7ProSim);
+                                    }
+
+                                #endregion
+
+                                if (mDisconnect) { break; }
+
+                                mSlowCounter = mSlowCounter + mDeltaSlow;
+                                if (mSlowCounter >= 1.0D)
+                                {
+                                    mSlowCounter = mSlowCounter - 1.0D;
+                                    Thread.Sleep(MiscUtils.TimeSlice);
+                                }
+                            }
+
+                            mCurrentItem = null;
                         }
                     }
                 }

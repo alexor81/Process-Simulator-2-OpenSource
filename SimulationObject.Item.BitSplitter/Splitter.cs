@@ -140,27 +140,52 @@ namespace SimulationObject.Item.BitSplitter
             {
                 bool lNewValue;
 
-                if (mDataFlow.HasFlag(EDataFlow.FROM) && aItemHandle == mBitsValueItemHandle)
+                if (mDataFlow.HasFlag(EDataFlow.FROM))
                 {
-                    checkType(aItemValue.GetType());
-
-                    for (int i = 0; i < mBitItemHandles.Length; i++)
+                    if (aItemHandle == mBitsValueItemHandle)
                     {
-                        lNewValue = getBitValue(aItemValue, i);
-                        if (lNewValue != mBitsValue[i])
+                        checkType(aItemValue.GetType());
+
+                        for (int i = 0; i < mBitItemHandles.Length; i++)
                         {
-                            mBitsValue[i] = lNewValue;
-                            if (mBitItemHandles[i] != -1)
+                            lNewValue = getBitValue(aItemValue, i);
+                            if (lNewValue != mBitsValue[i])
+                            {
+                                mBitsValue[i] = lNewValue;
+                                if (mBitItemHandles[i] != -1)
+                                {
+                                    mBitValueChanged[i] = true;
+                                    mValueChanged       = true;
+                                }
+                            }
+                        }
+                        return;
+                    }
+
+                    if(mDataFlow.HasFlag(EDataFlow.TO) == false)
+                    {
+                        for (int i = 0; i < mBitItemHandles.Length; i++)
+                        {
+                            if (aItemHandle == mBitItemHandles[i])
                             {
                                 mBitValueChanged[i] = true;
                                 mValueChanged       = true;
+                                return;
                             }
                         }
+                        
                     }
                 }
 
                 if (mDataFlow.HasFlag(EDataFlow.TO))
                 {
+                    if(mDataFlow.HasFlag(EDataFlow.FROM) == false && aItemHandle == mBitsValueItemHandle)
+                    {
+                        mBitsValueChanged   = true;
+                        mValueChanged       = true;
+                        return;
+                    }
+
                     for (int i = 0; i < mBitItemHandles.Length; i++)
                     {
                         if (aItemHandle == mBitItemHandles[i])
