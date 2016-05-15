@@ -1,8 +1,8 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using API;
 using Utils;
 using Utils.DialogForms;
 using Utils.Logger;
@@ -260,6 +260,14 @@ namespace SimulationObject.Item.TimeLine
                     Log.Error("Error while user was deleting section(s). " + lExc.Message, lExc.ToString());
                     MessageForm.showMessage(lExc.Message, this);
                 }
+            }
+        }
+
+        private void                        SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (tabControl.SelectedIndex == 1 && aEventArgs.KeyCode == Keys.Delete)
+            {
+                tsButton_Delete_Click(this, EventArgs.Empty);
             }
         }
 

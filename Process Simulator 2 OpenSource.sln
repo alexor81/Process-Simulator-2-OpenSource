@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.Internal", "Connection.Internal\Connection.Internal.csproj", "{331363E1-A12B-47A0-A5BF-70E60E90C8BF}"
 EndProject
@@ -62,6 +62,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.MQTT", "Connection.MQTT\Connection.MQTT.csproj", "{6FE628F6-DB51-4F17-8202-46B440EB561F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Animation.ImageMove", "SimulationObject.Animation.ImageMove\SimulationObject.Animation.ImageMove.csproj", "{7C394224-E83B-48AE-91EF-78E33FA10710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Item.WriteToFile", "SimulationObject.Item.WriteToFile\SimulationObject.Item.WriteToFile.csproj", "{078EACF7-A032-45D2-BE06-12D1A029DEF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -251,6 +253,12 @@ Global
 		{7C394224-E83B-48AE-91EF-78E33FA10710}.Release|Any CPU.ActiveCfg = Release|x86
 		{7C394224-E83B-48AE-91EF-78E33FA10710}.Release|x86.ActiveCfg = Release|x86
 		{7C394224-E83B-48AE-91EF-78E33FA10710}.Release|x86.Build.0 = Release|x86
+		{078EACF7-A032-45D2-BE06-12D1A029DEF1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{078EACF7-A032-45D2-BE06-12D1A029DEF1}.Debug|x86.ActiveCfg = Debug|x86
+		{078EACF7-A032-45D2-BE06-12D1A029DEF1}.Debug|x86.Build.0 = Debug|x86
+		{078EACF7-A032-45D2-BE06-12D1A029DEF1}.Release|Any CPU.ActiveCfg = Release|x86
+		{078EACF7-A032-45D2-BE06-12D1A029DEF1}.Release|x86.ActiveCfg = Release|x86
+		{078EACF7-A032-45D2-BE06-12D1A029DEF1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

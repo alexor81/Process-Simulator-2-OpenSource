@@ -65,10 +65,10 @@
             // 
             this.tabControl.Controls.Add(this.tabPage_Options);
             this.tabControl.Controls.Add(this.tabPage_Sections);
-            this.tabControl.Location = new System.Drawing.Point(2, 3);
+            this.tabControl.Location = new System.Drawing.Point(9, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(454, 292);
+            this.tabControl.Size = new System.Drawing.Size(453, 297);
             this.tabControl.TabIndex = 0;
             // 
             // tabPage_Options
@@ -79,7 +79,7 @@
             this.tabPage_Options.Location = new System.Drawing.Point(4, 25);
             this.tabPage_Options.Name = "tabPage_Options";
             this.tabPage_Options.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Options.Size = new System.Drawing.Size(446, 263);
+            this.tabPage_Options.Size = new System.Drawing.Size(445, 268);
             this.tabPage_Options.TabIndex = 0;
             this.tabPage_Options.Text = "Options";
             this.tabPage_Options.UseVisualStyleBackColor = true;
@@ -139,6 +139,7 @@
             // 
             // toolStrip
             // 
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsButton_Up,
             this.tsButton_Down,
@@ -243,7 +244,7 @@
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(135, 303);
+            this.okCancelButton.Location = new System.Drawing.Point(141, 312);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -256,11 +257,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(459, 338);
+            this.ClientSize = new System.Drawing.Size(470, 349);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetupForm";
@@ -269,6 +271,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Item.TimeLine";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.tabControl.ResumeLayout(false);
             this.tabPage_Options.ResumeLayout(false);
             this.tabPage_Options.PerformLayout();
