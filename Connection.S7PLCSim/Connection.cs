@@ -549,21 +549,7 @@ namespace Connection.S7PLCSim
             {
                 get
                 {
-                    int lResult;
-
-                    mItemListLock.EnterReadLock();
-                    //========================================
-                    try
-                    {
-                        lResult = mItemList.Count;
-                    }
-                    finally
-                    {
-                        //========================================
-                        mItemListLock.ExitReadLock();
-                    }
-
-                    return lResult;
+                    return mItemList.Count;
                 }
             }
 

@@ -150,6 +150,44 @@ namespace SimulationObject.Item.WriteToFile
             }
         }
 
+        private void            tsButton_AddWizard_Click(object aSender, EventArgs aEventArgs)
+        {
+            int[] lHandles = mBrowser.getItemHandlesByForm(this);
+
+            if (lHandles.Length > 0)
+            {
+                int lDoubling = 0;
+
+                try
+                {
+                    for (int i = 0; i < lHandles.Length; i++)
+                    {
+                        if (mCloneItems.Contains(lHandles[i]))
+                        {
+                            lDoubling = lDoubling + 1;
+                        }
+                        else
+                        {
+                            mCloneItems.Add(lHandles[i]);
+                        }
+
+                        updateTable();
+                        updateButtons();
+                    }
+
+                    if (lDoubling > 0)
+                    {
+                        throw new ArgumentException(lDoubling.ToString() + " from " + lHandles.Length + " Items already exist. ");
+                    }
+                }
+                catch (Exception lExc)
+                {
+                    Log.Error("Error while user was adding Items. " + lExc.Message, lExc.ToString());
+                    MessageForm.showMessage(lExc.Message, this);
+                }
+            }
+        }
+
         private void            tsButton_Delete_Click(object aSender, EventArgs aEventArgs)
         {
             int lCount = dataGridView_Items.SelectedRows.Count;

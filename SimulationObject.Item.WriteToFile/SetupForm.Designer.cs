@@ -33,6 +33,7 @@
             this.dataGridView_Items = new System.Windows.Forms.DataGridView();
             this.toolStrip_Items = new System.Windows.Forms.ToolStrip();
             this.tsButton_Add = new System.Windows.Forms.ToolStripButton();
+            this.tsButton_AddWizard = new System.Windows.Forms.ToolStripButton();
             this.tsButton_Delete = new System.Windows.Forms.ToolStripButton();
             this.okCancelButton = new Utils.SpecialControls.OKCancelButton();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEdit_Path.Properties)).BeginInit();
@@ -81,7 +82,7 @@
             // 
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Location = new System.Drawing.Point(9, 2);
+            this.tabControl.Location = new System.Drawing.Point(13, 2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(453, 297);
@@ -244,6 +245,7 @@
             this.toolStrip_Items.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip_Items.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsButton_Add,
+            this.tsButton_AddWizard,
             this.tsButton_Delete});
             this.toolStrip_Items.Location = new System.Drawing.Point(3, 3);
             this.toolStrip_Items.Name = "toolStrip_Items";
@@ -262,6 +264,17 @@
             this.tsButton_Add.Text = "Add";
             this.tsButton_Add.Click += new System.EventHandler(this.tsButton_Add_Click);
             // 
+            // tsButton_AddWizard
+            // 
+            this.tsButton_AddWizard.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsButton_AddWizard.Image = global::SimulationObject.Item.WriteToFile.Properties.Resources.AddWizard;
+            this.tsButton_AddWizard.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsButton_AddWizard.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButton_AddWizard.Name = "tsButton_AddWizard";
+            this.tsButton_AddWizard.Size = new System.Drawing.Size(23, 22);
+            this.tsButton_AddWizard.Text = "Add Items Wizard";
+            this.tsButton_AddWizard.Click += new System.EventHandler(this.tsButton_AddWizard_Click);
+            // 
             // tsButton_Delete
             // 
             this.tsButton_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -275,7 +288,7 @@
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(141, 312);
+            this.okCancelButton.Location = new System.Drawing.Point(145, 310);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -288,7 +301,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 349);
+            this.ClientSize = new System.Drawing.Size(479, 350);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.okCancelButton);
@@ -338,5 +351,6 @@
         private System.Windows.Forms.Label label_Rate;
         private System.Windows.Forms.TextBox textBox_Delimiter;
         private System.Windows.Forms.Label label_Delimiter;
+        private System.Windows.Forms.ToolStripButton tsButton_AddWizard;
     }
 }
