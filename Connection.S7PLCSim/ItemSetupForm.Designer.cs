@@ -292,7 +292,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 282);
+            this.ClientSize = new System.Drawing.Size(319, 284);
             this.ControlBox = false;
             this.Controls.Add(this.spinEdit_Length);
             this.Controls.Add(this.label_Length);
@@ -310,6 +310,7 @@
             this.Controls.Add(this.comboBox_MemoryType);
             this.Controls.Add(this.label_MemType);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -320,6 +321,7 @@
             this.Text = "S7PLCSim Item";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ItemSetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ItemSetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemSetupForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_DBNum.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Byte.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Bit.Properties)).EndInit();

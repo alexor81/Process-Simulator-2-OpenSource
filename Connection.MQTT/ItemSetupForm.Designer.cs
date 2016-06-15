@@ -87,7 +87,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 135);
+            this.ClientSize = new System.Drawing.Size(379, 136);
             this.ControlBox = false;
             this.Controls.Add(this.checkBox_Publish);
             this.Controls.Add(this.checkBox_Subscribe);
@@ -95,6 +95,7 @@
             this.Controls.Add(this.label_Topic);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -105,6 +106,7 @@
             this.Text = "MQTT Item";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ItemSetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ItemSetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemSetupForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

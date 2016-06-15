@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.button_Connect = new System.Windows.Forms.Button();
             this.button_Disconnect = new System.Windows.Forms.Button();
             this.groupBox_Connection = new System.Windows.Forms.GroupBox();
+            this.comboBox_Protocol = new System.Windows.Forms.ComboBox();
+            this.label_Protocol = new System.Windows.Forms.Label();
+            this.spinEdit_QOS = new DevExpress.XtraEditors.SpinEdit();
+            this.label_QOS = new System.Windows.Forms.Label();
             this.spinEdit_keepAlive = new DevExpress.XtraEditors.SpinEdit();
             this.label_keepAlive = new System.Windows.Forms.Label();
             this.textBox_Password = new System.Windows.Forms.TextBox();
@@ -48,17 +51,13 @@
             this.label_CountN = new System.Windows.Forms.Label();
             this.label_Count = new System.Windows.Forms.Label();
             this.okCancelButton = new Utils.SpecialControls.OKCancelButton();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.spinEdit_QOS = new DevExpress.XtraEditors.SpinEdit();
-            this.label_QOS = new System.Windows.Forms.Label();
-            this.label_Protocol = new System.Windows.Forms.Label();
-            this.comboBox_Protocol = new System.Windows.Forms.ComboBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider();
             this.groupBox_Connection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit_QOS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_keepAlive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Port.Properties)).BeginInit();
             this.groupBox_Items.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit_QOS.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Connect
@@ -111,6 +110,63 @@
             this.groupBox_Connection.TabIndex = 0;
             this.groupBox_Connection.TabStop = false;
             this.groupBox_Connection.Text = "Connection";
+            // 
+            // comboBox_Protocol
+            // 
+            this.comboBox_Protocol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Protocol.FormattingEnabled = true;
+            this.comboBox_Protocol.Items.AddRange(new object[] {
+            "Version_3_1_1",
+            "Version_3_1"});
+            this.comboBox_Protocol.Location = new System.Drawing.Point(84, 176);
+            this.comboBox_Protocol.Name = "comboBox_Protocol";
+            this.comboBox_Protocol.Size = new System.Drawing.Size(144, 24);
+            this.comboBox_Protocol.TabIndex = 14;
+            this.comboBox_Protocol.SelectedIndexChanged += new System.EventHandler(this.comboBox_Protocol_SelectedIndexChanged);
+            // 
+            // label_Protocol
+            // 
+            this.label_Protocol.AutoSize = true;
+            this.label_Protocol.Location = new System.Drawing.Point(14, 179);
+            this.label_Protocol.Name = "label_Protocol";
+            this.label_Protocol.Size = new System.Drawing.Size(64, 17);
+            this.label_Protocol.TabIndex = 13;
+            this.label_Protocol.Text = "Protocol:";
+            // 
+            // spinEdit_QOS
+            // 
+            this.spinEdit_QOS.EditValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.spinEdit_QOS.Location = new System.Drawing.Point(328, 175);
+            this.spinEdit_QOS.Margin = new System.Windows.Forms.Padding(4);
+            this.spinEdit_QOS.Name = "spinEdit_QOS";
+            this.spinEdit_QOS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.spinEdit_QOS.Properties.IsFloatValue = false;
+            this.spinEdit_QOS.Properties.LookAndFeel.SkinName = "Office 2010 Black";
+            this.spinEdit_QOS.Properties.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Style3D;
+            this.spinEdit_QOS.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.spinEdit_QOS.Properties.Mask.EditMask = "N00";
+            this.spinEdit_QOS.Properties.MaxValue = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.spinEdit_QOS.Size = new System.Drawing.Size(93, 24);
+            this.spinEdit_QOS.TabIndex = 6;
+            this.spinEdit_QOS.EditValueChanged += new System.EventHandler(this.spinEdit_QOS_EditValueChanged);
+            // 
+            // label_QOS
+            // 
+            this.label_QOS.AutoSize = true;
+            this.label_QOS.Location = new System.Drawing.Point(281, 179);
+            this.label_QOS.Name = "label_QOS";
+            this.label_QOS.Size = new System.Drawing.Size(40, 17);
+            this.label_QOS.TabIndex = 0;
+            this.label_QOS.Text = "QoS:";
             // 
             // spinEdit_keepAlive
             // 
@@ -298,73 +354,17 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // spinEdit_QOS
-            // 
-            this.spinEdit_QOS.EditValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.spinEdit_QOS.Location = new System.Drawing.Point(328, 175);
-            this.spinEdit_QOS.Margin = new System.Windows.Forms.Padding(4);
-            this.spinEdit_QOS.Name = "spinEdit_QOS";
-            this.spinEdit_QOS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.spinEdit_QOS.Properties.IsFloatValue = false;
-            this.spinEdit_QOS.Properties.LookAndFeel.SkinName = "Office 2010 Black";
-            this.spinEdit_QOS.Properties.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Style3D;
-            this.spinEdit_QOS.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.spinEdit_QOS.Properties.Mask.EditMask = "N00";
-            this.spinEdit_QOS.Properties.MaxValue = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.spinEdit_QOS.Size = new System.Drawing.Size(93, 24);
-            this.spinEdit_QOS.TabIndex = 6;
-            this.spinEdit_QOS.EditValueChanged += new System.EventHandler(this.spinEdit_QOS_EditValueChanged);
-            // 
-            // label_QOS
-            // 
-            this.label_QOS.AutoSize = true;
-            this.label_QOS.Location = new System.Drawing.Point(281, 179);
-            this.label_QOS.Name = "label_QOS";
-            this.label_QOS.Size = new System.Drawing.Size(40, 17);
-            this.label_QOS.TabIndex = 0;
-            this.label_QOS.Text = "QoS:";
-            // 
-            // label_Protocol
-            // 
-            this.label_Protocol.AutoSize = true;
-            this.label_Protocol.Location = new System.Drawing.Point(14, 179);
-            this.label_Protocol.Name = "label_Protocol";
-            this.label_Protocol.Size = new System.Drawing.Size(64, 17);
-            this.label_Protocol.TabIndex = 13;
-            this.label_Protocol.Text = "Protocol:";
-            // 
-            // comboBox_Protocol
-            // 
-            this.comboBox_Protocol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Protocol.FormattingEnabled = true;
-            this.comboBox_Protocol.Items.AddRange(new object[] {
-            "Version_3_1_1",
-            "Version_3_1"});
-            this.comboBox_Protocol.Location = new System.Drawing.Point(84, 176);
-            this.comboBox_Protocol.Name = "comboBox_Protocol";
-            this.comboBox_Protocol.Size = new System.Drawing.Size(144, 24);
-            this.comboBox_Protocol.TabIndex = 14;
-            this.comboBox_Protocol.SelectedIndexChanged += new System.EventHandler(this.comboBox_Protocol_SelectedIndexChanged);
-            // 
             // ConnectionSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 346);
+            this.ClientSize = new System.Drawing.Size(474, 345);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_Connection);
             this.Controls.Add(this.okCancelButton);
             this.Controls.Add(this.groupBox_Items);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -375,14 +375,15 @@
             this.Text = "MQTT Connection";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConnectionSetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ConnectionSetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConnectionSetupForm_KeyDown);
             this.groupBox_Connection.ResumeLayout(false);
             this.groupBox_Connection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit_QOS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_keepAlive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Port.Properties)).EndInit();
             this.groupBox_Items.ResumeLayout(false);
             this.groupBox_Items.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit_QOS.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

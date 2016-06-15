@@ -45,7 +45,7 @@
             // label_Value
             // 
             this.label_Value.AutoSize = true;
-            this.label_Value.Location = new System.Drawing.Point(11, 34);
+            this.label_Value.Location = new System.Drawing.Point(20, 34);
             this.label_Value.Name = "label_Value";
             this.label_Value.Size = new System.Drawing.Size(48, 17);
             this.label_Value.TabIndex = 2;
@@ -54,7 +54,7 @@
             // label_Type
             // 
             this.label_Type.AutoSize = true;
-            this.label_Type.Location = new System.Drawing.Point(15, 7);
+            this.label_Type.Location = new System.Drawing.Point(24, 7);
             this.label_Type.Name = "label_Type";
             this.label_Type.Size = new System.Drawing.Size(44, 17);
             this.label_Type.TabIndex = 3;
@@ -62,7 +62,7 @@
             // 
             // label_ValueValue
             // 
-            this.label_ValueValue.Location = new System.Drawing.Point(68, 33);
+            this.label_ValueValue.Location = new System.Drawing.Point(77, 33);
             this.label_ValueValue.Name = "label_ValueValue";
             this.label_ValueValue.Size = new System.Drawing.Size(196, 17);
             this.label_ValueValue.TabIndex = 4;
@@ -71,7 +71,7 @@
             // label_TypeValue
             // 
             this.label_TypeValue.AutoSize = true;
-            this.label_TypeValue.Location = new System.Drawing.Point(68, 7);
+            this.label_TypeValue.Location = new System.Drawing.Point(77, 7);
             this.label_TypeValue.Name = "label_TypeValue";
             this.label_TypeValue.Size = new System.Drawing.Size(89, 17);
             this.label_TypeValue.TabIndex = 5;
@@ -83,7 +83,7 @@
             this.groupBox_Access.Controls.Add(this.radioButton_RW);
             this.groupBox_Access.Controls.Add(this.radioButton_W);
             this.groupBox_Access.Controls.Add(this.radioButton_R);
-            this.groupBox_Access.Location = new System.Drawing.Point(4, 90);
+            this.groupBox_Access.Location = new System.Drawing.Point(5, 90);
             this.groupBox_Access.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Access.Name = "groupBox_Access";
             this.groupBox_Access.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -144,7 +144,7 @@
             // 
             // button_Write
             // 
-            this.button_Write.Location = new System.Drawing.Point(113, 59);
+            this.button_Write.Location = new System.Drawing.Point(114, 59);
             this.button_Write.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_Write.Name = "button_Write";
             this.button_Write.Size = new System.Drawing.Size(65, 27);
@@ -168,7 +168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(288, 210);
+            this.ClientSize = new System.Drawing.Size(292, 216);
             this.ControlBox = false;
             this.Controls.Add(this.okCancelButton);
             this.Controls.Add(this.button_Write);
@@ -178,6 +178,7 @@
             this.Controls.Add(this.label_Type);
             this.Controls.Add(this.label_Value);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -188,6 +189,7 @@
             this.Text = "Internal Item";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ItemSetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ItemSetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemSetupForm_KeyDown);
             this.groupBox_Access.ResumeLayout(false);
             this.groupBox_Access.PerformLayout();
             this.ResumeLayout(false);

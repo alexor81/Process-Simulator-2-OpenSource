@@ -281,6 +281,7 @@
             this.Controls.Add(this.groupBox_Options);
             this.Controls.Add(this.groupBox_S7PLCSim);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -291,6 +292,7 @@
             this.Text = "S7PLCSim Connection";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ConnectionSetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConnectionSetupForm_KeyDown);
             this.groupBox_S7PLCSim.ResumeLayout(false);
             this.groupBox_S7PLCSim.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_InstNum.Properties)).EndInit();

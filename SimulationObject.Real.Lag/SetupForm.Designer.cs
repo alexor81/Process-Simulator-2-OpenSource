@@ -161,7 +161,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 191);
+            this.ClientSize = new System.Drawing.Size(357, 194);
             this.ControlBox = false;
             this.Controls.Add(this.spinEdit_LagMS);
             this.Controls.Add(this.spinEdit_Gain);
@@ -173,6 +173,7 @@
             this.Controls.Add(this.label_Value);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -182,6 +183,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Real.Lag";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_LagMS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Gain.Properties)).EndInit();
             this.ResumeLayout(false);

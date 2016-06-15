@@ -197,7 +197,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 226);
+            this.ClientSize = new System.Drawing.Size(397, 229);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox_Out);
             this.Controls.Add(this.itemEditBox_In);
@@ -207,6 +207,7 @@
             this.Controls.Add(this.label_InItem);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -216,6 +217,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Binary.Delay";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.groupBox_Delay.ResumeLayout(false);
             this.groupBox_Delay.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Off.Properties)).EndInit();

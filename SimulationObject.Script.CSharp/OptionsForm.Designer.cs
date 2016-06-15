@@ -128,6 +128,7 @@
             this.Controls.Add(this.label_watchdog);
             this.Controls.Add(this.label_TTime);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -137,6 +138,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Options";
             this.Load += new System.EventHandler(this.OptionsForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OptionsForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Trigger.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Watchdog.Properties)).EndInit();
             this.ResumeLayout(false);

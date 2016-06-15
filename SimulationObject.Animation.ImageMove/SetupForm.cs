@@ -149,24 +149,29 @@ namespace SimulationObject.Animation.ImageMove
             }
         }
 
+        private void                Cancel()
+        {
+            if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
+            {
+                mBmp.Dispose();
+                mBmp = null;
+                pictureBox.Image = null;
+            }
+
+            if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
+            {
+                mImgMemStrm.Close();
+                mImgMemStrm = null;
+            }
+
+            DialogResult = DialogResult.Cancel;
+        }
+
         private void                okCancelButton_ButtonClick(object aSender, EventArgs aEventArgs)
         {
             if (okCancelButton.DialogResult == DialogResult.Cancel)
             {
-                if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
-                {
-                    mBmp.Dispose();
-                    mBmp                = null;
-                    pictureBox.Image    = null;
-                }
-
-                if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
-                {
-                    mImgMemStrm.Close();
-                    mImgMemStrm = null;
-                }
-
-                DialogResult = DialogResult.Cancel;
+                Cancel();
             }
             else
             {
@@ -226,9 +231,12 @@ namespace SimulationObject.Animation.ImageMove
             }
         }
 
-        private void                SetupForm_Load(object aSender, EventArgs aEventArgs)
+        private void                SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
         {
-            ClientSize = FormUtils.calcClientSize(ClientSize, Controls);
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                Cancel();
+            }
         }
     }
 }

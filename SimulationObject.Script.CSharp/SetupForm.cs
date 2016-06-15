@@ -1,11 +1,11 @@
-﻿using System;
+﻿using API;
+using FastColoredTextBoxNS;
+using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using API;
-using FastColoredTextBoxNS;
 using Utils;
 using Utils.DialogForms;
 
@@ -401,6 +401,14 @@ namespace SimulationObject.Script.CSharp
                 }
 
                 DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void                SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                DialogResult = DialogResult.Cancel;
             }
         }
 

@@ -163,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 235);
+            this.ClientSize = new System.Drawing.Size(358, 239);
             this.ControlBox = false;
             this.Controls.Add(this.checkBox_In2Inverse);
             this.Controls.Add(this.checkBox_In1Inverse);
@@ -177,6 +177,7 @@
             this.Controls.Add(this.label_In1);
             this.Controls.Add(this.label_Value);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -186,6 +187,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Binary.Logic";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -24,11 +24,11 @@ namespace SciptNamespace
 		public long					MSFromLastCall;
 
 		public event EventHandler	ScriptEvent;
-        private void				raiseScriptEvent()
-        {
-            EventHandler lEvent = ScriptEvent;
-            if (lEvent != null) lEvent(null, EventArgs.Empty);
-        }
+		private void				raiseScriptEvent()
+		{
+			EventHandler lEvent = ScriptEvent;
+			if (lEvent != null) lEvent(null, EventArgs.Empty);
+		}
 		public object[]				mEventArgs;
 
 		private void				ReportError(string aMessage)

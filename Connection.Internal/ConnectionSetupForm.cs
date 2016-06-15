@@ -48,6 +48,8 @@ namespace Connection.Internal
             button_Connect.Enabled      = !mConnection.Connected;
             button_Disconnect.Enabled   = mConnection.Connected;
 
+            checkBox_TypeChangeProhibited.Checked = mConnection.mTypeChangeProhibited;
+
             label_CountN.Text           = StringUtils.ObjectToString(mConnection.NumberOfItems);
         }
 
@@ -61,6 +63,11 @@ namespace Connection.Internal
             mConnection.disconnect();
         }
 
+        private void                checkBox_TypeChangeProhibited_CheckedChanged(object aSender, EventArgs aEventArgs)
+        {
+            mConnection.mTypeChangeProhibited = checkBox_TypeChangeProhibited.Checked;
+        }
+
         private void                okCancelButton_ButtonClick(object aSender, EventArgs aEventArgs)
         {
             DialogResult = okCancelButton.DialogResult;
@@ -69,6 +76,14 @@ namespace Connection.Internal
         private void                ConnectionSetupForm_FormClosed(object aSender, FormClosedEventArgs aEventArgs)
         {
             mConnection.ConnectionState -= onConnectionStateChanged;
+        }
+
+        private void                ConnectionSetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape && okCancelButton.isOkCancelStyle)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void                ConnectionSetupForm_Load(object aSender, EventArgs aEventArgs)

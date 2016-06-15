@@ -17,6 +17,7 @@ namespace Connection.S7IsoTCP
         {
             mConnectionS7IsoTCP = aConnectionS7IsoTCP;
             InitializeComponent();
+
             if (aNew == false)
             {
                 okCancelButton.setOkOnlyStyle();
@@ -178,6 +179,14 @@ namespace Connection.S7IsoTCP
 
             mConnectionS7IsoTCP.ConnectionState -= onConnectionState;
             mConnectionS7IsoTCP.ConnectionError -= onConnectionError;
+        }
+
+        private void                ConnectionSetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape && okCancelButton.isOkCancelStyle)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void                ConnectionSetupForm_Load(object aSender, EventArgs aEventArgs)

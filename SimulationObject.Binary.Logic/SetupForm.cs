@@ -1,6 +1,6 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Windows.Forms;
-using API;
 using Utils;
 using Utils.DialogForms;
 using Utils.SpecialControls;
@@ -94,6 +94,14 @@ namespace SimulationObject.Binary.Logic
 
                 DialogResult = DialogResult.OK;
              }
+        }
+
+        private void            SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void            SetupForm_Load(object aSender, EventArgs aEventArgs)

@@ -199,7 +199,7 @@
             this.Index.HeaderText = "Index";
             this.Index.Name = "Index";
             this.Index.ReadOnly = true;
-            this.Index.Width = 66;
+            this.Index.Width = 70;
             // 
             // ItemID
             // 
@@ -258,7 +258,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 349);
+            this.ClientSize = new System.Drawing.Size(446, 356);
             this.ControlBox = false;
             this.Controls.Add(this.comboBox_DataFlow);
             this.Controls.Add(this.label_DataFlow);
@@ -267,6 +267,7 @@
             this.Controls.Add(this.label_ArrayItem);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetupForm";
@@ -275,6 +276,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Item.ArraySplitter";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.groupBox_Elements.ResumeLayout(false);
             this.groupBox_Elements.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Index.Properties)).EndInit();

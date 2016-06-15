@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 130);
+            this.ClientSize = new System.Drawing.Size(312, 135);
             this.ControlBox = false;
             this.Controls.Add(this.textBox_Y);
             this.Controls.Add(this.textBox_X);
@@ -90,12 +90,14 @@
             this.Controls.Add(this.label_X);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Name = "AddSetupForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Point";
             this.Load += new System.EventHandler(this.AddForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

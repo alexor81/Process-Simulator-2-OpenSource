@@ -37,7 +37,7 @@
             // 
             // textBox_Value
             // 
-            this.textBox_Value.Location = new System.Drawing.Point(99, 58);
+            this.textBox_Value.Location = new System.Drawing.Point(98, 58);
             this.textBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Value.Name = "textBox_Value";
             this.textBox_Value.Size = new System.Drawing.Size(175, 22);
@@ -46,7 +46,7 @@
             // label_Value
             // 
             this.label_Value.AutoSize = true;
-            this.label_Value.Location = new System.Drawing.Point(41, 63);
+            this.label_Value.Location = new System.Drawing.Point(40, 63);
             this.label_Value.Name = "label_Value";
             this.label_Value.Size = new System.Drawing.Size(48, 17);
             this.label_Value.TabIndex = 5;
@@ -55,7 +55,7 @@
             // label_Operation
             // 
             this.label_Operation.AutoSize = true;
-            this.label_Operation.Location = new System.Drawing.Point(16, 23);
+            this.label_Operation.Location = new System.Drawing.Point(15, 23);
             this.label_Operation.Name = "label_Operation";
             this.label_Operation.Size = new System.Drawing.Size(75, 17);
             this.label_Operation.TabIndex = 4;
@@ -65,15 +65,15 @@
             // 
             this.comboBox_Operation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Operation.FormattingEnabled = true;
-            this.comboBox_Operation.Location = new System.Drawing.Point(99, 18);
-            this.comboBox_Operation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox_Operation.Location = new System.Drawing.Point(98, 18);
+            this.comboBox_Operation.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_Operation.Name = "comboBox_Operation";
             this.comboBox_Operation.Size = new System.Drawing.Size(175, 24);
             this.comboBox_Operation.TabIndex = 0;
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(52, 101);
+            this.okCancelButton.Location = new System.Drawing.Point(50, 101);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -86,7 +86,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 135);
+            this.ClientSize = new System.Drawing.Size(290, 139);
             this.ControlBox = false;
             this.Controls.Add(this.comboBox_Operation);
             this.Controls.Add(this.textBox_Value);

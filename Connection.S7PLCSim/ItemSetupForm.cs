@@ -221,6 +221,14 @@ namespace Connection.S7PLCSim
             mConnectionS7PLCSim.ConnectionState -= onChange;
         }
 
+        private void                    ItemSetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
+        }
+
         private void                    ItemSetupForm_Load(object aSender, EventArgs aEventArgs)
         {
             ClientSize = FormUtils.calcClientSize(ClientSize, Controls);

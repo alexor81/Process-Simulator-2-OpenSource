@@ -103,7 +103,7 @@
             this.tabPage_Sections.Location = new System.Drawing.Point(4, 25);
             this.tabPage_Sections.Name = "tabPage_Sections";
             this.tabPage_Sections.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Sections.Size = new System.Drawing.Size(446, 263);
+            this.tabPage_Sections.Size = new System.Drawing.Size(445, 268);
             this.tabPage_Sections.TabIndex = 1;
             this.tabPage_Sections.Text = "Sections";
             this.tabPage_Sections.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             this.dataGridView_Sections.ShowCellToolTips = false;
             this.dataGridView_Sections.ShowEditingIcon = false;
             this.dataGridView_Sections.ShowRowErrors = false;
-            this.dataGridView_Sections.Size = new System.Drawing.Size(440, 232);
+            this.dataGridView_Sections.Size = new System.Drawing.Size(439, 237);
             this.dataGridView_Sections.TabIndex = 1;
             this.dataGridView_Sections.TabStop = false;
             this.dataGridView_Sections.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Sections_CellDoubleClick);
@@ -152,7 +152,7 @@
             this.tsButton_Delay});
             this.toolStrip.Location = new System.Drawing.Point(3, 3);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(440, 25);
+            this.toolStrip.Size = new System.Drawing.Size(439, 25);
             this.toolStrip.TabIndex = 0;
             // 
             // tsButton_Up

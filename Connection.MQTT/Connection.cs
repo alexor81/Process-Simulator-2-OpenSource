@@ -61,20 +61,28 @@ namespace Connection.MQTT
             }
             set
             {
-                if (mRoot.Equals(value, StringComparison.Ordinal) == false)
+               if(String.IsNullOrWhiteSpace(value))
+                {                
+                    mRoot       = "";
+                    mRootExist = false;
+                }
+                else
                 {
-                    if (value.Contains("+"))
+                    if (mRoot.Equals(value, StringComparison.Ordinal) == false)
                     {
-                        throw new ArgumentException("There is wrong symbol [+] in Root '" + value + "'. ");
-                    }
+                        if (value.Contains("+"))
+                        {
+                            throw new ArgumentException("There is wrong symbol [+] in Root '" + value + "'. ");
+                        }
 
-                    if (value.Contains("#"))
-                    {
-                        throw new ArgumentException("There is wrong symbol [#] in Root '" + value + "'. ");
-                    }
+                        if (value.Contains("#"))
+                        {
+                            throw new ArgumentException("There is wrong symbol [#] in Root '" + value + "'. ");
+                        }
 
-                    mRoot       = value;
-                    mRootExist  = (String.IsNullOrWhiteSpace(mRoot) == false);
+                        mRoot       = value;
+                        mRootExist  = true;
+                    }
                 }
             }
         }

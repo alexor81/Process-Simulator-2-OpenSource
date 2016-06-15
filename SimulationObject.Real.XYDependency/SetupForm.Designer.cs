@@ -44,10 +44,10 @@
             this.listBox_Points = new System.Windows.Forms.ListBox();
             this.toolStrip_Points = new System.Windows.Forms.ToolStrip();
             this.tsLabel_Points = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsButton_Add = new System.Windows.Forms.ToolStripButton();
             this.tsButton_Delete = new System.Windows.Forms.ToolStripButton();
             this.tsButton_Setup = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.panel_OkCancel.SuspendLayout();
             this.panel_Items.SuspendLayout();
@@ -235,6 +235,11 @@
             this.tsLabel_Points.Size = new System.Drawing.Size(50, 22);
             this.tsLabel_Points.Text = "Points";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // tsButton_Add
             // 
             this.tsButton_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -268,11 +273,6 @@
             this.tsButton_Setup.Text = "Setup";
             this.tsButton_Setup.Click += new System.EventHandler(this.tsButton_Setup_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // SetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -282,6 +282,7 @@
             this.Controls.Add(this.panel_Points);
             this.Controls.Add(this.panel_Items);
             this.Controls.Add(this.panel_OkCancel);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetupForm";
@@ -290,6 +291,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Real.XYDependency";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.panel_OkCancel.ResumeLayout(false);
             this.panel_Items.ResumeLayout(false);

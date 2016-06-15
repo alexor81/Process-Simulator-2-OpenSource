@@ -154,6 +154,14 @@ namespace Connection.S7PLCSim
             mConnectionS7PLCSim.ConnectionError -= onConnectionError;
         }
 
+        private void                ConnectionSetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape && okCancelButton.isOkCancelStyle)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
+        }
+
         private void                ConnectionSetupForm_Load(object aSender, EventArgs aEventArgs)
         {
             ClientSize = FormUtils.calcClientSize(ClientSize, Controls);

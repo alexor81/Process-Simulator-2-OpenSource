@@ -199,15 +199,15 @@ namespace SimulationObject.Script.CSharp
 
                 CompilerParameters lCompilerParam       = new CompilerParameters();
                 lCompilerParam.GenerateExecutable       = false;
-                lCompilerParam.GenerateInMemory         = true;
+                lCompilerParam.GenerateInMemory         = false;
                 lCompilerParam.TreatWarningsAsErrors    = false;
                 lCompilerParam.WarningLevel             = 4;
                 lCompilerParam.IncludeDebugInformation  = true;
-
+                lCompilerParam.TempFiles                = new TempFileCollection(MiscUtils.TempPath, true);
                 lCompilerParam.ReferencedAssemblies.Add("System.dll");
 
                 CompilerResults lCompilerResults;
-                using (CodeDomProvider lCodeProvider = new CSharpCodeProvider())
+                using (CodeDomProvider lCodeProvider = new CSharpCodeProvider(new Dictionary<string, string> { { "CompilerVersion", "v4.0" } }))
                 {
                     lCompilerResults = lCodeProvider.CompileAssemblyFromSource(lCompilerParam, lScriptTemplate.ToString());
                 }
@@ -222,6 +222,8 @@ namespace SimulationObject.Script.CSharp
                         if (lError.Line > lLineNum) lError.Line = (int)lLineNum;
                     }
                 }
+
+                lCompilerResults.TempFiles.KeepFiles = true;
 
                 aAliasCode = lCode.ToString();
                 return lCompilerResults;
@@ -515,7 +517,14 @@ namespace SimulationObject.Script.CSharp
                             if (lExc != null)
                             {
                                 int lLine = new StackTrace(lExc, true).GetFrame(0).GetFileLineNumber() - UserLineStart;
-                                raiseSimulationObjectError(lExc.Message + " (Line " + lLine.ToString() + ")");
+                                if(lLine > 0)
+                                { 
+                                    raiseSimulationObjectError(lExc.Message + " (Line " + lLine.ToString() + ")");
+                                }
+                                else
+                                {
+                                    raiseSimulationObjectError(lExc.Message);
+                                }
                             }
                             break;
                 }

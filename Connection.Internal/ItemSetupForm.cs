@@ -1,6 +1,6 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Windows.Forms;
-using API;
 using Utils;
 using Utils.DialogForms;
 
@@ -51,64 +51,33 @@ namespace Connection.Internal
                 Text = "Internal Item (Disconnected)";
             }
 
-            if (mConnectionInternal.Connected && mItemInternal.Access.HasFlag(EAccess.READ))
+            if (mItemInternal.mValue != null)
             {
-                if (mItemInternal.Value != null)
-                {
-                    label_ValueValue.Text   = StringUtils.ObjectToString(mItemInternal.Value);
-                    label_TypeValue.Text    = mItemInternal.Value.GetType().Name;
-                }
-                else
-                {
-                    label_ValueValue.Text   = "null";
-                    label_TypeValue.Text    = "N/A";
-                }
+                label_ValueValue.Text   = StringUtils.ObjectToString(mItemInternal.mValue);
+                label_TypeValue.Text    = mItemInternal.mValue.GetType().Name;
             }
             else
             {
-                label_ValueValue.Text   = "N/A";
+                label_ValueValue.Text   = "null";
                 label_TypeValue.Text    = "N/A";
             }
 
-            button_Write.Enabled = mConnectionInternal.Connected && mItemInternal.Access.HasFlag(EAccess.WRITE);
-
-            if (mConnectionInternal.Connected)
+            switch (mItemInternal.mAccess)
             {
-                switch (mItemInternal.Access)
-                {
-                    case EAccess.READ:          radioButton_R.Checked   = true; break;
-                    case EAccess.WRITE:         radioButton_W.Checked   = true; break;
-                    case EAccess.READ_WRITE:    radioButton_RW.Checked  = true; break;
-                    case EAccess.NO_ACCESS:     radioButton_NA.Checked  = true; break;
-                }
+                case EAccess.READ: radioButton_R.Checked        = true; break;
+                case EAccess.WRITE: radioButton_W.Checked       = true; break;
+                case EAccess.READ_WRITE: radioButton_RW.Checked = true; break;
+                case EAccess.NO_ACCESS: radioButton_NA.Checked  = true; break;
             }
-            else
-            {
-                radioButton_NA.Checked = true;
-            }
-
-            radioButton_R.Enabled   = mConnectionInternal.Connected;
-            radioButton_W.Enabled   = mConnectionInternal.Connected;
-            radioButton_RW.Enabled  = mConnectionInternal.Connected;
-            radioButton_NA.Enabled  = mConnectionInternal.Connected;
         }
 
         private void        button_Write_Click(object aSender, EventArgs aEventArgs)
         {
-            object lValue;
-            if (mItemInternal.Access.HasFlag(EAccess.READ))
-            {
-                lValue = mItemInternal.Value;
-            }
-            else
-            {
-                lValue = mItemInternal.InitValue;
-            }
-
-            lValue = ValueForm.getValue(lValue, this);
+            object lValue = ValueForm.getValue(mItemInternal.mValue, this);
             if (lValue != null)
             {
-                mItemInternal.Value = lValue;
+                mItemInternal.setValue(lValue);
+                updateForm();
             }
         }
 
@@ -145,6 +114,14 @@ namespace Connection.Internal
             mItemInternal.ValueChanged          -= onChange;
             mItemInternal.PropertiesChanged     -= onChange;
             mConnectionInternal.ConnectionState -= onChange;
+        }
+
+        private void        ItemSetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape && okCancelButton.isOkCancelStyle)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void        ItemSetupForm_Load(object aSender, EventArgs aEventArgs)

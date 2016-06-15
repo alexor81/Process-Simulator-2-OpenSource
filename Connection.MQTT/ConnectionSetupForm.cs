@@ -113,7 +113,7 @@ namespace Connection.MQTT
 
         private void                textBox_Root_KeyPress(object aSender, KeyPressEventArgs aEventArgs)
         {
-            if (aEventArgs.KeyChar == 35 || aEventArgs.KeyChar == 43) // + #
+            if (aEventArgs.KeyChar == 35 || aEventArgs.KeyChar == 43) // '+' '#'
             {
                 aEventArgs.Handled = true;
             }
@@ -187,6 +187,14 @@ namespace Connection.MQTT
         {
             mConnectionMQTT.ConnectionState -= onConnectionState;
             mConnectionMQTT.ConnectionError -= onConnectionError;
+        }
+
+        private void                ConnectionSetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape && okCancelButton.isOkCancelStyle)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void                ConnectionSetupForm_Load(object aSender, EventArgs aEventArgs)

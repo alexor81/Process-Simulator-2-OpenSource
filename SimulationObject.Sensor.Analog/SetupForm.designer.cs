@@ -426,7 +426,6 @@
             this.Operation.HeaderText = "Operation";
             this.Operation.Name = "Operation";
             this.Operation.ReadOnly = true;
-            this.Operation.Width = 96;
             // 
             // Value
             // 
@@ -434,7 +433,7 @@
             this.Value.HeaderText = "Value";
             this.Value.Name = "Value";
             this.Value.ReadOnly = true;
-            this.Value.Width = 69;
+            this.Value.Width = 73;
             // 
             // ItemID
             // 
@@ -458,11 +457,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 318);
+            this.ClientSize = new System.Drawing.Size(449, 319);
             this.ControlBox = false;
             this.Controls.Add(this.okCancelButton);
             this.Controls.Add(this.tabControl_Thrs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -472,6 +472,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Sensor.Analog";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.groupBox_Raw.ResumeLayout(false);
             this.groupBox_Raw.PerformLayout();
             this.groupBox_Physical.ResumeLayout(false);

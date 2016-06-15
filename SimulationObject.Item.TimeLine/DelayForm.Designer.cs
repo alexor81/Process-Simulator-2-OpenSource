@@ -83,18 +83,20 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 109);
+            this.ClientSize = new System.Drawing.Size(283, 114);
             this.ControlBox = false;
             this.Controls.Add(this.spinEdit_Delay);
             this.Controls.Add(this.label_Delay);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Name = "DelayForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Section Delay";
             this.Load += new System.EventHandler(this.DelayForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DelayForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Delay.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

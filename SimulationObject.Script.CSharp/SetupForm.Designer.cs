@@ -15,7 +15,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetupForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.tsButton_Check = new System.Windows.Forms.ToolStripButton();
@@ -38,7 +37,7 @@
             this.tsLabel_Font = new System.Windows.Forms.ToolStripLabel();
             this.tsComboBox_Font = new System.Windows.Forms.ToolStripComboBox();
             this.tsButton_Options = new System.Windows.Forms.ToolStripButton();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             this.tsMenuItem_Cut = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenuItem_Paste = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +75,7 @@
             // 
             // toolStrip
             // 
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsButton_Check,
             this.tsButton_Items,
@@ -293,6 +293,7 @@
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsMenuItem_Cut,
             this.tsMenuItem_Copy,
@@ -315,14 +316,14 @@
             this.tsMenuItem_Clone,
             this.tsMenuItem_CloneAndComment});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(217, 394);
+            this.contextMenuStrip.Size = new System.Drawing.Size(221, 424);
             // 
             // tsMenuItem_Cut
             // 
             this.tsMenuItem_Cut.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Cut;
             this.tsMenuItem_Cut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Cut.Name = "tsMenuItem_Cut";
-            this.tsMenuItem_Cut.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Cut.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Cut.Text = "Cut";
             this.tsMenuItem_Cut.Click += new System.EventHandler(this.Cut_Click);
             // 
@@ -331,7 +332,7 @@
             this.tsMenuItem_Copy.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Copy;
             this.tsMenuItem_Copy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Copy.Name = "tsMenuItem_Copy";
-            this.tsMenuItem_Copy.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Copy.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Copy.Text = "Copy";
             this.tsMenuItem_Copy.Click += new System.EventHandler(this.Copy_Click);
             // 
@@ -340,7 +341,7 @@
             this.tsMenuItem_Paste.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Paste;
             this.tsMenuItem_Paste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Paste.Name = "tsMenuItem_Paste";
-            this.tsMenuItem_Paste.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Paste.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Paste.Text = "Paste";
             this.tsMenuItem_Paste.Click += new System.EventHandler(this.Paste_Click);
             // 
@@ -349,14 +350,14 @@
             this.tsMenuItem_SelectAll.Image = global::SimulationObject.Script.CSharp.Properties.Resources.SelectAll;
             this.tsMenuItem_SelectAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_SelectAll.Name = "tsMenuItem_SelectAll";
-            this.tsMenuItem_SelectAll.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_SelectAll.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_SelectAll.Text = "Select All";
             this.tsMenuItem_SelectAll.Click += new System.EventHandler(this.SelectAll_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(213, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(217, 6);
             // 
             // tsMenuItem_Undo
             // 
@@ -364,7 +365,7 @@
             this.tsMenuItem_Undo.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Undo;
             this.tsMenuItem_Undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Undo.Name = "tsMenuItem_Undo";
-            this.tsMenuItem_Undo.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Undo.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Undo.Text = "Undo";
             this.tsMenuItem_Undo.Click += new System.EventHandler(this.Undo_Click);
             // 
@@ -374,21 +375,21 @@
             this.tsMenuItem_Redo.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Redo;
             this.tsMenuItem_Redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Redo.Name = "tsMenuItem_Redo";
-            this.tsMenuItem_Redo.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Redo.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Redo.Text = "Redo";
             this.tsMenuItem_Redo.Click += new System.EventHandler(this.Redo_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(213, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(217, 6);
             // 
             // tsMenuItem_CollapseAll
             // 
             this.tsMenuItem_CollapseAll.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Collapse;
             this.tsMenuItem_CollapseAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_CollapseAll.Name = "tsMenuItem_CollapseAll";
-            this.tsMenuItem_CollapseAll.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_CollapseAll.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_CollapseAll.Text = "Collapse All";
             this.tsMenuItem_CollapseAll.Click += new System.EventHandler(this.CollapseAll_Click);
             // 
@@ -397,21 +398,21 @@
             this.tsMenuItem_ExpandAll.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Expand;
             this.tsMenuItem_ExpandAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_ExpandAll.Name = "tsMenuItem_ExpandAll";
-            this.tsMenuItem_ExpandAll.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_ExpandAll.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_ExpandAll.Text = "Expand All";
             this.tsMenuItem_ExpandAll.Click += new System.EventHandler(this.ExpandAll_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(213, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(217, 6);
             // 
             // tsMenuItem_Find
             // 
             this.tsMenuItem_Find.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Find;
             this.tsMenuItem_Find.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Find.Name = "tsMenuItem_Find";
-            this.tsMenuItem_Find.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Find.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Find.Text = "Find";
             this.tsMenuItem_Find.Click += new System.EventHandler(this.Find_Click);
             // 
@@ -420,40 +421,40 @@
             this.tsMenuItem_Replace.Image = global::SimulationObject.Script.CSharp.Properties.Resources.FindReplace;
             this.tsMenuItem_Replace.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Replace.Name = "tsMenuItem_Replace";
-            this.tsMenuItem_Replace.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Replace.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Replace.Text = "Replace";
             this.tsMenuItem_Replace.Click += new System.EventHandler(this.Replace_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(213, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(217, 6);
             // 
             // tsMenuItem_Comment
             // 
             this.tsMenuItem_Comment.Name = "tsMenuItem_Comment";
-            this.tsMenuItem_Comment.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Comment.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Comment.Text = "Comment";
             this.tsMenuItem_Comment.Click += new System.EventHandler(this.Comment_Click);
             // 
             // tsMenuItem_Uncomment
             // 
             this.tsMenuItem_Uncomment.Name = "tsMenuItem_Uncomment";
-            this.tsMenuItem_Uncomment.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Uncomment.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Uncomment.Text = "Uncomment";
             this.tsMenuItem_Uncomment.Click += new System.EventHandler(this.Uncomment_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(213, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(217, 6);
             // 
             // tsMenuItem_Indent
             // 
             this.tsMenuItem_Indent.Image = global::SimulationObject.Script.CSharp.Properties.Resources.text_indent;
             this.tsMenuItem_Indent.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Indent.Name = "tsMenuItem_Indent";
-            this.tsMenuItem_Indent.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Indent.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Indent.Text = "Indent";
             this.tsMenuItem_Indent.Click += new System.EventHandler(this.Indent_Click);
             // 
@@ -462,14 +463,14 @@
             this.tsMenuItem_Clone.Image = global::SimulationObject.Script.CSharp.Properties.Resources.Clone;
             this.tsMenuItem_Clone.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsMenuItem_Clone.Name = "tsMenuItem_Clone";
-            this.tsMenuItem_Clone.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_Clone.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_Clone.Text = "Clone";
             this.tsMenuItem_Clone.Click += new System.EventHandler(this.Clone_Click);
             // 
             // tsMenuItem_CloneAndComment
             // 
             this.tsMenuItem_CloneAndComment.Name = "tsMenuItem_CloneAndComment";
-            this.tsMenuItem_CloneAndComment.Size = new System.Drawing.Size(216, 24);
+            this.tsMenuItem_CloneAndComment.Size = new System.Drawing.Size(220, 26);
             this.tsMenuItem_CloneAndComment.Text = "Clone and Comment";
             this.tsMenuItem_CloneAndComment.Click += new System.EventHandler(this.CloneAndComment_Click);
             // 
@@ -540,14 +541,18 @@
         '\"',
         '\'',
         '\''};
-            this.fastColoredTextBox_Code.AutoScrollMinSize = new System.Drawing.Size(31, 18);
+            this.fastColoredTextBox_Code.AutoIndentCharsPatterns = "\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\n^\\s*(case|default)\\s*[^:]*(" +
+    "?<range>:)\\s*(?<range>[^;]+);\n";
+            this.fastColoredTextBox_Code.AutoScrollMinSize = new System.Drawing.Size(29, 19);
             this.fastColoredTextBox_Code.BackBrush = null;
             this.fastColoredTextBox_Code.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
-            this.fastColoredTextBox_Code.CharHeight = 18;
-            this.fastColoredTextBox_Code.CharWidth = 10;
+            this.fastColoredTextBox_Code.CharHeight = 19;
+            this.fastColoredTextBox_Code.CharWidth = 9;
             this.fastColoredTextBox_Code.ContextMenuStrip = this.contextMenuStrip;
+            this.fastColoredTextBox_Code.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fastColoredTextBox_Code.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fastColoredTextBox_Code.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastColoredTextBox_Code.Font = new System.Drawing.Font("Consolas", 10.2F);
             this.fastColoredTextBox_Code.IsReplaceMode = false;
             this.fastColoredTextBox_Code.Language = FastColoredTextBoxNS.Language.CSharp;
             this.fastColoredTextBox_Code.LeftBracket = '(';
@@ -578,6 +583,7 @@
             this.richTextBox_Result.Size = new System.Drawing.Size(658, 53);
             this.richTextBox_Result.TabIndex = 0;
             this.richTextBox_Result.TabStop = false;
+            this.richTextBox_Result.Text = "";
             this.richTextBox_Result.WordWrap = false;
             // 
             // SetupForm
@@ -589,6 +595,7 @@
             this.Controls.Add(this.panel_Code);
             this.Controls.Add(this.panel_OkCancel);
             this.Controls.Add(this.toolStrip);
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -599,6 +606,7 @@
             this.Text = "Script.CSharp";
             this.Load += new System.EventHandler(this.SetupForm_Load);
             this.SizeChanged += new System.EventHandler(this.SetupForm_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);

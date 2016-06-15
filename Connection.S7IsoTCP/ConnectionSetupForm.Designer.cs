@@ -377,13 +377,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 375);
+            this.ClientSize = new System.Drawing.Size(376, 376);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_Options);
             this.Controls.Add(this.groupBox_Items);
             this.Controls.Add(this.groupBox_PLC);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConnectionSetupForm";
@@ -393,6 +394,7 @@
             this.Text = "S7IsoTCP Connection";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConnectionSetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ConnectionSetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConnectionSetupForm_KeyDown);
             this.groupBox_PLC.ResumeLayout(false);
             this.groupBox_PLC.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Slot.Properties)).EndInit();

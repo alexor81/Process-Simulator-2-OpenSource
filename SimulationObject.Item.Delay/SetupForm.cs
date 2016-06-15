@@ -1,6 +1,6 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Windows.Forms;
-using API;
 using Utils;
 using Utils.DialogForms;
 using Utils.SpecialControls;
@@ -85,6 +85,14 @@ namespace SimulationObject.Item.Delay
                 }
 
                 DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void            SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                DialogResult = DialogResult.Cancel;
             }
         }
 

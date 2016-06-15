@@ -202,6 +202,7 @@
             this.Controls.Add(this.panel_Image);
             this.Controls.Add(this.panel_Items);
             this.Controls.Add(this.panel_OkCancel);
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -210,7 +211,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Animation.ImgMove";
-            this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.panel_OkCancel.ResumeLayout(false);
             this.panel_Items.ResumeLayout(false);
             this.panel_Items.PerformLayout();

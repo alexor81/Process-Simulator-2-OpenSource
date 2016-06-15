@@ -265,6 +265,11 @@ namespace SimulationObject.Item.TimeLine
 
         private void                        SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
         {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
+
             if (tabControl.SelectedIndex == 1 && aEventArgs.KeyCode == Keys.Delete)
             {
                 tsButton_Delete_Click(this, EventArgs.Empty);

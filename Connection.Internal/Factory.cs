@@ -3,7 +3,6 @@ using System;
 using System.Windows.Forms;
 using System.Xml;
 using Utils;
-using Utils.Logger;
 
 namespace Connection.Internal
 {
@@ -19,7 +18,12 @@ namespace Connection.Internal
 
             public IConnection          createFromXML(XmlTextReader aXMLTextReader)
             {
-                return new Connection();
+                var lConnection     = new Connection();
+                var lReader         = new XMLAttributeReader(aXMLTextReader);
+
+                lConnection.mTypeChangeProhibited = lReader.getAttribute<Boolean>("TypeChangeProhibited", lConnection.mTypeChangeProhibited);    
+
+                return lConnection;
             }
 
             public IConnection          createByForm(IWin32Window aOwner)
@@ -45,6 +49,8 @@ namespace Connection.Internal
 
             public void                 saveToXML(IConnection aConnection, XmlTextWriter aXMLTextWriter)
             {
+                Connection lConnection = (Connection)aConnection;
+                aXMLTextWriter.WriteAttributeString("TypeChangeProhibited", StringUtils.ObjectToString(lConnection.mTypeChangeProhibited));
             }
 
             public void                 destroyConnection(IConnection aConnection)
@@ -100,14 +106,8 @@ namespace Connection.Internal
             {
                 Connection lConnection  = (Connection)aConnection;
                 DataItem lItem          = (DataItem)aDataItem;
-                if (lConnection.Connected)
-                {
-                    aXMLTextWriter.WriteAttributeString("Access", lItem.mAccess.ToString());
-                }
-                else
-                {
-                    aXMLTextWriter.WriteAttributeString("Access", lItem.mPrevAccess.ToString());
-                }
+
+                aXMLTextWriter.WriteAttributeString("Access", lItem.mAccess.ToString());
 
                 if (lItem.mValue != null)
                 {

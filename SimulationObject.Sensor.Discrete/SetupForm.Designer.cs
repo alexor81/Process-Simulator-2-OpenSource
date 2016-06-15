@@ -191,13 +191,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 195);
+            this.ClientSize = new System.Drawing.Size(384, 196);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox);
             this.Controls.Add(this.groupBox_Signalisation);
             this.Controls.Add(this.label_Item);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -207,6 +208,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Sensor.Discrete";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.groupBox_Signalisation.ResumeLayout(false);
             this.groupBox_Signalisation.PerformLayout();
             this.ResumeLayout(false);

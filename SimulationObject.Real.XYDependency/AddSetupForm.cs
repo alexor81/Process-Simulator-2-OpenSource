@@ -29,6 +29,14 @@ namespace SimulationObject.Real.XYDependency
             DialogResult = okCancelButton.DialogResult;
         }
 
+        private void    AddForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
+        }
+
         private void    AddForm_Load(object aSender, EventArgs aEventArgs)
         {
             ClientSize = FormUtils.calcClientSize(ClientSize, Controls);

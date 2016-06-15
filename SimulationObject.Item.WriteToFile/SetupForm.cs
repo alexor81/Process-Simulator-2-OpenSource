@@ -229,7 +229,12 @@ namespace SimulationObject.Item.WriteToFile
 
         private void            SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
         {
-            if(tabControl.SelectedIndex == 1 && aEventArgs.KeyCode == Keys.Delete)
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
+
+            if (tabControl.SelectedIndex == 1 && aEventArgs.KeyCode == Keys.Delete)
             {
                 tsButton_Delete_Click(this, EventArgs.Empty);
             }

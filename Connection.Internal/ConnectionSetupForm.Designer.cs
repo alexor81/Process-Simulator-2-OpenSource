@@ -36,8 +36,11 @@
             this.label_CountN = new System.Windows.Forms.Label();
             this.label_Count = new System.Windows.Forms.Label();
             this.okCancelButton = new Utils.SpecialControls.OKCancelButton();
+            this.groupBox_Options = new System.Windows.Forms.GroupBox();
+            this.checkBox_TypeChangeProhibited = new System.Windows.Forms.CheckBox();
             this.groupBox_Connection.SuspendLayout();
             this.groupBox_Items.SuspendLayout();
+            this.groupBox_Options.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_Status
@@ -76,7 +79,7 @@
             this.groupBox_Connection.Controls.Add(this.label_Status);
             this.groupBox_Connection.Controls.Add(this.button_Disconnect);
             this.groupBox_Connection.Controls.Add(this.button_Connect);
-            this.groupBox_Connection.Location = new System.Drawing.Point(4, 1);
+            this.groupBox_Connection.Location = new System.Drawing.Point(5, 1);
             this.groupBox_Connection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Connection.Name = "groupBox_Connection";
             this.groupBox_Connection.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -89,12 +92,12 @@
             // 
             this.groupBox_Items.Controls.Add(this.label_CountN);
             this.groupBox_Items.Controls.Add(this.label_Count);
-            this.groupBox_Items.Location = new System.Drawing.Point(4, 106);
+            this.groupBox_Items.Location = new System.Drawing.Point(5, 163);
             this.groupBox_Items.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Items.Name = "groupBox_Items";
             this.groupBox_Items.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Items.Size = new System.Drawing.Size(276, 43);
-            this.groupBox_Items.TabIndex = 1;
+            this.groupBox_Items.TabIndex = 2;
             this.groupBox_Items.TabStop = false;
             this.groupBox_Items.Text = "Items";
             // 
@@ -118,25 +121,48 @@
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(48, 155);
+            this.okCancelButton.Location = new System.Drawing.Point(49, 213);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.Name = "okCancelButton";
             this.okCancelButton.Size = new System.Drawing.Size(188, 33);
-            this.okCancelButton.TabIndex = 2;
+            this.okCancelButton.TabIndex = 3;
             this.okCancelButton.ButtonClick += new System.EventHandler(this.okCancelButton_ButtonClick);
+            // 
+            // groupBox_Options
+            // 
+            this.groupBox_Options.Controls.Add(this.checkBox_TypeChangeProhibited);
+            this.groupBox_Options.Location = new System.Drawing.Point(5, 104);
+            this.groupBox_Options.Name = "groupBox_Options";
+            this.groupBox_Options.Size = new System.Drawing.Size(276, 54);
+            this.groupBox_Options.TabIndex = 1;
+            this.groupBox_Options.TabStop = false;
+            this.groupBox_Options.Text = "Options";
+            // 
+            // checkBox_TypeChangeProhibited
+            // 
+            this.checkBox_TypeChangeProhibited.AutoSize = true;
+            this.checkBox_TypeChangeProhibited.Location = new System.Drawing.Point(41, 22);
+            this.checkBox_TypeChangeProhibited.Name = "checkBox_TypeChangeProhibited";
+            this.checkBox_TypeChangeProhibited.Size = new System.Drawing.Size(194, 21);
+            this.checkBox_TypeChangeProhibited.TabIndex = 0;
+            this.checkBox_TypeChangeProhibited.Text = "Type change is prohibited";
+            this.checkBox_TypeChangeProhibited.UseVisualStyleBackColor = true;
+            this.checkBox_TypeChangeProhibited.CheckedChanged += new System.EventHandler(this.checkBox_TypeChangeProhibited_CheckedChanged);
             // 
             // ConnectionSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 190);
+            this.ClientSize = new System.Drawing.Size(286, 250);
             this.ControlBox = false;
+            this.Controls.Add(this.groupBox_Options);
             this.Controls.Add(this.groupBox_Connection);
             this.Controls.Add(this.okCancelButton);
             this.Controls.Add(this.groupBox_Items);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -147,10 +173,13 @@
             this.Text = "Internal Connection";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConnectionSetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ConnectionSetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConnectionSetupForm_KeyDown);
             this.groupBox_Connection.ResumeLayout(false);
             this.groupBox_Connection.PerformLayout();
             this.groupBox_Items.ResumeLayout(false);
             this.groupBox_Items.PerformLayout();
+            this.groupBox_Options.ResumeLayout(false);
+            this.groupBox_Options.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -165,5 +194,7 @@
         private System.Windows.Forms.Label label_CountN;
         private System.Windows.Forms.Label label_Count;
         private Utils.SpecialControls.OKCancelButton okCancelButton;
+        private System.Windows.Forms.GroupBox groupBox_Options;
+        private System.Windows.Forms.CheckBox checkBox_TypeChangeProhibited;
     }
 }

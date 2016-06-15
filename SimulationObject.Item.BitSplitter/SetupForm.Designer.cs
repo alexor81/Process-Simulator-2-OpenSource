@@ -147,7 +147,7 @@
             this.Index.HeaderText = "Index";
             this.Index.Name = "Index";
             this.Index.ReadOnly = true;
-            this.Index.Width = 66;
+            this.Index.Width = 70;
             // 
             // ItemID
             // 
@@ -258,7 +258,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 351);
+            this.ClientSize = new System.Drawing.Size(446, 356);
             this.ControlBox = false;
             this.Controls.Add(this.label_DataFlow);
             this.Controls.Add(this.groupBox_Elements);
@@ -267,6 +267,7 @@
             this.Controls.Add(this.label_ArrayItem);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetupForm";
@@ -275,6 +276,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Item.BitSplitter";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Index.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Bit)).EndInit();
             this.groupBox_Elements.ResumeLayout(false);

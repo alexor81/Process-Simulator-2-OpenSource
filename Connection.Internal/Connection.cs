@@ -5,6 +5,8 @@ namespace Connection.Internal
 {
     public class Connection: IConnection
     {
+        public bool                                         mTypeChangeProhibited = false;
+
         public void                                         connect()
         {
             mConnected = true;
@@ -53,29 +55,22 @@ namespace Connection.Internal
 
             public DataItem                                 addItem(EAccess aItemAccess, object aValue)
             {
-                DataItem lItem  = new DataItem();
-                ConnectionState += new EventHandler(lItem.onConnectionStateChanged);
+                DataItem lItem      = new DataItem();
+                lItem.mConnection   = this;
+                lItem.mAccess       = aItemAccess;
+                lItem.mValue        = aValue;
+                ConnectionState     += new EventHandler(lItem.onConnectionStateChanged);            
 
-                lItem.mPrevAccess = aItemAccess;
-                if (Connected)
-                {
-                    lItem.mAccess = aItemAccess;
-                }
-                else
-                {
-                    lItem.mAccess = EAccess.NO_ACCESS;
-                }
-
-                lItem.mValue    = aValue;
-                mNumberOfItems  = mNumberOfItems + 1;
+                mNumberOfItems      = mNumberOfItems + 1;
 
                 return lItem;
             }
 
             public void                                     removeItem(DataItem aItem)
             {
-                ConnectionState -= aItem.onConnectionStateChanged;
-                mNumberOfItems  = mNumberOfItems - 1;
+                ConnectionState     -= aItem.onConnectionStateChanged;
+                aItem.mConnection   = null;
+                mNumberOfItems      = mNumberOfItems - 1;
             }
 
             private int                                     mNumberOfItems = 0;

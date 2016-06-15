@@ -1019,7 +1019,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(386, 315);
+            this.ClientSize = new System.Drawing.Size(385, 316);
             this.ControlBox = false;
             this.Controls.Add(this.spinEdit_Update);
             this.Controls.Add(this.label_Update);
@@ -1027,6 +1027,7 @@
             this.Controls.Add(this.okCancelButton);
             this.Controls.Add(this.groupBox_Joints);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetupForm";
@@ -1035,6 +1036,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Robot.SixAxis";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.groupBox_Joints.ResumeLayout(false);
             this.tabControl_Joints.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

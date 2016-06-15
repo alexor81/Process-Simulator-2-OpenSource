@@ -1,17 +1,45 @@
-﻿using System;
-using API;
+﻿using API;
+using System;
 using Utils;
 
 namespace Connection.Internal
 {
     public class DataItem: IDataItem
     {
+        public Connection               mConnection;
+
         public object                   mValue = 0;
+        public void                     setValue(object aValue)
+        {
+            if (ValuesCompare.isNotEqual(mValue, aValue))
+            {
+                bool lTypeChanged = true;
+                if (mValue != null)
+                {
+                    lTypeChanged = (mValue.GetType() != aValue.GetType());
+                }
+                else
+                {
+                    lTypeChanged = true;
+                }
+
+                mValue = aValue;
+                if (Access.HasFlag(EAccess.READ))
+                {
+                    raiseValueChanged();
+                }
+
+                if (lTypeChanged)
+                {
+                    raisePropertiesChanged();
+                }
+            }
+        }
         public object                   Value
         {
             get
             {
-                if (mAccess.HasFlag(EAccess.READ) == false)
+                if (Access.HasFlag(EAccess.READ) == false)
                 {
                     throw new InvalidOperationException("No access. ");
                 }
@@ -20,34 +48,33 @@ namespace Connection.Internal
             }
             set
             {
-                if (mAccess.HasFlag(EAccess.WRITE) == false)
+                if (Access.HasFlag(EAccess.WRITE) == false)
                 {
                     throw new InvalidOperationException("No access. ");
                 }
 
-                if (ValuesCompare.isNotEqual(mValue, value))
+                if(value == null)
                 {
-                    bool lTypeChanged = true;
-                    if (mValue != null && value != null)
-                    {
-                        lTypeChanged = (mValue.GetType() != value.GetType());
-                    }
+                    throw new ArgumentException("Null value is prohibited. ");
+                }
 
-                    mValue      = value;
-                    var lEvent  = ValueChanged;
-                    if (mAccess.HasFlag(EAccess.READ) && lEvent != null)
+                if(mConnection.mTypeChangeProhibited && mValue != null)
+                {
+                    if(mValue.GetType() != value.GetType())
                     {
-                        lEvent(this, EventArgs.Empty);
-                    }
-
-                    if (lTypeChanged)
-                    {
-                        raisePropertiesChanged();
+                        throw new ArgumentException("Type change is prohibited. ");
                     }
                 }
+
+                setValue(value);
             }
         }
         public event EventHandler       ValueChanged;
+        public void                     raiseValueChanged()
+        {
+            EventHandler lEvent = ValueChanged;
+            if (lEvent != null) lEvent(this, EventArgs.Empty);
+        }
         public object                   InitValue
         {
             get
@@ -56,35 +83,43 @@ namespace Connection.Internal
             }
         }
 
-        public volatile EAccess         mPrevAccess = EAccess.READ_WRITE;
         public volatile EAccess         mAccess     = EAccess.READ_WRITE;
         public EAccess                  Access
         {
             get
             {
-                return mAccess;
+                if (mConnection.Connected)
+                {
+                    return mAccess;
+                }
+                else
+                {
+                    return EAccess.NO_ACCESS;
+                }
             }
             set
             {
-                if (mAccess != value)
+                if(mAccess != value)
                 {
                     mAccess = value;
                     raisePropertiesChanged();
+
+                    if (Access.HasFlag(EAccess.READ))
+                    {
+                        raiseValueChanged();
+                    }
                 }
             }
         }
 
         public void                     onConnectionStateChanged(object aSender, EventArgs aEventArgs)
         {
-            if (((Connection)aSender).Connected)
+            raisePropertiesChanged();
+
+            if (Access.HasFlag(EAccess.READ))
             {
-                Access = mPrevAccess;
-            }
-            else
-            {
-                mPrevAccess = mAccess;
-                Access      = EAccess.NO_ACCESS;
-            }
+                raiseValueChanged();
+            }   
         }
 
         public string                   Description
@@ -96,7 +131,7 @@ namespace Connection.Internal
         }
 
         public event EventHandler       PropertiesChanged;
-        private void                    raisePropertiesChanged()
+        public void                     raisePropertiesChanged()
         {
             EventHandler lEvent = PropertiesChanged;
             if (lEvent != null) lEvent(this, EventArgs.Empty);
