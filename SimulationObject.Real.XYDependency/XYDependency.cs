@@ -254,7 +254,7 @@ namespace SimulationObject.Real.XYDependency
                 }
                 else
                 {
-                    throw new ArgumentException("Points number must be grater than two. ");
+                    throw new ArgumentException("Points number must be equal or grater than two. ");
                 }
             }
 

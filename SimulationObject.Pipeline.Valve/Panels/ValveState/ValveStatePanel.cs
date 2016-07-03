@@ -183,7 +183,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveState
 
         private void            pictureBox_State_MouseClick(object aSender, MouseEventArgs aEventArgs)
         {
-            if (aEventArgs.Button == System.Windows.Forms.MouseButtons.Left)
+            if (aEventArgs.Button == MouseButtons.Left)
             {
                 using (var lPanelForm = new PanelForm(mValve, "Control", LabelText))
                 {

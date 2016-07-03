@@ -140,7 +140,7 @@ namespace Connection.MQTT
         }
 
         public event EventHandler       PropertiesChanged;
-        private void                    raisePropertiesChanged()
+        public void                     raisePropertiesChanged()
         {
             EventHandler lEvent = PropertiesChanged;
             if (lEvent != null) lEvent(this, EventArgs.Empty);

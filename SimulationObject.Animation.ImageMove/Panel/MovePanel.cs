@@ -80,7 +80,16 @@ namespace SimulationObject.Animation.ImageMove.Panel
         {
             if (mDemo == false)
             {
-                Location = new Point(mMove.mXValue, mMove.mYValue);
+                var lParent = Parent as ScrollableControl;
+                if (lParent != null)
+                {
+                    Location = new Point(mMove.mXValue + lParent.AutoScrollPosition.X, mMove.mYValue + lParent.AutoScrollPosition.Y);
+                }
+                else
+                {
+                    Location = new Point(mMove.mXValue, mMove.mYValue);
+                }
+
                 if (pictureBox.Enabled)
                 {
                     Visible = mMove.mVisible;

@@ -15,12 +15,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label_S7PlcSimInstNum = new System.Windows.Forms.Label();
             this.groupBox_S7PLCSim = new System.Windows.Forms.GroupBox();
             this.spinEdit_InstNum = new DevExpress.XtraEditors.SpinEdit();
             this.button_Disconnect = new System.Windows.Forms.Button();
             this.button_Connect = new System.Windows.Forms.Button();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox_Options = new System.Windows.Forms.GroupBox();
             this.label_WriteRequests = new System.Windows.Forms.Label();
             this.label_WR = new System.Windows.Forms.Label();
@@ -274,7 +275,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 324);
+            this.ClientSize = new System.Drawing.Size(361, 323);
             this.ControlBox = false;
             this.Controls.Add(this.okCancelButton);
             this.Controls.Add(this.groupBox_Items);

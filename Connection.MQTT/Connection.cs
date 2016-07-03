@@ -240,6 +240,10 @@ namespace Connection.MQTT
                     mItemList[lTopic].setValue(Encoding.UTF8.GetString(aEventArgs.Message));
                 }
             }
+            catch (Exception lExc)
+            {
+                raiseConnectionError("Error updating values. " + lExc.ToString());
+            }
             finally
             {
                 //========================================
@@ -297,8 +301,6 @@ namespace Connection.MQTT
                         throw new ArgumentException("Topic '" + aTopic + "' already exists. ");
                     }
 
-                    ConnectionState += new EventHandler(lItem.onConnectionStateChanged);
-
                     mItemList.Add(aTopic, lItem);
                 }
                 finally
@@ -307,10 +309,13 @@ namespace Connection.MQTT
                     mItemListLock.ExitWriteLock();
                 }
 
+                lItem.raisePropertiesChanged();
                 if (Connected)
                 {
                     mClient.Subscribe(new string[] { getFullTopic(aTopic) }, new byte[] { mQOS });
                 }
+
+                ConnectionState += new EventHandler(lItem.onConnectionStateChanged);
 
                 return lItem;
             }
@@ -350,6 +355,7 @@ namespace Connection.MQTT
                         mItemListLock.ExitWriteLock();
                     }
 
+                    aItem.raisePropertiesChanged();
                     if (Connected)
                     {
                         mClient.Subscribe(new string[] { getFullTopic(aNewTopic) }, new byte[] { mQOS });
@@ -359,6 +365,11 @@ namespace Connection.MQTT
                 if (aItem.Subscribe != aSubscribe)
                 {
                     aItem.Subscribe = aSubscribe;
+                    if (Connected)
+                    {
+                        mClient.Unsubscribe(new string[] { getFullTopic(aItem.mTopic) });
+                        mClient.Subscribe(new string[] { getFullTopic(aItem.mTopic) }, new byte[] { mQOS });
+                    }
                 }
 
                 if (aItem.Publish != aPublish)
@@ -369,6 +380,8 @@ namespace Connection.MQTT
 
             public void                                     removeItem(DataItem aItem)
             {
+                ConnectionState -= aItem.onConnectionStateChanged;
+
                 mItemListLock.EnterWriteLock();
                 //========================================
                 try
@@ -377,8 +390,6 @@ namespace Connection.MQTT
                     {
                         throw new ArgumentException("Data item with Topic: '" + aItem.mTopic + "' is not found. ");
                     }
-
-                    ConnectionState -= aItem.onConnectionStateChanged;
 
                     if (Connected)
                     {
@@ -406,7 +417,7 @@ namespace Connection.MQTT
 
         #region IDisposable
 
-        private bool                                    mDisposed = false;
+            private bool                                    mDisposed = false;
 
             public void                                     Dispose()
             {
