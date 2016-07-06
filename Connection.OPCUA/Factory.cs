@@ -24,9 +24,10 @@ namespace Connection.OPCUA
                 Connection lConnection      = new Connection();
                 XMLAttributeReader lReader  = new XMLAttributeReader(aXMLTextReader);
 
-                lConnection.mDiscovery      = lReader.getAttribute<String>("Discovery", lConnection.mDiscovery);
-                lConnection.mServerName     = lReader.getAttribute<String>("ServerName", lConnection.mServerName);
-                lConnection.Transport       = lReader.getAttribute<String>("Transport", lConnection.Transport);
+                lConnection.mDiscovery          = lReader.getAttribute<String>("Discovery", lConnection.mDiscovery);
+                lConnection.mServerName         = lReader.getAttribute<String>("ServerName", lConnection.mServerName);
+                lConnection.Transport           = lReader.getAttribute<String>("Transport", lConnection.Transport);
+                lConnection.mPublishingInterval = (int)lReader.getAttribute<UInt32>("PublishingInterval", (uint)lConnection.mPublishingInterval);
 
                 List<string> lNamespaces = new List<string>();
                 aXMLTextReader.Read();
@@ -78,6 +79,8 @@ namespace Connection.OPCUA
                 aXMLTextWriter.WriteAttributeString("Discovery", lConnection.mDiscovery);
                 aXMLTextWriter.WriteAttributeString("ServerName", lConnection.mServerName);
                 aXMLTextWriter.WriteAttributeString("Transport", lConnection.Transport);
+                aXMLTextWriter.WriteAttributeString("PublishingInterval", StringUtils.ObjectToString(lConnection.mPublishingInterval));
+
 
                 aXMLTextWriter.WriteStartElement("Namespaces");
 

@@ -23,6 +23,8 @@ namespace Connection.OPCUA
 
             comboBox_Transport.Items.AddRange(Enum.GetNames(typeof(ETransport)));
 
+            spinEdit_PubInterval.Value = mConnection.mPublishingInterval;
+
             mConnection.ConnectionState += new EventHandler(onConnectionState);
             mConnection.ConnectionError += new EventHandler<MessageStringEventArgs>(onConnectionError);
             updateForm();
@@ -54,17 +56,17 @@ namespace Connection.OPCUA
 
         private void        updateForm()
         {
-            textBox_Discovery.Text      = mConnection.mDiscovery;
-            textBox_Discovery.Enabled   = !mConnection.Connected;
-            comboBox_Server.Text        = mConnection.mServerName;
-            comboBox_Server.Enabled     = !mConnection.Connected;
-            comboBox_Transport.Text     = mConnection.Transport;
-            comboBox_Transport.Enabled  = !mConnection.Connected;
+            textBox_Discovery.Text          = mConnection.mDiscovery;
+            textBox_Discovery.Enabled       = !mConnection.Connected;
+            comboBox_Server.Text            = mConnection.mServerName;
+            comboBox_Server.Enabled         = !mConnection.Connected;
+            comboBox_Transport.Text         = mConnection.Transport;
+            comboBox_Transport.Enabled      = !mConnection.Connected;
+            spinEdit_PubInterval.Enabled    = !mConnection.Connected;
 
-            button_Connect.Enabled      = !mConnection.Connected;
-            button_Disconnect.Enabled   = mConnection.Connected;
-            button_Browse.Enabled       = mConnection.Connected;
-
+            button_Connect.Enabled          = !mConnection.Connected;
+            button_Disconnect.Enabled       = mConnection.Connected;
+            button_Browse.Enabled           = mConnection.Connected;
 
             label_CountN.Text = StringUtils.ObjectToString(mConnection.NumberOfItems);
         }
@@ -146,6 +148,15 @@ namespace Connection.OPCUA
         private void        button_Browse_Click(object aSender, EventArgs aEventArgs)
         {
             mConnection.OPCNodeBrowserForm.ShowDialog(this);
+        }
+
+        private void        spinEdit_PubInterval_EditValueChanged(object aSender, EventArgs aEventArgs)
+        {
+            int lNewPubInterval = (int)spinEdit_PubInterval.Value;
+            if (mConnection.mPublishingInterval != lNewPubInterval)
+            {
+                mConnection.mPublishingInterval = lNewPubInterval;
+            }
         }
 
         private void        okCancelButton_ButtonClick(object aSender, EventArgs aEventArgs)

@@ -81,6 +81,8 @@ namespace Connection.OPCUA
             }
         }
 
+        public int                                      mPublishingInterval = 100;
+
         public Session                                  mSession        = null;
         private Subscription                            mSubscription   = null;
         private void                                    cleanSession()
@@ -281,9 +283,9 @@ namespace Connection.OPCUA
                 mSubscription                               = new Subscription(mSession.DefaultSubscription);
                 mSubscription.DisplayName                   = "Subscription";
                 mSubscription.PublishingEnabled             = true;
-                mSubscription.PublishingInterval            = 100;  // in milliseconds.
-                mSubscription.KeepAliveCount                = 10;   // 10*UaRefreshRate  = 5s if UaRefreshRate = 500
-                mSubscription.LifetimeCount                 = 100;  // UaRefreshRate*100 = 50s if UaRefreshRate = 500;
+                mSubscription.PublishingInterval            = mPublishingInterval;
+                mSubscription.KeepAliveCount                = 10;
+                mSubscription.LifetimeCount                 = 100;
                 mSubscription.MaxNotificationsPerPublish    = 100;
                 mSession.AddSubscription(mSubscription);
                 mSubscription.Create();

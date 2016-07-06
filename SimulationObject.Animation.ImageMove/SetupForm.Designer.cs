@@ -210,7 +210,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Animation.ImgMove";
+            this.Text = "Animation.ImageMove";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.panel_OkCancel.ResumeLayout(false);
             this.panel_Items.ResumeLayout(false);
