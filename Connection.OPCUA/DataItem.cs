@@ -12,7 +12,6 @@ namespace Connection.OPCUA
         public uint                 mClientHandle   = 0;
         public int                  mSampling       = 100;
         public NodeId               mNodeId         = null;
-        public StatusCode           mLastStatusCode = 0;
 
         public object               mValue          = 0;
         public object               Value
@@ -76,19 +75,38 @@ namespace Connection.OPCUA
         private volatile EAccess    mAccess         = EAccess.NO_ACCESS;
         public void                 setAccess(byte aAccess)
         {
+            mAccessLevel = aAccess;
             switch (aAccess)
             {
                 case AccessLevels.CurrentRead:          mAccess = EAccess.READ; break;
-                case AccessLevels.CurrentWrite:         mAccess = EAccess.WRITE; break;
+                case AccessLevels.CurrentWrite:         mAccess = EAccess.READ_WRITE; break;
                 case AccessLevels.CurrentReadOrWrite:   mAccess = EAccess.READ_WRITE; break;
                 default:                                mAccess = EAccess.NO_ACCESS; break;
             }
         }
+        private byte                mAccessLevel;
+        private StatusCode          mStatusCode = 0;
+        public StatusCode           StatusCode
+        {
+           get { return mStatusCode; }
+           set
+           {
+                if(value == StatusCodes.BadNotReadable && mAccessLevel == AccessLevels.CurrentWrite)
+                {
+                    mStatusCode = 0;
+                }
+                else
+                {
+                    mStatusCode = value;
+                }
+           }
+        }
+
         public EAccess              Access
         {
             get
             {
-                if (mConnection.Connected && StatusCode.IsGood(mLastStatusCode))
+                if (mConnection.Connected && StatusCode.IsGood(mStatusCode))
                 {
                     return mAccess;
                 }

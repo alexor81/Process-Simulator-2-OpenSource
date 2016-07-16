@@ -93,15 +93,18 @@ namespace Connection.OPCUA
                 mOPCNodeBrowserForm = null;
             }
 
-            if (mSession != null)
+            if (mSubscription != null)
             {
-                if(mSubscription != null)
+                if (mSession != null)
                 {
                     mSession.RemoveSubscription(mSubscription);
-                    mSubscription.Dispose();
-                    mSubscription = null;
                 }
+                mSubscription.Dispose();
+                mSubscription = null;
+            }
 
+            if (mSession != null)
+            {
                 mSession.KeepAlive      -= MSession_KeepAlive;
                 mSession.Notification   -= MSession_Notification;
                 mSession.PublishError   -= MSession_PublishError;
@@ -302,8 +305,8 @@ namespace Connection.OPCUA
                     {
                         checkVariable(lItem.mNodeId, out lAccess, out lValue, out lStatusCode, out lType, out lArray);
 
-                        lItem.mLastStatusCode = lStatusCode;
                         lItem.setAccess(lAccess);
+                        lItem.StatusCode = lStatusCode;
 
                         if ((lAccess == AccessLevels.CurrentRead || lAccess == AccessLevels.CurrentReadOrWrite) && StatusCode.IsGood(lStatusCode) && lValue != null)
                         {
@@ -403,9 +406,9 @@ namespace Connection.OPCUA
                     {
                         lItem = lMItem.Handle as DataItem;
 
-                        if (lDataChanges[i].Value.StatusCode.Equals(lItem.mLastStatusCode) == false)
+                        if (lDataChanges[i].Value.StatusCode != lItem.StatusCode)
                         {
-                            lItem.mLastStatusCode = lDataChanges[i].Value.StatusCode;
+                            lItem.StatusCode = lDataChanges[i].Value.StatusCode;
                             lItem.raisePropertiesChanged();
                         }
 
@@ -547,7 +550,7 @@ namespace Connection.OPCUA
                 lMonitoredItem.MonitoringMode   = MonitoringMode.Reporting;
                 lMonitoredItem.SamplingInterval = aItem.mSampling;
                 lMonitoredItem.QueueSize        = 1;
-                lMonitoredItem.DiscardOldest    = false;
+                lMonitoredItem.DiscardOldest    = true;
                 lMonitoredItem.Handle           = aItem;
                 aItem.mClientHandle             = lMonitoredItem.ClientHandle;
 
@@ -566,10 +569,10 @@ namespace Connection.OPCUA
             {
                 var lMonitoredItem = mSubscription.FindItemByClientHandle(aItem.mClientHandle);
                 if (lMonitoredItem != null)
-                {
-                    lMonitoredItem.Handle = null;
+                { 
                     mSubscription.RemoveItem(lMonitoredItem);
                     mSubscription.ApplyChanges();
+                    lMonitoredItem.Handle = null;
                 }
             }
 
@@ -715,10 +718,10 @@ namespace Connection.OPCUA
 
                     checkVariable(lItem.mNodeId, out lAccess, out lValue, out lStatusCode, out lType, out lArray);
 
-                    lItem.mLastStatusCode = lStatusCode;
                     lItem.setAccess(lAccess);
+                    lItem.StatusCode = lStatusCode; 
 
-                    if (lItem.Access.HasFlag(EAccess.READ) && lValue != null)
+                    if ((lAccess == AccessLevels.CurrentRead || lAccess == AccessLevels.CurrentReadOrWrite) && StatusCode.IsGood(lStatusCode) && lValue != null)
                     {
                         lItem.mValue = lValue;
                     }
@@ -782,9 +785,10 @@ namespace Connection.OPCUA
                             aItem.mNodeId = lNewNodeId;
                             addItemToSubscription(aItem);
 
-                            aItem.mLastStatusCode = lStatusCode;
                             aItem.setAccess(lAccess);
-                            if(aItem.Access.HasFlag(EAccess.READ) && lValue != null)
+                            aItem.StatusCode = lStatusCode;                        
+
+                            if((lAccess == AccessLevels.CurrentRead || lAccess == AccessLevels.CurrentReadOrWrite) && StatusCode.IsGood(lStatusCode) && lValue != null)
                             {
                                 aItem.mValue = lValue;
                             }

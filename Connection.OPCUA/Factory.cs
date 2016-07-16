@@ -40,7 +40,7 @@ namespace Connection.OPCUA
                         lNamespaces.Add(aXMLTextReader.ReadElementContentAsString());
                     }
                 }
-                lConnection.mNamespaces     = lNamespaces.ToArray();
+                lConnection.mNamespaces = lNamespaces.ToArray();
 
                 return lConnection;
             }
@@ -80,7 +80,6 @@ namespace Connection.OPCUA
                 aXMLTextWriter.WriteAttributeString("ServerName", lConnection.mServerName);
                 aXMLTextWriter.WriteAttributeString("Transport", lConnection.Transport);
                 aXMLTextWriter.WriteAttributeString("PublishingInterval", StringUtils.ObjectToString(lConnection.mPublishingInterval));
-
 
                 aXMLTextWriter.WriteStartElement("Namespaces");
 

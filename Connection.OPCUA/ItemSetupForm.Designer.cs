@@ -39,7 +39,7 @@
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(97, 82);
+            this.okCancelButton.Location = new System.Drawing.Point(102, 85);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -50,7 +50,7 @@
             // 
             // button_Browser
             // 
-            this.button_Browser.Location = new System.Drawing.Point(343, 11);
+            this.button_Browser.Location = new System.Drawing.Point(348, 11);
             this.button_Browser.Name = "button_Browser";
             this.button_Browser.Size = new System.Drawing.Size(33, 23);
             this.button_Browser.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // textBox_NodeId
             // 
-            this.textBox_NodeId.Location = new System.Drawing.Point(114, 11);
+            this.textBox_NodeId.Location = new System.Drawing.Point(119, 11);
             this.textBox_NodeId.Name = "textBox_NodeId";
             this.textBox_NodeId.Size = new System.Drawing.Size(223, 22);
             this.textBox_NodeId.TabIndex = 0;
@@ -68,7 +68,7 @@
             // label_NodeId
             // 
             this.label_NodeId.AutoSize = true;
-            this.label_NodeId.Location = new System.Drawing.Point(44, 14);
+            this.label_NodeId.Location = new System.Drawing.Point(49, 14);
             this.label_NodeId.Name = "label_NodeId";
             this.label_NodeId.Size = new System.Drawing.Size(63, 17);
             this.label_NodeId.TabIndex = 12;
@@ -77,7 +77,7 @@
             // label_Sampling
             // 
             this.label_Sampling.AutoSize = true;
-            this.label_Sampling.Location = new System.Drawing.Point(7, 48);
+            this.label_Sampling.Location = new System.Drawing.Point(12, 48);
             this.label_Sampling.Name = "label_Sampling";
             this.label_Sampling.Size = new System.Drawing.Size(100, 17);
             this.label_Sampling.TabIndex = 13;
@@ -90,7 +90,7 @@
             0,
             0,
             0});
-            this.spinEdit_Sampling.Location = new System.Drawing.Point(114, 44);
+            this.spinEdit_Sampling.Location = new System.Drawing.Point(119, 44);
             this.spinEdit_Sampling.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_Sampling.Name = "spinEdit_Sampling";
             this.spinEdit_Sampling.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -112,7 +112,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 120);
+            this.ClientSize = new System.Drawing.Size(393, 124);
+            this.ControlBox = false;
             this.Controls.Add(this.spinEdit_Sampling);
             this.Controls.Add(this.label_Sampling);
             this.Controls.Add(this.button_Browser);
