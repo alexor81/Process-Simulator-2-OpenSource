@@ -14,7 +14,6 @@ namespace Converter.Round
             mRound = aRound;
             InitializeComponent();
 
-            okCancelButton.setOkOnlyStyle();
             spinEdit_Round.Value = mRound.Round;
         }
 
@@ -22,13 +21,24 @@ namespace Converter.Round
         {
             try
             {
-                mRound.Round = (int)spinEdit_Round.Value;
+                if (okCancelButton.DialogResult == DialogResult.OK)
+                {
+                    mRound.Round = (int)spinEdit_Round.Value;
+                }
 
                 Close();
             }
             catch (Exception lExc)
             {
                 MessageForm.showMessage(lExc.Message, this);
+            }
+        }
+
+        private void        SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                Close();
             }
         }
 

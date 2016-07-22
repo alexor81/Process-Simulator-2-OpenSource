@@ -14,7 +14,6 @@ namespace Converter.FilterExp
             mFilterExp = aFilterExp;
             InitializeComponent();
 
-            okCancelButton.setOkOnlyStyle();
             textBox_Alfa.Text = StringUtils.ObjectToString(mFilterExp.Alfa);
         }
 
@@ -22,20 +21,31 @@ namespace Converter.FilterExp
         {
             try
             {
-                double lAlfa = StringUtils.toDouble(textBox_Alfa.Text);
-
-                if(lAlfa > 1.0D || lAlfa < 0.0D)
+                if (okCancelButton.DialogResult == DialogResult.OK)
                 {
-                    throw new ArgumentException("Alfa range is  0..1.");
-                }
+                    double lAlfa = StringUtils.toDouble(textBox_Alfa.Text);
 
-                mFilterExp.Alfa = lAlfa;
+                    if (lAlfa > 1.0D || lAlfa < 0.0D)
+                    {
+                        throw new ArgumentException("Alfa range is  0..1.");
+                    }
+
+                    mFilterExp.Alfa = lAlfa;
+                }
 
                 Close();
             }
             catch (Exception lExc)
             {
                 MessageForm.showMessage(lExc.Message, this);
+            }
+        }
+
+        private void        SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                Close();
             }
         }
 

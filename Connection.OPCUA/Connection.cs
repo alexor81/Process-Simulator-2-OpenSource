@@ -691,7 +691,6 @@ namespace Connection.OPCUA
                     {
                         throw new ArgumentException("Only scalar or one dimension array is supported. ");
                     }
-
                 }
             }
 

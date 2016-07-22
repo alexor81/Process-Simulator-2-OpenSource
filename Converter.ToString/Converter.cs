@@ -29,7 +29,7 @@ namespace Converter.ToString
             }
             else
             {              
-                lValue = StringUtils.ObjectToString(aValue);
+                lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType, aValue));
             }
 
             return lValue;
@@ -41,7 +41,7 @@ namespace Converter.ToString
 
             if (mReverse)
             {
-                lValue = StringUtils.ObjectToString(aValue);
+                lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType, aValue));
             }
             else
             {

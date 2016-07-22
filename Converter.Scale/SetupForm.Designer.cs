@@ -158,12 +158,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 223);
+            this.ClientSize = new System.Drawing.Size(299, 225);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_Out);
             this.Controls.Add(this.groupBox_In);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -173,6 +174,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Scale";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.groupBox_In.ResumeLayout(false);
             this.groupBox_In.PerformLayout();
             this.groupBox_Out.ResumeLayout(false);

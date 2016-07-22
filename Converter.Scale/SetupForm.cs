@@ -14,7 +14,6 @@ namespace Converter.Scale
             mValueScale = aValueScale;
             InitializeComponent();
 
-            okCancelButton.setOkOnlyStyle();
             textBox_InMax.Text  = StringUtils.ObjectToString(mValueScale.InMax);
             textBox_InMin.Text  = StringUtils.ObjectToString(mValueScale.InMin);
             textBox_OutMax.Text = StringUtils.ObjectToString(mValueScale.OutMax);
@@ -25,18 +24,29 @@ namespace Converter.Scale
         {
             try
             {
-                double lInMax   = StringUtils.toDouble(textBox_InMax.Text);
-                double lInMin   = StringUtils.toDouble(textBox_InMin.Text);
-                double lOutMax  = StringUtils.toDouble(textBox_OutMax.Text);
-                double lOutMin  = StringUtils.toDouble(textBox_OutMin.Text);
+                if (okCancelButton.DialogResult == DialogResult.OK)
+                {
+                    double lInMax   = StringUtils.toDouble(textBox_InMax.Text);
+                    double lInMin   = StringUtils.toDouble(textBox_InMin.Text);
+                    double lOutMax  = StringUtils.toDouble(textBox_OutMax.Text);
+                    double lOutMin  = StringUtils.toDouble(textBox_OutMin.Text);
 
-                mValueScale.setProperties(lInMax, lInMin, lOutMax, lOutMin);
+                    mValueScale.setProperties(lInMax, lInMin, lOutMax, lOutMin);
+                }
 
                 Close();
             }
             catch (Exception lExc)
             {
                 MessageForm.showMessage(lExc.Message, this);
+            }
+        }
+
+        private void            SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                Close();
             }
         }
 

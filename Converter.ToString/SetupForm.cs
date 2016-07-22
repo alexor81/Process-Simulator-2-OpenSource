@@ -7,14 +7,12 @@ namespace Converter.ToString
 {
     public partial class SetupForm : Form
     {
-        private Converter mString;
+        private Converter   mString;
 
-        public          SetupForm(Converter aString)
+        public              SetupForm(Converter aString)
         {
             mString = aString;
             InitializeComponent();
-
-            okCancelButton.setOkOnlyStyle();
 
             comboBox_Type.Items.AddRange(StringUtils.TypesNames);
 
@@ -23,13 +21,16 @@ namespace Converter.ToString
             checkBox_Reverse.Checked    = mString.mReverse;
         }
 
-        private void    okCancelButton_ButtonClick(object aSender, EventArgs aEventArgs)
+        private void        okCancelButton_ButtonClick(object aSender, EventArgs aEventArgs)
         {
             try
             {
-                mString.mType       = StringUtils.getTypeByIndex(comboBox_Type.SelectedIndex);
-                mString.mArray      = checkBox_Array.Checked;
-                mString.mReverse    = checkBox_Reverse.Checked;
+                if (okCancelButton.DialogResult == DialogResult.OK)
+                {
+                    mString.mType       = StringUtils.getTypeByIndex(comboBox_Type.SelectedIndex);
+                    mString.mArray      = checkBox_Array.Checked;
+                    mString.mReverse    = checkBox_Reverse.Checked;
+                }
 
                 Close();
             }
@@ -39,7 +40,15 @@ namespace Converter.ToString
             }
         }
 
-        private void    SetupForm_Load(object aSender, EventArgs aEventArgs)
+        private void        SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
+        }
+
+        private void        SetupForm_Load(object aSender, EventArgs aEventArgs)
         {
             ClientSize = FormUtils.calcClientSize(ClientSize, Controls);
         }

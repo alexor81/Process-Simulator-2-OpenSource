@@ -35,7 +35,7 @@
             // richTextBox1
             // 
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox1.Location = new System.Drawing.Point(11, 6);
+            this.richTextBox1.Location = new System.Drawing.Point(10, 6);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
@@ -46,7 +46,7 @@
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(52, 66);
+            this.okCancelButton.Location = new System.Drawing.Point(50, 66);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -59,11 +59,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(288, 97);
+            this.ClientSize = new System.Drawing.Size(288, 105);
             this.ControlBox = false;
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -73,6 +74,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Inverse Boolean";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.ResumeLayout(false);
 
         }

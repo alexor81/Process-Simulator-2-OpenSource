@@ -86,7 +86,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 139);
+            this.ClientSize = new System.Drawing.Size(288, 143);
             this.ControlBox = false;
             this.Controls.Add(this.comboBox_Operation);
             this.Controls.Add(this.textBox_Value);
@@ -94,6 +94,7 @@
             this.Controls.Add(this.label_Operation);
             this.Controls.Add(this.okCancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -103,6 +104,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Compare";
             this.Load += new System.EventHandler(this.SetupForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SetupForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

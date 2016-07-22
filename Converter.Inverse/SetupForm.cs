@@ -17,6 +17,14 @@ namespace Converter.Inverse
             Close();
         }
 
+        private void    SetupForm_KeyDown(object aSender, KeyEventArgs aEventArgs)
+        {
+            if (aEventArgs.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
+        }
+
         private void    SetupForm_Load(object aSender, EventArgs aEventArgs)
         {
             ClientSize = FormUtils.calcClientSize(ClientSize, Controls);
