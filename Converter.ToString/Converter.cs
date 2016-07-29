@@ -28,8 +28,15 @@ namespace Converter.ToString
                 }
             }
             else
-            {              
-                lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType, aValue));
+            {
+                if (mArray)
+                {
+                    lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType.MakeArrayType(1), aValue));
+                }
+                else
+                {
+                    lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType, aValue));
+                }
             }
 
             return lValue;
@@ -41,7 +48,14 @@ namespace Converter.ToString
 
             if (mReverse)
             {
-                lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType, aValue));
+                if (mArray)
+                {
+                    lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType.MakeArrayType(1), aValue));
+                }
+                else
+                {
+                    lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType, aValue));
+                }
             }
             else
             {
