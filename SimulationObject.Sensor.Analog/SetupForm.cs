@@ -129,14 +129,14 @@ namespace SimulationObject.Sensor.Analog
 
                     lChecker.addItemName(dataGridView_Thd.Rows[i].Cells[2].Value.ToString());
                 }
+
+                return true;
             }
             catch (Exception lExc)
             {
                 MessageForm.showMessage(lExc.Message, this);
                 return false;
             }
-
-            return true;
         }
 
         private void            button_Add_Click(object aSender, EventArgs aEventArgs)
@@ -301,14 +301,13 @@ namespace SimulationObject.Sensor.Analog
                         mAnalogSensor.Thresholds[i]         = StringUtils.toDouble(dataGridView_Thd.Rows[i].Cells[1].Value.ToString());
                         mAnalogSensor.mThdItemHandles[i]    = mBrowser.getItemHandleByName(dataGridView_Thd.Rows[i].Cells[2].Value.ToString());
                     }
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }  
             }
         }
 

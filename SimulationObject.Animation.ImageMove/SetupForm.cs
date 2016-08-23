@@ -143,7 +143,6 @@ namespace SimulationObject.Animation.ImageMove
                         lMemStrm.Close();
                         Log.Error("Unable to load image from '" + lOpenDlg.FileName + "'. " + lExc.Message, lExc.ToString());
                         MessageForm.showMessage(lExc.Message, this);
-                        return;
                     }
                 }
             }
@@ -220,14 +219,13 @@ namespace SimulationObject.Animation.ImageMove
                     mMove.mBmp          = mBmp;
                     mMove.raiseValuesChanged();
                     mMove.raisePropertiesChanged();
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
                 }
-
-                DialogResult = DialogResult.OK;
             }
         }
 

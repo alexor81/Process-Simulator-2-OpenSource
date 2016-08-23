@@ -83,14 +83,13 @@ namespace SimulationObject.Binary.Trigger
                     mTrigger.mValueItemHandle   = mBrowser.getItemHandleByName(itemEditBox_Value.ItemName);
                     mTrigger.mSetItemHandle     = mBrowser.getItemHandleByName(itemEditBox_Set.ItemName);
                     mTrigger.mResetItemHandle   = mBrowser.getItemHandleByName(itemEditBox_Reset.ItemName);
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                } 
             }
         }
 

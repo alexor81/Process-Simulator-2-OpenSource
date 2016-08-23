@@ -51,8 +51,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Real.XYDep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Robot.SixAxis", "SimulationObject.Robot.SixAxis\SimulationObject.Robot.SixAxis.csproj", "{F749831C-D2DF-4E5B-ACA7-91D9CD60AC97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Script.CSharp", "SimulationObject.Script.CSharp\SimulationObject.Script.CSharp.csproj", "{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Sensor.Analog", "SimulationObject.Sensor.Analog\SimulationObject.Sensor.Analog.csproj", "{1B18B4E8-7171-4AB3-9E89-588723B59D28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Sensor.Discrete", "SimulationObject.Sensor.Discrete\SimulationObject.Sensor.Discrete.csproj", "{A0100BE5-A702-42D9-8B84-2DD4CE5782C6}"
@@ -68,6 +66,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.OPCUA", "Connection.OPCUA\Connection.OPCUA.csproj", "{DDE7177F-7563-4482-93D4-4D5043C9B26A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converter.ToBoolean", "Converter.ToBoolean\Converter.ToBoolean.csproj", "{57559174-46D1-4D1E-BEC4-E237443DF886}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Script.CSharp", "SimulationObject.Script.CSharp\SimulationObject.Script.CSharp.csproj", "{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Script.CSharpFSM", "SimulationObject.Script.CSharpFSM\SimulationObject.Script.CSharpFSM.csproj", "{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,10 +173,6 @@ Global
 		{F749831C-D2DF-4E5B-ACA7-91D9CD60AC97}.Debug|x86.Build.0 = Debug|x86
 		{F749831C-D2DF-4E5B-ACA7-91D9CD60AC97}.Release|x86.ActiveCfg = Release|x86
 		{F749831C-D2DF-4E5B-ACA7-91D9CD60AC97}.Release|x86.Build.0 = Release|x86
-		{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}.Debug|x86.ActiveCfg = Debug|x86
-		{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}.Debug|x86.Build.0 = Debug|x86
-		{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}.Release|x86.ActiveCfg = Release|x86
-		{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}.Release|x86.Build.0 = Release|x86
 		{1B18B4E8-7171-4AB3-9E89-588723B59D28}.Debug|x86.ActiveCfg = Debug|x86
 		{1B18B4E8-7171-4AB3-9E89-588723B59D28}.Debug|x86.Build.0 = Debug|x86
 		{1B18B4E8-7171-4AB3-9E89-588723B59D28}.Release|x86.ActiveCfg = Release|x86
@@ -207,6 +205,14 @@ Global
 		{57559174-46D1-4D1E-BEC4-E237443DF886}.Debug|x86.Build.0 = Debug|x86
 		{57559174-46D1-4D1E-BEC4-E237443DF886}.Release|x86.ActiveCfg = Release|x86
 		{57559174-46D1-4D1E-BEC4-E237443DF886}.Release|x86.Build.0 = Release|x86
+		{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}.Debug|x86.ActiveCfg = Debug|x86
+		{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}.Debug|x86.Build.0 = Debug|x86
+		{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}.Release|x86.ActiveCfg = Release|x86
+		{2FE7D52E-B38B-46C6-8C2D-A6D14D9C3B0D}.Release|x86.Build.0 = Release|x86
+		{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}.Debug|x86.ActiveCfg = Debug|x86
+		{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}.Debug|x86.Build.0 = Debug|x86
+		{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}.Release|x86.ActiveCfg = Release|x86
+		{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -82,14 +82,13 @@ namespace SimulationObject.Real.Comparator
                     mComparator.mInput2ItemHandle   = mBrowser.getItemHandleByName(itemEditBox_In2.ItemName);
                     mComparator.mValueItemHandle    = mBrowser.getItemHandleByName(itemEditBox_Value.ItemName);
                     mComparator.OperationIndex      = comboBox_Operation.SelectedIndex;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }                
             }
         }
 

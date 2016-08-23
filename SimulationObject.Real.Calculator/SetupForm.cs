@@ -77,14 +77,13 @@ namespace SimulationObject.Real.Calculator
                     mCalculator.mInput2ItemHandle   = mBrowser.getItemHandleByName(itemEditBox_In2.ItemName);
                     mCalculator.mValueItemHandle    = mBrowser.getItemHandleByName(itemEditBox_Value.ItemName);
                     mCalculator.OperationIndex      = comboBox_Operation.SelectedIndex;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
                 }
-
-                DialogResult = DialogResult.OK;
             }
         }
 

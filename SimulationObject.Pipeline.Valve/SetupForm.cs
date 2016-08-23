@@ -291,14 +291,13 @@ namespace SimulationObject.Pipeline.Valve
                     mValve.IgnoreCommands   = checkBox_IgnoreCommands.Checked;
                     mValve.ForseLimSwitches = checkBox_ForceLimSwitches.Checked;
                     mValve.PositionFault    = checkBox_PositionF.Checked;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }                
             }
         }
 

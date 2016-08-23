@@ -364,14 +364,13 @@ namespace SimulationObject.Real.XYDependency
                     mXYDependency.mValueItemHandle  = mBrowser.getItemHandleByName(itemEditBox_Y.ItemName);
 
                     mXYDependency.Points            = mPoints;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
                 }
-
-                DialogResult = DialogResult.OK;
             }
         }
 

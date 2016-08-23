@@ -72,14 +72,13 @@ namespace SimulationObject.Binary.Delay
                     mDelay.Inverse              = checkBox_Inverse.Checked;
                     mDelay.OnDelayMS            = (uint)spinEdit_On.Value;
                     mDelay.OffDelayMS           = (uint)spinEdit_Off.Value;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }   
             }
         }
 

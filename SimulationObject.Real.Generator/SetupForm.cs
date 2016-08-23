@@ -72,14 +72,13 @@ namespace SimulationObject.Real.Generator
                     mGenerator.Amplitude        = (double)spinEdit_Amplitude.Value;
                     mGenerator.PeriodMS         = (uint)spinEdit_PeriodMS.Value;
                     mGenerator.TurnMS           = (uint)spinEdit_TurnMS.Value;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }             
             }
         }
 

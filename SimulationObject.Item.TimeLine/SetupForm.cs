@@ -368,14 +368,13 @@ namespace SimulationObject.Item.TimeLine
                     mTimeLine.mOnItemHandle = mBrowser.getItemHandleByName(itemEditBox_On.ItemName);
                     mTimeLine.Loop          = checkBox_Loop.Checked;
                     mTimeLine.mSections     = mCloneSections;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }    
             }
         }
 

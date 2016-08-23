@@ -112,15 +112,14 @@ namespace SimulationObject.Real.Scale
 
                     mScaleReal.mValueScale.setProperties(lInMax, lInMin, lOutMax, lOutMin);
                     mScaleReal.mInValueItemHandle   = mBrowser.getItemHandleByName(itemEditBox_Input.ItemName);
-                    mScaleReal.mOutValueItemHandle  = mBrowser.getItemHandleByName(itemEditBox_Output.ItemName);         
+                    mScaleReal.mOutValueItemHandle  = mBrowser.getItemHandleByName(itemEditBox_Output.ItemName);
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                } 
             }
         }
 

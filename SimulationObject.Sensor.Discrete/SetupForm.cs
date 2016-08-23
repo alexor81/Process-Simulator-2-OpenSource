@@ -66,14 +66,13 @@ namespace SimulationObject.Sensor.Discrete
 
                     mDiscreteSensor.LogTrue             = checkBox_LogTrue.Checked;
                     mDiscreteSensor.LogFalse            = checkBox_LogFalse.Checked;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                } 
             }
         }
 

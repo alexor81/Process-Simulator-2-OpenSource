@@ -90,7 +90,6 @@ namespace Connection.OPCUA
             {
                 Log.Error("Error while recieving OPC UA servers from '" + textBox_Discovery.Text + "'. " + lExc.Message, lExc.ToString());
                 MessageForm.showMessage(lExc.Message, this);
-                return;
             }
             finally
             {

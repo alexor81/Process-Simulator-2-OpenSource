@@ -146,14 +146,13 @@ namespace SimulationObject.Robot.SixAxis
 
                     mRobot.SendData         = checkBox_Send.Checked;
                     mRobot.UpdateRoKiSimMS  = (int)spinEdit_Update.Value;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
                 }
-
-                DialogResult = DialogResult.OK;
             }
         }
 

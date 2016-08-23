@@ -153,14 +153,13 @@ namespace SimulationObject.Pipeline.Pump
                     {
                         mPump.OffBtn = false;
                     }
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }                
             }
         }
 

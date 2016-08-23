@@ -276,14 +276,13 @@ namespace SimulationObject.Item.WriteToFile
                     mWriteToFile.RateMS             = (int)spinEdit_Timeout.Value;
                     mWriteToFile.mDelimiter         = textBox_Delimiter.Text;
                     mWriteToFile.initItems(mCloneItems.ToArray());
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }   
             }
         }
 

@@ -77,14 +77,13 @@ namespace SimulationObject.Item.Delay
                     mDelay.mOutValueItemHandle  = mBrowser.getItemHandleByName(itemEditBox_Out.ItemName);
 
                     mDelay.DelayMS = (uint)spinEdit_Delay.Value;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }  
             }
         }
 

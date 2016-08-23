@@ -71,14 +71,13 @@ namespace SimulationObject.Real.Lag
 
                     mLag.Gain   = (double)spinEdit_Gain.Value;
                     mLag.LagMS  = (uint)spinEdit_LagMS.Value;
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
                 }
-
-                DialogResult = DialogResult.OK;
             }
         }
 

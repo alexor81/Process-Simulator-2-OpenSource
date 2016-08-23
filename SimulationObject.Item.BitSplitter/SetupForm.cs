@@ -91,14 +91,14 @@ namespace SimulationObject.Item.BitSplitter
 
                     lChecker.addItemName(dataGridView_Bit.Rows[i].Cells[1].Value.ToString());
                 }
+
+                return true;
             }
             catch (Exception lExc)
             {
                 MessageForm.showMessage(lExc.Message, this);
                 return false;
             }
-
-            return true;
         }
 
         private void            button_Add_Click(object aSender, EventArgs aEventArgs)
@@ -195,14 +195,13 @@ namespace SimulationObject.Item.BitSplitter
                         case 1: mSplitter.mDataFlow = EDataFlow.TO; break;
                         case 2: mSplitter.mDataFlow = EDataFlow.BOTH; break;
                     }
+
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception lExc)
                 {
                     MessageForm.showMessage(lExc.Message, this);
-                    return;
-                }
-
-                DialogResult = DialogResult.OK;
+                }   
             }
         }
 

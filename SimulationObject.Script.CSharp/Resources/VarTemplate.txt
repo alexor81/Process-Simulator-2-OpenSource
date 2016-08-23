@@ -1,9 +1,0 @@
-		private object		var#R#
-		{
-			get { return mVarValues[#R#]; }
-			set 
-			{ 
-				mVarValues[#R#]			= value;
-				mVarValuesChanged[#R#]	= true;
-			}
-		}
