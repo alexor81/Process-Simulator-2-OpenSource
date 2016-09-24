@@ -214,14 +214,14 @@ namespace SimulationObject.Script.CSharpFSM
                 }
             }
 
-            public void                         setupScript(string aStateName, IWin32Window aOwner)
+            public DialogResult                 setupScript(string aStateName, IWin32Window aOwner)
             {
                 if (mStateAction.ContainsKey(aStateName) == false)
                 {
                     throw new ArgumentException("State '" + aStateName + "' does not exist. ");
                 }
 
-                mStateAction[aStateName].setupByForm(aStateName, aOwner);
+                return mStateAction[aStateName].setupByForm(aStateName, aOwner);
             }
 
             public bool                         isFirstState(string aName)

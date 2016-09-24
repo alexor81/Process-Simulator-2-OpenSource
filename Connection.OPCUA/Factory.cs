@@ -28,6 +28,8 @@ namespace Connection.OPCUA
                 lConnection.mServerName         = lReader.getAttribute<String>("ServerName", lConnection.mServerName);
                 lConnection.Transport           = lReader.getAttribute<String>("Transport", lConnection.Transport);
                 lConnection.mPublishingInterval = (int)lReader.getAttribute<UInt32>("PublishingInterval", (uint)lConnection.mPublishingInterval);
+                lConnection.mLogin              = lReader.getAttribute<String>("Login", lConnection.mLogin);
+                lConnection.mPassword           = lReader.getAttribute<String>("Password", lConnection.mPassword);
 
                 List<string> lNamespaces = new List<string>();
                 aXMLTextReader.Read();
@@ -80,8 +82,12 @@ namespace Connection.OPCUA
                 aXMLTextWriter.WriteAttributeString("ServerName", lConnection.mServerName);
                 aXMLTextWriter.WriteAttributeString("Transport", lConnection.Transport);
                 aXMLTextWriter.WriteAttributeString("PublishingInterval", StringUtils.ObjectToString(lConnection.mPublishingInterval));
+                aXMLTextWriter.WriteAttributeString("Login", lConnection.mLogin);
+                aXMLTextWriter.WriteAttributeString("Password", lConnection.mPassword);
 
-                aXMLTextWriter.WriteStartElement("Namespaces");
+                if (lConnection.mNamespaces != null)
+                {
+                    aXMLTextWriter.WriteStartElement("Namespaces");
 
                     for (int i = 0; i < lConnection.mNamespaces.Length; i++)
                     {
@@ -90,7 +96,8 @@ namespace Connection.OPCUA
                         aXMLTextWriter.WriteEndElement();
                     }
 
-                aXMLTextWriter.WriteEndElement();
+                    aXMLTextWriter.WriteEndElement();
+                }
             }
 
             public void         destroyConnection(IConnection aConnection)

@@ -138,6 +138,20 @@ namespace SimulationObject.Pipeline.Valve
             }
             public double                                       mFaultValue         = 32767;
 
+            private bool                                        mUseOneCommand      = false;
+            public bool                                         UseOneCommand
+            {
+                get { return mUseOneCommand; }
+                set
+                {
+                    if (mUseOneCommand != value)
+                    {
+                        mUseOneCommand = value;
+                        raisePropertiesChanged();
+                    }
+                }
+        }
+
         #endregion
 
         #region IItemUser
@@ -1009,7 +1023,7 @@ namespace SimulationObject.Pipeline.Valve
                 }
                 LimitSwitchMS = lUInt;
 
-                mAnalogCtrl     = lReader.getAttribute<Boolean>("AnalogControl", mAnalogCtrl);
+                mAnalogCtrl = lReader.getAttribute<Boolean>("AnalogControl", mAnalogCtrl);
 
                 double lMax, lMin;
                 lItem = lReader.getAttribute<String>("PositionCMD", "");
@@ -1024,6 +1038,8 @@ namespace SimulationObject.Pipeline.Valve
                 lChecker.addItemName(lItem);
                 mOpenCMDItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
+                mUseOneCommand = lReader.getAttribute<Boolean>("UseOneCMD", mUseOneCommand);
+
                 lItem = lReader.getAttribute<String>("CloseCMD", "");
                 lChecker.addItemName(lItem);
                 mCloseCMDItemHandle = mItemBrowser.getItemHandleByName(lItem);
@@ -1033,6 +1049,10 @@ namespace SimulationObject.Pipeline.Valve
                 mStopCMDItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
                 mImpulseCtrl = lReader.getAttribute<Boolean>("ImpulseControl", mImpulseCtrl);
+                if (mImpulseCtrl && mUseOneCommand)
+                {
+                    throw new ArgumentException("Impulse control is not supported when using only one command. ");
+                }
 
                 lItem = lReader.getAttribute<String>("EsdCMD", "");
                 lChecker.addItemName(lItem);
@@ -1096,6 +1116,7 @@ namespace SimulationObject.Pipeline.Valve
                 aXMLTextWriter.WriteAttributeString("PositionCMDMin", StringUtils.ObjectToString(mPositionCMDScale.InMin));
 
                 aXMLTextWriter.WriteAttributeString("OpenCMD", mItemBrowser.getItemNameByHandle(mOpenCMDItemHandle));
+                aXMLTextWriter.WriteAttributeString("UseOneCMD", StringUtils.ObjectToString(mUseOneCommand));
                 aXMLTextWriter.WriteAttributeString("CloseCMD", mItemBrowser.getItemNameByHandle(mCloseCMDItemHandle));
                 aXMLTextWriter.WriteAttributeString("StopCMD", mItemBrowser.getItemNameByHandle(mStopCMDItemHandle));
                 aXMLTextWriter.WriteAttributeString("ImpulseControl", StringUtils.ObjectToString(mImpulseCtrl));
@@ -1159,21 +1180,35 @@ namespace SimulationObject.Pipeline.Valve
                         {
                             if (!mStopCMD)
                             {
-                                if (mOpenCMD && (mPosition < 100.0D) && !mCloseCMD)
-                                {
-                                    mLastMS = MiscUtils.TimerMS;
-                                    mFSM.State  = "Opens";
-                                    return;
-                                }
+                                    if (
+                                        (
+                                         (!mUseOneCommand && mOpenCMD && !mCloseCMD)
+                                         ||
+                                         (mUseOneCommand && mOpenCMD)
+                                        )
+                                         && (mPosition < 100.0D)
+                                       )
+                                    {
+                                        mLastMS = MiscUtils.TimerMS;
+                                        mFSM.State  = "Opens";
+                                        return;
+                                    }
 
-                                if (mCloseCMD && (mPosition > 0.0D) && !mOpenCMD)
-                                {
-                                    mLastMS = MiscUtils.TimerMS;
-                                    mFSM.State  = "Closes";
-                                    return;
+                                    if (
+                                        (
+                                         (!mUseOneCommand && mCloseCMD && !mOpenCMD)
+                                         ||
+                                         (mUseOneCommand && !mOpenCMD)
+                                        )
+                                         && (mPosition > 0.0D)
+                                       )
+                                    {
+                                        mLastMS = MiscUtils.TimerMS;
+                                        mFSM.State  = "Closes";
+                                        return;
+                                    }
                                 }
                             }
-                        }
                     }
                 }
             }
@@ -1201,7 +1236,7 @@ namespace SimulationObject.Pipeline.Valve
                 if(
                         ValuesCompare.EqualDelta1.compare(mPosition, 100.0D) ||
                         (mAnalogCtrl && ValuesCompare.EqualDelta1.compare(mPosition, mPositionCMD)) ||
-                        (!mAnalogCtrl && (mOpenCMD == false || mCloseCMD == true || mStopCMD == true))
+                        (!mAnalogCtrl && (!mOpenCMD || (!mUseOneCommand && mCloseCMD) || mStopCMD))
                   )
                 {
                     mFSM.State = "Stoped";
@@ -1232,7 +1267,7 @@ namespace SimulationObject.Pipeline.Valve
                 if (
                         ValuesCompare.EqualDelta1.compare(mPosition, 0.0D) ||
                         (mAnalogCtrl && ValuesCompare.EqualDelta1.compare(mPosition, mPositionCMD)) ||
-                        (!mAnalogCtrl && (mCloseCMD == false || mOpenCMD == true || mStopCMD == true))
+                        (!mAnalogCtrl && ((!mUseOneCommand && !mCloseCMD) || mOpenCMD || mStopCMD))
                    )
                 {
                     mFSM.State = "Stoped";

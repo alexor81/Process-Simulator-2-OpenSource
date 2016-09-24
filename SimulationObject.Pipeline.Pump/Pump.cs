@@ -20,7 +20,7 @@ namespace SimulationObject.Pipeline.Pump
 
         #region Properties
 
-            private uint                                        mOnMS = 0;
+            private uint                                        mOnMS           = 0;
             public uint                                         OnMS
             {
                 get { return mOnMS; }
@@ -33,7 +33,7 @@ namespace SimulationObject.Pipeline.Pump
                 }
             }
 
-            private uint                                        mOffMS = 0;
+            private uint                                        mOffMS          = 0;
             public uint                                         OffMS
             {
                 get { return mOffMS; }
@@ -57,6 +57,21 @@ namespace SimulationObject.Pipeline.Pump
                         mIgnoreCommands = value;
                         evaluate();
                         raiseValuesChanged();
+                    }
+                }
+            }
+
+            private bool                                        mUseOneCommand  = false;
+            public bool                                         UseOneCommand
+            {
+                get { return mUseOneCommand; }
+                set
+                {
+                    if(mUseOneCommand != value)
+                    {
+                        mUseOneCommand = value;
+                        evaluate();
+                        raisePropertiesChanged();
                     }
                 }
             }
@@ -641,6 +656,8 @@ namespace SimulationObject.Pipeline.Pump
                 lChecker.addItemName(lItem);
                 mOnCMDItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
+                mUseOneCommand = lReader.getAttribute<Boolean>("UseOneCMD", mUseOneCommand);
+
                 lItem = lReader.getAttribute<String>("OffCMD", "");
                 lChecker.addItemName(lItem);
                 mOffCMDItemHandle = mItemBrowser.getItemHandleByName(lItem);
@@ -678,6 +695,7 @@ namespace SimulationObject.Pipeline.Pump
                 aXMLTextWriter.WriteAttributeString("Remote", mItemBrowser.getItemNameByHandle(mRemoteItemHandle));
 
                 aXMLTextWriter.WriteAttributeString("OnCMD", mItemBrowser.getItemNameByHandle(mOnCMDItemHandle));
+                aXMLTextWriter.WriteAttributeString("UseOneCMD", StringUtils.ObjectToString(mUseOneCommand));
                 aXMLTextWriter.WriteAttributeString("OffCMD", mItemBrowser.getItemNameByHandle(mOffCMDItemHandle));
                 aXMLTextWriter.WriteAttributeString("EsdCMD", mItemBrowser.getItemNameByHandle(mEsdCMDItemHandle));
 
@@ -705,7 +723,7 @@ namespace SimulationObject.Pipeline.Pump
                         }
                     }
 
-                    if ((mRemote && mOffCMD) || mOffBtn || !mPower || mEsdCMD || mAlarm)
+                    if ((mRemote && ((mOffCMD && !mUseOneCommand) || (!mOnCMD && mUseOneCommand))) || mOffBtn || !mPower || mEsdCMD || mAlarm)
                     {
                         lNewOnInternal = false;
                     }

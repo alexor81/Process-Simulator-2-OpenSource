@@ -70,6 +70,8 @@ namespace Connection.OPCUA
         public string                                   mDiscovery      = "opc.tcp://localhost:4840";
         public string                                   mHost           = "";
         public string                                   mServerName     = "";
+        public string                                   mLogin          = "";
+        public string                                   mPassword       = "";
 
         private ETransport                              mTransport      = ETransport.TCP;
         public string                                   Transport
@@ -232,7 +234,14 @@ namespace Connection.OPCUA
                 mSession.Notification       += MSession_Notification;
                 mSession.PublishError       += MSession_PublishError;
 
-                mSession.Open("Process Simulator 2 session", null);
+                if(String.IsNullOrWhiteSpace(mLogin) == false && String.IsNullOrWhiteSpace(mPassword) == false)
+                {
+                    mSession.Open("Process Simulator 2 session", new UserIdentity(mLogin, mPassword));
+                }
+                else
+                {
+                    mSession.Open("Process Simulator 2 session", null);
+                }
 
             #endregion
 

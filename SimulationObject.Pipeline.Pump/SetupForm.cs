@@ -1,6 +1,6 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Windows.Forms;
-using API;
 using Utils;
 using Utils.DialogForms;
 using Utils.SpecialControls;
@@ -25,6 +25,8 @@ namespace SimulationObject.Pipeline.Pump
                 itemEditBox_OnCMD.ItemName      = mBrowser.getItemNameByHandle(mPump.mOnCMDItemHandle);
                 itemEditBox_OnCMD.ItemToolTip   = mBrowser.getItemToolTipByHandle(mPump.mOnCMDItemHandle);
             }
+
+            checkBox_UseOneCommand.Checked      = mPump.UseOneCommand;
 
             if (mPump.mOffCMDItemHandle != -1)
             {
@@ -107,7 +109,8 @@ namespace SimulationObject.Pipeline.Pump
                     lChecker.addItemName(itemEditBox_OnBtn.ItemName);
                     lChecker.addItemName(itemEditBox_OffBtn.ItemName);
 
-                    mPump.IgnoreCommands = checkBox_IgnoreCommands.Checked;
+                    mPump.IgnoreCommands    = checkBox_IgnoreCommands.Checked;
+                    mPump.UseOneCommand     = checkBox_UseOneCommand.Checked;
 
                     mPump.OnMS  = (uint)spinEdit_On.Value;
                     mPump.OffMS = (uint)spinEdit_Off.Value;

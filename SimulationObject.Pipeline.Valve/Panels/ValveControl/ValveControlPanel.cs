@@ -224,7 +224,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
         {
             label_PositionCMD.Visible   = mValve.mAnalogCtrl && (mValve.mPositionCMDItemHandle != -1);
             label_OpenCMD.Visible       = !mValve.mAnalogCtrl && (mValve.mOpenCMDItemHandle != -1);
-            label_CloseCMD.Visible      = !mValve.mAnalogCtrl && (mValve.mCloseCMDItemHandle != -1);
+            label_CloseCMD.Visible      = !mValve.mAnalogCtrl && !mValve.UseOneCommand && (mValve.mCloseCMDItemHandle != -1);
             label_StopCMD.Visible       = !mValve.mAnalogCtrl && (mValve.mStopCMDItemHandle != -1);
             label_EsdCMD.Visible        = (mValve.mEsdCMDItemHandle != -1);
             

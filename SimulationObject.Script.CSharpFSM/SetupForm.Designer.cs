@@ -55,7 +55,7 @@
             this.tsButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsButton_Add.Name = "tsButton_Add";
             this.tsButton_Add.Size = new System.Drawing.Size(23, 22);
-            this.tsButton_Add.Text = "Add State";
+            this.tsButton_Add.Text = "Add";
             this.tsButton_Add.Click += new System.EventHandler(this.tsButton_Add_Click);
             // 
             // tsButton_Delete
@@ -66,7 +66,7 @@
             this.tsButton_Delete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsButton_Delete.Name = "tsButton_Delete";
             this.tsButton_Delete.Size = new System.Drawing.Size(23, 22);
-            this.tsButton_Delete.Text = "Delete State";
+            this.tsButton_Delete.Text = "Delete";
             this.tsButton_Delete.Click += new System.EventHandler(this.tsButton_Delete_Click);
             // 
             // tsButton_Setup

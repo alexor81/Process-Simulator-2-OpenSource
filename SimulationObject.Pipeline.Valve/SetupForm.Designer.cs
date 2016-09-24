@@ -84,6 +84,7 @@
             this.checkBox_PositionF = new System.Windows.Forms.CheckBox();
             this.checkBox_ForceLimSwitches = new System.Windows.Forms.CheckBox();
             this.checkBox_IgnoreCommands = new System.Windows.Forms.CheckBox();
+            this.checkBox_UseOneCommand = new System.Windows.Forms.CheckBox();
             this.groupBox_Control.SuspendLayout();
             this.tabControl_Control.SuspendLayout();
             this.tabPage_Digital.SuspendLayout();
@@ -101,11 +102,11 @@
             this.groupBox_Control.Controls.Add(this.itemEditBox_EsdCMD);
             this.groupBox_Control.Controls.Add(this.tabControl_Control);
             this.groupBox_Control.Controls.Add(this.label_EsdCMD);
-            this.groupBox_Control.Location = new System.Drawing.Point(3, 2);
+            this.groupBox_Control.Location = new System.Drawing.Point(5, 2);
             this.groupBox_Control.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Control.Name = "groupBox_Control";
             this.groupBox_Control.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Control.Size = new System.Drawing.Size(365, 258);
+            this.groupBox_Control.Size = new System.Drawing.Size(365, 283);
             this.groupBox_Control.TabIndex = 0;
             this.groupBox_Control.TabStop = false;
             this.groupBox_Control.Text = "Control";
@@ -113,7 +114,7 @@
             // checkBox_EsdOpen
             // 
             this.checkBox_EsdOpen.AutoSize = true;
-            this.checkBox_EsdOpen.Location = new System.Drawing.Point(85, 230);
+            this.checkBox_EsdOpen.Location = new System.Drawing.Point(85, 255);
             this.checkBox_EsdOpen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_EsdOpen.Name = "checkBox_EsdOpen";
             this.checkBox_EsdOpen.Size = new System.Drawing.Size(230, 21);
@@ -126,7 +127,7 @@
             this.itemEditBox_EsdCMD.ItemName = "";
             this.itemEditBox_EsdCMD.ItemRequirements = "Binary, Read";
             this.itemEditBox_EsdCMD.ItemToolTip = "";
-            this.itemEditBox_EsdCMD.Location = new System.Drawing.Point(85, 195);
+            this.itemEditBox_EsdCMD.Location = new System.Drawing.Point(85, 220);
             this.itemEditBox_EsdCMD.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_EsdCMD.Name = "itemEditBox_EsdCMD";
             this.itemEditBox_EsdCMD.Size = new System.Drawing.Size(267, 30);
@@ -141,11 +142,12 @@
             this.tabControl_Control.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl_Control.Name = "tabControl_Control";
             this.tabControl_Control.SelectedIndex = 0;
-            this.tabControl_Control.Size = new System.Drawing.Size(351, 167);
+            this.tabControl_Control.Size = new System.Drawing.Size(351, 194);
             this.tabControl_Control.TabIndex = 0;
             // 
             // tabPage_Digital
             // 
+            this.tabPage_Digital.Controls.Add(this.checkBox_UseOneCommand);
             this.tabPage_Digital.Controls.Add(this.checkBox_ImpCtrl);
             this.tabPage_Digital.Controls.Add(this.itemEditBox_StopCMD);
             this.tabPage_Digital.Controls.Add(this.itemEditBox_CloseCMD);
@@ -157,7 +159,7 @@
             this.tabPage_Digital.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage_Digital.Name = "tabPage_Digital";
             this.tabPage_Digital.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage_Digital.Size = new System.Drawing.Size(343, 138);
+            this.tabPage_Digital.Size = new System.Drawing.Size(343, 165);
             this.tabPage_Digital.TabIndex = 0;
             this.tabPage_Digital.Text = "Digital";
             this.tabPage_Digital.UseVisualStyleBackColor = true;
@@ -165,7 +167,7 @@
             // checkBox_ImpCtrl
             // 
             this.checkBox_ImpCtrl.AutoSize = true;
-            this.checkBox_ImpCtrl.Location = new System.Drawing.Point(71, 110);
+            this.checkBox_ImpCtrl.Location = new System.Drawing.Point(71, 138);
             this.checkBox_ImpCtrl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_ImpCtrl.Name = "checkBox_ImpCtrl";
             this.checkBox_ImpCtrl.Size = new System.Drawing.Size(254, 21);
@@ -178,7 +180,7 @@
             this.itemEditBox_StopCMD.ItemName = "";
             this.itemEditBox_StopCMD.ItemRequirements = "Binary, Read";
             this.itemEditBox_StopCMD.ItemToolTip = "";
-            this.itemEditBox_StopCMD.Location = new System.Drawing.Point(71, 74);
+            this.itemEditBox_StopCMD.Location = new System.Drawing.Point(71, 102);
             this.itemEditBox_StopCMD.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_StopCMD.Name = "itemEditBox_StopCMD";
             this.itemEditBox_StopCMD.Size = new System.Drawing.Size(267, 30);
@@ -190,7 +192,7 @@
             this.itemEditBox_CloseCMD.ItemName = "";
             this.itemEditBox_CloseCMD.ItemRequirements = "Binary, Read";
             this.itemEditBox_CloseCMD.ItemToolTip = "";
-            this.itemEditBox_CloseCMD.Location = new System.Drawing.Point(71, 39);
+            this.itemEditBox_CloseCMD.Location = new System.Drawing.Point(71, 67);
             this.itemEditBox_CloseCMD.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_CloseCMD.Name = "itemEditBox_CloseCMD";
             this.itemEditBox_CloseCMD.Size = new System.Drawing.Size(267, 30);
@@ -200,7 +202,7 @@
             // label_StopCMD
             // 
             this.label_StopCMD.AutoSize = true;
-            this.label_StopCMD.Location = new System.Drawing.Point(24, 81);
+            this.label_StopCMD.Location = new System.Drawing.Point(24, 109);
             this.label_StopCMD.Name = "label_StopCMD";
             this.label_StopCMD.Size = new System.Drawing.Size(41, 17);
             this.label_StopCMD.TabIndex = 2;
@@ -221,7 +223,7 @@
             // label_CloseCMD
             // 
             this.label_CloseCMD.AutoSize = true;
-            this.label_CloseCMD.Location = new System.Drawing.Point(19, 47);
+            this.label_CloseCMD.Location = new System.Drawing.Point(19, 75);
             this.label_CloseCMD.Name = "label_CloseCMD";
             this.label_CloseCMD.Size = new System.Drawing.Size(47, 17);
             this.label_CloseCMD.TabIndex = 1;
@@ -248,7 +250,7 @@
             this.tabPage_Analog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage_Analog.Name = "tabPage_Analog";
             this.tabPage_Analog.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage_Analog.Size = new System.Drawing.Size(343, 138);
+            this.tabPage_Analog.Size = new System.Drawing.Size(343, 165);
             this.tabPage_Analog.TabIndex = 1;
             this.tabPage_Analog.Text = "Analog";
             this.tabPage_Analog.UseVisualStyleBackColor = true;
@@ -313,7 +315,7 @@
             // label_EsdCMD
             // 
             this.label_EsdCMD.AutoSize = true;
-            this.label_EsdCMD.Location = new System.Drawing.Point(39, 203);
+            this.label_EsdCMD.Location = new System.Drawing.Point(39, 228);
             this.label_EsdCMD.Name = "label_EsdCMD";
             this.label_EsdCMD.Size = new System.Drawing.Size(40, 17);
             this.label_EsdCMD.TabIndex = 23;
@@ -325,7 +327,7 @@
             this.groupBox_Settings.Controls.Add(this.spinEdit_LimitMS);
             this.groupBox_Settings.Controls.Add(this.label_TravelMS);
             this.groupBox_Settings.Controls.Add(this.label_LimitSwitchMS);
-            this.groupBox_Settings.Location = new System.Drawing.Point(4, 264);
+            this.groupBox_Settings.Location = new System.Drawing.Point(6, 289);
             this.groupBox_Settings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Settings.Name = "groupBox_Settings";
             this.groupBox_Settings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -428,11 +430,11 @@
             this.groupBox_Signals.Controls.Add(this.label_Closed);
             this.groupBox_Signals.Controls.Add(this.label_Open);
             this.groupBox_Signals.Controls.Add(this.label_Rotation);
-            this.groupBox_Signals.Location = new System.Drawing.Point(375, 2);
+            this.groupBox_Signals.Location = new System.Drawing.Point(377, 2);
             this.groupBox_Signals.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Signals.Name = "groupBox_Signals";
             this.groupBox_Signals.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Signals.Size = new System.Drawing.Size(365, 429);
+            this.groupBox_Signals.Size = new System.Drawing.Size(365, 454);
             this.groupBox_Signals.TabIndex = 2;
             this.groupBox_Signals.TabStop = false;
             this.groupBox_Signals.Text = "Signals";
@@ -685,7 +687,7 @@
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(279, 436);
+            this.okCancelButton.Location = new System.Drawing.Point(279, 461);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -700,7 +702,7 @@
             this.groupBox_SpecModes.Controls.Add(this.checkBox_PositionF);
             this.groupBox_SpecModes.Controls.Add(this.checkBox_ForceLimSwitches);
             this.groupBox_SpecModes.Controls.Add(this.checkBox_IgnoreCommands);
-            this.groupBox_SpecModes.Location = new System.Drawing.Point(3, 348);
+            this.groupBox_SpecModes.Location = new System.Drawing.Point(6, 373);
             this.groupBox_SpecModes.Name = "groupBox_SpecModes";
             this.groupBox_SpecModes.Size = new System.Drawing.Size(365, 83);
             this.groupBox_SpecModes.TabIndex = 4;
@@ -746,11 +748,21 @@
             this.checkBox_IgnoreCommands.Text = "Ignore commands";
             this.checkBox_IgnoreCommands.UseVisualStyleBackColor = true;
             // 
+            // checkBox_UseOneCommand
+            // 
+            this.checkBox_UseOneCommand.AutoSize = true;
+            this.checkBox_UseOneCommand.Location = new System.Drawing.Point(72, 40);
+            this.checkBox_UseOneCommand.Name = "checkBox_UseOneCommand";
+            this.checkBox_UseOneCommand.Size = new System.Drawing.Size(153, 21);
+            this.checkBox_UseOneCommand.TabIndex = 4;
+            this.checkBox_UseOneCommand.Text = "Use One Command";
+            this.checkBox_UseOneCommand.UseVisualStyleBackColor = true;
+            // 
             // SetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 474);
+            this.ClientSize = new System.Drawing.Size(746, 497);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_SpecModes);
             this.Controls.Add(this.groupBox_Signals);
@@ -846,5 +858,6 @@
         private System.Windows.Forms.CheckBox checkBox_IgnoreCommands;
         private System.Windows.Forms.CheckBox checkBox_PositionF;
         private System.Windows.Forms.TextBox textBox_FValue;
+        private System.Windows.Forms.CheckBox checkBox_UseOneCommand;
     }
 }

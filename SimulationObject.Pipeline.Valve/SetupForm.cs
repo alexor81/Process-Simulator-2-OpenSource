@@ -1,6 +1,6 @@
-﻿using System;
+﻿using API;
+using System;
 using System.Windows.Forms;
-using API;
 using Utils;
 using Utils.DialogForms;
 using Utils.SpecialControls;
@@ -52,6 +52,8 @@ namespace SimulationObject.Pipeline.Valve
                 itemEditBox_OpenCMD.ItemName    = mBrowser.getItemNameByHandle(mValve.mOpenCMDItemHandle);
                 itemEditBox_OpenCMD.ItemToolTip = mBrowser.getItemToolTipByHandle(mValve.mOpenCMDItemHandle);
             }
+
+            checkBox_UseOneCommand.Checked = mValve.UseOneCommand;
 
             if (mValve.mCloseCMDItemHandle != -1)
             {
@@ -209,6 +211,11 @@ namespace SimulationObject.Pipeline.Valve
                             throw new ArgumentException("Wrong fault value. ", lExc);
                         }
 
+                        if (checkBox_ImpCtrl.Checked && checkBox_UseOneCommand.Checked)
+                        {
+                            throw new ArgumentException("Impulse control is not supported when using only one command. ");
+                        }
+
                         var lChecker = new RepeatItemNameChecker();
                         lChecker.addItemName(itemEditBox_Remote.ItemName);
                         lChecker.addItemName(itemEditBox_PositionCMD.ItemName);
@@ -251,6 +258,7 @@ namespace SimulationObject.Pipeline.Valve
                     {
                         mValve.mOpenCMD = false;
                     }
+                    mValve.UseOneCommand            = checkBox_UseOneCommand.Checked;
                     mValve.mCloseCMDItemHandle      = mBrowser.getItemHandleByName(itemEditBox_CloseCMD.ItemName);
                     if (mValve.mCloseCMDItemHandle == -1)
                     {

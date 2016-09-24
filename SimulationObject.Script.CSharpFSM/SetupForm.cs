@@ -156,8 +156,8 @@ namespace SimulationObject.Script.CSharpFSM
 
         private void                tsButton_Add_Click(object aSender, EventArgs aEventArgs)
         {
-            bool lCreated   = false;
-            string lName    = "State" + (mCSharpFSMClone.StateCount + 1).ToString();
+            bool lExit  = false;
+            var lName   = "State" + (mCSharpFSMClone.StateCount + 1).ToString();
 
             do
             {
@@ -166,15 +166,21 @@ namespace SimulationObject.Script.CSharpFSM
                     lName = StringForm.getString(lName, this, "Add State");
                     if (lName != null)
                     {
-                        var lScript = new CSScipt(mBrowser);
-                        
-                        mCSharpFSMClone.addState(lName, new CSScipt(mBrowser));
-                        mCSharpFSMClone.setupScript(lName, this);
+                        if(mCSharpFSMClone.isStateExists(lName))
+                        {
+                            throw new ArgumentException("State '" + lName + "' already exists. ");
+                        }
 
-                        lCreated = true;
+                        CSScipt lScript = new CSScipt(mBrowser);
+                        if(lScript.setupByForm(lName, this) == DialogResult.OK)
+                        {
+                            mCSharpFSMClone.addState(lName, lScript);
 
-                        updateForm();
-                        updateButtons();
+                            updateForm();
+                            updateButtons();
+                        }
+
+                        lExit = true;
                     }
                 }
                 catch (Exception lExc)
@@ -182,7 +188,7 @@ namespace SimulationObject.Script.CSharpFSM
                     MessageForm.showMessage(lExc.Message, this);
                 }
             }
-            while (lName != null && lCreated == false);
+            while (lName != null && lExit == false);
         }
 
         private void                tsButton_Delete_Click(object aSender, EventArgs aEventArgs)

@@ -187,7 +187,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
         private void            updateP()
         {
             label_OnCMD.Visible         = (mPump.mOnCMDItemHandle != -1);
-            label_OffCMD.Visible        = (mPump.mOffCMDItemHandle != -1);
+            label_OffCMD.Visible        = (mPump.mOffCMDItemHandle != -1) && !mPump.UseOneCommand;
             label_EsdCMD.Visible        = (mPump.mEsdCMDItemHandle != -1);
 
             checkBox_Remote.Enabled     = (mPump.mRemoteItemHandle != -1);

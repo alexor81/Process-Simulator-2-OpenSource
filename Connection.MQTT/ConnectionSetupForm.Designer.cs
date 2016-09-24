@@ -50,8 +50,8 @@
             this.groupBox_Items = new System.Windows.Forms.GroupBox();
             this.label_CountN = new System.Windows.Forms.Label();
             this.label_Count = new System.Windows.Forms.Label();
-            this.okCancelButton = new Utils.SpecialControls.OKCancelButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider();
+            this.okCancelButton = new Utils.SpecialControls.OKCancelButton();
             this.groupBox_Connection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_QOS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_keepAlive.Properties)).BeginInit();
@@ -62,22 +62,22 @@
             // 
             // button_Connect
             // 
-            this.button_Connect.Location = new System.Drawing.Point(125, 212);
+            this.button_Connect.Location = new System.Drawing.Point(125, 210);
             this.button_Connect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_Connect.Name = "button_Connect";
             this.button_Connect.Size = new System.Drawing.Size(103, 27);
-            this.button_Connect.TabIndex = 7;
+            this.button_Connect.TabIndex = 8;
             this.button_Connect.Text = "Connect";
             this.button_Connect.UseVisualStyleBackColor = true;
             this.button_Connect.Click += new System.EventHandler(this.button_Connect_Click);
             // 
             // button_Disconnect
             // 
-            this.button_Disconnect.Location = new System.Drawing.Point(233, 212);
+            this.button_Disconnect.Location = new System.Drawing.Point(233, 210);
             this.button_Disconnect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_Disconnect.Name = "button_Disconnect";
             this.button_Disconnect.Size = new System.Drawing.Size(103, 27);
-            this.button_Disconnect.TabIndex = 8;
+            this.button_Disconnect.TabIndex = 9;
             this.button_Disconnect.Text = "Disconnect";
             this.button_Disconnect.UseVisualStyleBackColor = true;
             this.button_Disconnect.Click += new System.EventHandler(this.button_Disconnect_Click);
@@ -106,7 +106,7 @@
             this.groupBox_Connection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Connection.Name = "groupBox_Connection";
             this.groupBox_Connection.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Connection.Size = new System.Drawing.Size(460, 253);
+            this.groupBox_Connection.Size = new System.Drawing.Size(460, 251);
             this.groupBox_Connection.TabIndex = 0;
             this.groupBox_Connection.TabStop = false;
             this.groupBox_Connection.Text = "Connection";
@@ -118,16 +118,16 @@
             this.comboBox_Protocol.Items.AddRange(new object[] {
             "Version_3_1_1",
             "Version_3_1"});
-            this.comboBox_Protocol.Location = new System.Drawing.Point(84, 176);
+            this.comboBox_Protocol.Location = new System.Drawing.Point(84, 85);
             this.comboBox_Protocol.Name = "comboBox_Protocol";
             this.comboBox_Protocol.Size = new System.Drawing.Size(144, 24);
-            this.comboBox_Protocol.TabIndex = 14;
+            this.comboBox_Protocol.TabIndex = 3;
             this.comboBox_Protocol.SelectedIndexChanged += new System.EventHandler(this.comboBox_Protocol_SelectedIndexChanged);
             // 
             // label_Protocol
             // 
             this.label_Protocol.AutoSize = true;
-            this.label_Protocol.Location = new System.Drawing.Point(14, 179);
+            this.label_Protocol.Location = new System.Drawing.Point(14, 89);
             this.label_Protocol.Name = "label_Protocol";
             this.label_Protocol.Size = new System.Drawing.Size(64, 17);
             this.label_Protocol.TabIndex = 13;
@@ -140,7 +140,7 @@
             0,
             0,
             0});
-            this.spinEdit_QOS.Location = new System.Drawing.Point(328, 175);
+            this.spinEdit_QOS.Location = new System.Drawing.Point(328, 85);
             this.spinEdit_QOS.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_QOS.Name = "spinEdit_QOS";
             this.spinEdit_QOS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -156,13 +156,13 @@
             0,
             0});
             this.spinEdit_QOS.Size = new System.Drawing.Size(93, 24);
-            this.spinEdit_QOS.TabIndex = 6;
+            this.spinEdit_QOS.TabIndex = 4;
             this.spinEdit_QOS.EditValueChanged += new System.EventHandler(this.spinEdit_QOS_EditValueChanged);
             // 
             // label_QOS
             // 
             this.label_QOS.AutoSize = true;
-            this.label_QOS.Location = new System.Drawing.Point(281, 179);
+            this.label_QOS.Location = new System.Drawing.Point(281, 89);
             this.label_QOS.Name = "label_QOS";
             this.label_QOS.Size = new System.Drawing.Size(40, 17);
             this.label_QOS.TabIndex = 0;
@@ -205,17 +205,16 @@
             // 
             // textBox_Password
             // 
-            this.textBox_Password.Location = new System.Drawing.Point(84, 115);
+            this.textBox_Password.Location = new System.Drawing.Point(84, 174);
             this.textBox_Password.Name = "textBox_Password";
-            this.textBox_Password.PasswordChar = '*';
             this.textBox_Password.Size = new System.Drawing.Size(368, 22);
-            this.textBox_Password.TabIndex = 4;
+            this.textBox_Password.TabIndex = 7;
             this.textBox_Password.TextChanged += new System.EventHandler(this.textBox_Password_TextChanged);
             // 
             // label_Password
             // 
             this.label_Password.AutoSize = true;
-            this.label_Password.Location = new System.Drawing.Point(5, 118);
+            this.label_Password.Location = new System.Drawing.Point(5, 177);
             this.label_Password.Name = "label_Password";
             this.label_Password.Size = new System.Drawing.Size(73, 17);
             this.label_Password.TabIndex = 10;
@@ -223,16 +222,16 @@
             // 
             // textBox_Login
             // 
-            this.textBox_Login.Location = new System.Drawing.Point(84, 85);
+            this.textBox_Login.Location = new System.Drawing.Point(84, 145);
             this.textBox_Login.Name = "textBox_Login";
             this.textBox_Login.Size = new System.Drawing.Size(368, 22);
-            this.textBox_Login.TabIndex = 3;
+            this.textBox_Login.TabIndex = 6;
             this.textBox_Login.TextChanged += new System.EventHandler(this.textBox_Login_TextChanged);
             // 
             // label_Login
             // 
             this.label_Login.AutoSize = true;
-            this.label_Login.Location = new System.Drawing.Point(31, 88);
+            this.label_Login.Location = new System.Drawing.Point(31, 148);
             this.label_Login.Name = "label_Login";
             this.label_Login.Size = new System.Drawing.Size(47, 17);
             this.label_Login.TabIndex = 8;
@@ -240,7 +239,7 @@
             // 
             // textBox_Root
             // 
-            this.textBox_Root.Location = new System.Drawing.Point(84, 145);
+            this.textBox_Root.Location = new System.Drawing.Point(84, 116);
             this.textBox_Root.Name = "textBox_Root";
             this.textBox_Root.Size = new System.Drawing.Size(368, 22);
             this.textBox_Root.TabIndex = 5;
@@ -250,7 +249,7 @@
             // label_Root
             // 
             this.label_Root.AutoSize = true;
-            this.label_Root.Location = new System.Drawing.Point(36, 148);
+            this.label_Root.Location = new System.Drawing.Point(36, 119);
             this.label_Root.Name = "label_Root";
             this.label_Root.Size = new System.Drawing.Size(42, 17);
             this.label_Root.TabIndex = 6;
@@ -312,7 +311,7 @@
             // 
             this.groupBox_Items.Controls.Add(this.label_CountN);
             this.groupBox_Items.Controls.Add(this.label_Count);
-            this.groupBox_Items.Location = new System.Drawing.Point(7, 258);
+            this.groupBox_Items.Location = new System.Drawing.Point(7, 256);
             this.groupBox_Items.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Items.Name = "groupBox_Items";
             this.groupBox_Items.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -339,9 +338,13 @@
             this.label_Count.TabIndex = 0;
             this.label_Count.Text = "Count:";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(143, 309);
+            this.okCancelButton.Location = new System.Drawing.Point(143, 306);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -350,15 +353,11 @@
             this.okCancelButton.TabIndex = 2;
             this.okCancelButton.ButtonClick += new System.EventHandler(this.okCancelButton_ButtonClick);
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
             // ConnectionSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 345);
+            this.ClientSize = new System.Drawing.Size(474, 346);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_Connection);
             this.Controls.Add(this.okCancelButton);

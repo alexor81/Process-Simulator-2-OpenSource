@@ -63,6 +63,10 @@ namespace Connection.OPCUA
             comboBox_Transport.Text         = mConnection.Transport;
             comboBox_Transport.Enabled      = !mConnection.Connected;
             spinEdit_PubInterval.Enabled    = !mConnection.Connected;
+            textBox_Login.Text              = mConnection.mLogin;
+            textBox_Login.Enabled           = !mConnection.Connected;
+            textBox_Password.Text           = mConnection.mPassword;
+            textBox_Password.Enabled        = !mConnection.Connected;
 
             button_Connect.Enabled          = !mConnection.Connected;
             button_Disconnect.Enabled       = mConnection.Connected;
@@ -106,6 +110,16 @@ namespace Connection.OPCUA
         private void        comboBox_Transport_TextChanged(object aSender, EventArgs aEventArgs)
         {
             mConnection.Transport = comboBox_Transport.Text;
+        }
+
+        private void        textBox_Login_TextChanged(object aSender, EventArgs aEventArgs)
+        {
+            mConnection.mLogin = textBox_Login.Text;
+        }
+
+        private void        textBox_Password_TextChanged(object aSender, EventArgs aEventArgs)
+        {
+            mConnection.mPassword = textBox_Password.Text;
         }
 
         private void        button_Connect_Click(object aSender, EventArgs aEventArgs)

@@ -26,11 +26,11 @@ namespace Connection.MQTT
                 lConnection.mHost       = lReader.getAttribute<String>("BrokerHost", lConnection.mHost);
                 lConnection.mPort       = (int)lReader.getAttribute<UInt32>("BrokerPort", (uint)lConnection.mPort);
                 lConnection.mKeepAlive  = lReader.getAttribute<UInt16>("KeepAlive", lConnection.mKeepAlive);
+                lConnection.QOS         = lReader.getAttribute<Byte>("QoS", lConnection.QOS);
+                lConnection.Protocol    = lReader.getAttribute<String>("Protocol", "Version_3_1_1");
                 lConnection.Root        = lReader.getAttribute<String>("Root", lConnection.Root);
                 lConnection.mLogin      = lReader.getAttribute<String>("Login", lConnection.mLogin);
                 lConnection.mPassword   = lReader.getAttribute<String>("Password", lConnection.mPassword);
-                lConnection.QOS         = lReader.getAttribute<Byte>("QoS", lConnection.QOS);
-                lConnection.Protocol    = lReader.getAttribute<String>("Protocol", "Version_3_1_1");
 
                 return lConnection;
             }
@@ -63,11 +63,11 @@ namespace Connection.MQTT
                 aXMLTextWriter.WriteAttributeString("BrokerHost", lConnection.mHost);
                 aXMLTextWriter.WriteAttributeString("BrokerPort", StringUtils.ObjectToString(lConnection.mPort));
                 aXMLTextWriter.WriteAttributeString("KeepAlive", StringUtils.ObjectToString(lConnection.mKeepAlive));
+                aXMLTextWriter.WriteAttributeString("QoS", StringUtils.ObjectToString(lConnection.QOS));
+                aXMLTextWriter.WriteAttributeString("Protocol", lConnection.Protocol);
                 aXMLTextWriter.WriteAttributeString("Root", lConnection.Root);
                 aXMLTextWriter.WriteAttributeString("Login", lConnection.mLogin);
                 aXMLTextWriter.WriteAttributeString("Password", lConnection.mPassword);
-                aXMLTextWriter.WriteAttributeString("QoS", StringUtils.ObjectToString(lConnection.QOS));
-                aXMLTextWriter.WriteAttributeString("Protocol", lConnection.Protocol);
             }
 
             public void                 destroyConnection(IConnection aConnection)
