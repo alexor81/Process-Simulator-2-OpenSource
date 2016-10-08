@@ -176,7 +176,8 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpState
                 if (mBitmap != null)
                 {
                     mBitmap.Dispose();
-                    mBitmap = null;
+                    pictureBox_State.Image  = null;
+                    mBitmap                 = null;
                 }
             }
             base.Dispose(disposing);

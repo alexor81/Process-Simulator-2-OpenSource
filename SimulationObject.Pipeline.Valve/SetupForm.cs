@@ -18,8 +18,6 @@ namespace SimulationObject.Pipeline.Valve
             mBrowser    = aBrowser;
             InitializeComponent();
 
-            spinEdit_TravelMS.Properties.MinValue   = Valve.MinTravelMS;
-
             if (mValve.mRemoteItemHandle != -1)
             {
                 itemEditBox_Remote.ItemName     = mBrowser.getItemNameByHandle(mValve.mRemoteItemHandle);

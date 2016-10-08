@@ -219,7 +219,8 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveState
                 if (mBitmap != null)
                 {
                     mBitmap.Dispose();
-                    mBitmap = null;
+                    pictureBox_State.Image  = null;
+                    mBitmap                 = null;
                 }
 
                 if (mStateBuf != null)

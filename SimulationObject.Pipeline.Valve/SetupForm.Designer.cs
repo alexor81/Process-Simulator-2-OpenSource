@@ -33,6 +33,7 @@
             this.itemEditBox_EsdCMD = new Utils.SpecialControls.ItemEditBox();
             this.tabControl_Control = new System.Windows.Forms.TabControl();
             this.tabPage_Digital = new System.Windows.Forms.TabPage();
+            this.checkBox_UseOneCommand = new System.Windows.Forms.CheckBox();
             this.checkBox_ImpCtrl = new System.Windows.Forms.CheckBox();
             this.itemEditBox_StopCMD = new Utils.SpecialControls.ItemEditBox();
             this.itemEditBox_CloseCMD = new Utils.SpecialControls.ItemEditBox();
@@ -84,7 +85,6 @@
             this.checkBox_PositionF = new System.Windows.Forms.CheckBox();
             this.checkBox_ForceLimSwitches = new System.Windows.Forms.CheckBox();
             this.checkBox_IgnoreCommands = new System.Windows.Forms.CheckBox();
-            this.checkBox_UseOneCommand = new System.Windows.Forms.CheckBox();
             this.groupBox_Control.SuspendLayout();
             this.tabControl_Control.SuspendLayout();
             this.tabPage_Digital.SuspendLayout();
@@ -138,7 +138,7 @@
             // 
             this.tabControl_Control.Controls.Add(this.tabPage_Digital);
             this.tabControl_Control.Controls.Add(this.tabPage_Analog);
-            this.tabControl_Control.Location = new System.Drawing.Point(9, 20);
+            this.tabControl_Control.Location = new System.Drawing.Point(8, 20);
             this.tabControl_Control.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl_Control.Name = "tabControl_Control";
             this.tabControl_Control.SelectedIndex = 0;
@@ -163,6 +163,16 @@
             this.tabPage_Digital.TabIndex = 0;
             this.tabPage_Digital.Text = "Digital";
             this.tabPage_Digital.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_UseOneCommand
+            // 
+            this.checkBox_UseOneCommand.AutoSize = true;
+            this.checkBox_UseOneCommand.Location = new System.Drawing.Point(72, 40);
+            this.checkBox_UseOneCommand.Name = "checkBox_UseOneCommand";
+            this.checkBox_UseOneCommand.Size = new System.Drawing.Size(153, 21);
+            this.checkBox_UseOneCommand.TabIndex = 4;
+            this.checkBox_UseOneCommand.Text = "Use One Command";
+            this.checkBox_UseOneCommand.UseVisualStyleBackColor = true;
             // 
             // checkBox_ImpCtrl
             // 
@@ -327,7 +337,7 @@
             this.groupBox_Settings.Controls.Add(this.spinEdit_LimitMS);
             this.groupBox_Settings.Controls.Add(this.label_TravelMS);
             this.groupBox_Settings.Controls.Add(this.label_LimitSwitchMS);
-            this.groupBox_Settings.Location = new System.Drawing.Point(6, 289);
+            this.groupBox_Settings.Location = new System.Drawing.Point(5, 289);
             this.groupBox_Settings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Settings.Name = "groupBox_Settings";
             this.groupBox_Settings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -339,7 +349,7 @@
             // spinEdit_TravelMS
             // 
             this.spinEdit_TravelMS.EditValue = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -358,13 +368,18 @@
             0,
             0,
             0});
+            this.spinEdit_TravelMS.Properties.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.spinEdit_TravelMS.Size = new System.Drawing.Size(159, 24);
             this.spinEdit_TravelMS.TabIndex = 5;
             // 
             // spinEdit_LimitMS
             // 
             this.spinEdit_LimitMS.EditValue = new decimal(new int[] {
-            0,
+            1,
             0,
             0,
             0});
@@ -380,6 +395,11 @@
             this.spinEdit_LimitMS.Properties.Mask.EditMask = "N00";
             this.spinEdit_LimitMS.Properties.MaxValue = new decimal(new int[] {
             -1,
+            0,
+            0,
+            0});
+            this.spinEdit_LimitMS.Properties.MinValue = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -430,7 +450,7 @@
             this.groupBox_Signals.Controls.Add(this.label_Closed);
             this.groupBox_Signals.Controls.Add(this.label_Open);
             this.groupBox_Signals.Controls.Add(this.label_Rotation);
-            this.groupBox_Signals.Location = new System.Drawing.Point(377, 2);
+            this.groupBox_Signals.Location = new System.Drawing.Point(376, 2);
             this.groupBox_Signals.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Signals.Name = "groupBox_Signals";
             this.groupBox_Signals.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -444,7 +464,7 @@
             this.itemEditBox_Rotation.ItemName = "";
             this.itemEditBox_Rotation.ItemRequirements = "Binary, Write";
             this.itemEditBox_Rotation.ItemToolTip = "";
-            this.itemEditBox_Rotation.Location = new System.Drawing.Point(73, 161);
+            this.itemEditBox_Rotation.Location = new System.Drawing.Point(73, 169);
             this.itemEditBox_Rotation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Rotation.Name = "itemEditBox_Rotation";
             this.itemEditBox_Rotation.Size = new System.Drawing.Size(287, 30);
@@ -454,7 +474,7 @@
             // label_Power
             // 
             this.label_Power.AutoSize = true;
-            this.label_Power.Location = new System.Drawing.Point(17, 358);
+            this.label_Power.Location = new System.Drawing.Point(17, 376);
             this.label_Power.Name = "label_Power";
             this.label_Power.Size = new System.Drawing.Size(51, 17);
             this.label_Power.TabIndex = 43;
@@ -465,7 +485,7 @@
             this.itemEditBox_Power.ItemName = "";
             this.itemEditBox_Power.ItemRequirements = "Binary, Read, Write";
             this.itemEditBox_Power.ItemToolTip = "";
-            this.itemEditBox_Power.Location = new System.Drawing.Point(73, 351);
+            this.itemEditBox_Power.Location = new System.Drawing.Point(73, 369);
             this.itemEditBox_Power.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Power.Name = "itemEditBox_Power";
             this.itemEditBox_Power.Size = new System.Drawing.Size(287, 30);
@@ -475,7 +495,7 @@
             // label_Remote
             // 
             this.label_Remote.AutoSize = true;
-            this.label_Remote.Location = new System.Drawing.Point(8, 396);
+            this.label_Remote.Location = new System.Drawing.Point(8, 416);
             this.label_Remote.Name = "label_Remote";
             this.label_Remote.Size = new System.Drawing.Size(61, 17);
             this.label_Remote.TabIndex = 41;
@@ -486,7 +506,7 @@
             this.itemEditBox_Remote.ItemName = "";
             this.itemEditBox_Remote.ItemRequirements = "Binary, Read, Write";
             this.itemEditBox_Remote.ItemToolTip = "";
-            this.itemEditBox_Remote.Location = new System.Drawing.Point(73, 389);
+            this.itemEditBox_Remote.Location = new System.Drawing.Point(73, 409);
             this.itemEditBox_Remote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Remote.Name = "itemEditBox_Remote";
             this.itemEditBox_Remote.Size = new System.Drawing.Size(287, 30);
@@ -498,7 +518,7 @@
             this.itemEditBox_Alarm2.ItemName = "";
             this.itemEditBox_Alarm2.ItemRequirements = "Binary, Read, Write";
             this.itemEditBox_Alarm2.ItemToolTip = "";
-            this.itemEditBox_Alarm2.Location = new System.Drawing.Point(73, 313);
+            this.itemEditBox_Alarm2.Location = new System.Drawing.Point(73, 329);
             this.itemEditBox_Alarm2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Alarm2.Name = "itemEditBox_Alarm2";
             this.itemEditBox_Alarm2.Size = new System.Drawing.Size(287, 30);
@@ -510,7 +530,7 @@
             this.itemEditBox_Alarm1.ItemName = "";
             this.itemEditBox_Alarm1.ItemRequirements = "Binary, Read, Write";
             this.itemEditBox_Alarm1.ItemToolTip = "";
-            this.itemEditBox_Alarm1.Location = new System.Drawing.Point(73, 275);
+            this.itemEditBox_Alarm1.Location = new System.Drawing.Point(73, 289);
             this.itemEditBox_Alarm1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Alarm1.Name = "itemEditBox_Alarm1";
             this.itemEditBox_Alarm1.Size = new System.Drawing.Size(287, 30);
@@ -522,7 +542,7 @@
             this.itemEditBox_Closes.ItemName = "";
             this.itemEditBox_Closes.ItemRequirements = "Binary, Write";
             this.itemEditBox_Closes.ItemToolTip = "";
-            this.itemEditBox_Closes.Location = new System.Drawing.Point(73, 237);
+            this.itemEditBox_Closes.Location = new System.Drawing.Point(73, 249);
             this.itemEditBox_Closes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Closes.Name = "itemEditBox_Closes";
             this.itemEditBox_Closes.Size = new System.Drawing.Size(287, 30);
@@ -534,7 +554,7 @@
             this.itemEditBox_Opens.ItemName = "";
             this.itemEditBox_Opens.ItemRequirements = "Binary, Write";
             this.itemEditBox_Opens.ItemToolTip = "";
-            this.itemEditBox_Opens.Location = new System.Drawing.Point(73, 199);
+            this.itemEditBox_Opens.Location = new System.Drawing.Point(73, 209);
             this.itemEditBox_Opens.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Opens.Name = "itemEditBox_Opens";
             this.itemEditBox_Opens.Size = new System.Drawing.Size(287, 30);
@@ -544,7 +564,7 @@
             // label_Alarm2
             // 
             this.label_Alarm2.AutoSize = true;
-            this.label_Alarm2.Location = new System.Drawing.Point(15, 320);
+            this.label_Alarm2.Location = new System.Drawing.Point(15, 336);
             this.label_Alarm2.Name = "label_Alarm2";
             this.label_Alarm2.Size = new System.Drawing.Size(56, 17);
             this.label_Alarm2.TabIndex = 35;
@@ -553,7 +573,7 @@
             // label_Alarm1
             // 
             this.label_Alarm1.AutoSize = true;
-            this.label_Alarm1.Location = new System.Drawing.Point(15, 282);
+            this.label_Alarm1.Location = new System.Drawing.Point(15, 296);
             this.label_Alarm1.Name = "label_Alarm1";
             this.label_Alarm1.Size = new System.Drawing.Size(56, 17);
             this.label_Alarm1.TabIndex = 34;
@@ -562,7 +582,7 @@
             // label_Closes
             // 
             this.label_Closes.AutoSize = true;
-            this.label_Closes.Location = new System.Drawing.Point(16, 244);
+            this.label_Closes.Location = new System.Drawing.Point(16, 256);
             this.label_Closes.Name = "label_Closes";
             this.label_Closes.Size = new System.Drawing.Size(54, 17);
             this.label_Closes.TabIndex = 33;
@@ -571,7 +591,7 @@
             // label_Opens
             // 
             this.label_Opens.AutoSize = true;
-            this.label_Opens.Location = new System.Drawing.Point(16, 206);
+            this.label_Opens.Location = new System.Drawing.Point(16, 216);
             this.label_Opens.Name = "label_Opens";
             this.label_Opens.Size = new System.Drawing.Size(54, 17);
             this.label_Opens.TabIndex = 32;
@@ -579,7 +599,7 @@
             // 
             // textBox_PositionMin
             // 
-            this.textBox_PositionMin.Location = new System.Drawing.Point(231, 131);
+            this.textBox_PositionMin.Location = new System.Drawing.Point(231, 137);
             this.textBox_PositionMin.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_PositionMin.Name = "textBox_PositionMin";
             this.textBox_PositionMin.Size = new System.Drawing.Size(89, 22);
@@ -588,7 +608,7 @@
             // 
             // textBox_PositionMax
             // 
-            this.textBox_PositionMax.Location = new System.Drawing.Point(88, 131);
+            this.textBox_PositionMax.Location = new System.Drawing.Point(88, 137);
             this.textBox_PositionMax.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_PositionMax.Name = "textBox_PositionMax";
             this.textBox_PositionMax.Size = new System.Drawing.Size(89, 22);
@@ -598,7 +618,7 @@
             // label_PositionMin
             // 
             this.label_PositionMin.AutoSize = true;
-            this.label_PositionMin.Location = new System.Drawing.Point(191, 134);
+            this.label_PositionMin.Location = new System.Drawing.Point(191, 140);
             this.label_PositionMin.Name = "label_PositionMin";
             this.label_PositionMin.Size = new System.Drawing.Size(34, 17);
             this.label_PositionMin.TabIndex = 29;
@@ -607,7 +627,7 @@
             // label_PositionMax
             // 
             this.label_PositionMax.AutoSize = true;
-            this.label_PositionMax.Location = new System.Drawing.Point(44, 134);
+            this.label_PositionMax.Location = new System.Drawing.Point(44, 140);
             this.label_PositionMax.Name = "label_PositionMax";
             this.label_PositionMax.Size = new System.Drawing.Size(37, 17);
             this.label_PositionMax.TabIndex = 28;
@@ -618,7 +638,7 @@
             this.itemEditBox_ClosedLimit.ItemName = "";
             this.itemEditBox_ClosedLimit.ItemRequirements = "Binary, Read, Write";
             this.itemEditBox_ClosedLimit.ItemToolTip = "";
-            this.itemEditBox_ClosedLimit.Location = new System.Drawing.Point(73, 55);
+            this.itemEditBox_ClosedLimit.Location = new System.Drawing.Point(73, 57);
             this.itemEditBox_ClosedLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_ClosedLimit.Name = "itemEditBox_ClosedLimit";
             this.itemEditBox_ClosedLimit.Size = new System.Drawing.Size(287, 30);
@@ -640,7 +660,7 @@
             // label_Position
             // 
             this.label_Position.AutoSize = true;
-            this.label_Position.Location = new System.Drawing.Point(8, 100);
+            this.label_Position.Location = new System.Drawing.Point(8, 104);
             this.label_Position.Name = "label_Position";
             this.label_Position.Size = new System.Drawing.Size(62, 17);
             this.label_Position.TabIndex = 4;
@@ -651,7 +671,7 @@
             this.itemEditBox_Position.ItemName = "";
             this.itemEditBox_Position.ItemRequirements = "Real, Write";
             this.itemEditBox_Position.ItemToolTip = "";
-            this.itemEditBox_Position.Location = new System.Drawing.Point(73, 93);
+            this.itemEditBox_Position.Location = new System.Drawing.Point(73, 97);
             this.itemEditBox_Position.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Position.Name = "itemEditBox_Position";
             this.itemEditBox_Position.Size = new System.Drawing.Size(287, 30);
@@ -661,7 +681,7 @@
             // label_Closed
             // 
             this.label_Closed.AutoSize = true;
-            this.label_Closed.Location = new System.Drawing.Point(15, 62);
+            this.label_Closed.Location = new System.Drawing.Point(15, 64);
             this.label_Closed.Name = "label_Closed";
             this.label_Closed.Size = new System.Drawing.Size(55, 17);
             this.label_Closed.TabIndex = 2;
@@ -679,7 +699,7 @@
             // label_Rotation
             // 
             this.label_Rotation.AutoSize = true;
-            this.label_Rotation.Location = new System.Drawing.Point(4, 168);
+            this.label_Rotation.Location = new System.Drawing.Point(4, 176);
             this.label_Rotation.Name = "label_Rotation";
             this.label_Rotation.Size = new System.Drawing.Size(65, 17);
             this.label_Rotation.TabIndex = 44;
@@ -702,7 +722,7 @@
             this.groupBox_SpecModes.Controls.Add(this.checkBox_PositionF);
             this.groupBox_SpecModes.Controls.Add(this.checkBox_ForceLimSwitches);
             this.groupBox_SpecModes.Controls.Add(this.checkBox_IgnoreCommands);
-            this.groupBox_SpecModes.Location = new System.Drawing.Point(6, 373);
+            this.groupBox_SpecModes.Location = new System.Drawing.Point(5, 373);
             this.groupBox_SpecModes.Name = "groupBox_SpecModes";
             this.groupBox_SpecModes.Size = new System.Drawing.Size(365, 83);
             this.groupBox_SpecModes.TabIndex = 4;
@@ -748,21 +768,11 @@
             this.checkBox_IgnoreCommands.Text = "Ignore commands";
             this.checkBox_IgnoreCommands.UseVisualStyleBackColor = true;
             // 
-            // checkBox_UseOneCommand
-            // 
-            this.checkBox_UseOneCommand.AutoSize = true;
-            this.checkBox_UseOneCommand.Location = new System.Drawing.Point(72, 40);
-            this.checkBox_UseOneCommand.Name = "checkBox_UseOneCommand";
-            this.checkBox_UseOneCommand.Size = new System.Drawing.Size(153, 21);
-            this.checkBox_UseOneCommand.TabIndex = 4;
-            this.checkBox_UseOneCommand.Text = "Use One Command";
-            this.checkBox_UseOneCommand.UseVisualStyleBackColor = true;
-            // 
             // SetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 497);
+            this.ClientSize = new System.Drawing.Size(747, 499);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_SpecModes);
             this.Controls.Add(this.groupBox_Signals);

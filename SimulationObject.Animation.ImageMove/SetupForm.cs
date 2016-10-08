@@ -153,8 +153,8 @@ namespace SimulationObject.Animation.ImageMove
             if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
             {
                 mBmp.Dispose();
-                mBmp = null;
-                pictureBox.Image = null;
+                pictureBox.Image    = null;
+                mBmp                = null;        
             }
 
             if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)

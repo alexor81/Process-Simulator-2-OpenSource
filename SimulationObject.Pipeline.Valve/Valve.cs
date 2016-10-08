@@ -63,7 +63,6 @@ namespace SimulationObject.Pipeline.Valve
                 }
             }
 
-            public static readonly uint                         MinTravelMS         = 500;
             private uint                                        mTravelMS           = 4000;
             public uint                                         TravelMS
             {
@@ -72,9 +71,9 @@ namespace SimulationObject.Pipeline.Valve
                 {
                     if (mTravelMS != value)
                     {
-                        if (value < MinTravelMS)
+                        if (value == 0)
                         {
-                            mTravelMS = MinTravelMS;
+                            mTravelMS = 1;
                         }
                         else
                         {
@@ -1009,14 +1008,9 @@ namespace SimulationObject.Pipeline.Valve
                 lChecker.addItemName(lItem);
                 mRemoteItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
-                uint lUInt = lReader.getAttribute<UInt32>("TravelMS", mTravelMS);
-                if (lUInt < MinTravelMS)
-                {
-                    throw new ArgumentException("Travel time of valve has to be equal or more than " + StringUtils.ObjectToString(MinTravelMS) + ". ");
-                }
-                TravelMS = lUInt;
+                TravelMS = lReader.getAttribute<UInt32>("TravelMS", mTravelMS);
 
-                lUInt = lReader.getAttribute<UInt32>("LimitSwitchMS", mLimitSwitchMS);
+                uint lUInt = lReader.getAttribute<UInt32>("LimitSwitchMS", mLimitSwitchMS);
                 if (lUInt == 0)
                 {
                     throw new ArgumentException("Limit switch time of valve has to be more than 0. ");
