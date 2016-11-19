@@ -67,7 +67,7 @@ namespace Snap7
             public Int32 Area;
             public Int32 DBNumber;
             public Int32 Start;
-            public Int32 Size;
+            public Int32 Elements;
             public Int32 WordLen;
         }
     }
@@ -136,7 +136,7 @@ namespace Snap7
         #region Get/Set 16 bit signed value (S7 int) -32768..32767
         public static int GetIntAt(byte[] Buffer, int Pos)
         {
-            return (int)((Buffer[Pos] << 8) | Buffer[Pos + 1]);
+            return (short)((Buffer[Pos] << 8) | Buffer[Pos + 1]);
         }
         public static void SetIntAt(byte[] Buffer, int Pos, Int16 Value)
         {

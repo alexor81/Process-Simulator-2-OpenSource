@@ -573,7 +573,7 @@ namespace Connection.S7IsoTCP
 
         #region IDisposable
 
-        private bool                mDisposed           = false;
+            private bool                mDisposed           = false;
 
             public void                 Dispose()
             {

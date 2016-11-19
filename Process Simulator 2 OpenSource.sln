@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Script.CSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Script.CSharpFSM", "SimulationObject.Script.CSharpFSM\SimulationObject.Script.CSharpFSM.csproj", "{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Binary.Counter", "SimulationObject.Binary.Counter\SimulationObject.Binary.Counter.csproj", "{07FA5F91-A358-437D-897D-22B0A4FD06D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -213,6 +215,10 @@ Global
 		{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}.Debug|x86.Build.0 = Debug|x86
 		{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}.Release|x86.ActiveCfg = Release|x86
 		{B73AE0A2-5605-4586-A1F7-0CEC6B180F46}.Release|x86.Build.0 = Release|x86
+		{07FA5F91-A358-437D-897D-22B0A4FD06D5}.Debug|x86.ActiveCfg = Debug|x86
+		{07FA5F91-A358-437D-897D-22B0A4FD06D5}.Debug|x86.Build.0 = Debug|x86
+		{07FA5F91-A358-437D-897D-22B0A4FD06D5}.Release|x86.ActiveCfg = Release|x86
+		{07FA5F91-A358-437D-897D-22B0A4FD06D5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

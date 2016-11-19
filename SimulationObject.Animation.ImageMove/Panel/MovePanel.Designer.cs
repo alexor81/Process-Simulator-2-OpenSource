@@ -15,7 +15,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolTip = new System.Windows.Forms.ToolTip();
+            this.components = new System.ComponentModel.Container();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();

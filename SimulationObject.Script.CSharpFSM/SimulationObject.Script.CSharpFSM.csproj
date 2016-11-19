@@ -31,6 +31,7 @@
     <Reference Include="API, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Process Simulator 2\API.DLL</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Msagl">
       <HintPath>.\Microsoft.Msagl.dll</HintPath>
@@ -53,6 +54,7 @@
     <Reference Include="Utils, Version=1.0.6079.19159, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Process Simulator 2\Utils.DLL</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
