@@ -11,6 +11,7 @@ using Utils.Panels.DoubleIndicator;
 using Utils.Panels.DoubleMeter;
 using Utils.Panels.DoubleSlidingScale;
 using Utils.Panels.DoubleTrend;
+using Utils.Panels.ObjectDropDownList;
 using Utils.Panels.ObjectRadioButtonGroup;
 using Utils.Panels.ObjectTextLabel;
 
@@ -205,7 +206,7 @@ namespace SimulationObject.Binary.Counter
 
         #region IPanelOwner
 
-            private static readonly string[] mPanelList = new string[] { "Counter", "Trend", "Indicator", "TextLabel", "Meter", "Bar", "SlidingScale", "EditBox", "RadioButton" };
+            private static readonly string[] mPanelList = new string[] { "Counter", "Trend", "Indicator", "TextLabel", "Meter", "Bar", "SlidingScale", "EditBox", "RadioButton", "DropDownList" };
             public string[]         PanelTypeList
             {
                 get { return mPanelList; }
@@ -221,6 +222,7 @@ namespace SimulationObject.Binary.Counter
                     case "TextLabel":       return new ObjectTextLabelPanel(this);
                     case "EditBox":         return new DoubleEditBoxPanel(this);
                     case "RadioButton":     return new RadioButtonGroupPanel(this);
+                    case "DropDownList":    return new DropDownListPanel(this);
                     case "Meter":           return new DoubleMeterPanel(this, 100, 0);
                     case "Bar":             return new DoubleBarPanel(this, 100, 0);
                     case "SlidingScale":    return new DoubleSlidingScalePanel(this);

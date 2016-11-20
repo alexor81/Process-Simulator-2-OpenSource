@@ -10,6 +10,7 @@ using Utils.Panels.BooleanCheckBox;
 using Utils.Panels.BooleanIndicator;
 using Utils.Panels.BooleanToggle;
 using Utils.Panels.BooleanTrend;
+using Utils.Panels.ObjectDropDownList;
 using Utils.Panels.ObjectRadioButtonGroup;
 using Utils.Panels.ObjectTextLabel;
 
@@ -191,7 +192,7 @@ namespace SimulationObject.Sensor.Discrete
 
         #region IPanelOwner
 
-            private static readonly string[]                    mPanelList = new string[] { "Indicator", "Button", "CheckBox", "Trend", "RadioButton", "TextLabel", "Toggle" };
+            private static readonly string[]                    mPanelList = new string[] { "Indicator", "Button", "CheckBox", "Trend", "RadioButton", "DropDownList", "TextLabel", "Toggle" };
             public string[]                                     PanelTypeList
             {
                 get { return mPanelList; }
@@ -201,14 +202,15 @@ namespace SimulationObject.Sensor.Discrete
             {
                 switch (aPanelType)
                 {
-                    case "Indicator":   return new BooleanIndicatorPanel(this);
-                    case "Button":      return new BooleanButtonPanel(this);
-                    case "CheckBox":    return new BooleanCheckBoxPanel(this);
-                    case "Trend":       return new BooleanTrendPanel(this);
-                    case "RadioButton": return new RadioButtonGroupPanel(this);
-                    case "TextLabel":   return new ObjectTextLabelPanel(this);
-                    case "Toggle":      return new BooleanTogglePanel(this);
-                default:            throw new ArgumentException("Panel of type '" + aPanelType + "' does not exist. ");
+                    case "Indicator":       return new BooleanIndicatorPanel(this);
+                    case "Button":          return new BooleanButtonPanel(this);
+                    case "CheckBox":        return new BooleanCheckBoxPanel(this);
+                    case "Trend":           return new BooleanTrendPanel(this);
+                    case "RadioButton":     return new RadioButtonGroupPanel(this);
+                    case "DropDownList":    return new DropDownListPanel(this);
+                    case "TextLabel":       return new ObjectTextLabelPanel(this);
+                    case "Toggle":          return new BooleanTogglePanel(this);
+                    default:                throw new ArgumentException("Panel of type '" + aPanelType + "' does not exist. ");
                 }
             }
 
