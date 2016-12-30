@@ -1,4 +1,6 @@
-﻿using API;
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+using API;
 using SimulationObject.Item.TimeLine.Panel;
 using System;
 using System.Collections.Generic;
@@ -80,16 +82,11 @@ namespace SimulationObject.Item.TimeLine
                 }
             }
 
-            public int[]                        ItemWriteHandles
+            public int[]                        UniqueItemHandles
             {
                 get
                 {
                     HashSet<int> lUniqueItemHandles = new HashSet<int>();
-
-                    if (mOnItemHandle != -1)
-                    {
-                        lUniqueItemHandles.Add(mOnItemHandle);
-                    }
 
                     int[] lItemHandles;
                     foreach (Tuple<long, Snapshot> lRecord in mSections)
@@ -102,6 +99,23 @@ namespace SimulationObject.Item.TimeLine
                     }
 
                     return lUniqueItemHandles.ToArray();
+                }
+            }
+
+            public int[]                        ItemWriteHandles
+            {
+                get
+                {
+                    List<int> lItemHandles = new List<int>();
+
+                    if (mOnItemHandle != -1)
+                    {
+                        lItemHandles.Add(mOnItemHandle);
+                    }
+
+                    lItemHandles.AddRange(UniqueItemHandles);
+
+                    return lItemHandles.ToArray();
                 }
             }
 

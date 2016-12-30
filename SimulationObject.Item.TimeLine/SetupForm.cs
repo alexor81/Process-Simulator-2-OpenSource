@@ -1,4 +1,6 @@
-﻿using API;
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+using API;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -69,15 +71,16 @@ namespace SimulationObject.Item.TimeLine
 
         private void                        updateButtons()
         {
-            bool lExistSelected     = (mDataTable.Rows.Count > 0) && (dataGridView_Sections.SelectedRows.Count > 0);
-            bool lOneSelected       = (dataGridView_Sections.SelectedRows.Count == 1);
+            bool lExistSelected         = (mDataTable.Rows.Count > 0) && (dataGridView_Sections.SelectedRows.Count > 0);
+            bool lOneSelected           = (dataGridView_Sections.SelectedRows.Count == 1);
 
-            tsButton_Up.Enabled     = lExistSelected && lOneSelected && (dataGridView_Sections.SelectedRows[0].Index != 0);
-            tsButton_Down.Enabled   = lExistSelected && lOneSelected && (dataGridView_Sections.SelectedRows[0].Index != (mDataTable.Rows.Count - 1));
-            tsButton_Delete.Enabled = lExistSelected;
-            tsButton_Clone.Enabled  = lExistSelected && lOneSelected;
-            tsButton_Delay.Enabled  = tsButton_Clone.Enabled;
-            tsButton_Setup.Enabled  = tsButton_Clone.Enabled;
+            tsButton_Up.Enabled         = lExistSelected && lOneSelected && (dataGridView_Sections.SelectedRows[0].Index != 0);
+            tsButton_Down.Enabled       = lExistSelected && lOneSelected && (dataGridView_Sections.SelectedRows[0].Index != (mDataTable.Rows.Count - 1));
+            tsButton_Delete.Enabled     = lExistSelected;
+            tsButton_Clone.Enabled      = lExistSelected && lOneSelected;
+            tsButton_Delay.Enabled      = tsButton_Clone.Enabled;
+            tsButton_Setup.Enabled      = tsButton_Clone.Enabled;
+            tsButton_Replace.Enabled    = (mDataTable.Rows.Count > 0);
         }
 
         private void                        dataGridView_Sections_SelectionChanged(object aSender, EventArgs aEventArgs)
@@ -205,7 +208,14 @@ namespace SimulationObject.Item.TimeLine
                 try
                 {
                     int lIndex = dataGridView_Sections.SelectedRows[0].Index;
-                    mCloneSections.Add(new Tuple<long, Snapshot>(mCloneSections[lIndex].Item1, mCloneSections[lIndex].Item2.Clone));
+
+                    long lTime = mCloneSections[lIndex].Item1;
+                    if(lTime == 0)
+                    {
+                        lTime = MiscUtils.TimeSlice;
+                    }
+
+                    mCloneSections.Add(new Tuple<long, Snapshot>(lTime, mCloneSections[lIndex].Item2.Clone));
 
                     updateTable();
                     dataGridView_Sections.Rows[0].Selected                          = false;
@@ -347,6 +357,23 @@ namespace SimulationObject.Item.TimeLine
             }
         }
 
+        private void                        tsButton_Replace_Click(object aSender, EventArgs aEventArgs)
+        {
+            if(mDataTable.Rows.Count > 0)
+            {
+                using (var lReplaceForm = new ReplaceForm(mTimeLine.UniqueItemHandles, mBrowser))
+                {
+                    if(lReplaceForm.ShowDialog(this) == DialogResult.OK)
+                    {
+                        foreach (Tuple<long, Snapshot> lRecord in mCloneSections)
+                        {
+                            lRecord.Item2.replaceItems(lReplaceForm.Replace);
+                        }
+                    }
+                }
+            }
+        }
+
         private void                        dataGridView_Sections_CellDoubleClick(object aSender, EventArgs aEventArgs)
         {
             if (dataGridView_Sections.SelectedRows.Count == 1)
@@ -394,6 +421,7 @@ namespace SimulationObject.Item.TimeLine
 
                 if (mDataTable != null)
                 {
+                    dataGridView_Sections.DataSource = null;
                     mDataTable.Dispose();
                     mDataTable = null;
                 }

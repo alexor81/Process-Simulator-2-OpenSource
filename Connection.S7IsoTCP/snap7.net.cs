@@ -1,4 +1,6 @@
-﻿/*=============================================================================|
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+/*=============================================================================|
 |  PROJECT SNAP7                                                         1.4.0 |
 |==============================================================================|
 |  Copyright (C) 2013, 2014, 2015 Davide Nardella                              |

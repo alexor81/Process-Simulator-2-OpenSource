@@ -1,4 +1,6 @@
-﻿namespace SimulationObject.Item.TimeLine
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+namespace SimulationObject.Item.TimeLine
 {
     partial class SetupForm
     {
@@ -32,6 +34,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsButton_Setup = new System.Windows.Forms.ToolStripButton();
             this.tsButton_Delay = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsButton_Replace = new System.Windows.Forms.ToolStripButton();
             this.okCancelButton = new Utils.SpecialControls.OKCancelButton();
             this.tabControl.SuspendLayout();
             this.tabPage_Options.SuspendLayout();
@@ -65,7 +69,7 @@
             // 
             this.tabControl.Controls.Add(this.tabPage_Options);
             this.tabControl.Controls.Add(this.tabPage_Sections);
-            this.tabControl.Location = new System.Drawing.Point(9, 3);
+            this.tabControl.Location = new System.Drawing.Point(6, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(453, 297);
@@ -149,7 +153,9 @@
             this.tsButton_Delete,
             this.toolStripSeparator2,
             this.tsButton_Setup,
-            this.tsButton_Delay});
+            this.tsButton_Delay,
+            this.toolStripSeparator3,
+            this.tsButton_Replace});
             this.toolStrip.Location = new System.Drawing.Point(3, 3);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(439, 25);
@@ -242,9 +248,25 @@
             this.tsButton_Delay.Text = "Delay";
             this.tsButton_Delay.Click += new System.EventHandler(this.tsButton_Delay_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsButton_Replace
+            // 
+            this.tsButton_Replace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsButton_Replace.Image = global::SimulationObject.Item.TimeLine.Properties.Resources.FindReplace;
+            this.tsButton_Replace.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsButton_Replace.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButton_Replace.Name = "tsButton_Replace";
+            this.tsButton_Replace.Size = new System.Drawing.Size(23, 22);
+            this.tsButton_Replace.Text = "Replace Item";
+            this.tsButton_Replace.Click += new System.EventHandler(this.tsButton_Replace_Click);
+            // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(141, 312);
+            this.okCancelButton.Location = new System.Drawing.Point(138, 306);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -257,7 +279,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 349);
+            this.ClientSize = new System.Drawing.Size(465, 346);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.okCancelButton);
@@ -304,5 +326,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsButton_Delay;
         private System.Windows.Forms.ToolStripButton tsButton_Setup;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton tsButton_Replace;
     }
 }
