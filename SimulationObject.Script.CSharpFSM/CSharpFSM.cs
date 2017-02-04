@@ -35,7 +35,7 @@ namespace SimulationObject.Script.CSharpFSM
             }
 
             private List<string>                mStates         = new List<string>();
-            private Dictionary<string, CSScipt> mStateAction    = new Dictionary<string, CSScipt>();    
+            private Dictionary<string, CSScipt> mStateAction    = new Dictionary<string, CSScipt>(StringComparer.Ordinal);    
 
             public void                         addState(string aName, CSScipt aScript)
             {

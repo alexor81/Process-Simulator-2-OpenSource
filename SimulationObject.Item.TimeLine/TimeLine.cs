@@ -372,7 +372,7 @@ namespace SimulationObject.Item.TimeLine
             {
                 get
                 {
-                    return new string[] { };
+                    return new string[0];
                 }
             }
 

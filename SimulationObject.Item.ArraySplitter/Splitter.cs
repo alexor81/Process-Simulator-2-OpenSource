@@ -365,7 +365,7 @@ namespace SimulationObject.Item.ArraySplitter
 
             public string[]                     ContextMenuItemList
             {
-                get { return new string[] { }; }
+                get { return new string[0]; }
             }
 
             public void                         onContextMenuItemClick(string aMenuItemName, IWin32Window aOwner)

@@ -129,15 +129,16 @@ namespace SimulationObject.Item.TimeLine
         {
             if (disposing)
             {
+                if (mDataTable != null)
+                {
+                    dataGridViewItems.DataSource = null;
+                    mDataTable.Dispose();
+                    mDataTable = null;
+                }
+
                 if (components != null)
                 {
                     components.Dispose();
-                }
-
-                if (mDataTable != null)
-                {
-                    mDataTable.Dispose();
-                    mDataTable = null;
                 }
             }
             base.Dispose(disposing);

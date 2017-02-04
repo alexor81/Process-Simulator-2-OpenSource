@@ -337,7 +337,7 @@ namespace SimulationObject.Real.Calculator
                     case 12: mValue = Math.Cos(mInput1); break;          //Cosine
                     case 13: mValue = Math.Tan(mInput1); break;          //Tangent
                     case 14: mValue = Math.Abs(mInput1); break;          //Absolute
-                    case 15: mValue = Math.Round(mInput1); break;        //Round
+                    case 15: mValue = Math.Round(mInput1, MidpointRounding.AwayFromZero); break;        //Round
                     case 16: mValue = Math.Truncate(mInput1); break;     //Truncate
                 }
 

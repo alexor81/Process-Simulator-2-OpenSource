@@ -261,7 +261,7 @@ namespace Connection.MQTT
 
         #region Items
 
-            private Dictionary<string, DataItem>            mItemList       = new Dictionary<string, DataItem>();
+            private Dictionary<string, DataItem>            mItemList       = new Dictionary<string, DataItem>(StringComparer.Ordinal);
             private ReaderWriterLockSlim                    mItemListLock   = new ReaderWriterLockSlim();
 
             private void                                    checkItemArguments(string aTopic)

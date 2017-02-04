@@ -39,7 +39,6 @@ namespace SimulationObject.Animation.ImageMove.Panel
             this.Controls.Add(this.pictureBox);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.MinimumSize = new System.Drawing.Size(10, 10);
             this.Name = "MovePanel";
             this.Size = new System.Drawing.Size(38, 38);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();

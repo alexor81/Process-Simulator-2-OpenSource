@@ -414,16 +414,16 @@ namespace SimulationObject.Item.TimeLine
         {
             if (disposing)
             {
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-
                 if (mDataTable != null)
                 {
                     dataGridView_Sections.DataSource = null;
                     mDataTable.Dispose();
                     mDataTable = null;
+                }
+
+                if (components != null)
+                {
+                    components.Dispose();
                 }
             }
             base.Dispose(disposing);

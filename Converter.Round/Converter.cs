@@ -46,7 +46,7 @@ namespace Converter.Round
                 throw new InvalidOperationException("Value conversion error. " + lExc.Message, lExc);
             }
 
-            return Math.Round(lValue, mRound);
+            return Math.Round(lValue, mRound, MidpointRounding.AwayFromZero);
         }
 
         private object  roundSingle(object aValue)
@@ -61,7 +61,7 @@ namespace Converter.Round
                 throw new InvalidOperationException("Value conversion error. " + lExc.Message, lExc);
             }
 
-            return Convert.ToSingle(Math.Round(lValue, mRound));
+            return Convert.ToSingle(Math.Round(lValue, mRound, MidpointRounding.AwayFromZero));
         }
 
         private object  roundDouble(object aValue)
@@ -76,7 +76,7 @@ namespace Converter.Round
                 throw new InvalidOperationException("Value conversion error. " + lExc.Message, lExc);
             }
 
-            return Math.Round(lValue, mRound);
+            return Math.Round(lValue, mRound, MidpointRounding.AwayFromZero);
         }
 
         private object  round(object aValue)

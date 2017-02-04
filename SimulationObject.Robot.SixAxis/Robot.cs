@@ -547,7 +547,7 @@ namespace SimulationObject.Robot.SixAxis
             {
                 get
                 {
-                    return new string[] { };
+                    return new string[0];
                 }
             }
 

@@ -1,4 +1,6 @@
-﻿namespace SimulationObject.Binary.Logic
+﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+namespace SimulationObject.Binary.Logic
 {
     partial class SetupForm
     {
@@ -44,7 +46,7 @@
             // label_In2
             // 
             this.label_In2.AutoSize = true;
-            this.label_In2.Location = new System.Drawing.Point(19, 78);
+            this.label_In2.Location = new System.Drawing.Point(24, 78);
             this.label_In2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_In2.Name = "label_In2";
             this.label_In2.Size = new System.Drawing.Size(55, 17);
@@ -54,7 +56,7 @@
             // label_In1
             // 
             this.label_In1.AutoSize = true;
-            this.label_In1.Location = new System.Drawing.Point(19, 12);
+            this.label_In1.Location = new System.Drawing.Point(24, 12);
             this.label_In1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_In1.Name = "label_In1";
             this.label_In1.Size = new System.Drawing.Size(55, 17);
@@ -64,7 +66,7 @@
             // label_Value
             // 
             this.label_Value.AutoSize = true;
-            this.label_Value.Location = new System.Drawing.Point(26, 171);
+            this.label_Value.Location = new System.Drawing.Point(31, 171);
             this.label_Value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Value.Name = "label_Value";
             this.label_Value.Size = new System.Drawing.Size(48, 17);
@@ -74,7 +76,7 @@
             // label_Operator
             // 
             this.label_Operator.AutoSize = true;
-            this.label_Operator.Location = new System.Drawing.Point(5, 136);
+            this.label_Operator.Location = new System.Drawing.Point(10, 136);
             this.label_Operator.Name = "label_Operator";
             this.label_Operator.Size = new System.Drawing.Size(69, 17);
             this.label_Operator.TabIndex = 33;
@@ -84,7 +86,7 @@
             // 
             this.comboBox_Operator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Operator.FormattingEnabled = true;
-            this.comboBox_Operator.Location = new System.Drawing.Point(74, 132);
+            this.comboBox_Operator.Location = new System.Drawing.Point(79, 132);
             this.comboBox_Operator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Operator.Name = "comboBox_Operator";
             this.comboBox_Operator.Size = new System.Drawing.Size(89, 24);
@@ -95,7 +97,7 @@
             this.itemEditBox_Value.ItemName = "";
             this.itemEditBox_Value.ItemRequirements = "Binay, Write, Obligatory";
             this.itemEditBox_Value.ItemToolTip = "";
-            this.itemEditBox_Value.Location = new System.Drawing.Point(74, 164);
+            this.itemEditBox_Value.Location = new System.Drawing.Point(79, 164);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_Value.Name = "itemEditBox_Value";
             this.itemEditBox_Value.Size = new System.Drawing.Size(273, 30);
@@ -107,7 +109,7 @@
             this.itemEditBox_In2.ItemName = "";
             this.itemEditBox_In2.ItemRequirements = "Binary, Read";
             this.itemEditBox_In2.ItemToolTip = "";
-            this.itemEditBox_In2.Location = new System.Drawing.Point(74, 70);
+            this.itemEditBox_In2.Location = new System.Drawing.Point(79, 70);
             this.itemEditBox_In2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_In2.Name = "itemEditBox_In2";
             this.itemEditBox_In2.Size = new System.Drawing.Size(273, 30);
@@ -119,7 +121,7 @@
             this.itemEditBox_In1.ItemName = "";
             this.itemEditBox_In1.ItemRequirements = "Binary, Read, Obligatory";
             this.itemEditBox_In1.ItemToolTip = "";
-            this.itemEditBox_In1.Location = new System.Drawing.Point(74, 5);
+            this.itemEditBox_In1.Location = new System.Drawing.Point(79, 5);
             this.itemEditBox_In1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox_In1.Name = "itemEditBox_In1";
             this.itemEditBox_In1.Size = new System.Drawing.Size(273, 30);
@@ -128,7 +130,7 @@
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(82, 200);
+            this.okCancelButton.Location = new System.Drawing.Point(87, 200);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -140,7 +142,7 @@
             // checkBox_In1Inverse
             // 
             this.checkBox_In1Inverse.AutoSize = true;
-            this.checkBox_In1Inverse.Location = new System.Drawing.Point(74, 39);
+            this.checkBox_In1Inverse.Location = new System.Drawing.Point(79, 39);
             this.checkBox_In1Inverse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_In1Inverse.Name = "checkBox_In1Inverse";
             this.checkBox_In1Inverse.Size = new System.Drawing.Size(76, 21);
@@ -151,7 +153,7 @@
             // checkBox_In2Inverse
             // 
             this.checkBox_In2Inverse.AutoSize = true;
-            this.checkBox_In2Inverse.Location = new System.Drawing.Point(74, 104);
+            this.checkBox_In2Inverse.Location = new System.Drawing.Point(79, 104);
             this.checkBox_In2Inverse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox_In2Inverse.Name = "checkBox_In2Inverse";
             this.checkBox_In2Inverse.Size = new System.Drawing.Size(76, 21);
@@ -163,7 +165,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 239);
+            this.ClientSize = new System.Drawing.Size(363, 239);
             this.ControlBox = false;
             this.Controls.Add(this.checkBox_In2Inverse);
             this.Controls.Add(this.checkBox_In1Inverse);

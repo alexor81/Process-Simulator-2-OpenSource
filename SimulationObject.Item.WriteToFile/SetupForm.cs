@@ -297,16 +297,16 @@ namespace SimulationObject.Item.WriteToFile
         {
             if (disposing)
             {
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-
                 if (mDataTable != null)
                 {
                     dataGridView_Items.DataSource = null;
                     mDataTable.Dispose();
                     mDataTable = null;
+                }
+
+                if (components != null)
+                {
+                    components.Dispose();
                 }
             }
             base.Dispose(disposing);

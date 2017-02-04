@@ -89,7 +89,7 @@ namespace Connection.OPCUA
 
         public Session                                  mSession        = null;
         private Subscription                            mSubscription   = null;
-        private void                                    cleanSession()
+        private void                                    clearSession()
         {
             if (mOPCNodeBrowserForm != null)
             {
@@ -119,7 +119,7 @@ namespace Connection.OPCUA
 
         public void                                     connect()
         {
-            cleanSession();
+            clearSession();
 
             #region Server
 
@@ -898,7 +898,7 @@ namespace Connection.OPCUA
                             mItemListLock = null;
                         }
 
-                        cleanSession();
+                        clearSession();
                     }
 
                     mDisposed = true;

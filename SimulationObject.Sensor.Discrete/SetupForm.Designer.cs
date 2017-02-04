@@ -50,7 +50,7 @@ namespace SimulationObject.Sensor.Discrete
             // label_Item
             // 
             this.label_Item.AutoSize = true;
-            this.label_Item.Location = new System.Drawing.Point(11, 12);
+            this.label_Item.Location = new System.Drawing.Point(9, 12);
             this.label_Item.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Item.Name = "label_Item";
             this.label_Item.Size = new System.Drawing.Size(38, 17);
@@ -86,7 +86,7 @@ namespace SimulationObject.Sensor.Discrete
             this.groupBox_Signalisation.Controls.Add(this.textBox_False);
             this.groupBox_Signalisation.Controls.Add(this.label_True);
             this.groupBox_Signalisation.Controls.Add(this.textBox_True);
-            this.groupBox_Signalisation.Location = new System.Drawing.Point(6, 41);
+            this.groupBox_Signalisation.Location = new System.Drawing.Point(5, 41);
             this.groupBox_Signalisation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox_Signalisation.Name = "groupBox_Signalisation";
             this.groupBox_Signalisation.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -171,7 +171,7 @@ namespace SimulationObject.Sensor.Discrete
             this.itemEditBox.ItemName = "";
             this.itemEditBox.ItemRequirements = "Binary, Read, Write, Obligatory";
             this.itemEditBox.ItemToolTip = "";
-            this.itemEditBox.Location = new System.Drawing.Point(55, 5);
+            this.itemEditBox.Location = new System.Drawing.Point(53, 5);
             this.itemEditBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.itemEditBox.Name = "itemEditBox";
             this.itemEditBox.Size = new System.Drawing.Size(320, 30);
@@ -180,7 +180,7 @@ namespace SimulationObject.Sensor.Discrete
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(98, 159);
+            this.okCancelButton.Location = new System.Drawing.Point(97, 159);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
@@ -193,7 +193,7 @@ namespace SimulationObject.Sensor.Discrete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 196);
+            this.ClientSize = new System.Drawing.Size(383, 196);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox);
             this.Controls.Add(this.groupBox_Signalisation);
