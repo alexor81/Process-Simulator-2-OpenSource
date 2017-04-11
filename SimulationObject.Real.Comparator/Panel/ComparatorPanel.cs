@@ -88,7 +88,7 @@ namespace SimulationObject.Real.Comparator.Panel
             label_Input2.Text = StringUtils.ObjectToString(mComparator.Input2);
             if (mComparator.ValueBoolean)
             {
-                label_Output.BackColor = Color.Green;
+                label_Output.BackColor = Color.LimeGreen;
             }
             else
             {

@@ -133,7 +133,6 @@ namespace SimulationObject.Sensor.Analog
                     List<int> lResult = new List<int>();
 
                     lResult.Add(mValueItemHandle);
-                    lResult.AddRange(mThdItemHandles);
 
                     return lResult.ToArray();
                 }
@@ -143,7 +142,12 @@ namespace SimulationObject.Sensor.Analog
             {
                 get
                 {
-                    return ItemReadHandles;
+                    List<int> lResult = new List<int>();
+
+                    lResult.Add(mValueItemHandle);
+                    lResult.AddRange(mThdItemHandles);
+
+                    return lResult.ToArray();
                 }
             }
 
@@ -231,31 +235,6 @@ namespace SimulationObject.Sensor.Analog
 
                     return;
                 }
-
-                for (int i = 0; i < mThdItemHandles.Length; i++)
-                {
-                    if (aItemHandle == mThdItemHandles[i])
-                    {
-                        bool lValue;
-                        try
-                        {
-                            lValue = Convert.ToBoolean(aItemValue);
-                        }
-                        catch (Exception lExc)
-                        {
-                            Log.Error("Value conversion error for threshold. " + lExc.Message, lExc.ToString());
-                            mValueChanged = true;
-                            continue;
-                        }
-
-                        if (lValue != mThdItemValues[i])
-                        {
-                            mValueChanged = true;
-                        }
-
-                        return;
-                    }
-                }
             }
 
             public double                                       Maximum { get { return mValueScale.OutMax; } }
@@ -294,15 +273,13 @@ namespace SimulationObject.Sensor.Analog
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -438,8 +415,7 @@ namespace SimulationObject.Sensor.Analog
             private void                                        raiseSimulationObjectError(string aMessage)
             {
                 mLastError = aMessage;
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             private string                                      mLastError;

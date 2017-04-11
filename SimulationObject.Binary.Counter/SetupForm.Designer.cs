@@ -41,17 +41,18 @@ namespace SimulationObject.Binary.Counter
             this.label_N = new System.Windows.Forms.Label();
             this.comboBox_P = new System.Windows.Forms.ComboBox();
             this.comboBox_N = new System.Windows.Forms.ComboBox();
+            this.checkBox_ReadOutput = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(85, 200);
+            this.okCancelButton.Location = new System.Drawing.Point(85, 226);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.Name = "okCancelButton";
             this.okCancelButton.Size = new System.Drawing.Size(188, 33);
-            this.okCancelButton.TabIndex = 5;
+            this.okCancelButton.TabIndex = 6;
             this.okCancelButton.ButtonClick += new System.EventHandler(this.okCancelButton_ButtonClick);
             // 
             // itemEditBox_Value
@@ -159,12 +160,23 @@ namespace SimulationObject.Binary.Counter
             this.comboBox_N.Size = new System.Drawing.Size(134, 24);
             this.comboBox_N.TabIndex = 3;
             // 
+            // checkBox_ReadOutput
+            // 
+            this.checkBox_ReadOutput.AutoSize = true;
+            this.checkBox_ReadOutput.Location = new System.Drawing.Point(67, 194);
+            this.checkBox_ReadOutput.Name = "checkBox_ReadOutput";
+            this.checkBox_ReadOutput.Size = new System.Drawing.Size(64, 21);
+            this.checkBox_ReadOutput.TabIndex = 5;
+            this.checkBox_ReadOutput.Text = "Read";
+            this.checkBox_ReadOutput.UseVisualStyleBackColor = true;
+            // 
             // SetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 238);
+            this.ClientSize = new System.Drawing.Size(359, 263);
             this.ControlBox = false;
+            this.Controls.Add(this.checkBox_ReadOutput);
             this.Controls.Add(this.comboBox_N);
             this.Controls.Add(this.comboBox_P);
             this.Controls.Add(this.label_N);
@@ -203,5 +215,6 @@ namespace SimulationObject.Binary.Counter
         private System.Windows.Forms.Label label_N;
         private System.Windows.Forms.ComboBox comboBox_P;
         private System.Windows.Forms.ComboBox comboBox_N;
+        private System.Windows.Forms.CheckBox checkBox_ReadOutput;
     }
 }

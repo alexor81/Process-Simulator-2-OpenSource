@@ -79,6 +79,34 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
             }
         }
 
+        private void            updateOpenCMD()
+        {
+            if (mValve.UseOneCommand)
+            {
+                label_OpenCMD.BackColor = Color.Yellow;
+                if (mValve.mOpenCMD == true)
+                {
+                    label_OpenCMD.Text = "Open";
+                }
+                else
+                {
+                    label_OpenCMD.Text = "Close";
+                }
+            }
+            else
+            {
+                label_OpenCMD.Text = "Open";
+                if (mValve.mOpenCMD == true)
+                {
+                    label_OpenCMD.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    label_OpenCMD.BackColor = BackColor;
+                }
+            }
+        }
+
         public void             updateValues()
         {
             if (InvokeRequired)
@@ -107,7 +135,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
             if (mValve.ForseLimSwitches)
             {
                 label_Closed.BackColor  = Color.Red;
-                label_Open.BackColor    = Color.Green;
+                label_Open.BackColor    = Color.LimeGreen;
             }
             else
             {
@@ -122,7 +150,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
 
                 if (mValve.OpenLimit)
                 {
-                    label_Open.BackColor = Color.Green;
+                    label_Open.BackColor = Color.LimeGreen;
                 }
                 else
                 {
@@ -158,14 +186,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
             }
             else
             {
-                if (mValve.mOpenCMD == true)
-                {
-                    label_OpenCMD.BackColor = Color.Yellow;
-                }
-                else
-                {
-                    label_OpenCMD.BackColor = BackColor;
-                }
+                updateOpenCMD();
 
                 if (mValve.mCloseCMD == true)
                 {
@@ -195,7 +216,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
                 label_EsdCMD.BackColor = BackColor;
             }
 
-            if (mValve.IgnoreCommands != (label_Control.Font.Strikeout))
+            if (mValve.IgnoreCommands != label_Control.Font.Strikeout)
             {
                 label_Control.Font = new Font(label_Control.Font, label_Control.Font.Style ^ FontStyle.Strikeout);
 
@@ -226,6 +247,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveControl
         {
             label_PositionCMD.Visible   = mValve.mAnalogCtrl && (mValve.mPositionCMDItemHandle != -1);
             label_OpenCMD.Visible       = !mValve.mAnalogCtrl && (mValve.mOpenCMDItemHandle != -1);
+            updateOpenCMD();
             label_CloseCMD.Visible      = !mValve.mAnalogCtrl && !mValve.UseOneCommand && (mValve.mCloseCMDItemHandle != -1);
             label_StopCMD.Visible       = !mValve.mAnalogCtrl && (mValve.mStopCMDItemHandle != -1);
             label_EsdCMD.Visible        = (mValve.mEsdCMDItemHandle != -1);

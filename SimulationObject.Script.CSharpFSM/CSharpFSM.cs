@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Utils;
 using Utils.CSharpScript;
+using Utils.Logger;
 using Utils.Panels.ObjectTextLabel;
 
 namespace SimulationObject.Script.CSharpFSM
@@ -35,9 +36,9 @@ namespace SimulationObject.Script.CSharpFSM
             }
 
             private List<string>                mStates         = new List<string>();
-            private Dictionary<string, CSScipt> mStateAction    = new Dictionary<string, CSScipt>(StringComparer.Ordinal);    
+            private Dictionary<string, CSScript> mStateAction    = new Dictionary<string, CSScript>(StringComparer.Ordinal);    
 
-            public void                         addState(string aName, CSScipt aScript)
+            public void                         addState(string aName, CSScript aScript)
             {
                 if(String.IsNullOrWhiteSpace(aName))
                 {
@@ -293,6 +294,28 @@ namespace SimulationObject.Script.CSharpFSM
                 mStateAction.Remove(aOldName);
                 mStateAction.Add(aNewName, lScript);
                 mStates[mStates.IndexOf(aOldName)] = aNewName;
+
+                bool lErrors = false;
+                foreach(var lStateKey in mStateAction.Keys)
+                {
+                    if (lStateKey.Equals(aNewName, StringComparison.Ordinal) == false)
+                    {
+                        try
+                        {
+                            mStateAction[lStateKey].replaceConnectedState(aOldName, aNewName);
+                        }
+                        catch(Exception lExc)
+                        {
+                            lErrors = true;
+                            Log.Error("State '" + lStateKey + "'. " + lExc.Message, lExc.ToString());
+                        }
+                    }
+                }
+
+                if (lErrors)
+                {             
+                    throw new InvalidOperationException("Unable to compile script(s). ");
+                }
             }
 
         #endregion
@@ -334,7 +357,7 @@ namespace SimulationObject.Script.CSharpFSM
             {
                 mValueChanged = false;
             
-                foreach(CSScipt lScript in mStateAction.Values)
+                foreach(CSScript lScript in mStateAction.Values)
                 {
                     if(lScript.ValueChanged)
                     {
@@ -349,11 +372,14 @@ namespace SimulationObject.Script.CSharpFSM
 
             public void             onItemValueChange(int aItemHandle, object aItemValue)
             {
-                if(mItemHandles.ContainsKey(aItemHandle))
+                if (mItemHandles != null)
                 {
-                    foreach(string lStateName in mItemHandles[aItemHandle])
+                    if(mItemHandles.ContainsKey(aItemHandle))
                     {
-                        mStateAction[lStateName].setItemValue(aItemHandle, aItemValue);
+                        foreach(string lStateName in mItemHandles[aItemHandle])
+                        {
+                            mStateAction[lStateName].setItemValue(aItemHandle, aItemValue);
+                        }
                     }
                 }
             }
@@ -380,15 +406,13 @@ namespace SimulationObject.Script.CSharpFSM
             public event EventHandler ChangedValues;
             public void             raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler ChangedProperties;
             public void             raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -403,7 +427,7 @@ namespace SimulationObject.Script.CSharpFSM
                 {
                     lResult         = lSetupForm.ShowDialog(aOwner);
                     mItemHandles    = null;
-                    raisePropertiesChanged();
+                    raiseValuesChanged();
                 }
 
                 return lResult;
@@ -418,11 +442,11 @@ namespace SimulationObject.Script.CSharpFSM
                     aXMLTextReader.Read();
 
                     string lStateName;
-                    CSScipt lScript;
+                    CSScript lScript;
                     while (aXMLTextReader.Name.Equals("State", StringComparison.Ordinal) && aXMLTextReader.IsStartElement())
                     {
                         lStateName  = lReader.getAttribute<string>("Name");
-                        lScript     = new CSScipt(mItemBrowser);
+                        lScript     = new CSScript(mItemBrowser);
                         try
                         {
                             lScript.loadFromXML(aXMLTextReader);
@@ -474,7 +498,7 @@ namespace SimulationObject.Script.CSharpFSM
                 {
                     mCurrentState = mStates[0];
                     raiseValuesChanged();
-                    foreach (CSScipt lScript in mStateAction.Values)
+                    foreach (CSScript lScript in mStateAction.Values)
                     {
                         lScript.reset();
                     }
@@ -497,8 +521,7 @@ namespace SimulationObject.Script.CSharpFSM
             public void             raiseSimulationObjectError(string aMessage)
             {
                 mLastError = aMessage;
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             private void            MCSScript_ScriptException(object aSender, MessageStringEventArgs aEventArgs)

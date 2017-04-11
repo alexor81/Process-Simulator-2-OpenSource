@@ -19,18 +19,61 @@ namespace SimulationObject.Animation.ImageMove
             public MemoryStream                                 mImgMemStrm;
             public Bitmap                                       mBmp;
 
+            public bool                                         mUserCanMove = false;
+
         #endregion
 
         #region IItemUser
 
             public int                                          mXValueItemHandle   = -1;
-            public int                                          mXValue;
+            private int                                         mXValue;
+            public int                                          XValue
+            {
+                get { return mXValue; }
+                set
+                {
+                    if (mUserCanMove && mXValue != value)
+                    {
+                        mXValue         = value;
+                        mValueChanged   = true;
+                        raiseValuesChanged();
+                    }
+                }
+            }
 
             public int                                          mYValueItemHandle   = -1;
-            public int                                          mYValue;
+            private int                                         mYValue;
+            public int                                          YValue
+            {
+                get { return mYValue; }
+                set
+                {
+                    if (mUserCanMove && mYValue != value)
+                    {
+                        mYValue         = value;
+                        mValueChanged   = true;
+                        raiseValuesChanged();
+                    }
+                }
+            }
 
             public int                                          mVisibleItemHandle  = -1;
             public bool                                         mVisible            = true;
+
+            public int                                          mMovingByUserItemHandle  = -1;
+            private bool                                        mMovingByUser;
+            public bool                                         MovingByUser
+            {
+                get { return mMovingByUser; }
+                set
+                {
+                    if (mUserCanMove && mMovingByUser != value)
+                    {
+                        mMovingByUser   = value;
+                        mValueChanged   = true;
+                    }
+                }
+            }
 
             private IItemBrowser                                mItemBrowser;
             public IItemBrowser                                 ItemBrowser
@@ -47,7 +90,6 @@ namespace SimulationObject.Animation.ImageMove
                     lResult.Add(mXValueItemHandle);
                     lResult.Add(mYValueItemHandle);
 
-
                     if (mVisibleItemHandle != -1)
                     {
                         lResult.Add(mVisibleItemHandle);
@@ -61,7 +103,20 @@ namespace SimulationObject.Animation.ImageMove
             {
                 get
                 {
-                    return new int[] { };
+                    List<int> lResult = new List<int>();
+
+                    if (mUserCanMove)
+                    {
+                        lResult.Add(mXValueItemHandle);
+                        lResult.Add(mYValueItemHandle);
+                    }
+
+                    if (mMovingByUserItemHandle != -1)
+                    {
+                        lResult.Add(mMovingByUserItemHandle);
+                    }
+
+                    return lResult.ToArray();
                 }
             }
 
@@ -73,9 +128,26 @@ namespace SimulationObject.Animation.ImageMove
 
             public void                                         getItemValues(out int[] aItemHandles, out object[] aItemValues)
             {
-                mValueChanged   = false;
-                aItemHandles    = new int[] { };
-                aItemValues     = new object[] { };
+                mValueChanged = false;
+
+                if (mUserCanMove)
+                {
+                    if (mMovingByUserItemHandle != -1)
+                    {
+                        aItemHandles    = new int[] { mXValueItemHandle, mYValueItemHandle, mMovingByUserItemHandle};
+                        aItemValues     = new object[] { mXValue, mYValue, mMovingByUser };
+                    }
+                    else
+                    {
+                        aItemHandles    = new int[] { mXValueItemHandle, mYValueItemHandle};
+                        aItemValues     = new object[] { mXValue, mYValue };
+                    }
+                }
+                else
+                {
+                    aItemHandles    = new int[] { };
+                    aItemValues     = new object[] { };
+                }
             }
 
             public void                                         onItemValueChange(int aItemHandle, object aItemValue)
@@ -131,7 +203,7 @@ namespace SimulationObject.Animation.ImageMove
                     }
                     catch (Exception lExc)
                     {
-                        throw new ArgumentException("Value conversion error for image to change visibile state. ", lExc);
+                        throw new ArgumentException("Value conversion error for visibility state. ", lExc);
                     }
 
                     if (mVisible != lValue)
@@ -166,15 +238,13 @@ namespace SimulationObject.Animation.ImageMove
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -209,6 +279,12 @@ namespace SimulationObject.Animation.ImageMove
                 lItem = lReader.getAttribute<String>("Visible", "");
                 lChecker.addItemName(lItem);
                 mVisibleItemHandle = mItemBrowser.getItemHandleByName(lItem);
+
+                lItem = lReader.getAttribute<String>("MovingByUser", "");
+                lChecker.addItemName(lItem);
+                mMovingByUserItemHandle = mItemBrowser.getItemHandleByName(lItem);
+
+                mUserCanMove = lReader.getAttribute<Boolean>("UserCanMove", mUserCanMove);
 
                 if (aXMLTextReader.IsEmptyElement == false)
                 {
@@ -245,6 +321,8 @@ namespace SimulationObject.Animation.ImageMove
                 aXMLTextWriter.WriteAttributeString("X", mItemBrowser.getItemNameByHandle(mXValueItemHandle));
                 aXMLTextWriter.WriteAttributeString("Y", mItemBrowser.getItemNameByHandle(mYValueItemHandle));
                 aXMLTextWriter.WriteAttributeString("Visible", mItemBrowser.getItemNameByHandle(mVisibleItemHandle));
+                aXMLTextWriter.WriteAttributeString("UserCanMove", StringUtils.ObjectToString(mUserCanMove));
+                aXMLTextWriter.WriteAttributeString("MovingByUser", mItemBrowser.getItemNameByHandle(mMovingByUserItemHandle));
                 aXMLTextWriter.WriteStartElement("Image");
                     aXMLTextWriter.WriteString(Convert.ToBase64String(mImgMemStrm.ToArray()));
                 aXMLTextWriter.WriteEndElement();
@@ -265,8 +343,7 @@ namespace SimulationObject.Animation.ImageMove
             public event EventHandler<MessageStringEventArgs>   SimulationObjectError;
             private void                                        raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string                                       LastError

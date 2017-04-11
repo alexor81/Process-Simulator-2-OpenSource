@@ -15,7 +15,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpState
         private Pump            mPump;
         private Bitmap          mBitmap         = new Bitmap(43, 34);
         private Graphics        mGraphics;
-        private RectangleF      mImageRect      = new RectangleF(0, 0, 43, 34);
+        private Rectangle       mImageRect      = new Rectangle(0, 0, 43, 34);
 
         public                  PumpStatePanel(Pump aPump)
         {
@@ -176,10 +176,10 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpState
                 }
 
                 if (mBitmap != null)
-                {
+                {                 
+                    pictureBox_State.Image = null;
                     mBitmap.Dispose();
-                    pictureBox_State.Image  = null;
-                    mBitmap                 = null;
+                    mBitmap = null;
                 }
             }
             base.Dispose(disposing);

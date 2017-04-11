@@ -130,7 +130,6 @@ namespace SimulationObject.Real.Calculator
                 {
                     List<int> lResult = new List<int>();
 
-                    lResult.Add(mValueItemHandle);
                     lResult.Add(mInput1ItemHandle);
 
                     if (mInput2ItemHandle != -1)
@@ -209,28 +208,6 @@ namespace SimulationObject.Real.Calculator
 
                     return;
                 }
-
-                if (aItemHandle == mValueItemHandle)
-                {
-                    double lValue;
-                    try
-                    {
-                        lValue = Convert.ToDouble(aItemValue);
-                    }
-                    catch (Exception lExc)
-                    {
-                        Log.Error("Output value conversion error. " + lExc.Message, lExc.ToString());
-                        mValueChanged = true;
-                        return;
-                    }
-
-                    if (ValuesCompare.NotEqualDelta1.compare(mValue, lValue))
-                    {
-                        mValueChanged = true;
-                    }
-
-                    return;
-                }
             }
 
         #endregion
@@ -261,15 +238,13 @@ namespace SimulationObject.Real.Calculator
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -363,8 +338,7 @@ namespace SimulationObject.Real.Calculator
             public event EventHandler<MessageStringEventArgs>   SimulationObjectError;
             private void                                        raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string                                       LastError

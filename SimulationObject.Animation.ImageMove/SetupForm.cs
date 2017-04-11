@@ -20,6 +20,10 @@ namespace SimulationObject.Animation.ImageMove
         private Bitmap              mBmp;
         private string              mPath;
 
+        public int                  mVisibleItemHandle      = -1;
+        public int                  mMovingByUserItemHandle = -1;
+        public bool                 mUserMove;
+
         public                      SetupForm(Move aMove, IItemBrowser aBrowser)
         {
             mMove       = aMove;
@@ -38,11 +42,9 @@ namespace SimulationObject.Animation.ImageMove
                 itemEditBox_Y.ItemToolTip   = mBrowser.getItemToolTipByHandle(mMove.mYValueItemHandle);
             }
 
-            if (mMove.mVisibleItemHandle != -1)
-            {
-                itemEditBox_Visible.ItemName    = mBrowser.getItemNameByHandle(mMove.mVisibleItemHandle);
-                itemEditBox_Visible.ItemToolTip = mBrowser.getItemToolTipByHandle(mMove.mVisibleItemHandle);
-            }
+            mVisibleItemHandle      = mMove.mVisibleItemHandle;
+            mMovingByUserItemHandle = mMove.mMovingByUserItemHandle;
+            mUserMove               = mMove.mUserCanMove;
 
             if (mMove.mBmp != null)
             {
@@ -150,6 +152,14 @@ namespace SimulationObject.Animation.ImageMove
             }
         }
 
+        private void                tsButton_Options_Click(object aSender, EventArgs aEventArgs)
+        {
+            using (var lOptions = new OptionsForm(this, mBrowser))
+            {
+                lOptions.ShowDialog(this);
+            }
+        }
+
         private void                Cancel()
         {
             if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
@@ -196,11 +206,15 @@ namespace SimulationObject.Animation.ImageMove
                     var lChecker = new RepeatItemNameChecker();
                     lChecker.addItemName(itemEditBox_X.ItemName);
                     lChecker.addItemName(itemEditBox_Y.ItemName);
-                    lChecker.addItemName(itemEditBox_Visible.ItemName);
+                    lChecker.addItemName(mBrowser.getItemNameByHandle(mVisibleItemHandle));
+                    lChecker.addItemName(mBrowser.getItemNameByHandle(mMovingByUserItemHandle));
 
-                    mMove.mXValueItemHandle     = mBrowser.getItemHandleByName(itemEditBox_X.ItemName);
-                    mMove.mYValueItemHandle     = mBrowser.getItemHandleByName(itemEditBox_Y.ItemName);
-                    mMove.mVisibleItemHandle    = mBrowser.getItemHandleByName(itemEditBox_Visible.ItemName);
+                    mMove.mXValueItemHandle         = mBrowser.getItemHandleByName(itemEditBox_X.ItemName);
+                    mMove.mYValueItemHandle         = mBrowser.getItemHandleByName(itemEditBox_Y.ItemName);
+                    mMove.mVisibleItemHandle        = mVisibleItemHandle;
+                    mMove.mMovingByUserItemHandle   = mMovingByUserItemHandle;
+
+                    mMove.mUserCanMove          = mUserMove;
 
                     if(mMove.mVisibleItemHandle == -1)
                     {

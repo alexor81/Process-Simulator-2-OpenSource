@@ -112,7 +112,7 @@ namespace SimulationObject.Binary.Trigger.Panel
         {
             if (mValue)
             {
-                button_Value.BackColor  = Color.Green;
+                button_Value.BackColor  = Color.LimeGreen;
             }
             else
             {

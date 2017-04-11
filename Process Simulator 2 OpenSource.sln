@@ -73,6 +73,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Script.CSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Binary.Counter", "SimulationObject.Binary.Counter\SimulationObject.Binary.Counter.csproj", "{07FA5F91-A358-437D-897D-22B0A4FD06D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Robot.Conveyor", "SimulationObject.Robot.Conveyor\SimulationObject.Robot.Conveyor.csproj", "{424C1E1A-D81A-465B-999B-DDE029E4FE28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Voice.Command", "SimulationObject.Voice.Command\SimulationObject.Voice.Command.csproj", "{C1FCA578-F0D8-4427-A4B4-6A1ECB429035}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -219,6 +223,14 @@ Global
 		{07FA5F91-A358-437D-897D-22B0A4FD06D5}.Debug|x86.Build.0 = Debug|x86
 		{07FA5F91-A358-437D-897D-22B0A4FD06D5}.Release|x86.ActiveCfg = Release|x86
 		{07FA5F91-A358-437D-897D-22B0A4FD06D5}.Release|x86.Build.0 = Release|x86
+		{424C1E1A-D81A-465B-999B-DDE029E4FE28}.Debug|x86.ActiveCfg = Debug|x86
+		{424C1E1A-D81A-465B-999B-DDE029E4FE28}.Debug|x86.Build.0 = Debug|x86
+		{424C1E1A-D81A-465B-999B-DDE029E4FE28}.Release|x86.ActiveCfg = Release|x86
+		{424C1E1A-D81A-465B-999B-DDE029E4FE28}.Release|x86.Build.0 = Release|x86
+		{C1FCA578-F0D8-4427-A4B4-6A1ECB429035}.Debug|x86.ActiveCfg = Debug|x86
+		{C1FCA578-F0D8-4427-A4B4-6A1ECB429035}.Debug|x86.Build.0 = Debug|x86
+		{C1FCA578-F0D8-4427-A4B4-6A1ECB429035}.Release|x86.ActiveCfg = Release|x86
+		{C1FCA578-F0D8-4427-A4B4-6A1ECB429035}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

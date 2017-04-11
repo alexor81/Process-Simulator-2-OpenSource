@@ -76,6 +76,34 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             }
         }
 
+        private void            updateOnCMD()
+        {
+            if (mPump.UseOneCommand)
+            {
+                label_OnCMD.BackColor = Color.Yellow;
+                if (mPump.mOnCMD == true)
+                {
+                    label_OnCMD.Text = "On";
+                }
+                else
+                {
+                    label_OnCMD.Text = "Off";
+                }
+            }
+            else
+            {
+                label_OnCMD.Text = "On";
+                if (mPump.mOnCMD == true)
+                {
+                    label_OnCMD.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    label_OnCMD.BackColor = BackColor;
+                }
+            }
+        }
+
         public void             updateValues()
         {
             if (InvokeRequired)
@@ -92,25 +120,18 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             if (mPump.On == true)
             {
                 button_On.Text      = "ON";
-                button_On.BackColor = Color.Green;
+                button_On.BackColor = Color.LimeGreen;
             }
             else
             {
                 button_On.Text      = "OFF";
-                button_On.BackColor = Color.Gray;
+                button_On.BackColor = Color.LightGray;
             }
 
             checkBox_Power.Checked  = mPump.Power;
             checkBox_Remote.Checked = mPump.Remote;
 
-            if (mPump.mOnCMD == true)
-            {
-                label_OnCMD.BackColor = Color.Yellow;
-            }
-            else
-            {
-                label_OnCMD.BackColor = BackColor;
-            }
+            updateOnCMD();
 
             if (mPump.mOffCMD == true)
             {
@@ -143,7 +164,7 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             checkBox_OnBtn.Checked = mPump.OnBtn;
             if (checkBox_OnBtn.Checked)
             {
-                checkBox_OnBtn.BackColor = Color.Green;
+                checkBox_OnBtn.BackColor = Color.LimeGreen;
             }
             else
             {
@@ -153,14 +174,14 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
             checkBox_OffBtn.Checked = mPump.OffBtn;
             if (checkBox_OffBtn.Checked)
             {
-                checkBox_OffBtn.BackColor = Color.Green;
+                checkBox_OffBtn.BackColor = Color.LimeGreen;
             }
             else
             {
                 checkBox_OffBtn.BackColor = BackColor;
             }
 
-            if (mPump.IgnoreCommands != (label_Control.Font.Strikeout))
+            if (mPump.IgnoreCommands != label_Control.Font.Strikeout)
             {
                 label_Control.Font = new Font(label_Control.Font, label_Control.Font.Style ^ FontStyle.Strikeout);
 
@@ -189,6 +210,8 @@ namespace SimulationObject.Pipeline.Pump.Panels.PumpControl
         private void            updateP()
         {
             label_OnCMD.Visible         = (mPump.mOnCMDItemHandle != -1);
+            updateOnCMD();
+
             label_OffCMD.Visible        = (mPump.mOffCMDItemHandle != -1) && !mPump.UseOneCommand;
             label_EsdCMD.Visible        = (mPump.mEsdCMDItemHandle != -1);
 

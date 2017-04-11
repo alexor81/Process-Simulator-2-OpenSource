@@ -210,15 +210,13 @@ namespace SimulationObject.Binary.Trigger
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -315,8 +313,7 @@ namespace SimulationObject.Binary.Trigger
             private void                                        raiseSimulationObjectError(string aMessage)
             {
                 mLastError = aMessage;
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             private string                                      mLastError;

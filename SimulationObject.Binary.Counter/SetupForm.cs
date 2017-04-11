@@ -52,6 +52,8 @@ namespace SimulationObject.Binary.Counter
             {
                 comboBox_N.SelectedIndex = 1;
             }
+
+            checkBox_ReadOutput.Checked = mCounter.mReadOutput;
         }
 
         private void            ItemButtonClick(object aSender, EventArgs aEventArgs)
@@ -93,6 +95,8 @@ namespace SimulationObject.Binary.Counter
 
                     mCounter.PositiveInc = (comboBox_P.SelectedIndex == 0);
                     mCounter.NegativeInc = (comboBox_N.SelectedIndex == 0);
+
+                    mCounter.mReadOutput = checkBox_ReadOutput.Checked;
 
                     DialogResult = DialogResult.OK;
                 }

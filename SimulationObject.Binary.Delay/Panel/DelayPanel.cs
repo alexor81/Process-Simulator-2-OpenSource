@@ -92,7 +92,7 @@ namespace SimulationObject.Binary.Delay.Panel
 
             if (mDelay.ValueBoolean)
             {
-                label_Output.BackColor = Color.Green;
+                label_Output.BackColor = Color.LimeGreen;
             }
             else
             {

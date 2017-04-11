@@ -83,7 +83,7 @@ namespace SimulationObject.Real.Lag
             {
                 get
                 {
-                    return new int[] { mValueItemHandle, mInputItemHandle };
+                    return new int[] { mInputItemHandle };
                 }
             }
 
@@ -131,28 +131,6 @@ namespace SimulationObject.Real.Lag
 
                     return;
                 }
-
-                if (aItemHandle == mValueItemHandle)
-                {
-                    double lValue;
-                    try
-                    {
-                        lValue = Convert.ToDouble(aItemValue);
-                    }
-                    catch (Exception lExc)
-                    {
-                        Log.Error("Output value conversion error. " + lExc.Message, lExc.ToString());
-                        mValueChanged = true;
-                        return;
-                    }
-
-                    if (ValuesCompare.NotEqualDelta1.compare(mValue, lValue))
-                    {
-                        mValueChanged = true;
-                    }
-
-                    return;
-                }
             }
 
         #endregion
@@ -183,15 +161,13 @@ namespace SimulationObject.Real.Lag
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -268,8 +244,7 @@ namespace SimulationObject.Real.Lag
             public event EventHandler<MessageStringEventArgs>   SimulationObjectError;
             private void                                        raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string                                       LastError

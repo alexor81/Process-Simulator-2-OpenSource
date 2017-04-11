@@ -96,7 +96,6 @@ namespace SimulationObject.Real.Comparator
                 {
                     List<int> lResult = new List<int>();
 
-                    lResult.Add(mValueItemHandle);
                     lResult.Add(mInput1ItemHandle);
                     lResult.Add(mInput2ItemHandle);
 
@@ -124,10 +123,10 @@ namespace SimulationObject.Real.Comparator
 
             public void                                         getItemValues(out int[] aItemHandles, out object[] aItemValues)
             {
-                mValueChanged = false;
+                mValueChanged   = false;
 
-                aItemHandles = new int[] { mValueItemHandle };
-                aItemValues = new object[] { mValue };
+                aItemHandles    = new int[] { mValueItemHandle };
+                aItemValues     = new object[] { mValue };
             }
 
             public void                                         onItemValueChange(int aItemHandle, object aItemValue)
@@ -175,28 +174,6 @@ namespace SimulationObject.Real.Comparator
 
                     return;
                 }
-
-                if (aItemHandle == mValueItemHandle)
-                {
-                    bool lValue;
-                    try
-                    {
-                        lValue = Convert.ToBoolean(aItemValue);
-                    }
-                    catch (Exception lExc)
-                    {
-                        Log.Error("Output value conversion error. " + lExc.Message, lExc.ToString());
-                        mValueChanged = true;
-                        return;
-                    }
-
-                    if (mValue != lValue)
-                    {
-                        mValueChanged = true;
-                    }
-
-                    return;
-                }
             }
 
         #endregion
@@ -224,15 +201,13 @@ namespace SimulationObject.Real.Comparator
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -307,8 +282,7 @@ namespace SimulationObject.Real.Comparator
             public event EventHandler<MessageStringEventArgs>   SimulationObjectError;
             private void                                        raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string                                       LastError

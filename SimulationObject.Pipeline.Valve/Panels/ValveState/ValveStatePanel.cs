@@ -16,7 +16,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveState
         private Bitmap          mBitmap         = new Bitmap(43, 34);
         private Graphics        mGraphics;
         private Bitmap          mStateBuf       = new Bitmap(43, 34);
-        private RectangleF      mImageRect      = new RectangleF(0, 0, 43, 34);
+        private Rectangle       mImageRect      = new Rectangle(0, 0, 43, 34);
         private Font            mFont           = new Font("Microsoft Sans Serif", 5);
         private StringFormat    mStringFormat   = new StringFormat();
 
@@ -220,9 +220,9 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveState
 
                 if (mBitmap != null)
                 {
+                    pictureBox_State.Image = null;
                     mBitmap.Dispose();
-                    pictureBox_State.Image  = null;
-                    mBitmap                 = null;
+                    mBitmap = null;
                 }
 
                 if (mStateBuf != null)

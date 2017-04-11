@@ -498,8 +498,7 @@ namespace Connection.S7IsoTCP
         public event EventHandler       ConnectionState;
         private void                    raiseConnectionState()
         {
-            EventHandler lEvent = ConnectionState;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            ConnectionState?.Invoke(this, EventArgs.Empty);
         }
 
         private string                  mLastError              = "";
@@ -514,8 +513,7 @@ namespace Connection.S7IsoTCP
         private void                    raiseConnectionError(string aMessage)
         {
             mLastError = aMessage;
-            var lEvent = ConnectionError;
-            if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+            ConnectionError?.Invoke(this, new MessageStringEventArgs(aMessage));
         }
 
         #region Items

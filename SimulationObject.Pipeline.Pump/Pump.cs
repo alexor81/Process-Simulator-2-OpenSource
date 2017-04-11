@@ -617,15 +617,13 @@ namespace SimulationObject.Pipeline.Pump
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -802,6 +800,7 @@ namespace SimulationObject.Pipeline.Pump
             {
                 mFSM.State  = "Switch";
                 mOnInternal = mOn;
+                evaluate();
             }
 
             public void                                         afterDeactivate()
@@ -811,8 +810,7 @@ namespace SimulationObject.Pipeline.Pump
             public event EventHandler<MessageStringEventArgs>   SimulationObjectError;
             private void                                        raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string                                       LastError

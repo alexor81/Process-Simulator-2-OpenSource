@@ -74,8 +74,7 @@ namespace Connection.Internal
         public event EventHandler       ValueChanged;
         public void                     raiseValueChanged()
         {
-            EventHandler lEvent = ValueChanged;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            ValueChanged?.Invoke(this, EventArgs.Empty);
         }
         public object                   InitValue
         {
@@ -135,8 +134,7 @@ namespace Connection.Internal
         public event EventHandler       PropertiesChanged;
         public void                     raisePropertiesChanged()
         {
-            EventHandler lEvent = PropertiesChanged;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            PropertiesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

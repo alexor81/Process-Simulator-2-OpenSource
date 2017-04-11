@@ -85,11 +85,11 @@ namespace SimulationObject.Animation.ImageMove.Panel
                 var lParent = Parent as ScrollableControl;
                 if (lParent != null)
                 {
-                    Location = new Point(mMove.mXValue + lParent.AutoScrollPosition.X, mMove.mYValue + lParent.AutoScrollPosition.Y);
+                    Location = new Point(mMove.XValue + lParent.AutoScrollPosition.X, mMove.YValue + lParent.AutoScrollPosition.Y);
                 }
                 else
                 {
-                    Location = new Point(mMove.mXValue, mMove.mYValue);
+                    Location = new Point(mMove.XValue, mMove.YValue);
                 }
 
                 if (pictureBox.Enabled)
@@ -134,6 +134,36 @@ namespace SimulationObject.Animation.ImageMove.Panel
         private void            pictureBox_EnabledChanged(object aSender, EventArgs aEventArgs)
         {
             updateV();
+        }
+
+        private Point           mMousePos;
+        private void            pictureBox_MouseDown(object aSender, MouseEventArgs aEventArgs)
+        {
+            if (!mDemo && aEventArgs.Button == MouseButtons.Left)
+            {
+                mMousePos = aEventArgs.Location;
+                mMove.MovingByUser = true;
+            }
+        }
+
+        private void            pictureBox_MouseMove(object aSender, MouseEventArgs aEventArgs)
+        {
+            if (!mDemo && aEventArgs.Button == MouseButtons.Left)
+            {
+                int lX = mMove.XValue + aEventArgs.X - mMousePos.X;
+                int lY = mMove.YValue + aEventArgs.Y - mMousePos.Y;
+
+                if (lX < 0) lX = 0;
+                if (lY < 0) lY = 0;
+
+                mMove.XValue = lX;
+                mMove.YValue = lY;
+            }
+        }
+
+        private void            pictureBox_MouseUp(object aSender, MouseEventArgs aEventArgs)
+        {
+            mMove.MovingByUser = false;
         }
 
         protected override void Dispose(bool disposing)

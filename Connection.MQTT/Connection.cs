@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using Utils.Logger;
@@ -180,8 +181,7 @@ namespace Connection.MQTT
         public event EventHandler                           ConnectionState;
         private void                                        raiseConnectionState()
         {
-            var lEvent = ConnectionState;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            ConnectionState?.Invoke(this, EventArgs.Empty);
         }
 
         private string                                      mLastError  = "";
@@ -211,18 +211,19 @@ namespace Connection.MQTT
             raiseConnectionState();
         }
 
-        private void                                        MClient_MqttMsgPublishReceived(object aSender, MqttMsgPublishEventArgs aEventArgs)
+        private void                                        MsgReceived(string aTopic, byte[] aMessage)
         {
-            string lTopic = aEventArgs.Topic;
+            string lTopic = aTopic;
+
             if (mRootExist)
             {
                 if (lTopic.StartsWith(mRoot))
                 {
-                    lTopic = lTopic.Remove(0, mRoot.Length);
+                    lTopic = aTopic.Remove(0, mRoot.Length);
                 }
                 else
                 {
-                    Log.Error("Root is wrong in Topic '" + lTopic + "'. ");
+                    Log.Error("Root is wrong in Topic '" + aTopic + "'. ");
                     return;
                 }
             }
@@ -233,13 +234,13 @@ namespace Connection.MQTT
             {
                 if (mItemList.ContainsKey(lTopic) == false)
                 {
-                    Log.Error("Topic '" + aEventArgs.Topic + "' does not exist. ");
+                    Log.Error("Topic '" + aTopic + "' does not exist. ");
                     return;
                 }
 
                 if (mItemList[lTopic].Subscribe)
                 {
-                    mItemList[lTopic].setValue(Encoding.UTF8.GetString(aEventArgs.Message));
+                    mItemList[lTopic].setValue(Encoding.UTF8.GetString(aMessage));
                 }
             }
             catch (Exception lExc)
@@ -251,7 +252,11 @@ namespace Connection.MQTT
                 //========================================
                 mItemListLock.ExitReadLock();
             }
+        }
 
+        private void                                        MClient_MqttMsgPublishReceived(object aSender, MqttMsgPublishEventArgs aEventArgs)
+        {
+            Task.Factory.StartNew(() => MsgReceived(aEventArgs.Topic, aEventArgs.Message));
         }
 
         public void                                         publish(string aTopic, string aValue)

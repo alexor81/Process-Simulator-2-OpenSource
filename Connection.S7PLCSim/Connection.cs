@@ -482,8 +482,7 @@ namespace Connection.S7PLCSim
         public event EventHandler                           ConnectionState;
         private void                                        raiseConnectionState()
         {
-            EventHandler lEvent = ConnectionState;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            ConnectionState?.Invoke(this, EventArgs.Empty);
         }
 
         private string                                      mLastError          = "";
@@ -559,7 +558,7 @@ namespace Connection.S7PLCSim
 
         #region IDisposable
 
-        private bool                                    mDisposed = false;
+            private bool                                    mDisposed = false;
 
             public void                                     Dispose()
             {

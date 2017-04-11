@@ -97,7 +97,7 @@ namespace SimulationObject.Binary.Delay
             {
                 get
                 {
-                    return new int[] { mInValueItemHandle, mOutValueItemHandle };
+                    return new int[] { mInValueItemHandle };
                 }
             }
 
@@ -153,38 +153,6 @@ namespace SimulationObject.Binary.Delay
 
                     return;
                 }
-
-                if (aItemHandle == mOutValueItemHandle)
-                {
-                    bool lValue;
-                    try
-                    {
-                        lValue = Convert.ToBoolean(aItemValue);
-                    }
-                    catch (Exception lExc)
-                    {
-                        Log.Error("Output value conversion error. " + lExc.Message, lExc.ToString());
-                        mValueChanged = true;
-                        return;
-                    }
-
-                    if (mInverse)
-                    {
-                        if (mOutValue == lValue)
-                        {
-                            mValueChanged = true;
-                        }
-                    }
-                    else
-                    {
-                        if (mOutValue != lValue)
-                        {
-                            mValueChanged = true;
-                        }
-                    }
-
-                    return;
-                }
             }
 
         #endregion
@@ -212,15 +180,13 @@ namespace SimulationObject.Binary.Delay
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -358,8 +324,7 @@ namespace SimulationObject.Binary.Delay
             public event EventHandler<MessageStringEventArgs>   SimulationObjectError;
             private void                                        raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string                                       LastError

@@ -64,6 +64,8 @@ namespace SimulationObject.Binary.Counter
                 }
             }
 
+            public bool             mReadOutput     = true;
+
         #endregion
 
         #region IItemUser, IDoubleValueRead, IObjectValueRead
@@ -131,7 +133,14 @@ namespace SimulationObject.Binary.Counter
             {
                 get
                 {
-                    return new int[] { mInValueItemHandle, mOutValueItemHandle };
+                    if (mReadOutput)
+                    {
+                        return new int[] { mInValueItemHandle, mOutValueItemHandle };
+                    }
+                    else
+                    {
+                        return new int[] { mInValueItemHandle };
+                    }
                 }
             }
 
@@ -180,7 +189,7 @@ namespace SimulationObject.Binary.Counter
                     return;
                 }
 
-                if (aItemHandle == mOutValueItemHandle)
+                if (mReadOutput && aItemHandle == mOutValueItemHandle)
                 {
                     int lValue;
                     try
@@ -235,15 +244,13 @@ namespace SimulationObject.Binary.Counter
             public event EventHandler ChangedValues;
             public void             raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler ChangedProperties;
             public void             raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -278,6 +285,8 @@ namespace SimulationObject.Binary.Counter
                 lItem = lReader.getAttribute<String>("Output");
                 lChecker.addItemName(lItem);
                 mOutValueItemHandle = mItemBrowser.getItemHandleByName(lItem);
+
+                mReadOutput = lReader.getAttribute<Boolean>("ReadOutput", mReadOutput);
             }
 
             public void             saveToXML(XmlTextWriter aXMLTextWriter)
@@ -287,6 +296,7 @@ namespace SimulationObject.Binary.Counter
                 aXMLTextWriter.WriteAttributeString("NegativeIncrease", StringUtils.ObjectToString(mNegativeInc));
                 aXMLTextWriter.WriteAttributeString("Input", mItemBrowser.getItemNameByHandle(mInValueItemHandle));
                 aXMLTextWriter.WriteAttributeString("Output", mItemBrowser.getItemNameByHandle(mOutValueItemHandle));
+                aXMLTextWriter.WriteAttributeString("ReadOutput", StringUtils.ObjectToString(mReadOutput));
             }
 
             private bool            mPrevInValue;
@@ -332,9 +342,10 @@ namespace SimulationObject.Binary.Counter
 
                     if (lValueChanged)
                     {
-                        mValueChanged = true;
-                        raiseValuesChanged();
+                        mValueChanged = true;                  
                     }
+
+                    raiseValuesChanged();
                 }
             }
 
@@ -353,8 +364,7 @@ namespace SimulationObject.Binary.Counter
             public event EventHandler<MessageStringEventArgs> SimulationObjectError;
             private void            raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string           LastError

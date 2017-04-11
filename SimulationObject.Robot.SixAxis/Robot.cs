@@ -61,11 +61,6 @@ namespace SimulationObject.Robot.SixAxis
 
                     for (int i = 0; i < 6; i++)
                     {
-                        if (mAxisAngleItemHandle[i] != -1)
-                        {
-                            lResult.Add(mAxisAngleItemHandle[i]);
-                        }
-
                         if (mAxisSPItemHandle[i] != -1)
                         {
                             lResult.Add(mAxisSPItemHandle[i]);
@@ -129,30 +124,6 @@ namespace SimulationObject.Robot.SixAxis
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    if (aItemHandle == mAxisAngleItemHandle[i])
-                    {
-                        double lValue;
-                        try
-                        {
-                            lValue = Convert.ToDouble(aItemValue);
-                        }
-                        catch (Exception lExc)
-                        {
-                            Log.Error("Axis angle value conversion error for joint №" + (i + 1).ToString() + ". ", lExc.ToString());
-                            mAxisAngleItemChanged[i]    = true;
-                            mValueChanged               = true;
-                            return;
-                        }
-
-                        if (ValuesCompare.NotEqualDelta1.compare(mAxisAngle[i], lValue))
-                        {
-                            mAxisAngleItemChanged[i]    = true;
-                            mValueChanged               = true;
-                        }
-
-                        return;
-                    }
-
                     if (aItemHandle == mAxisSPItemHandle[i])
                     {
                         double lValue;
@@ -324,15 +295,13 @@ namespace SimulationObject.Robot.SixAxis
             public event EventHandler           ChangedValues;
             public void                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler           ChangedProperties;
             public void                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -534,8 +503,7 @@ namespace SimulationObject.Robot.SixAxis
             public event EventHandler<MessageStringEventArgs> SimulationObjectError;
             private void                        raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string                       LastError

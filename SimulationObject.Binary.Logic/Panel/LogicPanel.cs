@@ -103,7 +103,7 @@ namespace SimulationObject.Binary.Logic.Panel
 
             if (mLogic.ValueBoolean)
             {
-                label_Output.BackColor = Color.Green;
+                label_Output.BackColor = Color.LimeGreen;
             }
             else
             {

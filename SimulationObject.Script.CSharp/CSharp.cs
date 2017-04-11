@@ -5,14 +5,52 @@ using System;
 using System.Windows.Forms;
 using System.Xml;
 using Utils.CSharpScript;
+using Utils.Panels.BooleanButton;
+using Utils.Panels.BooleanCheckBox;
+using Utils.Panels.BooleanIndicator;
+using Utils.Panels.BooleanToggle;
+using Utils.Panels.BooleanTrend;
+using Utils.Panels.ObjectDropDownList;
+using Utils.Panels.ObjectRadioButtonGroup;
+using Utils.Panels.ObjectTextLabel;
 
 namespace SimulationObject.Script.CSharp
 {
-    public class CSharp : ISimulationObject
+    public class CSharp : ISimulationObject, IBooleanValueReadWrite, IObjectValueReadWrite
     {
-        private CSScipt                                         mCSScript;
+        private CSScript mCSScript;
 
-        #region IItemUser
+        #region IItemUser, IBooleanValueReadWrite, IObjectValueReadWrite
+
+            public bool                                         ValueBoolean
+            {
+                get
+                {
+                    return mCSScript.On;
+                }
+                set
+                {
+                    if (mCSScript.On != value)
+                    {
+                        mCSScript.On = value;
+                    }
+                }
+            }
+            public object                                       ValueObject
+            {
+                get { return ValueBoolean; }
+                set
+                {
+                    try
+                    {
+                        ValueBoolean = Convert.ToBoolean(value);
+                    }
+                    catch (Exception lExc)
+                    {
+                        raiseSimulationObjectError(lExc.Message);
+                    }
+                }
+            }
 
             private IItemBrowser                                mItemBrowser;
             public IItemBrowser                                 ItemBrowser
@@ -23,8 +61,9 @@ namespace SimulationObject.Script.CSharp
 
                     if(mCSScript == null)
                     {
-                        mCSScript                   = new CSScipt(mItemBrowser);
+                        mCSScript                   = new CSScript(mItemBrowser);
                         mCSScript.ScriptException   += MCSScript_ScriptException;
+                        mCSScript.OnChanged         += MCSScript_OnChanged;
                     }
                 }
             }
@@ -66,7 +105,7 @@ namespace SimulationObject.Script.CSharp
 
         #region IPanelOwner
 
-            private static readonly string[]                    mPanelList = new string[] { };
+            private static readonly string[]                    mPanelList = new string[] { "Indicator", "Button", "CheckBox", "Trend", "RadioButton", "DropDownList", "TextLabel", "Toggle" };
             public string[]                                     PanelTypeList
             {
                 get { return mPanelList; }
@@ -76,22 +115,33 @@ namespace SimulationObject.Script.CSharp
             {
                 switch (aPanelType)
                 {
-                    default: throw new ArgumentException("Panel of type '" + aPanelType + "' does not exist. ");
+                    case "Indicator":       return new BooleanIndicatorPanel(this);
+                    case "Button":          return new BooleanButtonPanel(this);
+                    case "CheckBox":        return new BooleanCheckBoxPanel(this);
+                    case "Trend":           return new BooleanTrendPanel(this);
+                    case "RadioButton":     return new RadioButtonGroupPanel(this);
+                    case "DropDownList":    return new DropDownListPanel(this);
+                    case "TextLabel":       return new ObjectTextLabelPanel(this);
+                    case "Toggle":          return new BooleanTogglePanel(this);
+                    default:                throw new ArgumentException("Panel of type '" + aPanelType + "' does not exist. ");
                 }
             }
 
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
+            }
+
+            private void                                        MCSScript_OnChanged(object aSender, EventArgs aEventArgs)
+            {
+                raiseValuesChanged();
             }
 
         #endregion
@@ -139,8 +189,7 @@ namespace SimulationObject.Script.CSharp
             public void                                         raiseSimulationObjectError(string aMessage)
             {
                 mLastError = aMessage;
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             private void                                        MCSScript_ScriptException(object aSender, MessageStringEventArgs aEventArgs)
@@ -178,6 +227,7 @@ namespace SimulationObject.Script.CSharp
                         if(mCSScript != null)
                         {
                             mCSScript.ScriptException -= MCSScript_ScriptException;
+                            mCSScript.OnChanged       -= MCSScript_OnChanged;
                             mCSScript.Dispose();
                             mCSScript = null;
                         }

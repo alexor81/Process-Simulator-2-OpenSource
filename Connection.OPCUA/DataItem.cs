@@ -37,11 +37,11 @@ namespace Connection.OPCUA
                 if (ValuesCompare.isNotEqual(mValue, value))
                 {
                     object lPrevValue   = mValue;
-                    mValue              = value;
+                    mValue              = MiscUtils.convertValue(mValue.GetType(), value);
 
                     try
                     {
-                        mConnection.writeAttribute(mNodeId, Attributes.Value, value);
+                        mConnection.writeAttribute(mNodeId, Attributes.Value, mValue);
                     }
                     catch
                     {
@@ -59,8 +59,7 @@ namespace Connection.OPCUA
         public event EventHandler   ValueChanged;
         public void                 raiseValueChanged()
         {
-            EventHandler lEvent = ValueChanged;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            ValueChanged?.Invoke(this, EventArgs.Empty);
         }
         public void                 initValue(string aType, bool aArray)
         {
@@ -139,8 +138,7 @@ namespace Connection.OPCUA
         public event EventHandler   PropertiesChanged;
         public void                 raisePropertiesChanged()
         {
-            EventHandler lEvent = PropertiesChanged;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            PropertiesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -173,7 +173,7 @@ namespace SimulationObject.Script.CSharpFSM
                             throw new ArgumentException("State '" + lName + "' already exists. ");
                         }
 
-                        CSScipt lScript = new CSScipt(mBrowser);
+                        CSScript lScript = new CSScript(mBrowser);
                         if(lScript.setupByForm(lName, this) == DialogResult.OK)
                         {
                             mCSharpFSMClone.addState(lName, lScript);

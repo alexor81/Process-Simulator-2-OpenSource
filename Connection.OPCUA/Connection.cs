@@ -6,6 +6,7 @@ using Opc.Ua.Client;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Utils;
 using Utils.Logger;
 
@@ -394,40 +395,34 @@ namespace Connection.OPCUA
             }
         }
 
-        private void                                    MSession_Notification(Session aSession, NotificationEventArgs aNotificationEventArgs)
+        private void                                    NotificationReceived(IList<MonitoredItemNotification> aDataChanges)
         {
-            if (mConnected == false || mItemList.Count == 0) return;
-
-            var lMessage = aNotificationEventArgs.NotificationMessage;
-            if (lMessage.NotificationData.Count == 0) return;
-
-            var lDataChanges = lMessage.GetDataChanges(false);
-    
             MonitoredItem lMItem;
             DataItem lItem;
-            int lCount = lDataChanges.Count;
+            int lCount = aDataChanges.Count;
+
             for(int i = 0; i < lCount; i++)
             {
                 mItemListLock.EnterReadLock();
                 //========================================
                 try
                 {
-                    lMItem = mSubscription.FindItemByClientHandle(lDataChanges[i].ClientHandle);
+                    lMItem = mSubscription.FindItemByClientHandle(aDataChanges[i].ClientHandle);
                     if (lMItem != null)
                     {
                         lItem = lMItem.Handle as DataItem;
 
-                        if (lDataChanges[i].Value.StatusCode != lItem.StatusCode)
+                        if (aDataChanges[i].Value.StatusCode != lItem.StatusCode)
                         {
-                            lItem.StatusCode = lDataChanges[i].Value.StatusCode;
+                            lItem.StatusCode = aDataChanges[i].Value.StatusCode;
                             lItem.raisePropertiesChanged();
                         }
 
-                        if (lDataChanges[i].Value.Value != null)
+                        if (aDataChanges[i].Value.Value != null)
                         {
-                            if (ValuesCompare.isNotEqual(lItem.mValue, lDataChanges[i].Value.Value))
+                            if (ValuesCompare.isNotEqual(lItem.mValue, aDataChanges[i].Value.Value))
                             {
-                                lItem.mValue = lDataChanges[i].Value.Value;
+                                lItem.mValue = aDataChanges[i].Value.Value;
                                 if (lItem.Access.HasFlag(EAccess.READ))
                                 {
                                     lItem.raiseValueChanged();
@@ -446,6 +441,19 @@ namespace Connection.OPCUA
                     mItemListLock.ExitReadLock();
                 }
             }
+        }
+
+        private void                                    MSession_Notification(Session aSession, NotificationEventArgs aNotificationEventArgs)
+        {
+            if (mConnected == false || mItemList.Count == 0) return;
+
+            var lMessage = aNotificationEventArgs.NotificationMessage;
+            if (lMessage.NotificationData.Count == 0) return;
+
+            var lDataChanges = lMessage.GetDataChanges(false);
+            if (lDataChanges.Count == 0) return;
+
+            Task.Factory.StartNew(() => NotificationReceived(lDataChanges));
         }
 
         private void                                    MSession_PublishError(Session aSession, PublishErrorEventArgs aPublishErrorEventArgs)
@@ -527,8 +535,7 @@ namespace Connection.OPCUA
         public event EventHandler                       ConnectionState;
         private void                                    raiseConnectionState()
         {
-            EventHandler lEvent = ConnectionState;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            ConnectionState?.Invoke(this, EventArgs.Empty);
         }
 
         private string                                  mLastError = "";
@@ -543,8 +550,7 @@ namespace Connection.OPCUA
         private void                                    raiseConnectionError(string aMessage)
         {
             mLastError = aMessage;
-            var lEvent = ConnectionError;
-            if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+            ConnectionError?.Invoke(this, new MessageStringEventArgs(aMessage));
         }
 
         #region Items

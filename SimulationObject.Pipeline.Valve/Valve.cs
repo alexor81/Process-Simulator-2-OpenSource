@@ -350,29 +350,9 @@ namespace SimulationObject.Pipeline.Valve
                         lResult.Add(mOpenLimitItemHandle);
                     }
 
-                    if (mOpensItemHandle != -1)
-                    {
-                        lResult.Add(mOpensItemHandle);
-                    }
-
                     if (mClosedLimitItemHandle != -1)
                     {
                         lResult.Add(mClosedLimitItemHandle);
-                    }
-
-                    if (mClosesItemHandle != -1)
-                    {
-                        lResult.Add(mClosesItemHandle);
-                    }
-
-                    if (mRotationItemHandle != -1)
-                    {
-                        lResult.Add(mRotationItemHandle);
-                    }
-
-                    if (mPositionItemHandle != -1)
-                    {
-                        lResult.Add(mPositionItemHandle);
                     }
 
                     if (mRemoteItemHandle != -1)
@@ -840,26 +820,6 @@ namespace SimulationObject.Pipeline.Valve
                     return;
                 }
 
-                if (aItemHandle == mOpensItemHandle)
-                {
-                    bool lValue;
-                    try
-                    {
-                        lValue = Convert.ToBoolean(aItemValue);
-                    }
-                    catch (Exception lExc)
-                    {
-                        throw new ArgumentException("Value conversion error for valve 'Opens' state. ", lExc);
-                    }
-
-                    if (mOpens != lValue)
-                    {
-                        mValueChanged = true;
-                    }
-
-                    return;
-                }
-
                 if (aItemHandle == mClosedLimitItemHandle)
                 {
                     bool lValue;
@@ -882,68 +842,6 @@ namespace SimulationObject.Pipeline.Valve
                         {
                             mValueChanged = true;
                         }
-                    }
-
-                    return;
-                }
-
-                if (aItemHandle == mClosesItemHandle)
-                {
-                    bool lValue;
-                    try
-                    {
-                        lValue = Convert.ToBoolean(aItemValue);
-                    }
-                    catch (Exception lExc)
-                    {
-                        throw new ArgumentException("Value conversion error for valve 'Closes' state. ", lExc);
-                    }
-
-                    if (mCloses != lValue)
-                    {
-                        mValueChanged = true;
-                    }
-
-                    return;
-                }
-
-                if (aItemHandle == mRotationItemHandle)
-                {
-                    bool lValue;
-                    try
-                    {
-                        lValue = Convert.ToBoolean(aItemValue);
-                    }
-                    catch (Exception lExc)
-                    {
-                        throw new ArgumentException("Value conversion error for valve 'Rotation' state. ", lExc);
-                    }
-
-                    if (mRotation != lValue)
-                    {
-                        mValueChanged = true;
-                    }
-
-                    return;
-                }
-
-                if (aItemHandle == mPositionItemHandle)
-                {
-                    double lValue;
-                    try
-                    {
-                        lValue = mPositionCMDScale.scale(Convert.ToDouble(aItemValue));
-                    }
-                    catch (Exception lExc)
-                    {
-                        Log.Error("Value conversion error for valve 'Position' state. " + lExc.Message, lExc.ToString());
-                        mValueChanged = true;
-                        return;
-                    }
-
-                    if (ValuesCompare.NotEqualDelta1.compare(mPosition, lValue))
-                    {
-                        mValueChanged = true;
                     }
 
                     return;
@@ -973,15 +871,13 @@ namespace SimulationObject.Pipeline.Valve
             public event EventHandler                           ChangedValues;
             public void                                         raiseValuesChanged()
             {
-                EventHandler lEvent = ChangedValues;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedValues?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler                           ChangedProperties;
             public void                                         raisePropertiesChanged()
             {
-                EventHandler lEvent = ChangedProperties;
-                if (lEvent != null) lEvent(this, EventArgs.Empty);
+                ChangedProperties?.Invoke(this, EventArgs.Empty);
             }
 
         #endregion
@@ -1420,8 +1316,7 @@ namespace SimulationObject.Pipeline.Valve
             public event EventHandler<MessageStringEventArgs>   SimulationObjectError;
             private void                                        raiseSimulationObjectError(string aMessage)
             {
-                var lEvent = SimulationObjectError;
-                if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+                SimulationObjectError?.Invoke(this, new MessageStringEventArgs(aMessage));
             }
 
             public string                                       LastError
@@ -1433,36 +1328,36 @@ namespace SimulationObject.Pipeline.Valve
             {
                 get
                 {
-                    List<string> lList = new List<string>();
+                    string[] lMenu = new string[3];
 
                     if (mIgnoreCommands)
                     {
-                        lList.Add("Not ignore commands");
+                        lMenu[0] = "Not ignore commands";
                     }
                     else
                     {
-                        lList.Add("Ignore commands");
+                        lMenu[0] = "Ignore commands";
                     }
 
                     if (mForseLimSwitches)
                     {
-                        lList.Add("Not forse limit switches");
+                        lMenu[1] = "Not forse limit switches";
                     }
                     else
                     {
-                        lList.Add("Forse limit switches");
+                        lMenu[1] = "Forse limit switches";
                     }
 
                     if (mPositionFault)
                     {
-                        lList.Add("Reset position signal fault");
+                        lMenu[2] = "Reset position signal fault";
                     }
                     else
                     {
-                        lList.Add("Set position signal fault");
+                        lMenu[2] = "Set position signal fault";
                     }
 
-                    return lList.ToArray();
+                    return lMenu;
                 }
             }
 

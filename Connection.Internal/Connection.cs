@@ -33,8 +33,7 @@ namespace Connection.Internal
         public event EventHandler                           ConnectionState;
         private void                                        raiseConnectionState()
         {
-            var lEvent = ConnectionState;
-            if (lEvent != null) lEvent(this, EventArgs.Empty);
+            ConnectionState?.Invoke(this, EventArgs.Empty);
         }
 
         private string                                      mLastError = "";
