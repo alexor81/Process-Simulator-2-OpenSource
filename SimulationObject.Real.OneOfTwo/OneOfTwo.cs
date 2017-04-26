@@ -26,8 +26,8 @@ namespace SimulationObject.Real.OneOfTwo
 
         #region Properties
 
-            private double                                      mIn1ToIn2PerMS  = 0.02;
-            private uint                                        mIn1ToIn2MS     = 5000;
+            private double                                      mIn1ToIn2PerMS  = 0;
+            private uint                                        mIn1ToIn2MS     = 0;
             public uint                                         In1ToIn2MS
             {
                 get { return mIn1ToIn2MS; }
@@ -47,8 +47,8 @@ namespace SimulationObject.Real.OneOfTwo
                 }
             }
 
-            private double                                      mIn2ToIn1PerMS  = 0.01;
-            private uint                                        mIn2ToIn1MS     = 10000;
+            private double                                      mIn2ToIn1PerMS  = 0;
+            private uint                                        mIn2ToIn1MS     = 0;
             public uint                                         In2ToIn1MS
             {
                 get { return mIn2ToIn1MS; }
