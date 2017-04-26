@@ -1,7 +1,7 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using API;
-using SimulationObject.Item.WriteToFile.Panel;
+using SimulationObject.Item.WriteToFile.Panels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -110,14 +110,14 @@ namespace SimulationObject.Item.WriteToFile
             {
                 get
                 {
-                    List<int> lItemHandles = new List<int>();
-
                     if (mOnItemHandle != -1)
                     {
-                        lItemHandles.Add(mOnItemHandle);
+                        return new int[] {mOnItemHandle};
                     }
-
-                    return lItemHandles.ToArray();
+                    else
+                    {
+                        return new int[] {};
+                    }
                 }
             }
 

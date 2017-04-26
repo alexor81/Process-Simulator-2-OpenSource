@@ -8,7 +8,7 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Real.Calculator.Panel
+namespace SimulationObject.Real.Calculator.Panels
 {
     public partial class CalculatorPanel : UserControl, IPanel
     {

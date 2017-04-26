@@ -18,7 +18,7 @@ namespace SimulationObject.Script.CSharp
 {
     public class CSharp : ISimulationObject, IBooleanValueReadWrite, IObjectValueReadWrite
     {
-        private CSScript mCSScript;
+        private CSScript                                        mCSScript;
 
         #region IItemUser, IBooleanValueReadWrite, IObjectValueReadWrite
 

@@ -8,7 +8,7 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Real.Generator.Panel
+namespace SimulationObject.Real.Generator.Panels
 {
     public partial class GeneratorPanel : UserControl, IPanel
     {

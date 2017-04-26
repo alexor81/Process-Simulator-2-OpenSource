@@ -1,7 +1,7 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using API;
-using SimulationObject.Real.Comparator.Panel;
+using SimulationObject.Real.Comparator.Panels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -94,12 +94,7 @@ namespace SimulationObject.Real.Comparator
             {
                 get
                 {
-                    List<int> lResult = new List<int>();
-
-                    lResult.Add(mInput1ItemHandle);
-                    lResult.Add(mInput2ItemHandle);
-
-                    return lResult.ToArray();
+                    return new int[] {mInput1ItemHandle, mInput2ItemHandle};
                 }
             }
 
@@ -107,11 +102,7 @@ namespace SimulationObject.Real.Comparator
             {
                 get
                 {
-                    List<int> lResult = new List<int>();
-
-                    lResult.Add(mValueItemHandle);
-
-                    return lResult.ToArray();
+                    return new int[] {mValueItemHandle};
                 }
             }
 

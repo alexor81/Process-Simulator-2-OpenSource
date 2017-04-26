@@ -41,22 +41,18 @@
     </Reference>
     <Reference Include="DevExpress.Data.v12.2, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>False</Private>
     </Reference>
     <Reference Include="DevExpress.Printing.v12.2.Core, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>False</Private>
     </Reference>
     <Reference Include="DevExpress.Utils.v12.2, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>False</Private>
     </Reference>
     <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -75,10 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comparator.cs" />
-    <Compile Include="Panel\ComparatorPanel.cs">
+    <Compile Include="Panels\ComparatorPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\ComparatorPanel.Designer.cs">
+    <Compile Include="Panels\ComparatorPanel.Designer.cs">
       <DependentUpon>ComparatorPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,7 +86,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Panel\ComparatorPanel.resx">
+    <EmbeddedResource Include="Panels\ComparatorPanel.resx">
       <DependentUpon>ComparatorPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetupForm.resx">

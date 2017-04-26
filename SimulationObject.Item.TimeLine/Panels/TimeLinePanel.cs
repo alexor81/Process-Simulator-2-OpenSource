@@ -8,15 +8,15 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Real.Lag.Panels
+namespace SimulationObject.Item.TimeLine.Panels
 {
-    public partial class LagPanel : UserControl, IPanel
+    public partial class TimeLinePanel : UserControl, IPanel
     {
-        private Lag             mLag;
+        private TimeLine        mTimeLine;
 
-        public                  LagPanel(Lag aLag)
+        public                  TimeLinePanel(TimeLine aTimeLine)
         {
-            mLag = aLag;
+            mTimeLine = aTimeLine;
             InitializeComponent();
 
             BackColor = SystemColors.Control;
@@ -62,12 +62,8 @@ namespace SimulationObject.Real.Lag.Panels
             set
             {
                 toolTip.SetToolTip(panel, value);
-                toolTip.SetToolTip(label_Input, value);
-                toolTip.SetToolTip(label_Value, value);
-                toolTip.SetToolTip(spinEdit_Gain, value);
-                toolTip.SetToolTip(spinEdit_LagMS, value);
-                toolTip.SetToolTip(label_Gain, value);
-                toolTip.SetToolTip(label_LagMS, value);
+                toolTip.SetToolTip(playPause, value);
+                toolTip.SetToolTip(checkBox_Loop, value);
             }
         }
 
@@ -84,8 +80,7 @@ namespace SimulationObject.Real.Lag.Panels
         }
         private void            updateV()
         {
-            label_Value.Text = StringUtils.ObjectToString(mLag.ValueDouble);
-            label_Input.Text = StringUtils.ObjectToString(mLag.Input);
+            playPause.Checked = mTimeLine.On;
         }
 
         public void             updateProperties()
@@ -100,26 +95,23 @@ namespace SimulationObject.Real.Lag.Panels
             }
         }
         private void            updateP()
-        {
-            spinEdit_Gain.Value     = (decimal)mLag.Gain;
-            spinEdit_LagMS.Value    = mLag.LagMS;
+        {          
+            checkBox_Loop.Checked = mTimeLine.Loop;
         }
 
-        private void            spinEdit_Gain_EditValueChanged(object aSender, EventArgs aEventArgs)
+        private void            playPause_CheckedChanged(object aSender, EventArgs aEventArgs)
         {
-            double lValue = (double)spinEdit_Gain.Value;
-            if (ValuesCompare.NotEqualDelta1.compare(lValue, mLag.Gain))
+            if (mTimeLine.On != playPause.Checked)
             {
-                mLag.Gain = lValue;
+                mTimeLine.On = playPause.Checked;
             }
         }
 
-        private void            spinEdit_LagMS_EditValueChanged(object aSender, EventArgs aEventArgs)
+        private void            checkBox_Loop_CheckedChanged(object aSender, EventArgs aEventArgs)
         {
-            uint lValue = (uint)spinEdit_LagMS.Value;
-            if (lValue != mLag.LagMS)
+            if (mTimeLine.Loop != checkBox_Loop.Checked)
             {
-                mLag.LagMS = lValue;
+                mTimeLine.Loop = checkBox_Loop.Checked;
             }
         }
 
@@ -127,7 +119,7 @@ namespace SimulationObject.Real.Lag.Panels
         {
             if (disposing)
             {
-                mLag = null;
+                mTimeLine = null;
                 toolTip.RemoveAll();
 
                 if (components != null)

@@ -8,7 +8,7 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Binary.Counter.Panel
+namespace SimulationObject.Binary.Counter.Panels
 {
     public partial class CounterPanel : UserControl, IPanel
     {

@@ -8,15 +8,15 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Item.TimeLine.Panel
+namespace SimulationObject.Item.WriteToFile.Panels
 {
-    public partial class TimeLinePanel : UserControl, IPanel
+    public partial class WriteToFilePanel : UserControl, IPanel
     {
-        private TimeLine        mTimeLine;
+        private WriteToFile     mWriteToFile;
 
-        public                  TimeLinePanel(TimeLine aTimeLine)
+        public                  WriteToFilePanel(WriteToFile aWriteToFile)
         {
-            mTimeLine = aTimeLine;
+            mWriteToFile = aWriteToFile;
             InitializeComponent();
 
             BackColor = SystemColors.Control;
@@ -29,7 +29,7 @@ namespace SimulationObject.Item.TimeLine.Panel
         public void             loadFromXML(XmlTextReader aXMLTextReader)
         {
             var lReader = new XMLAttributeReader(aXMLTextReader);
-            LabelText   = lReader.getAttribute<String>("ToolTip", "");
+            LabelText = lReader.getAttribute<String>("ToolTip", "");
         }
 
         public void             saveToXML(XmlTextWriter aXMLTextWriter)
@@ -62,8 +62,6 @@ namespace SimulationObject.Item.TimeLine.Panel
             set
             {
                 toolTip.SetToolTip(panel, value);
-                toolTip.SetToolTip(playPause, value);
-                toolTip.SetToolTip(checkBox_Loop, value);
             }
         }
 
@@ -80,38 +78,18 @@ namespace SimulationObject.Item.TimeLine.Panel
         }
         private void            updateV()
         {
-            playPause.Checked = mTimeLine.On;
+            checkBox_Record.Checked = mWriteToFile.On;
         }
 
         public void             updateProperties()
         {
-            if (InvokeRequired)
-            {
-                BeginInvoke((Action)(() => { updateP(); }));
-            }
-            else
-            {
-                updateP();
-            }
-        }
-        private void            updateP()
-        {          
-            checkBox_Loop.Checked = mTimeLine.Loop;
         }
 
-        private void            playPause_CheckedChanged(object aSender, EventArgs aEventArgs)
+        private void            checkBox_Record_CheckedChanged(object aSender, EventArgs aEventArgs)
         {
-            if (mTimeLine.On != playPause.Checked)
+            if (mWriteToFile.On != checkBox_Record.Checked)
             {
-                mTimeLine.On = playPause.Checked;
-            }
-        }
-
-        private void            checkBox_Loop_CheckedChanged(object aSender, EventArgs aEventArgs)
-        {
-            if (mTimeLine.Loop != checkBox_Loop.Checked)
-            {
-                mTimeLine.Loop = checkBox_Loop.Checked;
+                mWriteToFile.On = checkBox_Record.Checked;
             }
         }
 
@@ -119,7 +97,7 @@ namespace SimulationObject.Item.TimeLine.Panel
         {
             if (disposing)
             {
-                mTimeLine = null;
+                mWriteToFile = null;
                 toolTip.RemoveAll();
 
                 if (components != null)

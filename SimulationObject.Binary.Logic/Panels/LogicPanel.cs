@@ -8,19 +8,19 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Real.Comparator.Panel
+namespace SimulationObject.Binary.Logic.Panels
 {
-    public partial class ComparatorPanel : UserControl, IPanel
+    public partial class LogicPanel : UserControl, IPanel
     {
-        private Comparator      mComparator;
+        private Logic           mLogic;
 
-        public                  ComparatorPanel(Comparator aComparator)
+        public                  LogicPanel(Logic aLogic)
         {
-            mComparator = aComparator;
+            mLogic = aLogic;
             InitializeComponent();
 
             BackColor = SystemColors.Control;
-            comboBox_Operation.Items.AddRange(ValuesCompare.Operations);
+            comboBox_Operator.Items.AddRange(Logic.Operators);
         }
 
         public void             fillForDemo()
@@ -63,11 +63,10 @@ namespace SimulationObject.Real.Comparator.Panel
             set
             {
                 toolTip.SetToolTip(panel, value);
-                toolTip.SetToolTip(comboBox_Operation, value);
-                toolTip.SetToolTip(label_Input1, value);
-                toolTip.SetToolTip(label_Input2, value);
+                toolTip.SetToolTip(comboBox_Operator, value);
+                toolTip.SetToolTip(label_In1, value);
+                toolTip.SetToolTip(label_In2, value);
                 toolTip.SetToolTip(label_Output, value);
-                toolTip.SetToolTip(panel_div, value);
             }
         }
 
@@ -84,9 +83,25 @@ namespace SimulationObject.Real.Comparator.Panel
         }
         private void            updateV()
         {
-            label_Input1.Text = StringUtils.ObjectToString(mComparator.Input1);
-            label_Input2.Text = StringUtils.ObjectToString(mComparator.Input2);
-            if (mComparator.ValueBoolean)
+            if (mLogic.Input1Value)
+            {
+                label_In1.BackColor = Color.Yellow;
+            }
+            else
+            {
+                label_In1.BackColor = BackColor;
+            }
+
+            if (mLogic.Input2Value)
+            {
+                label_In2.BackColor = Color.Yellow;
+            }
+            else
+            {
+                label_In2.BackColor = BackColor;
+            }
+
+            if (mLogic.ValueBoolean)
             {
                 label_Output.BackColor = Color.LimeGreen;
             }
@@ -109,14 +124,34 @@ namespace SimulationObject.Real.Comparator.Panel
         }
         private void            updateP()
         {
-            comboBox_Operation.SelectedIndex = mComparator.OperationIndex;
+            comboBox_Operator.SelectedIndex = mLogic.OperatorIndex;
+            label_In2.Visible               = (comboBox_Operator.SelectedIndex != 3);
+            checkBox_In2Inverse.Visible     = label_In2.Visible;
+            checkBox_In1Inverse.Checked     = mLogic.Input1Inverse;
+            checkBox_In2Inverse.Checked     = mLogic.Input2Inverse;
         }
 
-        private void            comboBox_Operation_SelectedIndexChanged(object aSender, EventArgs aEventArgs)
+        private void            comboBox_Operator_SelectedIndexChanged(object aSender, EventArgs aEventArgs)
         {
-            if (comboBox_Operation.SelectedIndex != mComparator.OperationIndex)
+            if (comboBox_Operator.SelectedIndex != mLogic.OperatorIndex)
             {
-                mComparator.OperationIndex = comboBox_Operation.SelectedIndex;
+                mLogic.OperatorIndex = comboBox_Operator.SelectedIndex;
+            }
+        }
+
+        private void            checkBox_In1Inverse_CheckedChanged(object aSender, EventArgs aEventArgs)
+        {
+            if (mLogic.Input1Inverse != checkBox_In1Inverse.Checked)
+            {
+                mLogic.Input1Inverse = checkBox_In1Inverse.Checked;
+            }
+        }
+
+        private void            checkBox_In2Inverse_CheckedChanged(object aSender, EventArgs aEventArgs)
+        {
+            if (mLogic.Input2Inverse != checkBox_In2Inverse.Checked)
+            {
+                mLogic.Input2Inverse = checkBox_In2Inverse.Checked;
             }
         }
 
@@ -124,7 +159,7 @@ namespace SimulationObject.Real.Comparator.Panel
         {
             if (disposing)
             {
-                mComparator = null;
+                mLogic = null;
                 toolTip.RemoveAll();
 
                 if (components != null)

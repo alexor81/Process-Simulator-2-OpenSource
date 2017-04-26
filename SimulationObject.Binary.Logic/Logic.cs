@@ -1,7 +1,7 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using API;
-using SimulationObject.Binary.Logic.Panel;
+using SimulationObject.Binary.Logic.Panels;
 using System;
 using System.Windows.Forms;
 using System.Xml;
@@ -132,12 +132,15 @@ namespace SimulationObject.Binary.Logic
             {
                 get
                 {
-                    if (mInput2ItemHandle == -1)
+                    if (mInput2ItemHandle != -1)
                     {
+                        return new int[] { mInput1ItemHandle, mInput2ItemHandle };
+                    }
+                    else
+                    {
+                        
                         return new int[] { mInput1ItemHandle };
                     }
-            
-                    return new int[] { mInput1ItemHandle, mInput2ItemHandle };
                 }
             }
 

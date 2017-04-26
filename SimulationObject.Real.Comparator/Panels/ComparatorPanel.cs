@@ -8,18 +8,19 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Item.WriteToFile.Panel
+namespace SimulationObject.Real.Comparator.Panels
 {
-    public partial class WriteToFilePanel : UserControl, IPanel
+    public partial class ComparatorPanel : UserControl, IPanel
     {
-        private WriteToFile     mWriteToFile;
+        private Comparator      mComparator;
 
-        public                  WriteToFilePanel(WriteToFile aWriteToFile)
+        public                  ComparatorPanel(Comparator aComparator)
         {
-            mWriteToFile = aWriteToFile;
+            mComparator = aComparator;
             InitializeComponent();
 
             BackColor = SystemColors.Control;
+            comboBox_Operation.Items.AddRange(ValuesCompare.Operations);
         }
 
         public void             fillForDemo()
@@ -29,7 +30,7 @@ namespace SimulationObject.Item.WriteToFile.Panel
         public void             loadFromXML(XmlTextReader aXMLTextReader)
         {
             var lReader = new XMLAttributeReader(aXMLTextReader);
-            LabelText = lReader.getAttribute<String>("ToolTip", "");
+            LabelText   = lReader.getAttribute<String>("ToolTip", "");
         }
 
         public void             saveToXML(XmlTextWriter aXMLTextWriter)
@@ -62,6 +63,11 @@ namespace SimulationObject.Item.WriteToFile.Panel
             set
             {
                 toolTip.SetToolTip(panel, value);
+                toolTip.SetToolTip(comboBox_Operation, value);
+                toolTip.SetToolTip(label_Input1, value);
+                toolTip.SetToolTip(label_Input2, value);
+                toolTip.SetToolTip(label_Output, value);
+                toolTip.SetToolTip(panel_div, value);
             }
         }
 
@@ -78,18 +84,39 @@ namespace SimulationObject.Item.WriteToFile.Panel
         }
         private void            updateV()
         {
-            checkBox_Record.Checked = mWriteToFile.On;
+            label_Input1.Text = StringUtils.ObjectToString(mComparator.Input1);
+            label_Input2.Text = StringUtils.ObjectToString(mComparator.Input2);
+            if (mComparator.ValueBoolean)
+            {
+                label_Output.BackColor = Color.LimeGreen;
+            }
+            else
+            {
+                label_Output.BackColor = BackColor;
+            }
         }
 
         public void             updateProperties()
         {
+            if (InvokeRequired)
+            {
+                BeginInvoke((Action)(() => { updateP(); }));
+            }
+            else
+            {
+                updateP();
+            }
+        }
+        private void            updateP()
+        {
+            comboBox_Operation.SelectedIndex = mComparator.OperationIndex;
         }
 
-        private void            checkBox_Record_CheckedChanged(object aSender, EventArgs aEventArgs)
+        private void            comboBox_Operation_SelectedIndexChanged(object aSender, EventArgs aEventArgs)
         {
-            if (mWriteToFile.On != checkBox_Record.Checked)
+            if (comboBox_Operation.SelectedIndex != mComparator.OperationIndex)
             {
-                mWriteToFile.On = checkBox_Record.Checked;
+                mComparator.OperationIndex = comboBox_Operation.SelectedIndex;
             }
         }
 
@@ -97,7 +124,7 @@ namespace SimulationObject.Item.WriteToFile.Panel
         {
             if (disposing)
             {
-                mWriteToFile = null;
+                mComparator = null;
                 toolTip.RemoveAll();
 
                 if (components != null)

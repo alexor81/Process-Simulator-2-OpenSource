@@ -60,25 +60,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conveyor.cs" />
-    <Compile Include="Panel\ConveyorControl\ConveyorControlPanel.cs">
+    <Compile Include="Panels\ConveyorControl\ConveyorControlPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\ConveyorControl\ConveyorControlPanel.Designer.cs">
+    <Compile Include="Panels\ConveyorControl\ConveyorControlPanel.Designer.cs">
       <DependentUpon>ConveyorControlPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel\ConveyorState\BeltSideLayout.cs" />
-    <Compile Include="Panel\ConveyorState\BeltTopLayout.cs" />
-    <Compile Include="Panel\ConveyorState\ConveyorStatePanel.cs">
+    <Compile Include="Panels\ConveyorState\BeltSideLayout.cs" />
+    <Compile Include="Panels\ConveyorState\BeltTopLayout.cs" />
+    <Compile Include="Panels\ConveyorState\ConveyorStatePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\ConveyorState\ConveyorStatePanel.Designer.cs">
+    <Compile Include="Panels\ConveyorState\ConveyorStatePanel.Designer.cs">
       <DependentUpon>ConveyorStatePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel\ConveyorState\IConveyorLayout.cs" />
-    <Compile Include="Panel\ConveyorState\SetupForm.cs">
+    <Compile Include="Panels\ConveyorState\IConveyorLayout.cs" />
+    <Compile Include="Panels\ConveyorState\SetupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Panel\ConveyorState\SetupForm.Designer.cs">
+    <Compile Include="Panels\ConveyorState\SetupForm.Designer.cs">
       <DependentUpon>SetupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,13 +90,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Panel\ConveyorControl\ConveyorControlPanel.resx">
+    <EmbeddedResource Include="Panels\ConveyorControl\ConveyorControlPanel.resx">
       <DependentUpon>ConveyorControlPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel\ConveyorState\ConveyorStatePanel.resx">
+    <EmbeddedResource Include="Panels\ConveyorState\ConveyorStatePanel.resx">
       <DependentUpon>ConveyorStatePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel\ConveyorState\SetupForm.resx">
+    <EmbeddedResource Include="Panels\ConveyorState\SetupForm.resx">
       <DependentUpon>SetupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />

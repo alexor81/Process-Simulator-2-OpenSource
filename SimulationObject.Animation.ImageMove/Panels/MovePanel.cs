@@ -9,7 +9,7 @@ using Utils;
 using Utils.DialogForms;
 using Utils.Logger;
 
-namespace SimulationObject.Animation.ImageMove.Panel
+namespace SimulationObject.Animation.ImageMove.Panels
 {
     public partial class MovePanel : UserControl, IPanel
     {

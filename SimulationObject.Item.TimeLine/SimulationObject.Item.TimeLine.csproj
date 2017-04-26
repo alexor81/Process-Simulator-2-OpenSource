@@ -70,10 +70,10 @@
     <Compile Include="DelayForm.Designer.cs">
       <DependentUpon>DelayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel\TimeLinePanel.cs">
+    <Compile Include="Panels\TimeLinePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\TimeLinePanel.Designer.cs">
+    <Compile Include="Panels\TimeLinePanel.Designer.cs">
       <DependentUpon>TimeLinePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -100,7 +100,7 @@
     <EmbeddedResource Include="DelayForm.resx">
       <DependentUpon>DelayForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel\TimeLinePanel.resx">
+    <EmbeddedResource Include="Panels\TimeLinePanel.resx">
       <DependentUpon>TimeLinePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

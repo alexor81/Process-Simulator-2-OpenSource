@@ -8,7 +8,7 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Item.Delay.Panel
+namespace SimulationObject.Item.Delay.Panels
 {
     public partial class DelayPanel : UserControl, IPanel
     {

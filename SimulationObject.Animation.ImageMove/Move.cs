@@ -1,7 +1,7 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using API;
-using SimulationObject.Animation.ImageMove.Panel;
+using SimulationObject.Animation.ImageMove.Panels;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -85,17 +85,14 @@ namespace SimulationObject.Animation.ImageMove
             {
                 get
                 {
-                    List<int> lResult = new List<int>();
-
-                    lResult.Add(mXValueItemHandle);
-                    lResult.Add(mYValueItemHandle);
-
                     if (mVisibleItemHandle != -1)
                     {
-                        lResult.Add(mVisibleItemHandle);
+                        return new int[] {mXValueItemHandle, mYValueItemHandle, mVisibleItemHandle};
                     }
-
-                    return lResult.ToArray();
+                    else
+                    {
+                        return new int[] {mXValueItemHandle, mYValueItemHandle};
+                    }
                 }
             }
 

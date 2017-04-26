@@ -1,7 +1,7 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using API;
-using SimulationObject.Binary.Counter.Panel;
+using SimulationObject.Binary.Counter.Panels;
 using System;
 using System.Windows.Forms;
 using System.Xml;

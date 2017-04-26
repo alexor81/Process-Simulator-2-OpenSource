@@ -1,13 +1,12 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using API;
-using SimulationObject.Real.Calculator.Panel;
+using SimulationObject.Real.Calculator.Panels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Xml;
 using Utils;
-using Utils.Logger;
 using Utils.Panels.DoubleBar;
 using Utils.Panels.DoubleIndicator;
 using Utils.Panels.DoubleMeter;
@@ -128,16 +127,14 @@ namespace SimulationObject.Real.Calculator
             {
                 get
                 {
-                    List<int> lResult = new List<int>();
-
-                    lResult.Add(mInput1ItemHandle);
-
                     if (mInput2ItemHandle != -1)
                     {
-                        lResult.Add(mInput2ItemHandle);
+                        return new int[] {mInput1ItemHandle, mInput2ItemHandle};
                     }
-
-                    return lResult.ToArray();
+                    else
+                    {
+                        return new int[] {mInput1ItemHandle};
+                    }
                 }
             }
 

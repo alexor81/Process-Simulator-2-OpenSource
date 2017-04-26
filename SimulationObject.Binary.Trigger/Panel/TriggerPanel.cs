@@ -8,7 +8,7 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Binary.Trigger.Panel
+namespace SimulationObject.Binary.Trigger.Panels
 {
     public partial class TriggerPanel : UserControl, IPanel
     {

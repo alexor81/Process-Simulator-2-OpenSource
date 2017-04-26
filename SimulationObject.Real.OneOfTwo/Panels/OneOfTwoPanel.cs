@@ -8,19 +8,18 @@ using System.Xml;
 using Utils;
 using Utils.DialogForms;
 
-namespace SimulationObject.Binary.Logic.Panel
+namespace SimulationObject.Real.OneOfTwo.Panels
 {
-    public partial class LogicPanel : UserControl, IPanel
+    public partial class OneOfTwoPanel : UserControl, IPanel
     {
-        private Logic           mLogic;
+        private OneOfTwo        mOneOfTwo;
 
-        public                  LogicPanel(Logic aLogic)
+        public                  OneOfTwoPanel(OneOfTwo aOneOfTwo)
         {
-            mLogic = aLogic;
+            mOneOfTwo = aOneOfTwo;
             InitializeComponent();
 
             BackColor = SystemColors.Control;
-            comboBox_Operator.Items.AddRange(Logic.Operators);
         }
 
         public void             fillForDemo()
@@ -63,10 +62,12 @@ namespace SimulationObject.Binary.Logic.Panel
             set
             {
                 toolTip.SetToolTip(panel, value);
-                toolTip.SetToolTip(comboBox_Operator, value);
-                toolTip.SetToolTip(label_In1, value);
-                toolTip.SetToolTip(label_In2, value);
-                toolTip.SetToolTip(label_Output, value);
+                toolTip.SetToolTip(label_Input1, value);
+                toolTip.SetToolTip(label_Input2, value);
+                toolTip.SetToolTip(label_Value, value);
+                toolTip.SetToolTip(button_Switch, value);
+                toolTip.SetToolTip(spinEdit_In1ToIn2, value);
+                toolTip.SetToolTip(spinEdit_In2ToIn1, value);
             }
         }
 
@@ -83,31 +84,23 @@ namespace SimulationObject.Binary.Logic.Panel
         }
         private void            updateV()
         {
-            if (mLogic.Input1Value)
-            {
-                label_In1.BackColor = Color.Yellow;
-            }
-            else
-            {
-                label_In1.BackColor = BackColor;
-            }
+            label_Value.Text    = StringUtils.ObjectToString(mOneOfTwo.ValueDouble);
+            label_Input1.Text   = StringUtils.ObjectToString(mOneOfTwo.Input1);
+            label_Input2.Text   = StringUtils.ObjectToString(mOneOfTwo.Input2);
 
-            if (mLogic.Input2Value)
+            if (mOneOfTwo.Switch)
             {
-                label_In2.BackColor = Color.Yellow;
+                button_Switch.BackColor     = Color.LimeGreen;
+                button_Switch.Text          = "Input 1";
+                label_Input1.BorderStyle    = BorderStyle.FixedSingle;
+                label_Input2.BorderStyle    = BorderStyle.None;
             }
             else
             {
-                label_In2.BackColor = BackColor;
-            }
-
-            if (mLogic.ValueBoolean)
-            {
-                label_Output.BackColor = Color.LimeGreen;
-            }
-            else
-            {
-                label_Output.BackColor = BackColor;
+                button_Switch.BackColor     = BackColor;
+                button_Switch.Text          = "Input 2";
+                label_Input2.BorderStyle    = BorderStyle.FixedSingle;
+                label_Input1.BorderStyle    = BorderStyle.None;
             }
         }
 
@@ -124,34 +117,30 @@ namespace SimulationObject.Binary.Logic.Panel
         }
         private void            updateP()
         {
-            comboBox_Operator.SelectedIndex = mLogic.OperatorIndex;
-            label_In2.Visible               = (comboBox_Operator.SelectedIndex != 3);
-            checkBox_In2Inverse.Visible     = label_In2.Visible;
-            checkBox_In1Inverse.Checked     = mLogic.Input1Inverse;
-            checkBox_In2Inverse.Checked     = mLogic.Input2Inverse;
+           spinEdit_In1ToIn2.Value = mOneOfTwo.In1ToIn2MS;
+           spinEdit_In2ToIn1.Value = mOneOfTwo.In2ToIn1MS;
         }
 
-        private void            comboBox_Operator_SelectedIndexChanged(object aSender, EventArgs aEventArgs)
+        private void            button_Switch_Click(object aSender, EventArgs aEventArgs)
         {
-            if (comboBox_Operator.SelectedIndex != mLogic.OperatorIndex)
+            mOneOfTwo.Switch = !mOneOfTwo.Switch;
+        }
+
+        private void            spinEdit_In1ToIn2_EditValueChanged(object aSender, EventArgs aEventArgs)
+        {
+            uint lValue = (uint)spinEdit_In1ToIn2.Value;
+            if (lValue != mOneOfTwo.In1ToIn2MS)
             {
-                mLogic.OperatorIndex = comboBox_Operator.SelectedIndex;
+                mOneOfTwo.In1ToIn2MS = lValue;
             }
         }
 
-        private void            checkBox_In1Inverse_CheckedChanged(object aSender, EventArgs aEventArgs)
+        private void            spinEdit_In2ToIn1_EditValueChanged(object aSender, EventArgs aEventArgs)
         {
-            if (mLogic.Input1Inverse != checkBox_In1Inverse.Checked)
+            uint lValue = (uint)spinEdit_In2ToIn1.Value;
+            if (lValue != mOneOfTwo.In2ToIn1MS)
             {
-                mLogic.Input1Inverse = checkBox_In1Inverse.Checked;
-            }
-        }
-
-        private void            checkBox_In2Inverse_CheckedChanged(object aSender, EventArgs aEventArgs)
-        {
-            if (mLogic.Input2Inverse != checkBox_In2Inverse.Checked)
-            {
-                mLogic.Input2Inverse = checkBox_In2Inverse.Checked;
+                mOneOfTwo.In2ToIn1MS = lValue;
             }
         }
 
@@ -159,7 +148,7 @@ namespace SimulationObject.Binary.Logic.Panel
         {
             if (disposing)
             {
-                mLogic = null;
+                mOneOfTwo = null;
                 toolTip.RemoveAll();
 
                 if (components != null)

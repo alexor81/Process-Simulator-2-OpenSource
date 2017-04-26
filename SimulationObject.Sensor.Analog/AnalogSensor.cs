@@ -130,11 +130,7 @@ namespace SimulationObject.Sensor.Analog
             { 
                 get 
                 {
-                    List<int> lResult = new List<int>();
-
-                    lResult.Add(mValueItemHandle);
-
-                    return lResult.ToArray();
+                    return new int[] {mValueItemHandle};
                 }
             }
 

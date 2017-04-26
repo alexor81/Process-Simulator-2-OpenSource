@@ -1,7 +1,7 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using API;
-using SimulationObject.Item.Delay.Panel;
+using SimulationObject.Item.Delay.Panels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -86,16 +86,14 @@ namespace SimulationObject.Item.Delay
             {
                 get
                 {
-                    List<int> lResult = new List<int>();
-
-                    lResult.Add(mInValueItemHandle);
-
                     if (mOnItemHandle != -1)
                     {
-                        lResult.Add(mOnItemHandle);
+                        return new int[] {mInValueItemHandle, mOnItemHandle};
                     }
-
-                    return lResult.ToArray();
+                    else
+                    {
+                        return new int[] {mInValueItemHandle};
+                    }
                 }
             }
 
@@ -103,16 +101,14 @@ namespace SimulationObject.Item.Delay
             {
                 get
                 {
-                    List<int> lResult = new List<int>();
-
-                    lResult.Add(mOutValueItemHandle);
-
                     if (mOnItemHandle != -1)
                     {
-                        lResult.Add(mOnItemHandle);
+                        return new int[] {mOutValueItemHandle, mOnItemHandle};
                     }
-
-                    return lResult.ToArray();
+                    else
+                    {
+                        return new int[] {mOutValueItemHandle};
+                    }
                 }
             }
 

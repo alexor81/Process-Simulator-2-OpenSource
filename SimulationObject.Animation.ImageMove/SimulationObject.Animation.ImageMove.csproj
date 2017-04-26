@@ -77,10 +77,10 @@
     <Compile Include="OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel\MovePanel.cs">
+    <Compile Include="Panels\MovePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\MovePanel.Designer.cs">
+    <Compile Include="Panels\MovePanel.Designer.cs">
       <DependentUpon>MovePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,7 +100,7 @@
     <EmbeddedResource Include="OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel\MovePanel.resx">
+    <EmbeddedResource Include="Panels\MovePanel.resx">
       <DependentUpon>MovePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

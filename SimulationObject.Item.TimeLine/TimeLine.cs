@@ -1,7 +1,7 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using API;
-using SimulationObject.Item.TimeLine.Panel;
+using SimulationObject.Item.TimeLine.Panels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,14 +71,14 @@ namespace SimulationObject.Item.TimeLine
             {
                 get
                 {
-                    List<int> lResult = new List<int>();
-
                     if (mOnItemHandle != -1)
                     {
-                        lResult.Add(mOnItemHandle);
+                        return new int[] {mOnItemHandle};
                     }
-
-                    return lResult.ToArray();
+                    else
+                    {
+                        return new int[] {};
+                    }
                 }
             }
 
