@@ -99,7 +99,7 @@ namespace SimulationObject.Real.Scale
             // itemEditBox_Output
             // 
             this.itemEditBox_Output.ItemName = "";
-            this.itemEditBox_Output.ItemRequirements = "Real, Read, Write, Obligatory";
+            this.itemEditBox_Output.ItemRequirements = "Real, Read, Write, Required";
             this.itemEditBox_Output.ItemToolTip = "";
             this.itemEditBox_Output.Location = new System.Drawing.Point(61, 20);
             this.itemEditBox_Output.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -184,7 +184,7 @@ namespace SimulationObject.Real.Scale
             // itemEditBox_Input
             // 
             this.itemEditBox_Input.ItemName = "";
-            this.itemEditBox_Input.ItemRequirements = "Real, Read, Write, Obligatory";
+            this.itemEditBox_Input.ItemRequirements = "Real, Read, Write, Required";
             this.itemEditBox_Input.ItemToolTip = "";
             this.itemEditBox_Input.Location = new System.Drawing.Point(61, 20);
             this.itemEditBox_Input.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -218,7 +218,7 @@ namespace SimulationObject.Real.Scale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(431, 239);
+            this.ClientSize = new System.Drawing.Size(427, 235);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_Physical);
             this.Controls.Add(this.groupBox_Raw);

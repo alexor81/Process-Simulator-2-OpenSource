@@ -48,8 +48,7 @@ namespace Connection.Internal
         private void                                        raiseConnectionError(string aMessage)
         {
             mLastError  = aMessage;
-            var lEvent  = ConnectionError;
-            if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+            ConnectionError?.Invoke(this, new MessageStringEventArgs(aMessage));
         }
 
         #region Items

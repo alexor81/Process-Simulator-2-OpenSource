@@ -54,7 +54,7 @@ namespace SimulationObject.Real.Generator
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Real, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Real, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(64, 43);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -261,7 +261,7 @@ namespace SimulationObject.Real.Generator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 287);
+            this.ClientSize = new System.Drawing.Size(353, 283);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox_On);
             this.Controls.Add(this.label_On);

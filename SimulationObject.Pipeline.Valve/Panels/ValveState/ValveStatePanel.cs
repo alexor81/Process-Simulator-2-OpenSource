@@ -143,29 +143,29 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveState
 
             if (mValve.Remote)
             {
-                lGraphics.DrawImage((Image)SimulationObject.Pipeline.Valve.Properties.Resources.Vlv_DC, mImageRect);
+                lGraphics.DrawImage(Properties.Resources.Vlv_DC, mImageRect);
             }
             else
             {
-                lGraphics.DrawImage((Image)SimulationObject.Pipeline.Valve.Properties.Resources.Vlv_NDC, mImageRect);
+                lGraphics.DrawImage(Properties.Resources.Vlv_NDC, mImageRect);
             }
 
             if (mValve.OpenLimit)
             {
-                lGraphics.DrawImage((Image)SimulationObject.Pipeline.Valve.Properties.Resources.Vlv_OP, mImageRect);
+                lGraphics.DrawImage(Properties.Resources.Vlv_OP, mImageRect);
             }
             else if (mValve.ClosedLimit)
             {
-                lGraphics.DrawImage((Image)SimulationObject.Pipeline.Valve.Properties.Resources.Vlv_CL, mImageRect);
+                lGraphics.DrawImage(Properties.Resources.Vlv_CL, mImageRect);
             }
             else
             {
-                lGraphics.DrawImage((Image)SimulationObject.Pipeline.Valve.Properties.Resources.Vlv_OP_CL, mImageRect);
+                lGraphics.DrawImage(Properties.Resources.Vlv_OP_CL, mImageRect);
             }
 
             if (mValve.Alarm1 || mValve.Alarm2 || !mValve.Power || mValve.IgnoreCommands || mValve.ForseLimSwitches || mValve.PositionFault)
             {
-                lGraphics.DrawImage((Image)SimulationObject.Pipeline.Valve.Properties.Resources.Alarm, mImageRect);
+                lGraphics.DrawImage(Properties.Resources.Alarm, mImageRect);
             }
 
             lGraphics.Dispose();
@@ -201,11 +201,6 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveState
                 mValve = null;
                 toolTip.RemoveAll();
 
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-
                 if (mGraphics != null)
                 {
                     mGraphics.Dispose();
@@ -235,6 +230,11 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveState
                 {
                     mStringFormat.Dispose();
                     mStringFormat = null;
+                }
+
+                if (components != null)
+                {
+                    components.Dispose();
                 }
             }
             base.Dispose(disposing);

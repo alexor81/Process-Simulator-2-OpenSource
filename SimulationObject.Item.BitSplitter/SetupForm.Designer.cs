@@ -178,7 +178,7 @@ namespace SimulationObject.Item.BitSplitter
             // itemEditBox_Item
             // 
             this.itemEditBox_Item.ItemName = "";
-            this.itemEditBox_Item.ItemRequirements = "Binary, Read, Write, Obligatory";
+            this.itemEditBox_Item.ItemRequirements = "Binary, Read, Write, Required";
             this.itemEditBox_Item.ItemToolTip = "";
             this.itemEditBox_Item.Location = new System.Drawing.Point(84, 52);
             this.itemEditBox_Item.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -236,7 +236,7 @@ namespace SimulationObject.Item.BitSplitter
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Real (8 to 64bit), Read, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Real (8 to 64bit), Read, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(90, 9);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -260,7 +260,7 @@ namespace SimulationObject.Item.BitSplitter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 356);
+            this.ClientSize = new System.Drawing.Size(442, 352);
             this.ControlBox = false;
             this.Controls.Add(this.label_DataFlow);
             this.Controls.Add(this.groupBox_Elements);

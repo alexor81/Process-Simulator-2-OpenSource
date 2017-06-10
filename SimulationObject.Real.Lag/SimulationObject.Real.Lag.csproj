@@ -75,10 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lag.cs" />
-    <Compile Include="Panel\LagPanel.cs">
+    <Compile Include="Panels\LagPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\LagPanel.Designer.cs">
+    <Compile Include="Panels\LagPanel.Designer.cs">
       <DependentUpon>LagPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,7 +90,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Panel\LagPanel.resx">
+    <EmbeddedResource Include="Panels\LagPanel.resx">
       <DependentUpon>LagPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetupForm.resx">

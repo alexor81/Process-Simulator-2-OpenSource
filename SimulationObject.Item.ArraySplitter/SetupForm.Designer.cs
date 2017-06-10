@@ -139,7 +139,7 @@ namespace SimulationObject.Item.ArraySplitter
             // itemEditBox_Item
             // 
             this.itemEditBox_Item.ItemName = "";
-            this.itemEditBox_Item.ItemRequirements = "Any type, Read, Write, Obligatory";
+            this.itemEditBox_Item.ItemRequirements = "Any type, Read, Write, Required";
             this.itemEditBox_Item.ItemToolTip = "";
             this.itemEditBox_Item.Location = new System.Drawing.Point(84, 52);
             this.itemEditBox_Item.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -236,7 +236,7 @@ namespace SimulationObject.Item.ArraySplitter
             // itemEditBox_Array
             // 
             this.itemEditBox_Array.ItemName = "";
-            this.itemEditBox_Array.ItemRequirements = "Array, Read, Write, Obligatory";
+            this.itemEditBox_Array.ItemRequirements = "Array, Read, Write, Required";
             this.itemEditBox_Array.ItemToolTip = "";
             this.itemEditBox_Array.Location = new System.Drawing.Point(89, 9);
             this.itemEditBox_Array.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -260,7 +260,7 @@ namespace SimulationObject.Item.ArraySplitter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 356);
+            this.ClientSize = new System.Drawing.Size(442, 352);
             this.ControlBox = false;
             this.Controls.Add(this.comboBox_DataFlow);
             this.Controls.Add(this.label_DataFlow);

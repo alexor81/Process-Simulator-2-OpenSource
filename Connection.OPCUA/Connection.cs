@@ -433,7 +433,7 @@ namespace Connection.OPCUA
                 }
                 catch (Exception lExc)
                 {
-                    raiseConnectionError("Error updating values. " + lExc.ToString());
+                    raiseConnectionError("Error updating value. " + lExc.ToString());
                 }
                 finally
                 {

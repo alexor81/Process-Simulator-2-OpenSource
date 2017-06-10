@@ -154,7 +154,7 @@ namespace SimulationObject.Real.XYDependency
             // itemEditBox_X
             // 
             this.itemEditBox_X.ItemName = "";
-            this.itemEditBox_X.ItemRequirements = "Real, Read, Obligatory";
+            this.itemEditBox_X.ItemRequirements = "Real, Read, Required";
             this.itemEditBox_X.ItemToolTip = "";
             this.itemEditBox_X.Location = new System.Drawing.Point(42, 8);
             this.itemEditBox_X.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -166,7 +166,7 @@ namespace SimulationObject.Real.XYDependency
             // itemEditBox_Y
             // 
             this.itemEditBox_Y.ItemName = "";
-            this.itemEditBox_Y.ItemRequirements = "Real, Write, Obligatory";
+            this.itemEditBox_Y.ItemRequirements = "Real, Write, Required";
             this.itemEditBox_Y.ItemToolTip = "";
             this.itemEditBox_Y.Location = new System.Drawing.Point(369, 8);
             this.itemEditBox_Y.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

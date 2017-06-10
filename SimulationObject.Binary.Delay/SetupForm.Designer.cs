@@ -163,7 +163,7 @@ namespace SimulationObject.Binary.Delay
             // itemEditBox_Out
             // 
             this.itemEditBox_Out.ItemName = "";
-            this.itemEditBox_Out.ItemRequirements = "Binary, Write, Obligatory";
+            this.itemEditBox_Out.ItemRequirements = "Binary, Write, Required";
             this.itemEditBox_Out.ItemToolTip = "";
             this.itemEditBox_Out.Location = new System.Drawing.Point(68, 43);
             this.itemEditBox_Out.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -175,7 +175,7 @@ namespace SimulationObject.Binary.Delay
             // itemEditBox_In
             // 
             this.itemEditBox_In.ItemName = "";
-            this.itemEditBox_In.ItemRequirements = "Binary, Read, Obligatory";
+            this.itemEditBox_In.ItemRequirements = "Binary, Read, Required";
             this.itemEditBox_In.ItemToolTip = "";
             this.itemEditBox_In.Location = new System.Drawing.Point(68, 6);
             this.itemEditBox_In.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -199,7 +199,7 @@ namespace SimulationObject.Binary.Delay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 229);
+            this.ClientSize = new System.Drawing.Size(393, 225);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox_Out);
             this.Controls.Add(this.itemEditBox_In);

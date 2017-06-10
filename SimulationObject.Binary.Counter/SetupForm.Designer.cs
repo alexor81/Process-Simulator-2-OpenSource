@@ -58,7 +58,7 @@ namespace SimulationObject.Binary.Counter
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Real, Read, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Real, Read, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(67, 159);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -80,7 +80,7 @@ namespace SimulationObject.Binary.Counter
             // itemEditBox_Input
             // 
             this.itemEditBox_Input.ItemName = "";
-            this.itemEditBox_Input.ItemRequirements = "Boolean, Read, Obligatory";
+            this.itemEditBox_Input.ItemRequirements = "Boolean, Read, Required";
             this.itemEditBox_Input.ItemToolTip = "";
             this.itemEditBox_Input.Location = new System.Drawing.Point(67, 11);
             this.itemEditBox_Input.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -193,6 +193,8 @@ namespace SimulationObject.Binary.Counter
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetupForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Binary.Counter";
             this.Load += new System.EventHandler(this.SetupForm_Load);

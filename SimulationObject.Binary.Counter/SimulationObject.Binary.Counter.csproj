@@ -48,10 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Counter.cs" />
-    <Compile Include="Panel\CounterPanel.cs">
+    <Compile Include="Panels\CounterPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\CounterPanel.Designer.cs">
+    <Compile Include="Panels\CounterPanel.Designer.cs">
       <DependentUpon>CounterPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,7 +68,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Panel\CounterPanel.resx">
+    <EmbeddedResource Include="Panels\CounterPanel.resx">
       <DependentUpon>CounterPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

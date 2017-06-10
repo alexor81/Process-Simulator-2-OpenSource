@@ -57,7 +57,7 @@ namespace SimulationObject.Real.Lag
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Real, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Real, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(65, 47);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -69,7 +69,7 @@ namespace SimulationObject.Real.Lag
             // itemEditBox_Input
             // 
             this.itemEditBox_Input.ItemName = "";
-            this.itemEditBox_Input.ItemRequirements = "Real, Read, Obligatory";
+            this.itemEditBox_Input.ItemRequirements = "Real, Read, Required";
             this.itemEditBox_Input.ItemToolTip = "";
             this.itemEditBox_Input.Location = new System.Drawing.Point(65, 9);
             this.itemEditBox_Input.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -163,7 +163,7 @@ namespace SimulationObject.Real.Lag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 194);
+            this.ClientSize = new System.Drawing.Size(353, 190);
             this.ControlBox = false;
             this.Controls.Add(this.spinEdit_LagMS);
             this.Controls.Add(this.spinEdit_Gain);

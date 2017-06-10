@@ -95,7 +95,7 @@ namespace SimulationObject.Binary.Logic
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Binay, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Binay, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(79, 164);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -119,7 +119,7 @@ namespace SimulationObject.Binary.Logic
             // itemEditBox_In1
             // 
             this.itemEditBox_In1.ItemName = "";
-            this.itemEditBox_In1.ItemRequirements = "Binary, Read, Obligatory";
+            this.itemEditBox_In1.ItemRequirements = "Binary, Read, Required";
             this.itemEditBox_In1.ItemToolTip = "";
             this.itemEditBox_In1.Location = new System.Drawing.Point(79, 5);
             this.itemEditBox_In1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -165,7 +165,7 @@ namespace SimulationObject.Binary.Logic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 239);
+            this.ClientSize = new System.Drawing.Size(359, 235);
             this.ControlBox = false;
             this.Controls.Add(this.checkBox_In2Inverse);
             this.Controls.Add(this.checkBox_In1Inverse);

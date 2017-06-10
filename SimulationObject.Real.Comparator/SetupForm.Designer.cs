@@ -44,7 +44,7 @@ namespace SimulationObject.Real.Comparator
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Binary, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Binary, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(68, 111);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -56,7 +56,7 @@ namespace SimulationObject.Real.Comparator
             // itemEditBox_In2
             // 
             this.itemEditBox_In2.ItemName = "";
-            this.itemEditBox_In2.ItemRequirements = "Real, Read, Obligatory";
+            this.itemEditBox_In2.ItemRequirements = "Real, Read, Required";
             this.itemEditBox_In2.ItemToolTip = "";
             this.itemEditBox_In2.Location = new System.Drawing.Point(68, 44);
             this.itemEditBox_In2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -68,7 +68,7 @@ namespace SimulationObject.Real.Comparator
             // itemEditBox_In1
             // 
             this.itemEditBox_In1.ItemName = "";
-            this.itemEditBox_In1.ItemRequirements = "Real, Read, Obligatory";
+            this.itemEditBox_In1.ItemRequirements = "Real, Read, Required";
             this.itemEditBox_In1.ItemToolTip = "";
             this.itemEditBox_In1.Location = new System.Drawing.Point(68, 9);
             this.itemEditBox_In1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -141,7 +141,7 @@ namespace SimulationObject.Real.Comparator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 188);
+            this.ClientSize = new System.Drawing.Size(355, 184);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox_Value);
             this.Controls.Add(this.itemEditBox_In2);

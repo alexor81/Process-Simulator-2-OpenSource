@@ -3,6 +3,8 @@
 using API;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
 using Utils;
@@ -18,11 +20,7 @@ namespace SimulationObject.Animation.ImageMove
         private IItemBrowser        mBrowser;
         private MemoryStream        mImgMemStrm;
         private Bitmap              mBmp;
-        private string              mPath;
-
-        public int                  mVisibleItemHandle      = -1;
-        public int                  mMovingByUserItemHandle = -1;
-        public bool                 mUserMove;
+        private string              mPath;         
 
         public                      SetupForm(Move aMove, IItemBrowser aBrowser)
         {
@@ -45,13 +43,19 @@ namespace SimulationObject.Animation.ImageMove
             mVisibleItemHandle      = mMove.mVisibleItemHandle;
             mMovingByUserItemHandle = mMove.mMovingByUserItemHandle;
             mUserMove               = mMove.mUserCanMove;
+            mWidthItemHandle        = mMove.mWidthItemHandle;
+            mHeightItemHandle       = mMove.mHeightItemHandle;
+            mLabelItemHandle        = mMove.mLabelItemHandle;
+            mLabelFont              = mMove.mLabelFont;
+            mLabelColor             = mMove.mLabelColor;
 
             if (mMove.mBmp != null)
             {
                 mImgMemStrm         = mMove.mImgMemStrm;
                 mBmp                = mMove.mBmp;
-                pictureBox.Image    = mMove.mBmp;
             }
+
+            updateForm();
         }
 
         #region Size
@@ -84,6 +88,103 @@ namespace SimulationObject.Animation.ImageMove
             }
 
         #endregion
+
+        #region Options
+
+            public int              mVisibleItemHandle      = -1;
+            public int              mMovingByUserItemHandle = -1;
+            public bool             mUserMove;
+            public int              mWidthItemHandle        = -1;
+            public int              mHeightItemHandle       = -1;
+            public int              mLabelItemHandle        = -1;
+            public Font             mLabelFont;
+            public Color            mLabelColor; 
+
+            private void            tsButton_Options_Click(object aSender, EventArgs aEventArgs)
+            {
+                using (var lOptions = new OptionsForm(this, mBrowser))
+                {
+                    lOptions.ShowDialog(this);
+                }
+
+                updateForm();
+            }
+
+        #endregion
+
+        private Bitmap              mPBoxBmp;
+        private void                updateForm()
+        {
+            if (mPBoxBmp != null)
+            {
+                pictureBox.Image = null;
+                mPBoxBmp.Dispose();
+                mPBoxBmp = null;
+            }
+
+            if (mBmp != null)
+            {
+                var lWidth = mBmp.Width;
+                if (mWidthItemHandle != -1)
+                {
+                    try
+                    {
+                        lWidth = (int)mBrowser.readItemValue(mWidthItemHandle);
+                    }
+                    catch {}
+
+                    if (lWidth > ImageMove.Move.MaxWidth) lWidth = ImageMove.Move.MaxWidth;
+                }
+
+                var lHeight = mBmp.Height;
+                if (mHeightItemHandle != -1)
+                {
+                    try
+                    {
+                        lHeight = (int)mBrowser.readItemValue(mHeightItemHandle);
+                    }
+                    catch {}
+
+                    if (lHeight > ImageMove.Move.MaxHeight) lHeight = ImageMove.Move.MaxHeight;
+                }
+
+                var lLabel = "";
+                if (mLabelItemHandle != -1)
+                {
+                    try
+                    {
+                        lLabel = StringUtils.ObjectToString(mBrowser.readItemValue(mLabelItemHandle));
+                    }
+                    catch {}
+                }
+
+                var mPBoxBmp = new Bitmap(lWidth, lHeight);
+                mPBoxBmp.SetResolution(mBmp.HorizontalResolution, mBmp.VerticalResolution);
+
+                using (var lGraphics = Graphics.FromImage(mPBoxBmp))
+                {
+                    lGraphics.Clear(Color.Transparent);
+                    lGraphics.InterpolationMode = InterpolationMode.High;
+                    lGraphics.DrawImage(mBmp, 0, 0, lWidth, lHeight);
+                    if (String.IsNullOrWhiteSpace(lLabel) == false)
+                    {
+                        lGraphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                        using (var lBrush = new SolidBrush(mLabelColor))
+                        {
+                            lGraphics.DrawString(lLabel, mLabelFont, lBrush, 0, 0);
+                        }
+                    }
+                }
+
+                pictureBox.Image        = mPBoxBmp;
+                labelControl_HW.Text    = StringUtils.ObjectToString(lWidth) + ", " + StringUtils.ObjectToString(lHeight);
+            }
+            else
+            {
+                labelControl_HW.Text = "0, 0";
+            }
+        }
 
         private void                ItemButtonClick(object aSender, EventArgs aEventArgs)
         {
@@ -127,7 +228,6 @@ namespace SimulationObject.Animation.ImageMove
                         {
                             mBmp.Dispose();
                             mBmp                = null;
-                            pictureBox.Image    = null;
                         }
 
                         if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)
@@ -138,7 +238,8 @@ namespace SimulationObject.Animation.ImageMove
 
                         mImgMemStrm         = lMemStrm;
                         mBmp                = lBmp;
-                        pictureBox.Image    = lBmp;
+
+                        updateForm();
 
                         mPath               = Path.GetDirectoryName(lOpenDlg.FileName);
                     }
@@ -152,20 +253,11 @@ namespace SimulationObject.Animation.ImageMove
             }
         }
 
-        private void                tsButton_Options_Click(object aSender, EventArgs aEventArgs)
-        {
-            using (var lOptions = new OptionsForm(this, mBrowser))
-            {
-                lOptions.ShowDialog(this);
-            }
-        }
-
         private void                Cancel()
         {
             if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
             {
                 mBmp.Dispose();
-                pictureBox.Image    = null;
                 mBmp                = null;        
             }
 
@@ -208,18 +300,42 @@ namespace SimulationObject.Animation.ImageMove
                     lChecker.addItemName(itemEditBox_Y.ItemName);
                     lChecker.addItemName(mBrowser.getItemNameByHandle(mVisibleItemHandle));
                     lChecker.addItemName(mBrowser.getItemNameByHandle(mMovingByUserItemHandle));
+                    lChecker.addItemName(mBrowser.getItemNameByHandle(mWidthItemHandle));
+                    lChecker.addItemName(mBrowser.getItemNameByHandle(mHeightItemHandle));
+                    lChecker.addItemName(mBrowser.getItemNameByHandle(mLabelItemHandle));
 
                     mMove.mXValueItemHandle         = mBrowser.getItemHandleByName(itemEditBox_X.ItemName);
                     mMove.mYValueItemHandle         = mBrowser.getItemHandleByName(itemEditBox_Y.ItemName);
+
                     mMove.mVisibleItemHandle        = mVisibleItemHandle;
-                    mMove.mMovingByUserItemHandle   = mMovingByUserItemHandle;
-
-                    mMove.mUserCanMove          = mUserMove;
-
                     if(mMove.mVisibleItemHandle == -1)
                     {
                         mMove.mVisible = true;
                     }
+
+                    mMove.mUserCanMove              = mUserMove;
+                    mMove.mMovingByUserItemHandle   = mMovingByUserItemHandle;
+
+                    mMove.mWidthItemHandle          = mWidthItemHandle;
+                    if (mWidthItemHandle == -1)
+                    {
+                        mMove.mWidth = mBmp.Width;
+                    }
+
+                    mMove.mHeightItemHandle         = mHeightItemHandle;
+                    if (mHeightItemHandle == -1)
+                    {
+                        mMove.mHeight = mBmp.Height;
+                    }
+
+                    mMove.mLabelItemHandle          = mLabelItemHandle;
+                    if (mLabelItemHandle == -1)
+                    {
+                        mMove.mLabel = "";
+                    }
+
+                    mMove.mLabelFont                = mLabelFont;
+                    mMove.mLabelColor               = mLabelColor;
 
                     if (mMove.mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
                     {
@@ -252,5 +368,24 @@ namespace SimulationObject.Animation.ImageMove
                 Cancel();
             }
         }
-    }
+    
+        protected override void     Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (mPBoxBmp != null)
+                {
+                    pictureBox.Image = null;
+                    mPBoxBmp.Dispose();
+                    mPBoxBmp = null;
+                }
+
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }   
+     }
 }

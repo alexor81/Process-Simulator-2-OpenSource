@@ -75,10 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Delay.cs" />
-    <Compile Include="Panel\DelayPanel.cs">
+    <Compile Include="Panels\DelayPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\DelayPanel.Designer.cs">
+    <Compile Include="Panels\DelayPanel.Designer.cs">
       <DependentUpon>DelayPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,7 +90,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Panel\DelayPanel.resx">
+    <EmbeddedResource Include="Panels\DelayPanel.resx">
       <DependentUpon>DelayPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetupForm.resx">

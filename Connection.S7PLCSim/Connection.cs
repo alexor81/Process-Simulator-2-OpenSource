@@ -457,6 +457,17 @@ namespace Connection.S7PLCSim
             mS7ProSim.BeginScanNotify();
 
             raiseConnectionState();
+
+            if (mItemList.Count != 0)
+            {
+                foreach(var lItem in mItemList)
+                {
+                    if (lItem.mMemoryType == EPLCMemoryType.I)
+                    {
+                        lItem.mNeedWrite = true;
+                    }
+                }
+            }
         }
 
         public void                                         disconnect()
@@ -497,8 +508,7 @@ namespace Connection.S7PLCSim
         private void                                        raiseConnectionError(string aMessage)
         {
             mLastError  = aMessage;
-            var lEvent  = ConnectionError;
-            if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+            ConnectionError?.Invoke(this, new MessageStringEventArgs(aMessage));
         }
 
         #region Items
@@ -525,6 +535,11 @@ namespace Connection.S7PLCSim
                 {
                     //========================================
                     mItemListLock.ExitWriteLock();
+                }
+
+                if (aItem.mMemoryType == EPLCMemoryType.I)
+                {
+                    aItem.mNeedWrite = true;
                 }
             }
 

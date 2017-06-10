@@ -79,7 +79,7 @@ namespace SimulationObject.Voice.Command
             // itemEditBox
             // 
             this.itemEditBox.ItemName = "";
-            this.itemEditBox.ItemRequirements = "Any type, Write, Obligatory";
+            this.itemEditBox.ItemRequirements = "Any type, Write, Required";
             this.itemEditBox.ItemToolTip = "";
             this.itemEditBox.Location = new System.Drawing.Point(94, 49);
             this.itemEditBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -103,7 +103,7 @@ namespace SimulationObject.Voice.Command
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 169);
+            this.ClientSize = new System.Drawing.Size(303, 165);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox);
             this.Controls.Add(this.label_Item);

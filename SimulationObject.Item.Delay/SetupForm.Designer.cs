@@ -78,7 +78,7 @@ namespace SimulationObject.Item.Delay
             // itemEditBox_Out
             // 
             this.itemEditBox_Out.ItemName = "";
-            this.itemEditBox_Out.ItemRequirements = "Any type, Write, Obligatory";
+            this.itemEditBox_Out.ItemRequirements = "Any type, Write, Required";
             this.itemEditBox_Out.ItemToolTip = "";
             this.itemEditBox_Out.Location = new System.Drawing.Point(66, 79);
             this.itemEditBox_Out.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -90,7 +90,7 @@ namespace SimulationObject.Item.Delay
             // itemEditBox_In
             // 
             this.itemEditBox_In.ItemName = "";
-            this.itemEditBox_In.ItemRequirements = "Any type, Read, Obligatory";
+            this.itemEditBox_In.ItemRequirements = "Any type, Read, Required";
             this.itemEditBox_In.ItemToolTip = "";
             this.itemEditBox_In.Location = new System.Drawing.Point(66, 43);
             this.itemEditBox_In.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -157,7 +157,7 @@ namespace SimulationObject.Item.Delay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 190);
+            this.ClientSize = new System.Drawing.Size(390, 186);
             this.ControlBox = false;
             this.Controls.Add(this.spinEdit_Delay);
             this.Controls.Add(this.label_Delay);

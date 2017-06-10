@@ -93,7 +93,7 @@ namespace SimulationObject.Real.Calculator
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Real, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Real, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(68, 111);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -117,7 +117,7 @@ namespace SimulationObject.Real.Calculator
             // itemEditBox_In1
             // 
             this.itemEditBox_In1.ItemName = "";
-            this.itemEditBox_In1.ItemRequirements = "Real, Read, Obligatory";
+            this.itemEditBox_In1.ItemRequirements = "Real, Read, Required";
             this.itemEditBox_In1.ItemToolTip = "";
             this.itemEditBox_In1.Location = new System.Drawing.Point(68, 9);
             this.itemEditBox_In1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -141,7 +141,7 @@ namespace SimulationObject.Real.Calculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 190);
+            this.ClientSize = new System.Drawing.Size(357, 186);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox_Value);
             this.Controls.Add(this.itemEditBox_In2);

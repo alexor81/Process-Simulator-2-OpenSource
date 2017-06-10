@@ -63,7 +63,7 @@ namespace SimulationObject.Real.OneOfTwo
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Real, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Real, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(113, 128);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -75,7 +75,7 @@ namespace SimulationObject.Real.OneOfTwo
             // itemEditBox_In2
             // 
             this.itemEditBox_In2.ItemName = "";
-            this.itemEditBox_In2.ItemRequirements = "Real, Read, Obligatory";
+            this.itemEditBox_In2.ItemRequirements = "Real, Read, Required";
             this.itemEditBox_In2.ItemToolTip = "";
             this.itemEditBox_In2.Location = new System.Drawing.Point(113, 89);
             this.itemEditBox_In2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -87,7 +87,7 @@ namespace SimulationObject.Real.OneOfTwo
             // itemEditBox_In1
             // 
             this.itemEditBox_In1.ItemName = "";
-            this.itemEditBox_In1.ItemRequirements = "Real, Read, Obligatory";
+            this.itemEditBox_In1.ItemRequirements = "Real, Read, Required";
             this.itemEditBox_In1.ItemToolTip = "";
             this.itemEditBox_In1.Location = new System.Drawing.Point(113, 50);
             this.itemEditBox_In1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -129,7 +129,7 @@ namespace SimulationObject.Real.OneOfTwo
             // itemEditBox_Switch
             // 
             this.itemEditBox_Switch.ItemName = "";
-            this.itemEditBox_Switch.ItemRequirements = "Boolean, Read, Write, Obligatory";
+            this.itemEditBox_Switch.ItemRequirements = "Boolean, Read, Write, Required";
             this.itemEditBox_Switch.ItemToolTip = "";
             this.itemEditBox_Switch.Location = new System.Drawing.Point(113, 11);
             this.itemEditBox_Switch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -233,7 +233,7 @@ namespace SimulationObject.Real.OneOfTwo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 309);
+            this.ClientSize = new System.Drawing.Size(399, 305);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_Speed);
             this.Controls.Add(this.itemEditBox_Switch);

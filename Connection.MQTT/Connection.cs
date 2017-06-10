@@ -136,15 +136,22 @@ namespace Connection.MQTT
 
             raiseConnectionState();
 
-            if (mItemList.Count > 0)
+            if (mItemList.Count != 0)
             {
-                string[] lItems = mItemList.Keys.ToArray();
-                byte[] lQoS     = new byte[lItems.Length];
+                string[] lKeys  = mItemList.Keys.ToArray();
+                string[] lItems = new string[lKeys.Length];
+                byte[] lQoS     = new byte[lKeys.Length];
+                DataItem lDataItem;
 
-                for (int i = 0; i < lItems.Length; i++)
+                for (int i = 0; i < lKeys.Length; i++)
                 {
-                    lItems[i]   = getFullTopic(lItems[i]);
+                    lItems[i]   = getFullTopic(lKeys[i]);
                     lQoS[i]     = mQOS;
+                    lDataItem   = mItemList[lKeys[i]];
+                    if (lDataItem.Publish && lDataItem.Subscribe == false)
+                    {
+                        publish(lItems[i], lDataItem.mValue);
+                    }
                 }
 
                 mClient.Subscribe(lItems, lQoS);
@@ -195,9 +202,8 @@ namespace Connection.MQTT
         public event                                        EventHandler<MessageStringEventArgs> ConnectionError;
         private void                                        raiseConnectionError(string aMessage)
         {
-            mLastError  = aMessage;
-            var lEvent  = ConnectionError;
-            if (lEvent != null) lEvent(this, new MessageStringEventArgs(aMessage));
+            mLastError = aMessage;
+            ConnectionError?.Invoke(this, new MessageStringEventArgs(aMessage));
         }
 
         private void                                        MClient_ConnectionClosed(object aSender, EventArgs aEventArgs)
@@ -245,7 +251,7 @@ namespace Connection.MQTT
             }
             catch (Exception lExc)
             {
-                raiseConnectionError("Error updating values. " + lExc.ToString());
+                raiseConnectionError("Error updating value. " + lExc.ToString());
             }
             finally
             {
@@ -319,7 +325,12 @@ namespace Connection.MQTT
                 lItem.raisePropertiesChanged();
                 if (Connected)
                 {
-                    mClient.Subscribe(new string[] { getFullTopic(aTopic) }, new byte[] { mQOS });
+                    string lFullTopic = getFullTopic(aTopic);
+                    if (aPublish && aSubscribe == false)
+                    {
+                        publish(lFullTopic, aValue);
+                    }
+                    mClient.Subscribe(new string[] { lFullTopic }, new byte[] { mQOS });
                 }
 
                 ConnectionState += new EventHandler(lItem.onConnectionStateChanged);

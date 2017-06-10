@@ -241,7 +241,7 @@ namespace SimulationObject.Robot.Conveyor.Panel.ConveyorState
 
         private void            ConveyorPanel_SizeChanged(object aSender, EventArgs aEventArgs)
         {
-            mFullUpdate = true;
+            updateP();
         }
 
         private void            pictureBox_State_MouseClick(object aSender, MouseEventArgs aEventArgs)
@@ -263,11 +263,6 @@ namespace SimulationObject.Robot.Conveyor.Panel.ConveyorState
 
                 mConveyor = null;
                 toolTip.RemoveAll();
-
-                if (components != null)
-                {
-                    components.Dispose();
-                }
 
                 if (mGraphics != null)
                 {
@@ -298,6 +293,11 @@ namespace SimulationObject.Robot.Conveyor.Panel.ConveyorState
                 {
                     mLayout.Dispose();
                     mLayout = null;
+                }
+
+                if (components != null)
+                {
+                    components.Dispose();
                 }
             }
             base.Dispose(disposing);

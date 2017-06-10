@@ -169,7 +169,7 @@ namespace SimulationObject.Sensor.Discrete
             // itemEditBox
             // 
             this.itemEditBox.ItemName = "";
-            this.itemEditBox.ItemRequirements = "Binary, Read, Write, Obligatory";
+            this.itemEditBox.ItemRequirements = "Binary, Read, Write, Required";
             this.itemEditBox.ItemToolTip = "";
             this.itemEditBox.Location = new System.Drawing.Point(53, 5);
             this.itemEditBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -193,7 +193,7 @@ namespace SimulationObject.Sensor.Discrete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 196);
+            this.ClientSize = new System.Drawing.Size(379, 192);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox);
             this.Controls.Add(this.groupBox_Signalisation);

@@ -61,8 +61,8 @@ namespace Connection.S7PLCSim
             get { return mDataType; }
             set
             {
-                mDataType  = value;
-                mValue          = InitValue;
+                mDataType   = value;
+                mValue      = InitValue;
             }
         }
         private ImageDataTypeConstants  ImageDataType
@@ -93,8 +93,8 @@ namespace Connection.S7PLCSim
             get { return mFloatingP; }
             set
             {
-                mFloatingP = value;
-                mValue = InitValue;
+                mFloatingP  = value;
+                mValue      = InitValue;
             }
         }
         private int                     mLength         = 1;
@@ -655,8 +655,8 @@ namespace Connection.S7PLCSim
             return false;
         }
 
-        private object                  mValue = false;
-        private readonly object         mValueLock = new object();
+        public object                   mValue          = false;
+        private readonly object         mValueLock      = new object();
         public object                   Value
         {
             get

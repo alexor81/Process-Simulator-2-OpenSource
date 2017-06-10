@@ -98,7 +98,7 @@ namespace SimulationObject.Binary.Trigger
             // itemEditBox_Value
             // 
             this.itemEditBox_Value.ItemName = "";
-            this.itemEditBox_Value.ItemRequirements = "Binary, Read, Write, Obligatory";
+            this.itemEditBox_Value.ItemRequirements = "Binary, Read, Write, Required";
             this.itemEditBox_Value.ItemToolTip = "";
             this.itemEditBox_Value.Location = new System.Drawing.Point(63, 106);
             this.itemEditBox_Value.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -110,7 +110,7 @@ namespace SimulationObject.Binary.Trigger
             // itemEditBox_Reset
             // 
             this.itemEditBox_Reset.ItemName = "";
-            this.itemEditBox_Reset.ItemRequirements = "Binary, Read, Obligatory";
+            this.itemEditBox_Reset.ItemRequirements = "Binary, Read, Required";
             this.itemEditBox_Reset.ItemToolTip = "";
             this.itemEditBox_Reset.Location = new System.Drawing.Point(63, 44);
             this.itemEditBox_Reset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -122,7 +122,7 @@ namespace SimulationObject.Binary.Trigger
             // itemEditBox_Set
             // 
             this.itemEditBox_Set.ItemName = "";
-            this.itemEditBox_Set.ItemRequirements = "Binary, Read, Obligatory";
+            this.itemEditBox_Set.ItemRequirements = "Binary, Read, Required";
             this.itemEditBox_Set.ItemToolTip = "";
             this.itemEditBox_Set.Location = new System.Drawing.Point(63, 7);
             this.itemEditBox_Set.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -146,7 +146,7 @@ namespace SimulationObject.Binary.Trigger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(351, 184);
+            this.ClientSize = new System.Drawing.Size(347, 180);
             this.ControlBox = false;
             this.Controls.Add(this.itemEditBox_Value);
             this.Controls.Add(this.itemEditBox_Reset);

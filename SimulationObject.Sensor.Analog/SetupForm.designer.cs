@@ -124,7 +124,7 @@ namespace SimulationObject.Sensor.Analog
             // itemEditBox_Item
             // 
             this.itemEditBox_Item.ItemName = "";
-            this.itemEditBox_Item.ItemRequirements = "Real, Read, Write, Obligatory";
+            this.itemEditBox_Item.ItemRequirements = "Real, Read, Write, Required";
             this.itemEditBox_Item.ItemToolTip = "";
             this.itemEditBox_Item.Location = new System.Drawing.Point(59, 21);
             this.itemEditBox_Item.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -302,7 +302,7 @@ namespace SimulationObject.Sensor.Analog
             // itemEditBox_Thd
             // 
             this.itemEditBox_Thd.ItemName = "";
-            this.itemEditBox_Thd.ItemRequirements = "Binary, Write, Obligatory";
+            this.itemEditBox_Thd.ItemRequirements = "Binary, Write, Required";
             this.itemEditBox_Thd.ItemToolTip = "";
             this.itemEditBox_Thd.Location = new System.Drawing.Point(107, 63);
             this.itemEditBox_Thd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -459,7 +459,7 @@ namespace SimulationObject.Sensor.Analog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 319);
+            this.ClientSize = new System.Drawing.Size(445, 315);
             this.ControlBox = false;
             this.Controls.Add(this.okCancelButton);
             this.Controls.Add(this.tabControl_Thrs);

@@ -74,10 +74,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Panel\TriggerPanel.cs">
+    <Compile Include="Panels\TriggerPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Panel\TriggerPanel.Designer.cs">
+    <Compile Include="Panels\TriggerPanel.Designer.cs">
       <DependentUpon>TriggerPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="SetupForm.cs">
@@ -90,7 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Panel\TriggerPanel.resx">
+    <EmbeddedResource Include="Panels\TriggerPanel.resx">
       <DependentUpon>TriggerPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetupForm.resx">

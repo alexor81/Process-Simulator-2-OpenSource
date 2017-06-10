@@ -3,6 +3,8 @@
 using API;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Utils;
@@ -15,6 +17,7 @@ namespace SimulationObject.Animation.ImageMove.Panels
     {
         private Move            mMove;
         private bool            mDemo;
+        private Bitmap          mBmp;
 
         public                  MovePanel(Move aMove)
         {
@@ -120,10 +123,37 @@ namespace SimulationObject.Animation.ImageMove.Panels
         }
         private void            updateP()
         {
-            if (mMove.mBmp != null)
+            Width   = mMove.mWidth;
+            Height  = mMove.mHeight;
+
+            var lBmp = mMove.mBmp;
+            if (lBmp!= null)
             {
-                pictureBox.Image    = mMove.mBmp;
-                Size                = mMove.mBmp.Size;
+                var lNewBmp = new Bitmap(Width, Height);
+                lNewBmp.SetResolution(lBmp.HorizontalResolution, lBmp.VerticalResolution);
+
+                using (var lGraphics = Graphics.FromImage(lNewBmp))
+                {
+                    lGraphics.Clear(Color.Transparent);
+                    lGraphics.InterpolationMode = InterpolationMode.High;
+                    lGraphics.DrawImage(lBmp, 0, 0, Width, Height);
+                    if (String.IsNullOrWhiteSpace(mMove.mLabel) == false)
+                    {
+                        lGraphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                        using (var lBrush = new SolidBrush(mMove.mLabelColor))
+                        {
+                            lGraphics.DrawString(mMove.mLabel, mMove.mLabelFont, lBrush, 0, 0);
+                        }
+                    }
+                }
+
+                pictureBox.Image = lNewBmp;
+                if (mBmp != null)
+                {
+                    mBmp.Dispose();
+                }
+                mBmp = lNewBmp;
             }
             else
             {
@@ -172,6 +202,12 @@ namespace SimulationObject.Animation.ImageMove.Panels
             {
                 mMove = null;
                 toolTip.RemoveAll();
+
+                if (mBmp != null)
+                {
+                    mBmp.Dispose();
+                    mBmp = null;
+                }
 
                 if (components != null)
                 {

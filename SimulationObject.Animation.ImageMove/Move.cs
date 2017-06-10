@@ -16,16 +16,22 @@ namespace SimulationObject.Animation.ImageMove
     {
         #region Properties
 
+            public const int                                    MaxWidth                = 4096;
+            public const int                                    MaxHeight               = 3072;
+
             public MemoryStream                                 mImgMemStrm;
             public Bitmap                                       mBmp;
 
-            public bool                                         mUserCanMove = false;
+            public Font                                         mLabelFont              = new Font("Microsoft Sans Serif", 7);
+            public Color                                        mLabelColor             = Color.Black;
+
+            public bool                                         mUserCanMove            = false;
 
         #endregion
 
         #region IItemUser
 
-            public int                                          mXValueItemHandle   = -1;
+            public int                                          mXValueItemHandle       = -1;
             private int                                         mXValue;
             public int                                          XValue
             {
@@ -41,7 +47,7 @@ namespace SimulationObject.Animation.ImageMove
                 }
             }
 
-            public int                                          mYValueItemHandle   = -1;
+            public int                                          mYValueItemHandle       = -1;
             private int                                         mYValue;
             public int                                          YValue
             {
@@ -57,10 +63,10 @@ namespace SimulationObject.Animation.ImageMove
                 }
             }
 
-            public int                                          mVisibleItemHandle  = -1;
-            public bool                                         mVisible            = true;
+            public int                                          mVisibleItemHandle      = -1;
+            public bool                                         mVisible                = true;
 
-            public int                                          mMovingByUserItemHandle  = -1;
+            public int                                          mMovingByUserItemHandle = -1;
             private bool                                        mMovingByUser;
             public bool                                         MovingByUser
             {
@@ -75,6 +81,15 @@ namespace SimulationObject.Animation.ImageMove
                 }
             }
 
+            public int                                          mWidthItemHandle        = -1;
+            public int                                          mWidth;
+
+            public int                                          mHeightItemHandle       = -1;
+            public int                                          mHeight;
+
+            public int                                          mLabelItemHandle        = -1;
+            public string                                       mLabel                  = "";
+
             private IItemBrowser                                mItemBrowser;
             public IItemBrowser                                 ItemBrowser
             {
@@ -85,14 +100,32 @@ namespace SimulationObject.Animation.ImageMove
             {
                 get
                 {
+                    List<int> lResult = new List<int>();
+
+                    lResult.Add(mXValueItemHandle);
+                    lResult.Add(mYValueItemHandle);
+
                     if (mVisibleItemHandle != -1)
                     {
-                        return new int[] {mXValueItemHandle, mYValueItemHandle, mVisibleItemHandle};
+                        lResult.Add(mVisibleItemHandle);
                     }
-                    else
+
+                    if (mWidthItemHandle != -1)
                     {
-                        return new int[] {mXValueItemHandle, mYValueItemHandle};
+                        lResult.Add(mWidthItemHandle);
                     }
+
+                    if (mHeightItemHandle != -1)
+                    {
+                        lResult.Add(mHeightItemHandle);
+                    }
+
+                    if (mLabelItemHandle != -1)
+                    {
+                        lResult.Add(mLabelItemHandle);
+                    }
+
+                    return lResult.ToArray();
                 }
             }
 
@@ -211,6 +244,63 @@ namespace SimulationObject.Animation.ImageMove
 
                     return;
                 }
+            
+                if (aItemHandle == mWidthItemHandle)
+                {
+                    int lValue;
+                    try
+                    {
+                        lValue = Convert.ToInt32(aItemValue);
+                    }
+                    catch (Exception lExc)
+                    {
+                        throw new ArgumentException("Width value conversion error. ", lExc);
+                    }
+
+                    if (lValue > MaxWidth) lValue = MaxWidth;
+
+                    if (mWidth != lValue)
+                    {
+                        mWidth = lValue;
+                        raisePropertiesChanged();
+                    }
+
+                    return;
+                }  
+                
+                if (aItemHandle == mHeightItemHandle)
+                {
+                    int lValue;
+                    try
+                    {
+                        lValue = Convert.ToInt32(aItemValue);
+                    }
+                    catch (Exception lExc)
+                    {
+                        throw new ArgumentException("Height value conversion error. ", lExc);
+                    }
+
+                    if (lValue > MaxHeight) lValue = MaxHeight;
+
+                    if (mHeight != lValue)
+                    {
+                        mHeight = lValue;
+                        raisePropertiesChanged();
+                    }
+
+                    return;
+                }  
+            
+                if (aItemHandle == mLabelItemHandle)
+                {
+                    string lValue = StringUtils.ObjectToString(aItemValue);
+
+                    if (lValue.Equals(mLabel, StringComparison.Ordinal) == false)
+                    {
+                        mLabel = lValue;
+                        raisePropertiesChanged();
+                    }
+                } 
             }
 
         #endregion
@@ -277,11 +367,26 @@ namespace SimulationObject.Animation.ImageMove
                 lChecker.addItemName(lItem);
                 mVisibleItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
+                mUserCanMove = lReader.getAttribute<Boolean>("UserCanMove", mUserCanMove);
+
                 lItem = lReader.getAttribute<String>("MovingByUser", "");
                 lChecker.addItemName(lItem);
                 mMovingByUserItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
-                mUserCanMove = lReader.getAttribute<Boolean>("UserCanMove", mUserCanMove);
+                lItem = lReader.getAttribute<String>("Width", "");
+                lChecker.addItemName(lItem);
+                mWidthItemHandle = mItemBrowser.getItemHandleByName(lItem);
+
+                lItem = lReader.getAttribute<String>("Height", "");
+                lChecker.addItemName(lItem);
+                mHeightItemHandle = mItemBrowser.getItemHandleByName(lItem);
+
+                lItem = lReader.getAttribute<String>("Label", "");
+                lChecker.addItemName(lItem);
+                mLabelItemHandle = mItemBrowser.getItemHandleByName(lItem);
+
+                mLabelFont  = lReader.getAttribute<Font>("LabelFont", mLabelFont);
+                mLabelColor = lReader.getAttribute<Color>("LabelColor", mLabelColor);
 
                 if (aXMLTextReader.IsEmptyElement == false)
                 {
@@ -311,6 +416,16 @@ namespace SimulationObject.Animation.ImageMove
                     mImgMemStrm = null;
                     throw new ArgumentException("Image is wrong. " + lExc.Message, lExc);
                 }
+
+                if (mWidthItemHandle == -1)
+                {
+                    mWidth = mBmp.Width;
+                }
+
+                if (mHeightItemHandle == -1)
+                {
+                    mHeight = mBmp.Height;
+                }
             }
 
             public void                                         saveToXML(XmlTextWriter aXMLTextWriter)
@@ -320,6 +435,12 @@ namespace SimulationObject.Animation.ImageMove
                 aXMLTextWriter.WriteAttributeString("Visible", mItemBrowser.getItemNameByHandle(mVisibleItemHandle));
                 aXMLTextWriter.WriteAttributeString("UserCanMove", StringUtils.ObjectToString(mUserCanMove));
                 aXMLTextWriter.WriteAttributeString("MovingByUser", mItemBrowser.getItemNameByHandle(mMovingByUserItemHandle));
+                aXMLTextWriter.WriteAttributeString("Width", mItemBrowser.getItemNameByHandle(mWidthItemHandle));
+                aXMLTextWriter.WriteAttributeString("Height", mItemBrowser.getItemNameByHandle(mHeightItemHandle));
+                aXMLTextWriter.WriteAttributeString("Label", mItemBrowser.getItemNameByHandle(mLabelItemHandle));
+                aXMLTextWriter.WriteAttributeString("LabelFont", StringUtils.ObjectToString(mLabelFont));
+                aXMLTextWriter.WriteAttributeString("LabelColor", StringUtils.ObjectToString(mLabelColor));
+
                 aXMLTextWriter.WriteStartElement("Image");
                     aXMLTextWriter.WriteString(Convert.ToBase64String(mImgMemStrm.ToArray()));
                 aXMLTextWriter.WriteEndElement();
