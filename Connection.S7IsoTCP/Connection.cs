@@ -82,11 +82,11 @@ namespace Connection.S7IsoTCP
                 }
 
                 public bool                     mActual;
-                public int                      mStart;             
+                public int                      mStart = 0;             
                 public byte[]                   mBuffer;
                 public void                     setBufferSize(DataItem aItem, int aPDULength, int aMaxAddress)
                 {
-                    int lBuffer = mStart + aItem.Byte + aItem.BufferLength;
+                    int lBuffer = aItem.Byte - mStart + aItem.BufferLength;
                     int lDiv    = lBuffer / aPDULength;
                     if ((lBuffer % aPDULength) > 0)
                     {
