@@ -62,9 +62,10 @@ namespace Connection.Internal
 
                 if(mConnection.mTypeChangeProhibited && mValue != null)
                 {
-                    if(mValue.GetType() != value.GetType())
+                    var lCurrentType = mValue.GetType();
+                    if(lCurrentType != value.GetType())
                     {
-                        throw new ArgumentException("Type change is prohibited. ");
+                        value = Converters.convertValue(lCurrentType, value);
                     }
                 }
 

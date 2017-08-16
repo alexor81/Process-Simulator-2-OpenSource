@@ -118,6 +118,8 @@ namespace Connection.S7PLCSim
             }
         }
 
+        public object                   mValue          = false;
+        private readonly object         mValueLock      = new object();
         public volatile bool            mNeedWrite      = false;
         public void                     read(S7ProSim aS7ProSim)
         {
@@ -324,10 +326,10 @@ namespace Connection.S7PLCSim
             byte[] lBytes = null;
             switch (DataType)
             {
-                case PointDataTypeConstants.S7_Bit: lBytes = new byte[1]; break;
-                case PointDataTypeConstants.S7_Byte: lBytes = new byte[mLength]; break;
-                case PointDataTypeConstants.S7_Word: lBytes = new byte[mLength * 2]; break;
-                case PointDataTypeConstants.S7_DoubleWord: lBytes = new byte[mLength * 4]; break;
+                case PointDataTypeConstants.S7_Bit:         lBytes = new byte[1]; break;
+                case PointDataTypeConstants.S7_Byte:        lBytes = new byte[mLength]; break;
+                case PointDataTypeConstants.S7_Word:        lBytes = new byte[mLength * 2]; break;
+                case PointDataTypeConstants.S7_DoubleWord:  lBytes = new byte[mLength * 4]; break;
             }
             Array.Copy(aBuffer, Byte - aStartIndex, lBytes, 0, lBytes.Length);
 
@@ -414,8 +416,8 @@ namespace Connection.S7PLCSim
                         {
                             Array.Copy(lBytes, lIndex, lValue, 0, 2);
                             Array.Reverse(lValue);
-                            lArray[i] = BitConverter.ToInt16(lValue, 0);
-                            lIndex = lIndex + 2;
+                            lArray[i]   = BitConverter.ToInt16(lValue, 0);
+                            lIndex      = lIndex + 2;
                         }
 
                         lNewValue = lArray;
@@ -428,8 +430,8 @@ namespace Connection.S7PLCSim
                         {
                             Array.Copy(lBytes, lIndex, lValue, 0, 2);
                             Array.Reverse(lValue);
-                            lArray[i] = BitConverter.ToUInt16(lValue, 0);
-                            lIndex = lIndex + 2;
+                            lArray[i]   = BitConverter.ToUInt16(lValue, 0);
+                            lIndex      = lIndex + 2;
                         }
 
                         lNewValue = lArray;
@@ -448,8 +450,8 @@ namespace Connection.S7PLCSim
                         {
                             Array.Copy(lBytes, lIndex, lValue, 0, 4);
                             Array.Reverse(lValue);
-                            lArray[i] = BitConverter.ToSingle(lValue, 0);
-                            lIndex = lIndex + 4;
+                            lArray[i]   = BitConverter.ToSingle(lValue, 0);
+                            lIndex      = lIndex + 4;
                         }
 
                         lNewValue = lArray;
@@ -464,8 +466,8 @@ namespace Connection.S7PLCSim
                             {
                                 Array.Copy(lBytes, lIndex, lValue, 0, 4);
                                 Array.Reverse(lValue);
-                                lArray[i] = BitConverter.ToInt32(lValue, 0);
-                                lIndex = lIndex + 4;
+                                lArray[i]   = BitConverter.ToInt32(lValue, 0);
+                                lIndex      = lIndex + 4;
                             }
 
                             lNewValue = lArray;
@@ -478,8 +480,8 @@ namespace Connection.S7PLCSim
                             {
                                 Array.Copy(lBytes, lIndex, lValue, 0, 4);
                                 Array.Reverse(lValue);
-                                lArray[i] = BitConverter.ToUInt32(lValue, 0);
-                                lIndex = lIndex + 4;
+                                lArray[i]   = BitConverter.ToUInt32(lValue, 0);
+                                lIndex      = lIndex + 4;
                             }
 
                             lNewValue = lArray;
@@ -499,14 +501,7 @@ namespace Connection.S7PLCSim
             {
                 if (mNeedWrite) return;
 
-                if (mLength == 1)
-                {
-                    if (setIfNewValue(aNewValue))
-                    {
-                        lValueChanged = true;
-                    }
-                }
-                else
+                if (ValuesCompare.isNotEqual(mValue, aNewValue))
                 {
                     mValue          = aNewValue;
                     lValueChanged   = true;
@@ -523,95 +518,7 @@ namespace Connection.S7PLCSim
                 raiseValueChanged();
             }
         }    
-        private bool                    setIfNewValue(object aNewValue)
-        {
-            if (mDataType == PointDataTypeConstants.S7_Bit)
-            {
-                bool lNewValue = Convert.ToBoolean(aNewValue);
-                if ((bool)mValue != lNewValue)
-                {
-                    mValue = lNewValue;
-                    return true;
-                }
-            }
-            else if (mDataType == PointDataTypeConstants.S7_Byte)
-            {
-                if (mSigned)
-                {
-                    sbyte lNewValue = Convert.ToSByte(aNewValue);
-                    if ((sbyte)mValue != lNewValue)
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-                else
-                {
-                    byte lNewValue = Convert.ToByte(aNewValue);
-                    if ((byte)mValue != lNewValue)
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-            }
-            else if (mDataType == PointDataTypeConstants.S7_Word)
-            {
-                if (mSigned)
-                {
-                    short lNewValue = Convert.ToInt16(aNewValue);
-                    if ((short)mValue != lNewValue)
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-                else
-                {
-                    ushort lNewValue = Convert.ToUInt16(aNewValue);
-                    if ((ushort)mValue != lNewValue)
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-            }
-            else if (mDataType == PointDataTypeConstants.S7_DoubleWord)
-            {
-                if (mFloatingP)
-                {
-                    float lNewValue = Convert.ToSingle(aNewValue);
-                    if (ValuesCompare.NotEqualDelta1.compare((float)mValue, lNewValue))
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-                else
-                {
-                    if (mSigned)
-                    {
-                        int lNewValue = Convert.ToInt32(aNewValue);
-                        if ((int)mValue != lNewValue)
-                        {
-                            mValue = lNewValue;
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        uint lNewValue = Convert.ToUInt32(aNewValue);
-                        if ((uint)mValue != lNewValue)
-                        {
-                            mValue = lNewValue;
-                            return true;
-                        }
-                    }
-                }
-            }
 
-            return false;
-        }
         private bool                    isCorrectArrayElementType(Type aType)
         {
             switch (mDataType)
@@ -653,10 +560,7 @@ namespace Connection.S7PLCSim
             }
 
             return false;
-        }
-
-        public object                   mValue          = false;
-        private readonly object         mValueLock      = new object();
+        }        
         public object                   Value
         {
             get
@@ -675,55 +579,48 @@ namespace Connection.S7PLCSim
                     throw new InvalidOperationException("No access. ");
                 }
 
-                bool lUpdate = false;
+                object lNewValue;
+                Array lArray = value as Array;
+                if (mLength == 1)
+                {
+                    if (lArray != null)
+                    {
+                        throw new InvalidOperationException("Array is not expected. ");
+                    }
 
+                    lNewValue = Converters.convertValue(mValue.GetType(), value);
+                }
+                else
+                {
+                    if (lArray == null)
+                    {
+                        throw new InvalidOperationException("Array is expected. ");
+                    }
+
+                    if (lArray.Length != mLength)
+                    {
+                        throw new InvalidOperationException("Array with length " +
+                                                             StringUtils.ObjectToString(mLength) + " is expected. ");
+                    }
+
+                    lNewValue = Converters.convertValue(mValue.GetType().GetElementType(), value);
+                }
+
+                bool lUpdate = false;
                 Monitor.Enter(mValueLock);
                 //=========================================
                 try
                 {
-                    Array lArray = value as Array;
-
-                    if (mLength == 1)
+                    if (ValuesCompare.isNotEqual(mValue, lNewValue))
                     {
-                        if (lArray != null)
-                        {
-                            throw new InvalidOperationException("Array is not expected. ");
-                        }
-
-                        if (mMemoryType == EPLCMemoryType.I)
-                        {
-                            mNeedWrite  = true;
-                            lUpdate     = setIfNewValue(value);
-                        }
-                        else
-                        {
-                            if (setIfNewValue(value))
-                            {
-                                mNeedWrite  = true;
-                                lUpdate     = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (lArray == null)
-                        {
-                            throw new InvalidOperationException("Array is expected. ");
-                        }
-
-                        if (lArray.Length != mLength)
-                        {
-                            throw new InvalidOperationException("Array with length " + StringUtils.ObjectToString(mLength) + " is expected. ");
-                        }
-
-                        if(isCorrectArrayElementType(lArray.GetType().GetElementType()) == false)
-                        {
-                            throw new InvalidOperationException("Array element type is wrong. ");
-                        }
-
-                        mValue      = lArray;
+                        mValue      = lNewValue;
                         mNeedWrite  = true;
                         lUpdate     = true;
+                    }
+
+                    if (mMemoryType == EPLCMemoryType.I)
+                    {
+                        mNeedWrite  = true;
                     }
                 }
                 finally

@@ -90,7 +90,7 @@ namespace SimulationObject.Item.ArraySplitter
 
                     for (int i = 0; i < mArrayValue.Length; i++)
                     {
-                        lArray.SetValue(MiscUtils.convertValue(lType, mArrayValue[i]), i);
+                        lArray.SetValue(Converters.convertValue(lType, mArrayValue[i]), i);
                     }
 
                     lHandles.Add(mArrayValueItemHandle);

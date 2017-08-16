@@ -96,7 +96,7 @@ namespace SimulationObject.Script.CSharpFSM
             // tsButton_First
             // 
             this.tsButton_First.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsButton_First.Image = global::SimulationObject.Script.CSharpFSM.Properties.Resources.flag_checker;
+            this.tsButton_First.Image = global::SimulationObject.Script.CSharpFSM.Properties.Resources.Flag;
             this.tsButton_First.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsButton_First.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsButton_First.Name = "tsButton_First";

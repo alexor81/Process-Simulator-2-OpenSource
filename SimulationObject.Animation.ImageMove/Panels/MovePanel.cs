@@ -135,7 +135,7 @@ namespace SimulationObject.Animation.ImageMove.Panels
                 using (var lGraphics = Graphics.FromImage(lNewBmp))
                 {
                     lGraphics.Clear(Color.Transparent);
-                    lGraphics.InterpolationMode = InterpolationMode.High;
+                    lGraphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
                     lGraphics.DrawImage(lBmp, 0, 0, Width, Height);
                     if (String.IsNullOrWhiteSpace(mMove.mLabel) == false)
                     {

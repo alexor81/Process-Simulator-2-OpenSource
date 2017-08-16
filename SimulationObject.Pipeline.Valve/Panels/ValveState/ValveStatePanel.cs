@@ -127,7 +127,7 @@ namespace SimulationObject.Pipeline.Valve.Panels.ValveState
                 mPositionFault      = mValve.PositionFault;
                 mPosition           = lPosition;
 
-                if( lBoolChanged )
+                if (lBoolChanged)
                 {
                     redrawStateBuf();
                 }

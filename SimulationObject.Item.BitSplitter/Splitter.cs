@@ -76,7 +76,7 @@ namespace SimulationObject.Item.BitSplitter
 
             private bool                        getBitValue(object aSrc, int aIndex)
             {
-                return (BinaryConverters.ToUInt64(aSrc) & 1UL << aIndex) > 0;
+                return (Converters.ToUInt64(aSrc) & 1UL << aIndex) > 0;
             }
 
             private void                        checkType(Type aType)
@@ -111,14 +111,14 @@ namespace SimulationObject.Item.BitSplitter
                     Type lValueType     = lValueObject.GetType();
                     checkType(lValueType);
 
-                    ulong lValueUInt64  = BinaryConverters.ToUInt64(lValueObject);
+                    ulong lValueUInt64  = Converters.ToUInt64(lValueObject);
                     for (int i = 0; i < mBitsValue.Length; i++)
                     {
                         setBitValue(ref lValueUInt64, i, mBitsValue[i]);
                     }
                     
                     lHandles.Add(mBitsValueItemHandle);
-                    lValues.Add(BinaryConverters.FromUInt64(lValueType, lValueUInt64));
+                    lValues.Add(Converters.FromUInt64(lValueType, lValueUInt64));
                 }
 
                 if (mDataFlow.HasFlag(EDataFlow.FROM))

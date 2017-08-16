@@ -6,8 +6,8 @@ using System;
 using System.Windows.Forms;
 using System.Xml;
 using Utils;
-using Utils.Logger;
 using Utils.Panels.BooleanIndicator;
+using Utils.Panels.BooleanSymbol;
 using Utils.Panels.BooleanTrend;
 using Utils.Panels.ObjectTextLabel;
 
@@ -217,7 +217,7 @@ namespace SimulationObject.Binary.Logic
 
         #region IPanelOwner
 
-            private static readonly string[]                    mPanelList = new string[] { "Logic", "Indicator", "Trend", "TextLabel" };
+            private static readonly string[]                    mPanelList = new string[] { "Logic", "Indicator", "Trend", "TextLabel", "Symbol" };
             public string[]                                     PanelTypeList
             {
                 get { return mPanelList; }
@@ -231,6 +231,7 @@ namespace SimulationObject.Binary.Logic
                     case "Indicator":   return new BooleanIndicatorPanel(this);
                     case "Trend":       return new BooleanTrendPanel(this);
                     case "TextLabel":   return new ObjectTextLabelPanel(this);
+                    case "Symbol":      return new BooleanSymbolPanel(this);
                     default:            throw new ArgumentException("Panel of type '" + aPanelType + "' does not exist. ");
                 }
             }

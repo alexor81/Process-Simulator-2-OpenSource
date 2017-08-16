@@ -43,11 +43,11 @@ namespace Converter.ToBoolean
 
         private bool                toBool(object aValue)
         {
-            if (ValuesCompare.isEqual(mTrueValue, MiscUtils.convertValue(mTrueValue.GetType(), aValue)))
+            if (ValuesCompare.isEqual(mTrueValue, Converters.convertValue(mTrueValue.GetType(), aValue)))
             {
                 return true;
             }
-            else if (ValuesCompare.isEqual(mFalseValue, MiscUtils.convertValue(mFalseValue.GetType(), aValue)))
+            else if (ValuesCompare.isEqual(mFalseValue, Converters.convertValue(mFalseValue.GetType(), aValue)))
             {
                 return false;
             }

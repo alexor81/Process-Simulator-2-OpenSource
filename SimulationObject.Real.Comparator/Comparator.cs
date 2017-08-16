@@ -3,12 +3,11 @@
 using API;
 using SimulationObject.Real.Comparator.Panels;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Xml;
 using Utils;
-using Utils.Logger;
 using Utils.Panels.BooleanIndicator;
+using Utils.Panels.BooleanSymbol;
 using Utils.Panels.BooleanTrend;
 using Utils.Panels.ObjectTextLabel;
 
@@ -171,7 +170,7 @@ namespace SimulationObject.Real.Comparator
 
         #region IPanelOwner
 
-            private static readonly string[]                    mPanelList = new string[] { "Comparator", "Indicator", "Trend", "TextLabel" };
+            private static readonly string[]                    mPanelList = new string[] { "Comparator", "Indicator", "Trend", "TextLabel", "Symbol" };
             public string[]                                     PanelTypeList
             {
                 get { return mPanelList; }
@@ -185,6 +184,7 @@ namespace SimulationObject.Real.Comparator
                     case "Indicator":   return new BooleanIndicatorPanel(this);
                     case "Trend":       return new BooleanTrendPanel(this);
                     case "TextLabel":   return new ObjectTextLabelPanel(this);
+                    case "Symbol":      return new BooleanSymbolPanel(this);
                     default:            throw new ArgumentException("Panel of type '" + aPanelType + "' does not exist. ");
                 }
             }

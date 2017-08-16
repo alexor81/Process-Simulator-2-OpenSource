@@ -37,7 +37,7 @@ namespace Connection.OPCUA
                 if (ValuesCompare.isNotEqual(mValue, value))
                 {
                     object lPrevValue   = mValue;
-                    mValue              = MiscUtils.convertValue(mValue.GetType(), value);
+                    mValue              = Converters.convertValue(mValue.GetType(), value);
 
                     try
                     {

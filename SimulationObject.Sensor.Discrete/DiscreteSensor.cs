@@ -10,6 +10,7 @@ using Utils.Logger;
 using Utils.Panels.BooleanButton;
 using Utils.Panels.BooleanCheckBox;
 using Utils.Panels.BooleanIndicator;
+using Utils.Panels.BooleanSymbol;
 using Utils.Panels.BooleanToggle;
 using Utils.Panels.BooleanTrend;
 using Utils.Panels.ObjectDropDownList;
@@ -194,7 +195,7 @@ namespace SimulationObject.Sensor.Discrete
 
         #region IPanelOwner
 
-            private static readonly string[]                    mPanelList = new string[] { "Indicator", "Button", "CheckBox", "Trend", "RadioButton", "DropDownList", "TextLabel", "Toggle" };
+            private static readonly string[]                    mPanelList = new string[] { "Indicator", "Button", "CheckBox", "Trend", "RadioButton", "DropDownList", "TextLabel", "Toggle", "Symbol" };
             public string[]                                     PanelTypeList
             {
                 get { return mPanelList; }
@@ -212,6 +213,7 @@ namespace SimulationObject.Sensor.Discrete
                     case "DropDownList":    return new DropDownListPanel(this);
                     case "TextLabel":       return new ObjectTextLabelPanel(this);
                     case "Toggle":          return new BooleanTogglePanel(this);
+                    case "Symbol":          return new BooleanSymbolPanel(this);
                     default:                throw new ArgumentException("Panel of type '" + aPanelType + "' does not exist. ");
                 }
             }

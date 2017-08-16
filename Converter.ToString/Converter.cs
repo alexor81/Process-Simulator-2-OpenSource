@@ -33,11 +33,11 @@ namespace Converter.ToString
             {
                 if (mArray)
                 {
-                    lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType.MakeArrayType(1), aValue));
+                    lValue = StringUtils.ObjectToString(Converters.convertValue(mType.MakeArrayType(1), aValue));
                 }
                 else
                 {
-                    lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType, aValue));
+                    lValue = StringUtils.ObjectToString(Converters.convertValue(mType, aValue));
                 }
             }
 
@@ -52,11 +52,11 @@ namespace Converter.ToString
             {
                 if (mArray)
                 {
-                    lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType.MakeArrayType(1), aValue));
+                    lValue = StringUtils.ObjectToString(Converters.convertValue(mType.MakeArrayType(1), aValue));
                 }
                 else
                 {
-                    lValue = StringUtils.ObjectToString(MiscUtils.convertValue(mType, aValue));
+                    lValue = StringUtils.ObjectToString(Converters.convertValue(mType, aValue));
                 }
             }
             else

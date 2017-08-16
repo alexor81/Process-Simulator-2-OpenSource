@@ -1,16 +1,17 @@
 ﻿// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+using API;
+using Snap7;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using API;
-using Snap7;
 using Utils;
+using Utils.Segmentation;
 
 namespace Connection.S7IsoTCP
 {
-    public class DataItem : IDataItem
+    public class DataItem : IDataItem, ISegmentItem
     {
         public Connection           mConnection;
         public EArea                mMemoryType     = EArea.M;
@@ -34,7 +35,7 @@ namespace Connection.S7IsoTCP
             get { return mDataType; }
             set
             {
-                mDataType    = value;
+                mDataType   = value;
                 mValue      = InitValue;
                 setParams();
             }
@@ -110,7 +111,6 @@ namespace Connection.S7IsoTCP
                 setParams();
             }
         }
-
         private void                setParams()
         {
             switch (mDataType)
@@ -122,13 +122,7 @@ namespace Connection.S7IsoTCP
             }
         }
         private int                 mBufferLength   = 1;
-        public int                  BufferLength
-        {
-            get { return mBufferLength; }
-        }
         private int                 mStart          = 0;
-
-        public int                  mGroup          = 0;
 
         public object               mValue          = false;
         private readonly object     mValueLock      = new object();
@@ -149,224 +143,14 @@ namespace Connection.S7IsoTCP
                 }
             }
         }
-        public byte[]               write(S7Client aClient)
+        public void                 write(S7Client aClient)
         {
-            mNeedWrite      = false;
-            byte[] lBuffer  = getValueForPLC();
+            mNeedWrite = false;
 
-            int lResult = aClient.WriteArea((int)mMemoryType, mDB, mStart, mLength, (int)mDataType, lBuffer);
+            int lResult = aClient.WriteArea((int)mMemoryType, mDB, mStart, mLength, (int)mDataType, getValueForPLC());
             if (lResult != 0)
             {
                 mConnection.reportError(Description + " " + aClient.ErrorText(lResult));
-                return null;
-            }
-            else
-            {
-                return lBuffer;
-            }
-        }
-        private bool                setIfNewValue(object aNewValue)
-        {
-            if (mDataType == EWordlen.S7_Bit)
-            {
-                bool lNewValue = Convert.ToBoolean(aNewValue);
-                if ((bool)mValue != lNewValue)
-                {
-                    mValue = lNewValue;
-                    return true;
-                }
-            }
-            else if (mDataType == EWordlen.S7_Byte)
-            {
-                if (mSigned)
-                {
-                    sbyte lNewValue = Convert.ToSByte(aNewValue);
-                    if ((sbyte)mValue != lNewValue)
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-                else
-                {
-                    byte lNewValue = Convert.ToByte(aNewValue);
-                    if ((byte)mValue != lNewValue)
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-            }
-            else if (mDataType == EWordlen.S7_Word)
-            {
-                if (mSigned)
-                {
-                    short lNewValue = Convert.ToInt16(aNewValue);
-                    if ((short)mValue != lNewValue)
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-                else
-                {
-                    ushort lNewValue = Convert.ToUInt16(aNewValue);
-                    if ((ushort)mValue != lNewValue)
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-            }
-            else if (mDataType == EWordlen.S7_DoubleWord)
-            {
-                if (mFloatingP)
-                {
-                    float lNewValue = Convert.ToSingle(aNewValue);
-                    if (ValuesCompare.NotEqualDelta1.compare((float)mValue, lNewValue))
-                    {
-                        mValue = lNewValue;
-                        return true;
-                    }
-                }
-                else
-                {
-                    if (mSigned)
-                    {
-                        int lNewValue = Convert.ToInt32(aNewValue);
-                        if ((int)mValue != lNewValue)
-                        {
-                            mValue = lNewValue;
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        uint lNewValue = Convert.ToUInt32(aNewValue);
-                        if ((uint)mValue != lNewValue)
-                        {
-                            mValue = lNewValue;
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }
-        private bool                isCorrectArrayElementType(Type aType)
-        {
-            switch (mDataType)
-            {
-                case EWordlen.S7_Bit:           return false;
-                case EWordlen.S7_Byte:          if (mSigned)
-                                                {
-                                                    return (aType == typeof(SByte));
-                                                }
-                                                else
-                                                {
-                                                    return (aType == typeof(Byte));
-                                                }
-
-                case EWordlen.S7_Word:          if (mSigned)
-                                                {
-                                                    return (aType == typeof(Int16));
-                                                }
-                                                else
-                                                {
-                                                    return (aType == typeof(UInt16));
-                                                }
-
-                case EWordlen.S7_DoubleWord:    if (mFloatingP)
-                                                {
-                                                    return (aType == typeof(Single));
-                                                }
-                                                else
-                                                {
-                                                    if (mSigned)
-                                                    {
-                                                        return (aType == typeof(Int32));
-                                                    }
-                                                    else
-                                                    {
-                                                        return (aType == typeof(UInt32));
-                                                    }
-                                                }
-            }
-
-            return false;
-        }
-        public object               Value
-        {
-            get
-            {
-                if (mAccess.HasFlag(EAccess.READ) == false)
-                {
-                    throw new InvalidOperationException("No access. ");
-                }
-
-                return mValue;
-            }
-            set
-            {
-                if (mAccess.HasFlag(EAccess.WRITE) == false)
-                {
-                    throw new InvalidOperationException("No access. ");
-                }
-
-                bool lUpdate = false;
-
-                Monitor.Enter(mValueLock);
-                //=========================================
-                try
-                {
-                    Array lArray = value as Array;
-
-                    if (mLength == 1)
-                    {
-                        if (lArray != null)
-                        {
-                            throw new InvalidOperationException("Array is not expected. ");
-                        }
-
-                        if (setIfNewValue(value))
-                        {
-                            mNeedWrite  = true;
-                            lUpdate     = true;
-                        }
-                    }
-                    else
-                    {
-                        if (lArray == null)
-                        {
-                            throw new InvalidOperationException("Array is expected. ");
-                        }
-
-                        if (lArray.Length != mLength)
-                        {
-                            throw new InvalidOperationException("Array with length " + StringUtils.ObjectToString(mLength) + " is expected. ");
-                        }
-
-                        if (isCorrectArrayElementType(lArray.GetType().GetElementType()) == false)
-                        {
-                            throw new InvalidOperationException("Array element type is wrong. ");
-                        }
-
-                        mValue      = lArray;
-                        mNeedWrite  = true;
-                        lUpdate     = true;
-                    }
-                }
-                finally
-                {
-                    //=========================================
-                    Monitor.Exit(mValueLock);
-                }
-
-                if (lUpdate)
-                {
-                    raiseValueChanged();
-                }
             }
         }
         private static byte[]       getBytes(object aValue)
@@ -610,14 +394,7 @@ namespace Connection.S7IsoTCP
             {
                 if (mNeedWrite) return;
 
-                if (mLength == 1)
-                {
-                    if (setIfNewValue(lNewValue))
-                    {
-                        lValueChanged = true;
-                    }
-                }
-                else
+                if (ValuesCompare.isNotEqual(mValue, lNewValue))
                 {
                     mValue          = lNewValue;
                     lValueChanged   = true;
@@ -633,6 +410,118 @@ namespace Connection.S7IsoTCP
             {
                 raiseValueChanged();
             } 
+        }
+        
+        private bool                isCorrectArrayElementType(Type aType)
+        {
+            switch (mDataType)
+            {
+                case EWordlen.S7_Bit:           return false;
+                case EWordlen.S7_Byte:          if (mSigned)
+                                                {
+                                                    return (aType == typeof(SByte));
+                                                }
+                                                else
+                                                {
+                                                    return (aType == typeof(Byte));
+                                                }
+
+                case EWordlen.S7_Word:          if (mSigned)
+                                                {
+                                                    return (aType == typeof(Int16));
+                                                }
+                                                else
+                                                {
+                                                    return (aType == typeof(UInt16));
+                                                }
+
+                case EWordlen.S7_DoubleWord:    if (mFloatingP)
+                                                {
+                                                    return (aType == typeof(Single));
+                                                }
+                                                else
+                                                {
+                                                    if (mSigned)
+                                                    {
+                                                        return (aType == typeof(Int32));
+                                                    }
+                                                    else
+                                                    {
+                                                        return (aType == typeof(UInt32));
+                                                    }
+                                                }
+            }
+
+            return false;
+        }       
+        public object               Value
+        {
+            get
+            {
+                if (mAccess.HasFlag(EAccess.READ) == false)
+                {
+                    throw new InvalidOperationException("No access. ");
+                }
+
+                return mValue;
+            }
+            set
+            {
+                if (mAccess.HasFlag(EAccess.WRITE) == false)
+                {
+                    throw new InvalidOperationException("No access. ");
+                }
+
+                object lNewValue;
+                Array lArray = value as Array;
+                if (mLength == 1)
+                {
+                    if (lArray != null)
+                    {
+                        throw new InvalidOperationException("Array is not expected. ");
+                    }
+
+                    lNewValue = Converters.convertValue(mValue.GetType(), value);
+                }
+                else
+                {
+                    if (lArray == null)
+                    {
+                        throw new InvalidOperationException("Array is expected. ");
+                    }
+
+                    if (lArray.Length != mLength)
+                    {
+                        throw new InvalidOperationException("Array with length " + 
+                                                                StringUtils.ObjectToString(mLength) + " is expected. ");
+                    }
+
+                    lNewValue = Converters.convertValue(mValue.GetType().GetElementType(), value);
+                }
+
+                bool lUpdate = false;
+                Monitor.Enter(mValueLock);
+                //=========================================
+                try
+                {
+                    if (ValuesCompare.isNotEqual(mValue, lNewValue))
+                    {
+                        mValue      = lNewValue;
+                        mNeedWrite  = true;
+                        lUpdate     = true;
+                    }
+                }
+                finally
+                {
+                    //=========================================
+                    Monitor.Exit(mValueLock);
+                }
+
+                if (lUpdate)
+                {
+                    raiseValueChanged();
+                }
+            }
         }
         public event EventHandler   ValueChanged;
         public void                 raiseValueChanged()
@@ -839,5 +728,28 @@ namespace Connection.S7IsoTCP
         {
             PropertiesChanged?.Invoke(this, EventArgs.Empty);
         }
+    
+        #region ISegmentItem
+
+            public int              SegID { get; set; } = -1;
+
+            public int              SegAddress
+            {
+                get
+                {
+                    return mByte;
+                }
+            }
+
+            public int              SegLength
+            {
+                get
+                {
+                    return mBufferLength;
+                }
+            }
+
+        #endregion
+        
     }
 }

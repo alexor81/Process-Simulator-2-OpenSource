@@ -92,7 +92,7 @@ namespace SimulationObject.Voice.Command
                 }
             }
 
-            public NameValueHolder              mHolder = new NameValueHolder();
+            public NameValueHolder              mHolder = new NameValueHolder(false, true);
 
         #endregion
 

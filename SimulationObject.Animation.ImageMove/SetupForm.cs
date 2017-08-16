@@ -164,7 +164,7 @@ namespace SimulationObject.Animation.ImageMove
                 using (var lGraphics = Graphics.FromImage(mPBoxBmp))
                 {
                     lGraphics.Clear(Color.Transparent);
-                    lGraphics.InterpolationMode = InterpolationMode.High;
+                    lGraphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
                     lGraphics.DrawImage(mBmp, 0, 0, lWidth, lHeight);
                     if (String.IsNullOrWhiteSpace(lLabel) == false)
                     {
@@ -227,7 +227,7 @@ namespace SimulationObject.Animation.ImageMove
                         if (mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
                         {
                             mBmp.Dispose();
-                            mBmp                = null;
+                            mBmp = null;
                         }
 
                         if (mImgMemStrm != null && ReferenceEquals(mMove.mImgMemStrm, mImgMemStrm) == false)

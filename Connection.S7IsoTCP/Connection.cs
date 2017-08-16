@@ -8,6 +8,7 @@ using System.Threading;
 using System.Timers;
 using Utils;
 using Utils.Logger;
+using Utils.Segmentation;
 
 namespace Connection.S7IsoTCP
 {
@@ -71,228 +72,123 @@ namespace Connection.S7IsoTCP
 
         #region Read/Write optimisation
 
-            private class GroupDescriptor
+            private int                 mPDULength          = 0;
+
+            private bool                mOptimize           = false;
+            private void                optimize()
             {
-                public static GroupDescriptor   getNewGroupDescriptor(DataItem aItem, int aPDULength, int aMaxAddress)
+                var lSegments   = new SegmentBuilder((uint)mPDULength, false);
+
+                if (lSegments.Enabled)
                 {
-                    var lGroupDsc       = new GroupDescriptor();
-                    lGroupDsc.mStart    = aItem.Byte;
-                    lGroupDsc.setBufferSize(aItem, aPDULength, aMaxAddress);
-                    return lGroupDsc;
-                }
+                    string lSegName;
 
-                public bool                     mActual;
-                public int                      mStart = 0;             
-                public byte[]                   mBuffer;
-                public void                     setBufferSize(DataItem aItem, int aPDULength, int aMaxAddress)
-                {
-                    int lBuffer = aItem.Byte - mStart + aItem.BufferLength;
-                    int lDiv    = lBuffer / aPDULength;
-                    if ((lBuffer % aPDULength) > 0)
-                    {
-                        lDiv = lDiv + 1;
-                    }
-                    lBuffer = aPDULength * lDiv;
-
-                    if (mStart + lBuffer - 1 > aMaxAddress)
-                    {
-                        lBuffer = aMaxAddress - mStart + 1;
-                    }
-
-                    mBuffer = new byte[lBuffer];
-                }
-            }
-
-            private List<GroupDescriptor>   mGroups             = new List<GroupDescriptor>();
-
-            private int                     mPDULength          = 0;
-
-            private bool                    mOptimize           = false;
-            private void                    optimize()
-            {
-                #region Sorting
-
-                    var lMemoryAreas    = new SortedList<string, SortedDictionary<int, List<DataItem>>>(StringComparer.Ordinal);
-                    var lItemCount      = new SortedList<string, int>(StringComparer.Ordinal);
-                    var lMaxAddress     = new SortedList<string, int>(StringComparer.Ordinal);
-
-                    DataItem lItem;
-                    string lAreaName;
-                    int lMax;
-
-                    int lCount = mItemRWList.Count;
+                    int lCount = mItemList.Count;
                     for (int i = 0; i < lCount; i++)
                     {
-                        lItem       = mItemRWList[i];
-                        lAreaName   = lItem.mMemoryType.ToString();
-                        if (lItem.mMemoryType == EArea.DB)
+                        if (mItemList[i].mMemoryType == EArea.M)
                         {
-                            lAreaName = lAreaName + lItem.DB.ToString();
+                            lSegName = "M";
+                        }
+                        else if (mItemList[i].mMemoryType == EArea.DB)
+                        {
+                            lSegName = "DB" + mItemList[i].DB.ToString();
+                        }
+                        else if (mItemList[i].mMemoryType == EArea.I)
+                        {
+                            lSegName = "I";
+                        }
+                        else
+                        {
+                            lSegName = "Q";
                         }
 
-                        lMax = lItem.Byte + lItem.BufferLength - 1;
-
-                        if (lMemoryAreas.ContainsKey(lAreaName) == false)
-                        {
-                            lMemoryAreas.Add(lAreaName, new SortedDictionary<int, List<DataItem>>());
-                            lItemCount.Add(lAreaName, 0);
-                            lMaxAddress.Add(lAreaName, lMax);                            
-                        }
-
-                        if (lMemoryAreas[lAreaName].ContainsKey(lItem.Byte) == false)
-                        {
-                            lMemoryAreas[lAreaName].Add(lItem.Byte, new List<DataItem>());
-                        }
-
-                        lMemoryAreas[lAreaName][lItem.Byte].Add(lItem);
-                        lItemCount[lAreaName] = lItemCount[lAreaName] + 1;
-                        if (lMaxAddress[lAreaName] < lMax)
-                        {
-                            lMaxAddress[lAreaName] = lMax;
-                        }
-
-                        lItem.mGroup = 0;
+                        lSegments.addItem(lSegName, mItemList[i]);
                     }
 
-                #endregion
+                    var lSeg    = lSegments.getSegments();
+                    mSegActual  = new bool[lSeg.Item1.Length];
+                    mSegStart   = lSeg.Item1;
+                    mSegBuffer  = new byte[lSeg.Item1.Length][];
 
-                #region Grouping
-
-                    SortedDictionary<int, List<DataItem>> lArea;
-                    mGroups.Clear();
-                    mItemRWList.Clear();
-                    
-                    int lGroupLastByte;
-                    int lItemLastByte;
-                    GroupDescriptor lGroupDsc   = null;
-                    int lGroup                  = 0;
-
-                    foreach (string lAreaName1 in lMemoryAreas.Keys)
+                    for (int i = 0; i < lSeg.Item1.Length; i++)
                     {
-                        lArea = lMemoryAreas[lAreaName1];
-                        foreach (int lByte in lArea.Keys)
-                        {
-                            mItemRWList.AddRange(lArea[lByte]); 
-                        }
-
-                        if (lItemCount[lAreaName1] > 1)
-                        {
-                            foreach (int lByte in lArea.Keys)
-                            {
-                                foreach (DataItem lItem1 in lArea[lByte])
-                                {
-                                    if (lGroupDsc == null)
-                                    {
-                                        lGroupDsc = GroupDescriptor.getNewGroupDescriptor(lItem1, mPDULength, lMaxAddress[lAreaName1]);
-                                        mGroups.Add(lGroupDsc);
-                                        lGroup = lGroup + 1;
-                                    }
-
-                                    lGroupLastByte  = lGroupDsc.mStart + lGroupDsc.mBuffer.Length - 1;
-                                    lItemLastByte   = lItem1.Byte + lItem1.BufferLength - 1;
-
-                                    if (lGroupLastByte < lItemLastByte)
-                                    {
-                                        if (lItem1.Byte <= lGroupLastByte)
-                                        {
-                                            lGroupDsc.setBufferSize(lItem1, mPDULength, lMaxAddress[lAreaName1]);
-                                        }
-                                        else
-                                        {
-                                            lGroupDsc = GroupDescriptor.getNewGroupDescriptor(lItem1, mPDULength, lMaxAddress[lAreaName1]);
-                                            mGroups.Add(lGroupDsc);
-                                            lGroup = lGroup + 1;
-                                        }                
-                                    }
-
-                                    lItem1.mGroup = lGroup;
-                                }   
-                            }
-                            lGroupDsc = null;
-                        }
+                        mSegBuffer[i] = new byte[lSeg.Item2[i]];
                     }
-
-                #endregion
+                }
             }
 
-            private void                    read(DataItem aItem)
+            private bool[]              mSegActual;
+            private void                resetSegActual()
             {
-                if (aItem.mGroup == 0)
+                if (mSegActual == null) return;
+
+                for (int i = 0; i < mSegActual.Length; i++)
+                {
+                    mSegActual[i] = false;
+                }
+            }
+            private int[]               mSegStart;
+            private byte[][]            mSegBuffer;
+            private int                 readSegment(int aSegmentID, EArea aMemoryType, int aDB)
+            {
+                return mClient.ReadArea((int)aMemoryType, 
+                                                aDB, 
+                                                    mSegStart[aSegmentID], 
+                                                        mSegBuffer[aSegmentID].Length, 
+                                                            (int)EWordlen.S7_Byte, 
+                                                                mSegBuffer[aSegmentID]);
+            }
+
+            private void                read(DataItem aItem)
+            {
+                if (aItem.SegID < 0)
                 {
                     aItem.read(mClient);
                 }
                 else
                 {
-                    GroupDescriptor lGroupDsc = mGroups[aItem.mGroup - 1];
-                    if (lGroupDsc.mActual == false)
+                    if (mSegActual[aItem.SegID] == false)
                     {
-                        int lResult = mClient.ReadArea((int)aItem.mMemoryType, aItem.DB, lGroupDsc.mStart, lGroupDsc.mBuffer.Length, (int)EWordlen.S7_Byte, lGroupDsc.mBuffer);
+                        int lResult = readSegment(aItem.SegID, aItem.mMemoryType, aItem.DB);
                         if (lResult != 0)
                         {
                             reportError("Error reading data for group of Items: " + mClient.ErrorText(lResult));
                             return;
                         }
 
-                        lGroupDsc.mActual = true;
+                        mSegActual[aItem.SegID] = true;
                     }
 
-                    byte[] lValue   = new byte[aItem.BufferLength];
-                    int lIndex      = aItem.Byte - lGroupDsc.mStart;
-                    if (aItem.DataType == EWordlen.S7_Bit)
+                    if (mSegActual[aItem.SegID])
                     {
-                        if ((lGroupDsc.mBuffer[lIndex] & (1 << aItem.Bit)) != 0)
+                        var lValue  = new byte[aItem.SegLength];
+                        int lIndex  = aItem.SegAddress - mSegStart[aItem.SegID];
+
+                        if (aItem.DataType == EWordlen.S7_Bit)
                         {
-                            lValue[0] = 1;
+                            if ((mSegBuffer[aItem.SegID][lIndex] & (1 << aItem.Bit)) != 0)
+                            {
+                                lValue[0] = 1;
+                            }
+                            else
+                            {
+                                lValue[0] = 0;
+                            }
                         }
                         else
                         {
-                            lValue[0] = 0;
+                            Array.Copy(mSegBuffer[aItem.SegID], lIndex, lValue, 0, lValue.Length);
                         }
-                    }
-                    else
-                    {
-                        Array.Copy(lGroupDsc.mBuffer, lIndex, lValue, 0, lValue.Length);
-                    }
-                    aItem.setValueFromPLC(lValue);
+
+                        aItem.setValueFromPLC(lValue);
+                    }                    
                 }
             }
-
-            private void                    write(DataItem aItem)
+            private void                write(DataItem aItem)
             {
                 mWriteRequests = mWriteRequests + 1;
-                byte[] lValue = aItem.write(mClient);
-                if (lValue != null && aItem.mGroup != 0)
-                {
-                    var lGroupDsc   = mGroups[aItem.mGroup - 1];
-                    int lIndex      = aItem.Byte - lGroupDsc.mStart;
-                    if (aItem.DataType == EWordlen.S7_Bit)
-                    {
-                        if (lValue[0] == 1)
-                        {
-                            lGroupDsc.mBuffer[lIndex] = (byte)(lGroupDsc.mBuffer[lIndex] | (1 << aItem.Bit));
-                        }
-                        else
-                        {
-                            lGroupDsc.mBuffer[lIndex] = (byte)(lGroupDsc.mBuffer[lIndex] & ~(1 << aItem.Bit));
-                        }
-                    }
-                    else
-                    {
-                        for (int i = lIndex; i < lValue.Length; i++)
-                        {
-                            lGroupDsc.mBuffer[i] = lValue[i];
-                        }
-                    }
-                }
-            }
-
-            private void                    resetGroupCache()
-            {
-                int lCount = mGroups.Count;
-                for (int i = 0; i < lCount; i++)
-                {
-                    mGroups[i].mActual = false;
-                }
+                aItem.write(mClient);
             }
 
         #endregion
@@ -311,34 +207,34 @@ namespace Connection.S7IsoTCP
                         {
                             #region Item List Changed
 
-                            if (mItemListChanged)
-                            {
-                                mItemRWList.Clear();
-                                mItemListLock.EnterReadLock();
-                                //========================================
-                                try
+                                if (mItemListChanged)
                                 {
-                                    mItemRWList.AddRange(mItemList);
-                                    mItemListChanged = false;
-                                }
-                                finally
-                                {
+                                    mItemRWList.Clear();
+                                    mItemListLock.EnterReadLock();
                                     //========================================
-                                    mItemListLock.ExitReadLock();
-                                }
+                                    try
+                                    {
+                                        mItemRWList.AddRange(mItemList);
+                                        mItemListChanged = false;
+                                    }
+                                    finally
+                                    {
+                                        //========================================
+                                        mItemListLock.ExitReadLock();
+                                    }
 
-                                foreach (DataItem lDataItem in mItemRWList)
+                                    foreach (DataItem lDataItem in mItemRWList)
+                                    {
+                                        lDataItem.SegID = -1;
+                                    }
+
+                                    mOptimize = true;
+                                }
+                                else if (mOptimize)
                                 {
-                                    lDataItem.mGroup = 0;
+                                    mOptimize = false;
+                                    optimize();
                                 }
-
-                                mOptimize = true;
-                            }
-                            else if (mOptimize)
-                            {
-                                mOptimize = false;
-                                optimize();
-                            }
 
                             #endregion
 
@@ -389,7 +285,7 @@ namespace Connection.S7IsoTCP
                     }
             }
 
-            resetGroupCache();
+            resetSegActual();
 
             mMainCycleTimeMS = MiscUtils.TimerMS - lStartMS;
 
