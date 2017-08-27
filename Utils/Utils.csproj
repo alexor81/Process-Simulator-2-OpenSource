@@ -1,0 +1,948 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A3432DD2-E5EB-457E-9EE7-EDBC148F7D8A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Utils</RootNamespace>
+    <AssemblyName>Utils</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\_BinDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>none</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\_BinRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>none</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="API">
+      <HintPath>..\..\..\..\Program Files (x86)\Process Simulator 2\API.DLL</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v12.2.Core, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v12.2, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v12.2, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>.\FastColoredTextBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LBIndustrialCtrls">
+      <HintPath>.\LBIndustrialCtrls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChartUtils.cs" />
+    <Compile Include="CommunicationUtils.cs" />
+    <Compile Include="Converters.cs" />
+    <Compile Include="CSharpScript\CSScript.cs" />
+    <Compile Include="CSharpScript\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CSharpScript\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSharpScript\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CSharpScript\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogForms\ListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogForms\ListForm.Designer.cs">
+      <DependentUpon>ListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogForms\MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogForms\MessageForm.designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogForms\QuestionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogForms\QuestionForm.designer.cs">
+      <DependentUpon>QuestionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogForms\StringForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogForms\StringForm.designer.cs">
+      <DependentUpon>StringForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogForms\ValueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogForms\ValueForm.Designer.cs">
+      <DependentUpon>ValueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EDataFlow.cs" />
+    <Compile Include="FCTBUtils.cs" />
+    <Compile Include="FiniteStateMachine.cs" />
+    <Compile Include="FormUtils.cs" />
+    <Compile Include="GridUtils.cs" />
+    <Compile Include="Logger\LogTraceListener.cs" />
+    <Compile Include="Logger\Log.cs" />
+    <Compile Include="Logger\LogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logger\LogForm.Designer.cs">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MiscUtils.cs" />
+    <Compile Include="NameValueList\NameValueHolder.cs" />
+    <Compile Include="PanelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForm.designer.cs">
+      <DependentUpon>PanelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ArrayDoubleTrend\ArrayDoubleTrendPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\ArrayDoubleTrend\ArrayDoubleTrendPanel.Designer.cs">
+      <DependentUpon>ArrayDoubleTrendPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ArrayDoubleTrend\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ArrayDoubleTrend\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BitmapImage\BitmapImagePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\BitmapImage\BitmapImagePanel.Designer.cs">
+      <DependentUpon>BitmapImagePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BitmapImage\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BitmapImage\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BitmapImage\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BitmapImage\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanButton\BooleanButtonPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanButton\BooleanButtonPanel.Designer.cs">
+      <DependentUpon>BooleanButtonPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanButton\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanButton\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanCheckBox\BooleanCheckBoxPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanCheckBox\BooleanCheckBoxPanel.Designer.cs">
+      <DependentUpon>BooleanCheckBoxPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanCheckBox\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanCheckBox\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanIndicator\BooleanIndicatorPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanIndicator\BooleanIndicatorPanel.Designer.cs">
+      <DependentUpon>BooleanIndicatorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanIndicator\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanIndicator\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\BooleanSymbolPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\BooleanSymbolPanel.designer.cs">
+      <DependentUpon>BooleanSymbolPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\ISymbol.cs" />
+    <Compile Include="Panels\BooleanSymbol\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SetupForm.designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolEllipse\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolEllipse\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolEllipse\SymbolEllipse.cs" />
+    <Compile Include="Panels\BooleanSymbol\SymbolImage\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolImage\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolImage\SymbolImage.cs" />
+    <Compile Include="Panels\BooleanSymbol\SymbolLine\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolLine\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolLine\SymbolLine.cs" />
+    <Compile Include="Panels\BooleanSymbol\SymbolNone.cs" />
+    <Compile Include="Panels\BooleanSymbol\SymbolRectangle\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolRectangle\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanSymbol\SymbolRectangle\SymbolRectangle.cs" />
+    <Compile Include="Panels\BooleanToggle\BooleanTogglePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanToggle\BooleanTogglePanel.Designer.cs">
+      <DependentUpon>BooleanTogglePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanToggle\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanToggle\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanTrend\BooleanTrendPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanTrend\BooleanTrendPanel.Designer.cs">
+      <DependentUpon>BooleanTrendPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BooleanTrend\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BooleanTrend\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleBar\DoubleBarPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleBar\DoubleBarPanel.Designer.cs">
+      <DependentUpon>DoubleBarPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleBar\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleBar\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleEditBox\DoubleEditBoxPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleEditBox\DoubleEditBoxPanel.Designer.cs">
+      <DependentUpon>DoubleEditBoxPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleEditBox\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleEditBox\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleIndicator\DoubleIndicatorPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleIndicator\DoubleIndicatorPanel.Designer.cs">
+      <DependentUpon>DoubleIndicatorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleIndicator\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleIndicator\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleKnob\DoubleKnobPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleKnob\DoubleKnobPanel.Designer.cs">
+      <DependentUpon>DoubleKnobPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleKnob\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleKnob\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleMeter\DoubleMeterPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleMeter\DoubleMeterPanel.Designer.cs">
+      <DependentUpon>DoubleMeterPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleMeter\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleMeter\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleSlider\DoubleSliderPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleSlider\DoubleSliderPanel.Designer.cs">
+      <DependentUpon>DoubleSliderPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleSlider\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleSlider\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleSlidingScale\DoubleSlidingScalePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleSlidingScale\DoubleSlidingScalePanel.Designer.cs">
+      <DependentUpon>DoubleSlidingScalePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleSlidingScale\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleSlidingScale\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleTrend\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleTrend\SetupForm.designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoubleTrend\DoubleTrendPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\DoubleTrend\DoubleTrendPanel.designer.cs">
+      <DependentUpon>DoubleTrendPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\GroupBox\GroupBoxPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\GroupBox\GroupBoxPanel.Designer.cs">
+      <DependentUpon>GroupBoxPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\IPanelExt.cs" />
+    <Compile Include="Panels\ObjectDropDownList\DropDownListPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\ObjectDropDownList\DropDownListPanel.Designer.cs">
+      <DependentUpon>DropDownListPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NameValueList\Clipboard.cs" />
+    <Compile Include="Panels\ObjectRadioButtonGroup\RadioButtonGroupPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\ObjectRadioButtonGroup\RadioButtonGroupPanel.Designer.cs">
+      <DependentUpon>RadioButtonGroupPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NameValueList\NameValueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NameValueList\NameValueForm.Designer.cs">
+      <DependentUpon>NameValueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ObjectTextLabel\ObjectTextLabelPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\ObjectTextLabel\ObjectTextLabelPanel.Designer.cs">
+      <DependentUpon>ObjectTextLabelPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ObjectTextLabel\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ObjectTextLabel\SetupForm.designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\StringEditBox\StringEditBoxPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\StringEditBox\StringEditBoxPanel.Designer.cs">
+      <DependentUpon>StringEditBoxPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\StringTextEditor\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\StringTextEditor\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\StringTextEditor\StringTextEditorPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\StringTextEditor\StringTextEditorPanel.Designer.cs">
+      <DependentUpon>StringTextEditorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\TextLabel\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\TextLabel\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\TextLabel\TextLabelPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\TextLabel\TextLabelPanel.Designer.cs">
+      <DependentUpon>TextLabelPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementEllipse\ElementEllipse.cs" />
+    <Compile Include="Panels\VectorImage\ElementEllipse\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementEllipse\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementLine\ElementLine.cs" />
+    <Compile Include="Panels\VectorImage\ElementLine\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementLine\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementPolygon\ElementPolygon.cs" />
+    <Compile Include="Panels\VectorImage\ElementPolygon\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementPolygon\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementRectangle\ElementRectangle.cs" />
+    <Compile Include="Panels\VectorImage\ElementRectangle\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementRectangle\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementText\ElementText.cs" />
+    <Compile Include="Panels\VectorImage\ElementText\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\VectorImage\ElementText\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\IRedraw.cs" />
+    <Compile Include="Panels\VectorImage\IVectorElement.cs" />
+    <Compile Include="Panels\VectorImage\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\VectorImage\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\VectorImage\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\VectorImage\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\VectorImage\VectorImagePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\VectorImage\VectorImagePanel.Designer.cs">
+      <DependentUpon>VectorImagePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RepeatItemNameChecker.cs" />
+    <Compile Include="Segmentation\ISegmentItem.cs" />
+    <Compile Include="Segmentation\SegmentBuilder.cs" />
+    <Compile Include="Snapshot\AddEditRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Snapshot\AddEditRecordForm.designer.cs">
+      <DependentUpon>AddEditRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Snapshot\Snapshot.cs" />
+    <Compile Include="Snapshot\SnapshotRecordsManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Snapshot\SnapshotRecordsManagerForm.designer.cs">
+      <DependentUpon>SnapshotRecordsManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpecialControls\ItemEditBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpecialControls\ItemEditBox.Designer.cs">
+      <DependentUpon>ItemEditBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpecialControls\PlayPause.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpecialControls\PlayPause.Designer.cs">
+      <DependentUpon>PlayPause.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpecialControls\SliderControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SpecialControls\SlidingScale.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpecialControls\ToggleSwitch\GraphicsExtensionMethods.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\ImageHelper.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchAndroidRenderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchBrushedMetalRenderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchCarbonRenderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchFancyRenderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchIOS5Renderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchIphoneRenderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchMetroRenderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchModernRenderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchOSXRenderer.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\Renderers\ToggleSwitchRendererBase.cs" />
+    <Compile Include="SpecialControls\ToggleSwitch\ToggleSwitch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SpecialControls\ValueControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpecialControls\ValueControl.Designer.cs">
+      <DependentUpon>ValueControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpecialControls\VerticalProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StringUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpecialControls\OKCancelButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpecialControls\OKCancelButton.Designer.cs">
+      <DependentUpon>OKCancelButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ValueScale.cs" />
+    <Compile Include="ValuesCompare.cs" />
+    <Compile Include="WM.cs" />
+    <Compile Include="XMLAttributeReader.cs" />
+    <Compile Include="XMLUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CSharpScript\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CSharpScript\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogForms\ListForm.resx">
+      <DependentUpon>ListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogForms\MessageForm.resx">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogForms\QuestionForm.resx">
+      <DependentUpon>QuestionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogForms\StringForm.resx">
+      <DependentUpon>StringForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogForms\ValueForm.resx">
+      <DependentUpon>ValueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logger\LogForm.resx">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForm.resx">
+      <DependentUpon>PanelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ArrayDoubleTrend\ArrayDoubleTrendPanel.resx">
+      <DependentUpon>ArrayDoubleTrendPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ArrayDoubleTrend\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BitmapImage\BitmapImagePanel.resx">
+      <DependentUpon>BitmapImagePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BitmapImage\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BitmapImage\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanButton\BooleanButtonPanel.resx">
+      <DependentUpon>BooleanButtonPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanButton\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanCheckBox\BooleanCheckBoxPanel.resx">
+      <DependentUpon>BooleanCheckBoxPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanCheckBox\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanIndicator\BooleanIndicatorPanel.resx">
+      <DependentUpon>BooleanIndicatorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanIndicator\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanSymbol\BooleanSymbolPanel.resx">
+      <DependentUpon>BooleanSymbolPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanSymbol\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanSymbol\SymbolEllipse\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanSymbol\SymbolImage\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanSymbol\SymbolLine\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanSymbol\SymbolRectangle\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanToggle\BooleanTogglePanel.resx">
+      <DependentUpon>BooleanTogglePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanToggle\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanTrend\BooleanTrendPanel.resx">
+      <DependentUpon>BooleanTrendPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooleanTrend\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleBar\DoubleBarPanel.resx">
+      <DependentUpon>DoubleBarPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleBar\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleEditBox\DoubleEditBoxPanel.resx">
+      <DependentUpon>DoubleEditBoxPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleEditBox\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleIndicator\DoubleIndicatorPanel.resx">
+      <DependentUpon>DoubleIndicatorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleIndicator\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleKnob\DoubleKnobPanel.resx">
+      <DependentUpon>DoubleKnobPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleKnob\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleMeter\DoubleMeterPanel.resx">
+      <DependentUpon>DoubleMeterPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleMeter\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleSlider\DoubleSliderPanel.resx">
+      <DependentUpon>DoubleSliderPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleSlider\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleSlidingScale\DoubleSlidingScalePanel.resx">
+      <DependentUpon>DoubleSlidingScalePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleSlidingScale\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleTrend\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoubleTrend\DoubleTrendPanel.resx">
+      <DependentUpon>DoubleTrendPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\GroupBox\GroupBoxPanel.resx">
+      <DependentUpon>GroupBoxPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ObjectDropDownList\DropDownListPanel.resx">
+      <DependentUpon>DropDownListPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ObjectRadioButtonGroup\RadioButtonGroupPanel.resx">
+      <DependentUpon>RadioButtonGroupPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NameValueList\NameValueForm.resx">
+      <DependentUpon>NameValueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ObjectTextLabel\ObjectTextLabelPanel.resx">
+      <DependentUpon>ObjectTextLabelPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ObjectTextLabel\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\StringEditBox\StringEditBoxPanel.resx">
+      <DependentUpon>StringEditBoxPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\StringTextEditor\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\StringTextEditor\StringTextEditorPanel.resx">
+      <DependentUpon>StringTextEditorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\TextLabel\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\TextLabel\TextLabelPanel.resx">
+      <DependentUpon>TextLabelPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VectorImage\ElementEllipse\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VectorImage\ElementLine\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VectorImage\ElementPolygon\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VectorImage\ElementRectangle\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VectorImage\ElementText\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VectorImage\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VectorImage\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VectorImage\VectorImagePanel.resx">
+      <DependentUpon>VectorImagePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Snapshot\AddEditRecordForm.resx">
+      <DependentUpon>AddEditRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Snapshot\SnapshotRecordsManagerForm.resx">
+      <DependentUpon>SnapshotRecordsManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecialControls\ItemEditBox.resx">
+      <DependentUpon>ItemEditBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecialControls\OKCancelButton.resx">
+      <DependentUpon>OKCancelButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecialControls\PlayPause.resx">
+      <DependentUpon>PlayPause.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecialControls\ValueControl.resx">
+      <DependentUpon>ValueControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StayOnTop.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Track.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Book.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Up.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Down.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Eracer.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SelectAll_Items.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SelectNone_Items.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Setup.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Line.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rectangle.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ellipse.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Crosshair.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paste.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Options.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddWizard.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Filter.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FitSize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ScriptTemplate.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Check.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Collapse.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FindReplace.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Redo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cut.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Expand.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text_indent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Undo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SelectAll.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\VarTemplate.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CenterH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CenterV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlignLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlignRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlignTop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlignBottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SendToBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BringToFront.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Size.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pencil.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document-smiley.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

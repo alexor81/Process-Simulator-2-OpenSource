@@ -79,6 +79,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Voice.Comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationObject.Real.OneOfTwo", "SimulationObject.Real.OneOfTwo\SimulationObject.Real.OneOfTwo.csproj", "{ECA25F9F-1BDC-4352-BF9F-A9235173A2DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{A3432DD2-E5EB-457E-9EE7-EDBC148F7D8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -237,6 +239,10 @@ Global
 		{ECA25F9F-1BDC-4352-BF9F-A9235173A2DD}.Debug|x86.Build.0 = Debug|x86
 		{ECA25F9F-1BDC-4352-BF9F-A9235173A2DD}.Release|x86.ActiveCfg = Release|x86
 		{ECA25F9F-1BDC-4352-BF9F-A9235173A2DD}.Release|x86.Build.0 = Release|x86
+		{A3432DD2-E5EB-457E-9EE7-EDBC148F7D8A}.Debug|x86.ActiveCfg = Debug|x86
+		{A3432DD2-E5EB-457E-9EE7-EDBC148F7D8A}.Debug|x86.Build.0 = Debug|x86
+		{A3432DD2-E5EB-457E-9EE7-EDBC148F7D8A}.Release|x86.ActiveCfg = Release|x86
+		{A3432DD2-E5EB-457E-9EE7-EDBC148F7D8A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

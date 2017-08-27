@@ -1,0 +1,77 @@
+using System;
+
+namespace SciptNamespace
+{
+	public class ScriptClass
+	{
+		public void					ScriptMethod(long aMSFromLastCall)
+		{
+			MSFromLastCall = aMSFromLastCall;
+			try
+			{
+#R2#
+			}
+			catch (System.Threading.ThreadAbortException)
+			{
+				return;
+			}
+			catch (Exception lExc)
+			{
+				mEventArgs		= new object[2];
+				mEventArgs[0]	= 1;
+				mEventArgs[1]	= lExc;
+				raiseScriptEvent();
+			}
+			finally
+			{
+				FirstCycle = false;
+			}
+		}
+
+		public long					MSFromLastCall;
+		public bool					FirstCycle;
+
+		public event EventHandler	ScriptEvent;
+		private void				raiseScriptEvent()
+		{
+			EventHandler lEvent = ScriptEvent;
+			if (lEvent != null) lEvent(null, EventArgs.Empty);
+		}
+		public object[]				mEventArgs;
+
+		private void				LogMessage(string aMessage)
+		{
+			mEventArgs		= new object[2];
+			mEventArgs[0]	= 2;
+			mEventArgs[1]	= aMessage;
+			raiseScriptEvent();
+		}
+
+		private void				ReportError(string aMessage)
+		{
+			FirstCycle		= false;
+
+			mEventArgs		= new object[2];
+			mEventArgs[0]	= 3;
+			mEventArgs[1]	= aMessage;
+			raiseScriptEvent();
+			System.Threading.Thread.CurrentThread.Abort();
+		}
+
+		private void				SwitchTo(string aStateName)
+		{
+			FirstCycle		= false;
+
+			mEventArgs		= new object[2];
+			mEventArgs[0]	= 4;
+			mEventArgs[1]	= aStateName;
+			raiseScriptEvent();
+			System.Threading.Thread.CurrentThread.Abort();
+		}
+
+		public object[]				mVarValues;
+		public bool[]				mVarValuesChanged; 
+#R1#
+#R0#
+	}
+}

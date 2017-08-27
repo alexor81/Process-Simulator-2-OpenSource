@@ -46,9 +46,11 @@
     </Reference>
     <Reference Include="Opc.Ua.Client">
       <HintPath>.\Opc.Ua.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Opc.Ua.Core">
       <HintPath>.\Opc.Ua.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
