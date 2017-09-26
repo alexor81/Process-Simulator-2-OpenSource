@@ -528,6 +528,8 @@ namespace Utils.CSharpScript
         '\"',
         '\'',
         '\''};
+            this.fastColoredTextBox_Code.AutoIndent = false;
+            this.fastColoredTextBox_Code.AutoIndentChars = false;
             this.fastColoredTextBox_Code.AutoIndentCharsPatterns = "\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\n^\\s*(case|default)\\s*[^:]*(" +
     "?<range>:)\\s*(?<range>[^;]+);\n";
             this.fastColoredTextBox_Code.AutoScrollMinSize = new System.Drawing.Size(29, 19);

@@ -8,7 +8,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using Utils;
-using Utils.Logger;
 using Utils.Panels.DoubleBar;
 using Utils.Panels.DoubleIndicator;
 using Utils.Panels.DoubleMeter;

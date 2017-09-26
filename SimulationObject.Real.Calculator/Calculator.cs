@@ -3,7 +3,6 @@
 using API;
 using SimulationObject.Real.Calculator.Panels;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Xml;
 using Utils;

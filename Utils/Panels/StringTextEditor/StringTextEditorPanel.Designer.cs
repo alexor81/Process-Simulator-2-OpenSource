@@ -266,6 +266,8 @@ namespace Utils.Panels.StringTextEditor
         '\"',
         '\'',
         '\''};
+            this.fastColoredTextBox_Text.AutoIndent = false;
+            this.fastColoredTextBox_Text.AutoIndentChars = false;
             this.fastColoredTextBox_Text.AutoIndentCharsPatterns = "\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\n^\\s*(case|default)\\s*[^:]*(" +
     "?<range>:)\\s*(?<range>[^;]+);\n";
             this.fastColoredTextBox_Text.AutoScrollMinSize = new System.Drawing.Size(29, 19);
