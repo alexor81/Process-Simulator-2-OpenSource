@@ -241,26 +241,21 @@ namespace Connection.S7IsoTCP
                             int lCount = mItemRWList.Count;
                             DataItem lItem;
 
+                            resetSegActual();
+
                             for (int i = 0; i < lCount; i++)
                             {
                                 lItem = mItemRWList[i];
 
                                 if (mDisconnect) { break; }
 
-                                #region Write
+                                #region Write/Read
 
                                     if (lItem.mNeedWrite)
                                     {
                                         write(lItem);
                                     }
-
-                                #endregion
-
-                                if (mDisconnect) { break; }
-
-                                #region Read
-
-                                    if (lItem.mNeedWrite != true)
+                                    else
                                     {
                                         read(lItem);
                                     }
@@ -284,8 +279,6 @@ namespace Connection.S7IsoTCP
                         raiseConnectionError(lExc.Message);
                     }
             }
-
-            resetSegActual();
 
             mMainCycleTimeMS = MiscUtils.TimerMS - lStartMS;
 
