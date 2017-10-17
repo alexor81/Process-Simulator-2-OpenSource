@@ -37,16 +37,15 @@ namespace Utils
 
         public static void      checkSerial_Port(string aPortName)
         {
+            if (aPortName.StartsWith("COM") == false) throw new ArgumentException("Invalid port name. ");
+            
             try
             {
-                using (SerialPort lPort = new SerialPort(aPortName))
-                {
-                    lPort.Open();
-                }
+                Int32.Parse(aPortName.Substring(3));
             }
             catch
             {
-                throw new ArgumentException("Unable to open Port.");
+                throw new ArgumentException("Invalid port name. ");
             }
         }
     }

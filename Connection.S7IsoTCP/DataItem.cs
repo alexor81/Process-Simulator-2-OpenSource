@@ -228,10 +228,10 @@ namespace Connection.S7IsoTCP
         }
         public void                 setValueFromPLC(byte[] aBytes)
         {
+            if (mNeedWrite) return;
+
             bool lValueChanged  = false;
             object lNewValue    = aBytes;
-
-            if (mNeedWrite) return;
 
             if (mLength == 1)
             {
@@ -411,49 +411,7 @@ namespace Connection.S7IsoTCP
                 raiseValueChanged();
             } 
         }
-        
-        private bool                isCorrectArrayElementType(Type aType)
-        {
-            switch (mDataType)
-            {
-                case EWordlen.S7_Bit:           return false;
-                case EWordlen.S7_Byte:          if (mSigned)
-                                                {
-                                                    return (aType == typeof(SByte));
-                                                }
-                                                else
-                                                {
-                                                    return (aType == typeof(Byte));
-                                                }
-
-                case EWordlen.S7_Word:          if (mSigned)
-                                                {
-                                                    return (aType == typeof(Int16));
-                                                }
-                                                else
-                                                {
-                                                    return (aType == typeof(UInt16));
-                                                }
-
-                case EWordlen.S7_DoubleWord:    if (mFloatingP)
-                                                {
-                                                    return (aType == typeof(Single));
-                                                }
-                                                else
-                                                {
-                                                    if (mSigned)
-                                                    {
-                                                        return (aType == typeof(Int32));
-                                                    }
-                                                    else
-                                                    {
-                                                        return (aType == typeof(UInt32));
-                                                    }
-                                                }
-            }
-
-            return false;
-        }       
+              
         public object               Value
         {
             get
@@ -532,95 +490,35 @@ namespace Connection.S7IsoTCP
         {
             get
             {
+                Type lType = null;
+
                 switch (mDataType)
                 {
                     case EWordlen.S7_Bit:           return new Boolean();
 
-                    case EWordlen.S7_Byte:          if (mSigned)
-                                                    {
-                                                        if (mLength == 1)
-                                                        {
-                                                            return new SByte();
-                                                        }
-                                                        else
-                                                        {
-                                                            return Array.CreateInstance(typeof(SByte), mLength);
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        if (mLength == 1)
-                                                        {
-                                                            return new Byte();
-                                                        }
-                                                        else
-                                                        {
-                                                            return Array.CreateInstance(typeof(Byte), mLength);
-                                                        }
-                                                    }
+                    case EWordlen.S7_Byte:          if (mSigned) { lType = typeof(SByte); }
+                                                    else { lType = typeof(Byte); }
+                                                    break;
 
-                    case EWordlen.S7_Word:          if (mSigned)
-                                                    {
-                                                        if (mLength == 1)
-                                                        {
-                                                            return new Int16();
-                                                        }
-                                                        else
-                                                        {
-                                                            return Array.CreateInstance(typeof(Int16), mLength);
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        if (mLength == 1)
-                                                        {
-                                                            return new UInt16();
-                                                        }
-                                                        else
-                                                        {
-                                                            return Array.CreateInstance(typeof(UInt16), mLength);
-                                                        }
-                                                    }
+                    case EWordlen.S7_Word:          if (mSigned) { lType = typeof(Int16); }
+                                                    else { lType = typeof(UInt16); }
+                                                    break;
 
-                    case EWordlen.S7_DoubleWord:    if (mFloatingP)
-                                                    {
-                                                        if (mLength == 1)
-                                                        {
-                                                            return new Single();
-                                                        }
-                                                        else
-                                                        {
-                                                            return Array.CreateInstance(typeof(Single), mLength);
-                                                        }
-                                                    }
+                    case EWordlen.S7_DoubleWord:    if (mFloatingP) { lType = typeof(Single); }
                                                     else
-                                                    {
-                                                        if (mSigned)
-                                                        {
-                                                            if (mLength == 1)
-                                                            {
-                                                                return new Int32();
-                                                            }
-                                                            else
-                                                            {
-                                                                return Array.CreateInstance(typeof(Int32), mLength);
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            if (mLength == 1)
-                                                            {
-                                                                return new UInt32();
-                                                            }
-                                                            else
-                                                            {
-                                                                return Array.CreateInstance(typeof(UInt32), mLength);
-                                                            }
-                                                        }
+                                                    { 
+                                                        if (mSigned) { lType = typeof(Int32); }
+                                                        else { lType = typeof(UInt32); }
                                                     }
+                                                    break;
                 }
 
-                return null;
+                if (lType == null)
+                {
+                    throw new ArgumentException("DataType is wrong. ");
+                }
+
+                return StringUtils.getInitValue(lType, (mLength > 1), mLength);
             }
         }
 

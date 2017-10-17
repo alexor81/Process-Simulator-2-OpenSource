@@ -127,7 +127,7 @@ namespace Utils
             throw new ArgumentException("Type '" + aType.Name + "' is not supported. ");
         }
 
-        public static object                                getInitValue(string aType, bool aArray = false)
+        public static object                                getInitValue(string aType, bool aArray = false, int aLength = 0)
         {
             if (String.IsNullOrWhiteSpace(aType))
             {
@@ -144,14 +144,29 @@ namespace Utils
                 throw new ArgumentException("Type '" + aType + "' is not supported. ");
             }
 
+            if (aLength < 0)
+            {
+                throw new ArgumentException("Length is less than zero. ");
+            }
+
             if (aArray)
             {
-                return Array.CreateInstance(Types[aType], 0);
+                return Array.CreateInstance(Types[aType], aLength);
             }
             else
             {
+                if (aLength > 1)
+                {
+                    throw new ArgumentException("Length is wrong. ");
+                }
+
                 return InitValues[aType];
             }
+        }
+
+        public static object                                getInitValue(Type aType, bool aArray = false, int aLength = 0)
+        {
+            return getInitValue(aType.Name, aArray, aLength);
         }
 
         public const string                                 DTwMsFormat = "yyyy.MM.dd HH:mm:ss.fff";
