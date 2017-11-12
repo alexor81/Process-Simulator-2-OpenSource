@@ -8,14 +8,6 @@ using System.Xml;
 
 namespace Utils.Panels.TextLabel
 {
-    public enum ERotation
-    {
-        Rotate0     = 0,
-        Rotate90    = 1,
-        Rotate180   = 2,
-        Rotate270   = 3
-    }
-
     public partial class TextLabelPanel : UserControl, IPanel
     {
         public                  TextLabelPanel()

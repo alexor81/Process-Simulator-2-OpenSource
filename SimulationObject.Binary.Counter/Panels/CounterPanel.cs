@@ -20,7 +20,7 @@ namespace SimulationObject.Binary.Counter.Panels
             InitializeComponent();
 
             BackColor = SystemColors.Control;
-            comboBox_Front.Items.AddRange(Enum.GetNames(typeof(Counter.EFront)));
+            comboBox_Front.Items.AddRange(Enum.GetNames(typeof(EFront)));
         }
 
         public void             fillForDemo()
@@ -136,7 +136,7 @@ namespace SimulationObject.Binary.Counter.Panels
         {
             if(comboBox_Front.SelectedIndex != (int)mCounter.Front)
             {
-                mCounter.Front = (Counter.EFront)comboBox_Front.SelectedIndex;
+                mCounter.Front = (EFront)comboBox_Front.SelectedIndex;
             }
         }
 

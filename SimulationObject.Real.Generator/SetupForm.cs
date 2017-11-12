@@ -32,12 +32,13 @@ namespace SimulationObject.Real.Generator
                 itemEditBox_Value.ItemToolTip   = mBrowser.getItemToolTipByHandle(mGenerator.mValueItemHandle);
             }
 
-            comboBox_Signal.Items.AddRange(Generator.Signals);
+            comboBox_Signal.Items.AddRange(Enum.GetNames(typeof(ESignals)));
             comboBox_Signal.SelectedIndex   = mGenerator.SignalIndex;
             spinEdit_Bias.Value             = (decimal)mGenerator.Bias;
             spinEdit_Amplitude.Value        = (decimal)mGenerator.Amplitude;
             spinEdit_PeriodMS.Value         = mGenerator.PeriodMS;
             spinEdit_TurnMS.Value           = mGenerator.TurnMS;
+            spinEdit_StartMS.Value          = mGenerator.StartMS;
         }
 
         private void            ItemButtonClick(object aSender, EventArgs aEventArgs)
@@ -74,6 +75,7 @@ namespace SimulationObject.Real.Generator
                     mGenerator.Amplitude        = (double)spinEdit_Amplitude.Value;
                     mGenerator.PeriodMS         = (uint)spinEdit_PeriodMS.Value;
                     mGenerator.TurnMS           = (uint)spinEdit_TurnMS.Value;
+                    mGenerator.StartMS          = (uint)spinEdit_StartMS.Value;
 
                     DialogResult = DialogResult.OK;
                 }

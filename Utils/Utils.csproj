@@ -372,6 +372,7 @@
     <Compile Include="Panels\DoubleTrend\DoubleTrendPanel.designer.cs">
       <DependentUpon>DoubleTrendPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panels\ERotation.cs" />
     <Compile Include="Panels\GroupBox\GroupBoxPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -17,28 +17,26 @@ namespace SimulationObject.Binary.Logic
     {
         #region Properties
 
-            public static readonly string[]                     Operators = new string[] { "AND",
-                                                                                           "OR",
-                                                                                           "XOR",
-                                                                                           "NOT",
-                                                                                           "NAND",
-                                                                                           "NOR",
-                                                                                           "XNOR" };
-
-            private int                                         mOperator = 0;
+            private EOperators                                  mOperator = EOperators.AND;
             public int                                          OperatorIndex
             {
-                get { return mOperator; }
+                get { return (int)mOperator; }
                 set
                 {
-                    if (mOperator != value)
+                    EOperators lNew;
+                    try
                     {
-                        if (value < 0 || value >= Operators.Length)
-                        {
-                            throw new ArgumentException("Unknown logical operator. ");
-                        }
+                        lNew = (EOperators)value;
+                    }
+                    catch
+                    {
+                        throw new ArgumentException("Unknown logical type. ");
+                    }
+                        
 
-                        mOperator = value;
+                    if (mOperator != lNew)
+                    {
+                        mOperator     = lNew;
                         raisePropertiesChanged();
                         check();
                     }
@@ -46,24 +44,25 @@ namespace SimulationObject.Binary.Logic
             }
             public string                                       OperatorString
             {
-                get { return Operators[mOperator]; }
+                get { return mOperator.ToString(); }
                 set
                 {
-                    for (int i = 0; i < Operators.Length; i++)
+                    EOperators lNew;
+                    try
                     {
-                        if (Operators[i].Equals(value, StringComparison.Ordinal))
-                        {
-                            if (mOperator != i)
-                            {
-                                mOperator = i;
-                                raisePropertiesChanged();
-                                check();
-                            }
-                            return;
-                        }
+                        lNew = (EOperators)Enum.Parse(typeof(EOperators), value);
+                    }
+                    catch
+                    {
+                        throw new ArgumentException("Unknown logical operator. ");
                     }
 
-                    throw new ArgumentException("Unknown logical operator. ");
+                    if (mOperator != lNew)
+                    {
+                        mOperator     = lNew;
+                        raisePropertiesChanged();
+                        check();
+                    }
                 }
             }
 
@@ -324,13 +323,13 @@ namespace SimulationObject.Binary.Logic
 
                 switch (mOperator)
                 {
-                    case 0: mValue = lIn1 && lIn2; break;       //AND
-                    case 1: mValue = lIn1 || lIn2; break;       //OR
-                    case 2: mValue = lIn1 ^ lIn2; break;        //XOR
-                    case 3: mValue = !lIn1; break;              //NOT
-                    case 4: mValue = !(lIn1 && lIn2); break;    //NAND
-                    case 5: mValue = !(lIn1 || lIn2); break;    //NOR
-                    case 6: mValue = !(lIn1 ^ lIn2); break;     //XNOR
+                    case EOperators.AND:    mValue = lIn1 && lIn2; break;
+                    case EOperators.OR:     mValue = lIn1 || lIn2; break;
+                    case EOperators.XOR:    mValue = lIn1 ^ lIn2; break;
+                    case EOperators.NOT:    mValue = !lIn1; break;
+                    case EOperators.NAND:   mValue = !(lIn1 && lIn2); break;
+                    case EOperators.NOR:    mValue = !(lIn1 || lIn2); break;
+                    case EOperators.XNOR:   mValue = !(lIn1 ^ lIn2); break;
                 }
 
                 if (lPrevValue != mValue)

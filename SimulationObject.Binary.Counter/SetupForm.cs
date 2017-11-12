@@ -32,7 +32,7 @@ namespace SimulationObject.Binary.Counter
                 itemEditBox_Value.ItemToolTip = mBrowser.getItemToolTipByHandle(mCounter.mOutValueItemHandle);
             }
 
-            comboBox_Front.Items.AddRange(Enum.GetNames(typeof(Counter.EFront)));
+            comboBox_Front.Items.AddRange(Enum.GetNames(typeof(EFront)));
             comboBox_Front.SelectedIndex = (int)mCounter.Front;
 
             if(mCounter.PositiveInc)
@@ -91,7 +91,7 @@ namespace SimulationObject.Binary.Counter
                     mCounter.mInValueItemHandle     = mBrowser.getItemHandleByName(itemEditBox_Input.ItemName);
                     mCounter.mOutValueItemHandle    = mBrowser.getItemHandleByName(itemEditBox_Value.ItemName);
 
-                    mCounter.Front = (Counter.EFront)comboBox_Front.SelectedIndex;
+                    mCounter.Front = (EFront)comboBox_Front.SelectedIndex;
 
                     mCounter.PositiveInc = (comboBox_P.SelectedIndex == 0);
                     mCounter.NegativeInc = (comboBox_N.SelectedIndex == 0);

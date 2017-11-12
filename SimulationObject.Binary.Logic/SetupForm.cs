@@ -42,7 +42,7 @@ namespace SimulationObject.Binary.Logic
                 itemEditBox_Value.ItemToolTip   = mBrowser.getItemToolTipByHandle(mLogic.mValueItemHandle);
             }
 
-            comboBox_Operator.Items.AddRange(Logic.Operators);
+            comboBox_Operator.Items.AddRange(Enum.GetNames(typeof(EOperators)));
             comboBox_Operator.SelectedIndex = mLogic.OperatorIndex;
         }
 

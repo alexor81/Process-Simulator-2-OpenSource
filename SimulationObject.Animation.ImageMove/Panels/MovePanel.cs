@@ -3,8 +3,6 @@
 using API;
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Utils;
@@ -126,39 +124,13 @@ namespace SimulationObject.Animation.ImageMove.Panels
             Width   = mMove.mWidth;
             Height  = mMove.mHeight;
 
-            var lBmp = mMove.mBmp;
-            if (lBmp!= null)
+            var lBmp            = mMove.clonePanelBitmap;
+            pictureBox.Image    = lBmp;
+            if (mBmp != null)
             {
-                var lNewBmp = new Bitmap(Width, Height);
-                lNewBmp.SetResolution(lBmp.HorizontalResolution, lBmp.VerticalResolution);
-
-                using (var lGraphics = Graphics.FromImage(lNewBmp))
-                {
-                    lGraphics.Clear(Color.Transparent);
-                    lGraphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
-                    lGraphics.DrawImage(lBmp, 0, 0, Width, Height);
-                    if (String.IsNullOrWhiteSpace(mMove.mLabel) == false)
-                    {
-                        lGraphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-                        using (var lBrush = new SolidBrush(mMove.mLabelColor))
-                        {
-                            lGraphics.DrawString(mMove.mLabel, mMove.mLabelFont, lBrush, 0, 0);
-                        }
-                    }
-                }
-
-                pictureBox.Image = lNewBmp;
-                if (mBmp != null)
-                {
-                    mBmp.Dispose();
-                }
-                mBmp = lNewBmp;
+                mBmp.Dispose();
             }
-            else
-            {
-                Log.Error("Error in panel for Animation.ImageMove. Image is empty. ");
-            }
+            mBmp = lBmp;
         }
 
         private void            pictureBox_EnabledChanged(object aSender, EventArgs aEventArgs)
@@ -203,6 +175,7 @@ namespace SimulationObject.Animation.ImageMove.Panels
                 mMove = null;
                 toolTip.RemoveAll();
 
+                pictureBox.Image = null;
                 if (mBmp != null)
                 {
                     mBmp.Dispose();

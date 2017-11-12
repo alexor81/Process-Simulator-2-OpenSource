@@ -48,6 +48,7 @@ namespace SimulationObject.Animation.ImageMove
             mLabelItemHandle        = mMove.mLabelItemHandle;
             mLabelFont              = mMove.mLabelFont;
             mLabelColor             = mMove.mLabelColor;
+            mRotateItemHandle       = mMove.mRotateItemHandle;
 
             if (mMove.mBmp != null)
             {
@@ -97,6 +98,7 @@ namespace SimulationObject.Animation.ImageMove
             public int              mWidthItemHandle        = -1;
             public int              mHeightItemHandle       = -1;
             public int              mLabelItemHandle        = -1;
+            public int              mRotateItemHandle       = -1;
             public Font             mLabelFont;
             public Color            mLabelColor; 
 
@@ -303,6 +305,7 @@ namespace SimulationObject.Animation.ImageMove
                     lChecker.addItemName(mBrowser.getItemNameByHandle(mWidthItemHandle));
                     lChecker.addItemName(mBrowser.getItemNameByHandle(mHeightItemHandle));
                     lChecker.addItemName(mBrowser.getItemNameByHandle(mLabelItemHandle));
+                    lChecker.addItemName(mBrowser.getItemNameByHandle(mRotateItemHandle));
 
                     mMove.mXValueItemHandle         = mBrowser.getItemHandleByName(itemEditBox_X.ItemName);
                     mMove.mYValueItemHandle         = mBrowser.getItemHandleByName(itemEditBox_Y.ItemName);
@@ -336,6 +339,12 @@ namespace SimulationObject.Animation.ImageMove
 
                     mMove.mLabelFont                = mLabelFont;
                     mMove.mLabelColor               = mLabelColor;
+
+                    mMove.mRotateItemHandle         = mRotateItemHandle;
+                    if (mRotateItemHandle == -1)
+                    {
+                        mMove.mRotate = 0.0f;
+                    }
 
                     if (mMove.mBmp != null && ReferenceEquals(mMove.mBmp, mBmp) == false)
                     {

@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EOperators.cs" />
     <Compile Include="Logic.cs" />
     <Compile Include="Panels\LogicPanel.cs">
       <SubType>UserControl</SubType>

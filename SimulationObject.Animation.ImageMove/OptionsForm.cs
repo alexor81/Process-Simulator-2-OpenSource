@@ -46,6 +46,12 @@ namespace SimulationObject.Animation.ImageMove
             buttonEdit_Font.Text    = StringUtils.ObjectToString(mSetupForm.mLabelFont);
             colorEdit_Color.Color   = mSetupForm.mLabelColor;
 
+            if (mSetupForm.mRotateItemHandle != -1)
+            {
+                itemEditBox_Rotate.ItemName     = mBrowser.getItemNameByHandle(mSetupForm.mRotateItemHandle);
+                itemEditBox_Rotate.ItemToolTip  = mBrowser.getItemToolTipByHandle(mSetupForm.mRotateItemHandle);
+            }
+
             checkBox_UserMove.Checked = mSetupForm.mUserMove;
 
             if (mSetupForm.mUserMove && mSetupForm.mMovingByUserItemHandle != -1)
@@ -87,6 +93,7 @@ namespace SimulationObject.Animation.ImageMove
             mSetupForm.mWidthItemHandle     = mBrowser.getItemHandleByName(itemEditBox_Width.ItemName);
             mSetupForm.mHeightItemHandle    = mBrowser.getItemHandleByName(itemEditBox_Height.ItemName);
             mSetupForm.mLabelItemHandle     = mBrowser.getItemHandleByName(itemEditBox_Label.ItemName);
+            mSetupForm.mRotateItemHandle    = mBrowser.getItemHandleByName(itemEditBox_Rotate.ItemName);
             
             mSetupForm.mLabelColor          = colorEdit_Color.Color;
 

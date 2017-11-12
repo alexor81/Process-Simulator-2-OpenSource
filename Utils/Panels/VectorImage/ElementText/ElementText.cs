@@ -7,14 +7,6 @@ using System.Xml;
 
 namespace Utils.Panels.VectorImage.ElementText
 {
-    public enum ERotation
-    {
-        Rotate0     = 0,
-        Rotate90    = 1,
-        Rotate180   = 2,
-        Rotate270   = 3
-    }
-
     public class ElementText : IVectorElement
     {
         public string               Name { get { return "Text"; } }

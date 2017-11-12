@@ -31,16 +31,21 @@ namespace SimulationObject.Real.Generator.Panels
             this.label_Amplitude = new System.Windows.Forms.Label();
             this.label_Bias = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.spinEdit_StartMS = new DevExpress.XtraEditors.SpinEdit();
+            this.label_StartMS = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_TurnMS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_PeriodMS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Amplitude.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Bias.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit_StartMS.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel
             // 
             this.panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel.Controls.Add(this.spinEdit_StartMS);
+            this.panel.Controls.Add(this.label_StartMS);
             this.panel.Controls.Add(this.playPause);
             this.panel.Controls.Add(this.spinEdit_TurnMS);
             this.panel.Controls.Add(this.spinEdit_PeriodMS);
@@ -56,7 +61,7 @@ namespace SimulationObject.Real.Generator.Panels
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Margin = new System.Windows.Forms.Padding(4);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(233, 199);
+            this.panel.Size = new System.Drawing.Size(233, 210);
             this.panel.TabIndex = 0;
             // 
             // playPause
@@ -75,7 +80,7 @@ namespace SimulationObject.Real.Generator.Panels
             0,
             0,
             0});
-            this.spinEdit_TurnMS.Location = new System.Drawing.Point(92, 164);
+            this.spinEdit_TurnMS.Location = new System.Drawing.Point(92, 151);
             this.spinEdit_TurnMS.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_TurnMS.Name = "spinEdit_TurnMS";
             this.spinEdit_TurnMS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -106,7 +111,7 @@ namespace SimulationObject.Real.Generator.Panels
             0,
             0,
             0});
-            this.spinEdit_PeriodMS.Location = new System.Drawing.Point(92, 132);
+            this.spinEdit_PeriodMS.Location = new System.Drawing.Point(92, 122);
             this.spinEdit_PeriodMS.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_PeriodMS.Name = "spinEdit_PeriodMS";
             this.spinEdit_PeriodMS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -137,7 +142,7 @@ namespace SimulationObject.Real.Generator.Panels
             0,
             0,
             0});
-            this.spinEdit_Amplitude.Location = new System.Drawing.Point(92, 100);
+            this.spinEdit_Amplitude.Location = new System.Drawing.Point(92, 93);
             this.spinEdit_Amplitude.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_Amplitude.Name = "spinEdit_Amplitude";
             this.spinEdit_Amplitude.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -156,7 +161,7 @@ namespace SimulationObject.Real.Generator.Panels
             0,
             0,
             0});
-            this.spinEdit_Bias.Location = new System.Drawing.Point(92, 68);
+            this.spinEdit_Bias.Location = new System.Drawing.Point(92, 64);
             this.spinEdit_Bias.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_Bias.Name = "spinEdit_Bias";
             this.spinEdit_Bias.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -171,7 +176,8 @@ namespace SimulationObject.Real.Generator.Panels
             // comboBox_Signal
             // 
             this.comboBox_Signal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Signal.Location = new System.Drawing.Point(8, 37);
+            this.comboBox_Signal.ItemHeight = 16;
+            this.comboBox_Signal.Location = new System.Drawing.Point(8, 35);
             this.comboBox_Signal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_Signal.Name = "comboBox_Signal";
             this.comboBox_Signal.Size = new System.Drawing.Size(215, 24);
@@ -191,7 +197,7 @@ namespace SimulationObject.Real.Generator.Panels
             // label_TurnMS
             // 
             this.label_TurnMS.AutoSize = true;
-            this.label_TurnMS.Location = new System.Drawing.Point(16, 169);
+            this.label_TurnMS.Location = new System.Drawing.Point(15, 155);
             this.label_TurnMS.Name = "label_TurnMS";
             this.label_TurnMS.Size = new System.Drawing.Size(72, 17);
             this.label_TurnMS.TabIndex = 55;
@@ -200,7 +206,7 @@ namespace SimulationObject.Real.Generator.Panels
             // label_PeriodMS
             // 
             this.label_PeriodMS.AutoSize = true;
-            this.label_PeriodMS.Location = new System.Drawing.Point(5, 137);
+            this.label_PeriodMS.Location = new System.Drawing.Point(4, 126);
             this.label_PeriodMS.Name = "label_PeriodMS";
             this.label_PeriodMS.Size = new System.Drawing.Size(83, 17);
             this.label_PeriodMS.TabIndex = 54;
@@ -209,7 +215,7 @@ namespace SimulationObject.Real.Generator.Panels
             // label_Amplitude
             // 
             this.label_Amplitude.AutoSize = true;
-            this.label_Amplitude.Location = new System.Drawing.Point(13, 105);
+            this.label_Amplitude.Location = new System.Drawing.Point(13, 97);
             this.label_Amplitude.Name = "label_Amplitude";
             this.label_Amplitude.Size = new System.Drawing.Size(74, 17);
             this.label_Amplitude.TabIndex = 53;
@@ -218,11 +224,46 @@ namespace SimulationObject.Real.Generator.Panels
             // label_Bias
             // 
             this.label_Bias.AutoSize = true;
-            this.label_Bias.Location = new System.Drawing.Point(48, 73);
+            this.label_Bias.Location = new System.Drawing.Point(48, 68);
             this.label_Bias.Name = "label_Bias";
             this.label_Bias.Size = new System.Drawing.Size(39, 17);
             this.label_Bias.TabIndex = 52;
             this.label_Bias.Text = "Bias:";
+            // 
+            // spinEdit_StartMS
+            // 
+            this.spinEdit_StartMS.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spinEdit_StartMS.Location = new System.Drawing.Point(92, 180);
+            this.spinEdit_StartMS.Margin = new System.Windows.Forms.Padding(4);
+            this.spinEdit_StartMS.Name = "spinEdit_StartMS";
+            this.spinEdit_StartMS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.spinEdit_StartMS.Properties.IsFloatValue = false;
+            this.spinEdit_StartMS.Properties.LookAndFeel.SkinName = "Office 2010 Black";
+            this.spinEdit_StartMS.Properties.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Style3D;
+            this.spinEdit_StartMS.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.spinEdit_StartMS.Properties.Mask.EditMask = "N00";
+            this.spinEdit_StartMS.Properties.MaxValue = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.spinEdit_StartMS.Size = new System.Drawing.Size(132, 24);
+            this.spinEdit_StartMS.TabIndex = 57;
+            this.spinEdit_StartMS.EditValueChanged += new System.EventHandler(this.spinEdit_StartMS_EditValueChanged);
+            // 
+            // label_StartMS
+            // 
+            this.label_StartMS.AutoSize = true;
+            this.label_StartMS.Location = new System.Drawing.Point(15, 184);
+            this.label_StartMS.Name = "label_StartMS";
+            this.label_StartMS.Size = new System.Drawing.Size(72, 17);
+            this.label_StartMS.TabIndex = 58;
+            this.label_StartMS.Text = "Start [ms]:";
             // 
             // GeneratorPanel
             // 
@@ -231,13 +272,14 @@ namespace SimulationObject.Real.Generator.Panels
             this.Controls.Add(this.panel);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "GeneratorPanel";
-            this.Size = new System.Drawing.Size(233, 199);
+            this.Size = new System.Drawing.Size(233, 210);
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_TurnMS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_PeriodMS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Amplitude.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Bias.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit_StartMS.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -257,5 +299,7 @@ namespace SimulationObject.Real.Generator.Panels
         private DevExpress.XtraEditors.SpinEdit spinEdit_Amplitude;
         private DevExpress.XtraEditors.SpinEdit spinEdit_Bias;
         private Utils.SpecialControls.PlayPause playPause;
+        private DevExpress.XtraEditors.SpinEdit spinEdit_StartMS;
+        private System.Windows.Forms.Label label_StartMS;
     }
 }

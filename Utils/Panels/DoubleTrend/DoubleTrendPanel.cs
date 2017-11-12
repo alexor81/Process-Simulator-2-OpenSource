@@ -449,7 +449,15 @@ namespace Utils.Panels.DoubleTrend
                 double lNow     = DateTime.Now.ToOADate();
                 double lLast    = lNow - mWindow;
  
-                addValue(lNow, mValue);
+                if (mValueChanged)
+                {
+                    mValueChanged = false;
+                    addValue(mValueTime, mValue);
+                }
+                else
+                {
+                    addValue(lNow, mValue);
+                }
 
                 if (chart.Series[0].Points.Count >= 2)
                 {
@@ -476,11 +484,15 @@ namespace Utils.Panels.DoubleTrend
                 Log.Error("Error updating Panel 'Trend'. " + lExc.Message, lExc.ToString());
             }
         }
-
-        private double                  mValue;
+       
+        private double                  mValue          = 0;
+        private double                  mValueTime      = DateTime.Now.ToOADate();
+        private volatile bool           mValueChanged   = false;
         public void                     updateValues()
         {
-            mValue = mDoubleValue.ValueDouble;
+            mValue          = mDoubleValue.ValueDouble;
+            mValueTime      = DateTime.Now.ToOADate();
+            mValueChanged   = true;
         }
 
         public void                     updateProperties()

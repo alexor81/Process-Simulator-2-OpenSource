@@ -5,6 +5,8 @@ using SimulationObject.Animation.ImageMove.Panels;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -21,6 +23,78 @@ namespace SimulationObject.Animation.ImageMove
 
             public MemoryStream                                 mImgMemStrm;
             public Bitmap                                       mBmp;
+
+            private Bitmap                                      mPanelBitmap;
+            public Bitmap                                       clonePanelBitmap
+            {
+                get
+                {
+                    if (mPanelBitmap == null)
+                    {
+                        updatePanelBitmap();
+                    }
+
+                    lock (mUpdatePanelBmpLock)
+                    {
+                        if (mPanelBitmap != null)
+                        {
+                            return (Bitmap)mPanelBitmap.Clone();
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+            private readonly object                             mUpdatePanelBmpLock     = new object();
+            private void                                        updatePanelBitmap()
+            {
+                if (mBmp == null) return;
+
+                lock (mUpdatePanelBmpLock)
+                {
+                    var lNewBmp = new Bitmap(mWidth, mHeight);
+                    lNewBmp.SetResolution(mBmp.HorizontalResolution, mBmp.VerticalResolution);
+
+                    using (var lGraphics = Graphics.FromImage(lNewBmp)) 
+                    {
+                        lGraphics.Clear(Color.Transparent);
+                        lGraphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
+
+                        if (mRotateItemHandle != -1)
+                        {
+                            var lWC = mWidth / 2;
+                            var lHC = mHeight / 2;
+                            lGraphics.TranslateTransform(lWC, lHC);
+                            lGraphics.RotateTransform(mRotate);
+                            lGraphics.TranslateTransform(- lWC, - lHC);
+                            lGraphics.DrawImage(mBmp, 0, 0, mWidth, mHeight);
+                            lGraphics.ResetTransform();
+                        }
+                        else
+                        { 
+                            lGraphics.DrawImage(mBmp, 0, 0, mWidth, mHeight);
+                        }
+
+                        if (String.IsNullOrWhiteSpace(mLabel) == false)
+                        {
+                            lGraphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                            using (var lBrush = new SolidBrush(mLabelColor))
+                            {
+                                lGraphics.DrawString(mLabel, mLabelFont, lBrush, 0, 0);
+                            }
+                        }
+                    }
+
+                    var lTempBmp    = mPanelBitmap;
+                    mPanelBitmap    = lNewBmp;
+                    if (lTempBmp != null)
+                    {
+                        lTempBmp.Dispose();
+                    }
+                }
+            }
 
             public Font                                         mLabelFont              = new Font("Microsoft Sans Serif", 7);
             public Color                                        mLabelColor             = Color.Black;
@@ -90,6 +164,9 @@ namespace SimulationObject.Animation.ImageMove
             public int                                          mLabelItemHandle        = -1;
             public string                                       mLabel                  = "";
 
+            public int                                          mRotateItemHandle       = -1;
+            public float                                        mRotate                 = 0.0f;
+
             private IItemBrowser                                mItemBrowser;
             public IItemBrowser                                 ItemBrowser
             {
@@ -123,6 +200,11 @@ namespace SimulationObject.Animation.ImageMove
                     if (mLabelItemHandle != -1)
                     {
                         lResult.Add(mLabelItemHandle);
+                    }
+
+                    if (mRotateItemHandle != -1)
+                    {
+                        lResult.Add(mRotateItemHandle);
                     }
 
                     return lResult.ToArray();
@@ -262,6 +344,7 @@ namespace SimulationObject.Animation.ImageMove
                     if (mWidth != lValue)
                     {
                         mWidth = lValue;
+                        updatePanelBitmap();
                         raisePropertiesChanged();
                     }
 
@@ -285,6 +368,7 @@ namespace SimulationObject.Animation.ImageMove
                     if (mHeight != lValue)
                     {
                         mHeight = lValue;
+                        updatePanelBitmap();
                         raisePropertiesChanged();
                     }
 
@@ -298,9 +382,34 @@ namespace SimulationObject.Animation.ImageMove
                     if (lValue.Equals(mLabel, StringComparison.Ordinal) == false)
                     {
                         mLabel = lValue;
+                        updatePanelBitmap();
                         raisePropertiesChanged();
                     }
-                } 
+
+                    return;
+                }
+
+                if (aItemHandle == mRotateItemHandle)
+                {
+                    float lValue;
+                    try
+                    {
+                        lValue = Convert.ToSingle(aItemValue);
+                    }
+                    catch (Exception lExc)
+                    {
+                        throw new ArgumentException("Ratation angle value conversion error. ", lExc);
+                    }
+
+                    if (ValuesCompare.isNotEqual(mRotate, lValue))
+                    {
+                        mRotate = lValue;
+                        updatePanelBitmap();
+                        raisePropertiesChanged();
+                    }
+
+                    return;
+                }  
             }
 
         #endregion
@@ -385,6 +494,10 @@ namespace SimulationObject.Animation.ImageMove
                 lChecker.addItemName(lItem);
                 mLabelItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
+                lItem = lReader.getAttribute<String>("Rotate", "");
+                lChecker.addItemName(lItem);
+                mRotateItemHandle = mItemBrowser.getItemHandleByName(lItem);
+
                 mLabelFont  = lReader.getAttribute<Font>("LabelFont", mLabelFont);
                 mLabelColor = lReader.getAttribute<Color>("LabelColor", mLabelColor);
 
@@ -417,15 +530,8 @@ namespace SimulationObject.Animation.ImageMove
                     throw new ArgumentException("Image is wrong. " + lExc.Message, lExc);
                 }
 
-                if (mWidthItemHandle == -1)
-                {
-                    mWidth = mBmp.Width;
-                }
-
-                if (mHeightItemHandle == -1)
-                {
-                    mHeight = mBmp.Height;
-                }
+                mWidth  = mBmp.Width;
+                mHeight = mBmp.Height;
             }
 
             public void                                         saveToXML(XmlTextWriter aXMLTextWriter)
@@ -440,6 +546,7 @@ namespace SimulationObject.Animation.ImageMove
                 aXMLTextWriter.WriteAttributeString("Label", mItemBrowser.getItemNameByHandle(mLabelItemHandle));
                 aXMLTextWriter.WriteAttributeString("LabelFont", StringUtils.ObjectToString(mLabelFont));
                 aXMLTextWriter.WriteAttributeString("LabelColor", StringUtils.ObjectToString(mLabelColor));
+                aXMLTextWriter.WriteAttributeString("Rotate", mItemBrowser.getItemNameByHandle(mRotateItemHandle));
 
                 aXMLTextWriter.WriteStartElement("Image");
                     aXMLTextWriter.WriteString(Convert.ToBase64String(mImgMemStrm.ToArray()));

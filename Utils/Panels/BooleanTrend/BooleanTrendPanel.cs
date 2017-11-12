@@ -8,7 +8,6 @@ using System.Xml;
 using API;
 using Utils.Logger;
 
-
 namespace Utils.Panels.BooleanTrend
 {
     public partial class BooleanTrendPanel : UserControl, IPanel, IPanelExt

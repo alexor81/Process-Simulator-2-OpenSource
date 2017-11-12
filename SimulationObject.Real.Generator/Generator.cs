@@ -31,57 +31,60 @@ namespace SimulationObject.Real.Generator
 
         public                                                  Generator()
         {
-            mFSM = new FiniteStateMachine(Signals[0], () => Random());
-            mFSM.addState(Signals[1], () => Sine());
-            mFSM.addState(Signals[2], () => Square());
-            mFSM.addState(Signals[3], () => Sawtooth());
+            mFSM = new FiniteStateMachine(ESignals.Random.ToString(), () => Random());
+            mFSM.addState(ESignals.Sine.ToString(), () => Sine());
+            mFSM.addState(ESignals.Square.ToString(), () => Square());
+            mFSM.addState(ESignals.Sawtooth.ToString(), () => Sawtooth());
         }
 
         #region Properties
 
-            public static readonly string[]                     Signals     = new string[] { "Random",
-                                                                                             "Sine",
-                                                                                             "Square",
-                                                                                             "Sawtooth"};
-            private int                                         mSignal     = 0;
+            private ESignals                                    mSignal     = ESignals.Random;
             public int                                          SignalIndex
             {
-                get { return mSignal; }
+                get { return (int)mSignal; }
                 set
                 {
-                    if (mSignal != value)
+                    ESignals lNew;
+                    try
                     {
-                        if (value < 0 || value >= Signals.Length)
-                        {
-                            throw new ArgumentException("Unknown signal type. ");
-                        }
+                        lNew = (ESignals)value;
+                    }
+                    catch
+                    {
+                        throw new ArgumentException("Unknown signal type. ");
+                    }
+                        
 
-                        mSignal     = value;
-                        mFSM.State  = Signals[mSignal];
+                    if (mSignal != lNew)
+                    {
+                        mSignal     = lNew;
+                        mFSM.State  = lNew.ToString();
                         raisePropertiesChanged();
                     }
                 }
             }
             public string                                       SignalString
             {
-                get { return Signals[mSignal]; }
+                get { return mSignal.ToString(); }
                 set
                 {
-                    for (int i = 0; i < Signals.Length; i++)
+                    ESignals lNew;
+                    try
                     {
-                        if (Signals[i].Equals(value, StringComparison.Ordinal))
-                        {
-                            if (mSignal != i)
-                            {
-                                mSignal     = i;
-                                mFSM.State  = Signals[mSignal];
-                                raisePropertiesChanged();
-                            }
-                            return;
-                        }
+                        lNew = (ESignals)Enum.Parse(typeof(ESignals), value);
+                    }
+                    catch
+                    {
+                        throw new ArgumentException("Unknown signal type. ");
                     }
 
-                    throw new ArgumentException("Unknown signal type. ");
+                    if (mSignal != lNew)
+                    {
+                        mSignal     = lNew;
+                        mFSM.State  = lNew.ToString();
+                        raisePropertiesChanged();
+                    }
                 }
             }
 
@@ -155,10 +158,10 @@ namespace SimulationObject.Real.Generator
                 {
                     switch(mSignal)
                     {
-                        case 0: return mAmplitude + mBias;
-                        case 1: return 2 * mAmplitude + mBias;
-                        case 2: return mAmplitude + mBias;
-                        case 3: return mAmplitude + mBias;
+                        case ESignals.Random:   return mAmplitude + mBias;
+                        case ESignals.Sine:     return 2 * mAmplitude + mBias;
+                        case ESignals.Square:   return mAmplitude + mBias;
+                        case ESignals.Sawtooth: return mAmplitude + mBias;
                     }
 
                     return 100;
@@ -171,16 +174,33 @@ namespace SimulationObject.Real.Generator
                 {
                     switch (mSignal)
                     {
-                        case 0: return mBias;
-                        case 1: return mBias;
-                        case 2: return mBias;
-                        case 3: return mBias;
+                        case ESignals.Random:   return mBias;
+                        case ESignals.Sine:     return mBias;
+                        case ESignals.Square:   return mBias;
+                        case ESignals.Sawtooth: return mBias;
                     }
 
                     return 0;
                 }
             }
         
+            private uint                                        mStartMS = 0;
+            public uint                                         StartMS
+            {
+                get { return mStartMS; }
+                set
+                {
+                    uint lStartMS = value;
+                    if (lStartMS > mPeriodMS) lStartMS  = mPeriodMS;
+
+                    if (mStartMS != lStartMS)
+                    {
+                        mStartMS = lStartMS;
+                        raisePropertiesChanged();
+                    }
+                }
+            }
+
         #endregion
 
         #region IItemUser, IDoubleValueRead, IObjectValueRead
@@ -378,10 +398,25 @@ namespace SimulationObject.Real.Generator
                 mValueItemHandle = mItemBrowser.getItemHandleByName(lItem);
 
                 SignalString    = lReader.getAttribute<String>("Signal");
-                Bias            = lReader.getAttribute<Double>("Bias", Bias);
-                Amplitude       = lReader.getAttribute<Double>("Amplitude", Amplitude);
-                PeriodMS        = lReader.getAttribute<UInt32>("PeriodMS", PeriodMS);
-                TurnMS          = lReader.getAttribute<UInt32>("TurnMS", TurnMS);
+                Bias            = lReader.getAttribute<Double>("Bias", mBias);
+                Amplitude       = lReader.getAttribute<Double>("Amplitude", mAmplitude);
+                PeriodMS        = lReader.getAttribute<UInt32>("PeriodMS", mPeriodMS);
+                TurnMS          = lReader.getAttribute<UInt32>("TurnMS", mTurnMS);
+                StartMS         = lReader.getAttribute<UInt32>("StartMS", mStartMS);
+
+                try
+                {
+                    mValue = (double)mItemBrowser.readItemValue(mValueItemHandle);
+                }
+                catch
+                {
+                    if (mSignal > 0)
+                    {
+                        mPeriodStartMS  = MiscUtils.TimerMS - mStartMS;
+                        mCurrentMS      = mStartMS;
+                        mFSM.executeStateAction();
+                    }   
+                }
             }
 
             public void                                         saveToXML(XmlTextWriter aXMLTextWriter)
@@ -393,6 +428,7 @@ namespace SimulationObject.Real.Generator
                 aXMLTextWriter.WriteAttributeString("Amplitude", StringUtils.ObjectToString(mAmplitude));
                 aXMLTextWriter.WriteAttributeString("PeriodMS", StringUtils.ObjectToString(mPeriodMS));
                 aXMLTextWriter.WriteAttributeString("TurnMS", StringUtils.ObjectToString(mTurnMS));
+                aXMLTextWriter.WriteAttributeString("StartMS", StringUtils.ObjectToString(mStartMS));
             }
 
             private FiniteStateMachine                          mFSM;
@@ -400,7 +436,7 @@ namespace SimulationObject.Real.Generator
             private long                                        mCurrentMS          = 0;
             private long                                        mPeriodStartMS      = 0;
             private bool                                        mNewPeriod          = true;
-            private bool                                        mOnLast;
+            private bool                                        mOnLast             = false;
 
             private Random                                      mRnd                = new Random(RndCounter);
             private double                                      mBiasPlusAmp        = 100.0D;
@@ -455,8 +491,8 @@ namespace SimulationObject.Real.Generator
                 {
                     if (mOnLast == false)
                     {
-                        mPeriodStartMS  = MiscUtils.TimerMS;
-                        mCurrentMS      = 0;
+                        mPeriodStartMS  = MiscUtils.TimerMS - mStartMS;
+                        mCurrentMS      = mStartMS;
                     }
                     else
                     {
@@ -472,7 +508,7 @@ namespace SimulationObject.Real.Generator
 
                     double lLastOutValue = mValue;
                     mFSM.executeStateAction();
-                    if (ValuesCompare.NotEqualDelta1.compare(lLastOutValue, mValue))
+                    if (ValuesCompare.NotEqualDelta1.compare(lLastOutValue, mValue) || mOnLast == false)
                     {
                         mValueChanged = true;
                         raiseValuesChanged();
@@ -490,7 +526,7 @@ namespace SimulationObject.Real.Generator
             }
 
             public void                                         afterDeactivate()
-            {
+            {      
             }
 
             public event EventHandler<MessageStringEventArgs>   SimulationObjectError;

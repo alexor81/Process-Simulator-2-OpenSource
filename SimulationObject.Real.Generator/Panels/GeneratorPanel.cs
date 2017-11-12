@@ -20,7 +20,7 @@ namespace SimulationObject.Real.Generator.Panels
             InitializeComponent();
 
             BackColor = SystemColors.Control;
-            comboBox_Signal.Items.AddRange(Generator.Signals);
+            comboBox_Signal.Items.AddRange(Enum.GetNames(typeof(ESignals)));
         }
 
         public void             fillForDemo()
@@ -112,6 +112,7 @@ namespace SimulationObject.Real.Generator.Panels
             spinEdit_Amplitude.Value        = (decimal)mGenerator.Amplitude;
             spinEdit_PeriodMS.Value         = mGenerator.PeriodMS;
             spinEdit_TurnMS.Value           = mGenerator.TurnMS;
+            spinEdit_StartMS.Value          = mGenerator.StartMS;
         }
 
         private void            playPause_CheckedChanged(object aSender, EventArgs aEventArgs)
@@ -163,6 +164,15 @@ namespace SimulationObject.Real.Generator.Panels
             if (lValue != mGenerator.TurnMS)
             {
                 mGenerator.TurnMS = lValue;
+            }
+        }
+
+        private void            spinEdit_StartMS_EditValueChanged(object aSender, EventArgs aEventArgs)
+        {
+            uint lValue = (uint)spinEdit_StartMS.Value;
+            if (lValue != mGenerator.StartMS)
+            {
+                mGenerator.StartMS = lValue;
             }
         }
 

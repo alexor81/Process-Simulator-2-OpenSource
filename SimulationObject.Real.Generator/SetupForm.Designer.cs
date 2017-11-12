@@ -45,10 +45,13 @@ namespace SimulationObject.Real.Generator
             this.spinEdit_TurnMS = new DevExpress.XtraEditors.SpinEdit();
             this.itemEditBox_On = new Utils.SpecialControls.ItemEditBox();
             this.label_On = new System.Windows.Forms.Label();
+            this.spinEdit_StartMS = new DevExpress.XtraEditors.SpinEdit();
+            this.label_Start = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Bias.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Amplitude.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_PeriodMS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_TurnMS.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit_StartMS.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // itemEditBox_Value
@@ -75,13 +78,13 @@ namespace SimulationObject.Real.Generator
             // 
             // okCancelButton
             // 
-            this.okCancelButton.Location = new System.Drawing.Point(85, 250);
+            this.okCancelButton.Location = new System.Drawing.Point(85, 277);
             this.okCancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okCancelButton.MaximumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.MinimumSize = new System.Drawing.Size(188, 33);
             this.okCancelButton.Name = "okCancelButton";
             this.okCancelButton.Size = new System.Drawing.Size(188, 33);
-            this.okCancelButton.TabIndex = 7;
+            this.okCancelButton.TabIndex = 8;
             this.okCancelButton.ButtonClick += new System.EventHandler(this.okCancelButton_ButtonClick);
             // 
             // comboBox_Signal
@@ -97,7 +100,7 @@ namespace SimulationObject.Real.Generator
             // label_Signal
             // 
             this.label_Signal.AutoSize = true;
-            this.label_Signal.Location = new System.Drawing.Point(73, 87);
+            this.label_Signal.Location = new System.Drawing.Point(73, 88);
             this.label_Signal.Name = "label_Signal";
             this.label_Signal.Size = new System.Drawing.Size(51, 17);
             this.label_Signal.TabIndex = 43;
@@ -115,7 +118,7 @@ namespace SimulationObject.Real.Generator
             // label_Amplitude
             // 
             this.label_Amplitude.AutoSize = true;
-            this.label_Amplitude.Location = new System.Drawing.Point(51, 151);
+            this.label_Amplitude.Location = new System.Drawing.Point(51, 150);
             this.label_Amplitude.Name = "label_Amplitude";
             this.label_Amplitude.Size = new System.Drawing.Size(74, 17);
             this.label_Amplitude.TabIndex = 45;
@@ -124,7 +127,7 @@ namespace SimulationObject.Real.Generator
             // label_Period
             // 
             this.label_Period.AutoSize = true;
-            this.label_Period.Location = new System.Drawing.Point(43, 183);
+            this.label_Period.Location = new System.Drawing.Point(43, 181);
             this.label_Period.Name = "label_Period";
             this.label_Period.Size = new System.Drawing.Size(83, 17);
             this.label_Period.TabIndex = 46;
@@ -133,7 +136,7 @@ namespace SimulationObject.Real.Generator
             // label_Turn
             // 
             this.label_Turn.AutoSize = true;
-            this.label_Turn.Location = new System.Drawing.Point(53, 215);
+            this.label_Turn.Location = new System.Drawing.Point(53, 212);
             this.label_Turn.Name = "label_Turn";
             this.label_Turn.Size = new System.Drawing.Size(72, 17);
             this.label_Turn.TabIndex = 47;
@@ -146,7 +149,7 @@ namespace SimulationObject.Real.Generator
             0,
             0,
             0});
-            this.spinEdit_Bias.Location = new System.Drawing.Point(131, 114);
+            this.spinEdit_Bias.Location = new System.Drawing.Point(131, 115);
             this.spinEdit_Bias.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_Bias.Name = "spinEdit_Bias";
             this.spinEdit_Bias.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -182,7 +185,7 @@ namespace SimulationObject.Real.Generator
             0,
             0,
             0});
-            this.spinEdit_PeriodMS.Location = new System.Drawing.Point(131, 178);
+            this.spinEdit_PeriodMS.Location = new System.Drawing.Point(131, 177);
             this.spinEdit_PeriodMS.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_PeriodMS.Name = "spinEdit_PeriodMS";
             this.spinEdit_PeriodMS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -212,7 +215,7 @@ namespace SimulationObject.Real.Generator
             0,
             0,
             0});
-            this.spinEdit_TurnMS.Location = new System.Drawing.Point(131, 210);
+            this.spinEdit_TurnMS.Location = new System.Drawing.Point(131, 208);
             this.spinEdit_TurnMS.Margin = new System.Windows.Forms.Padding(4);
             this.spinEdit_TurnMS.Name = "spinEdit_TurnMS";
             this.spinEdit_TurnMS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -257,12 +260,48 @@ namespace SimulationObject.Real.Generator
             this.label_On.TabIndex = 49;
             this.label_On.Text = "On:";
             // 
+            // spinEdit_StartMS
+            // 
+            this.spinEdit_StartMS.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spinEdit_StartMS.Location = new System.Drawing.Point(131, 239);
+            this.spinEdit_StartMS.Margin = new System.Windows.Forms.Padding(4);
+            this.spinEdit_StartMS.Name = "spinEdit_StartMS";
+            this.spinEdit_StartMS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.spinEdit_StartMS.Properties.IsFloatValue = false;
+            this.spinEdit_StartMS.Properties.LookAndFeel.SkinName = "Office 2010 Black";
+            this.spinEdit_StartMS.Properties.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Style3D;
+            this.spinEdit_StartMS.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.spinEdit_StartMS.Properties.Mask.EditMask = "N00";
+            this.spinEdit_StartMS.Properties.MaxValue = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.spinEdit_StartMS.Size = new System.Drawing.Size(159, 24);
+            this.spinEdit_StartMS.TabIndex = 7;
+            // 
+            // label_Start
+            // 
+            this.label_Start.AutoSize = true;
+            this.label_Start.Location = new System.Drawing.Point(53, 243);
+            this.label_Start.Name = "label_Start";
+            this.label_Start.Size = new System.Drawing.Size(72, 17);
+            this.label_Start.TabIndex = 51;
+            this.label_Start.Text = "Start [ms]:";
+            // 
             // SetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 283);
+            this.ClientSize = new System.Drawing.Size(358, 313);
             this.ControlBox = false;
+            this.Controls.Add(this.spinEdit_StartMS);
+            this.Controls.Add(this.label_Start);
             this.Controls.Add(this.itemEditBox_On);
             this.Controls.Add(this.label_On);
             this.Controls.Add(this.spinEdit_TurnMS);
@@ -294,6 +333,7 @@ namespace SimulationObject.Real.Generator
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_Amplitude.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_PeriodMS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit_TurnMS.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit_StartMS.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,5 +356,7 @@ namespace SimulationObject.Real.Generator
         private DevExpress.XtraEditors.SpinEdit spinEdit_TurnMS;
         private Utils.SpecialControls.ItemEditBox itemEditBox_On;
         private System.Windows.Forms.Label label_On;
+        private DevExpress.XtraEditors.SpinEdit spinEdit_StartMS;
+        private System.Windows.Forms.Label label_Start;
     }
 }

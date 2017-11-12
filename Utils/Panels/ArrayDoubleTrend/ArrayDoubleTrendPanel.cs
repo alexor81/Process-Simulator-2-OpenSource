@@ -596,10 +596,9 @@ namespace Utils.Panels.ArrayDoubleTrend
             }
         }
 
-        private void                addValues()
+        private void                addValues(double aDateTime)
         {
             double lValue;
-            double lNow = DateTime.Now.ToOADate();
             for (int i = 0; i < chart.Series.Count; i++)
             {
                 if (i == mValue.Length) { break; }
@@ -612,12 +611,12 @@ namespace Utils.Panels.ArrayDoubleTrend
                             || lValue > ChartUtils.MaxValue
                                 || lValue < ChartUtils.MinValue)
                 {
-                    chart.Series[i].Points.AddXY(lNow, 0);
+                    chart.Series[i].Points.AddXY(aDateTime, 0);
                     chart.Series[i].Points[chart.Series[i].Points.Count - 1].IsEmpty = true;
                 }
                 else
                 {
-                    chart.Series[i].Points.AddXY(lNow, lValue);
+                    chart.Series[i].Points.AddXY(aDateTime, lValue);
                 }
             }
         }
@@ -639,12 +638,20 @@ namespace Utils.Panels.ArrayDoubleTrend
             {
                 if (chart.Series.Count > 0)
                 {
+                    double lNow     = DateTime.Now.ToOADate();
+                    double lLast    = lNow - mWindow;
+
                     lock (mArrayIndex)
                     {
-                        addValues();
-
-                        double lNow = DateTime.Now.ToOADate();
-                        double lLast = lNow - mWindow;
+                        if (mValueChanged)
+                        {
+                            mValueChanged = false;
+                            addValues(mValueTime);
+                        }
+                        else
+                        {
+                            addValues(lNow);
+                        }
 
                         for (int i = 0; i < chart.Series.Count; i++)
                         {
@@ -674,6 +681,8 @@ namespace Utils.Panels.ArrayDoubleTrend
         }
 
         private Array               mValue;
+        private double              mValueTime      = DateTime.Now.ToOADate();
+        private volatile bool       mValueChanged   = false;
         public void                 updateValues()
         {
             Type lElementType = mArrayValue.ValueArray.GetType().GetElementType();
@@ -692,7 +701,9 @@ namespace Utils.Panels.ArrayDoubleTrend
                 throw new ArgumentException("Array of numeric values is expected. ");
             }
 
-            mValue = mArrayValue.ValueArray;
+            mValue          = mArrayValue.ValueArray;
+            mValueTime      = DateTime.Now.ToOADate();
+            mValueChanged   = true;
         }
 
         public void                 updateProperties()
@@ -710,7 +721,7 @@ namespace Utils.Panels.ArrayDoubleTrend
         {
             lock (mArrayIndex)
             {
-                addValues();
+                addValues(DateTime.Now.ToOADate());
             }
         }
 

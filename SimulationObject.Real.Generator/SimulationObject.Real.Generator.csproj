@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ESignals.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="Panels\GeneratorPanel.cs">
       <SubType>UserControl</SubType>

@@ -20,7 +20,7 @@ namespace SimulationObject.Binary.Logic.Panels
             InitializeComponent();
 
             BackColor = SystemColors.Control;
-            comboBox_Operator.Items.AddRange(Logic.Operators);
+            comboBox_Operator.Items.AddRange(Enum.GetNames(typeof(EOperators)));
         }
 
         public void             fillForDemo()

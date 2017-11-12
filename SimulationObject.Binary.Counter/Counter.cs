@@ -23,13 +23,6 @@ namespace SimulationObject.Binary.Counter
     {
         #region Properties
 
-            public enum             EFront
-            {
-                Positive = 0,
-                Negative = 1,
-                Both     = 2
-            }
-
             private EFront          mFront          = EFront.Positive;
             public EFront           Front
             {
