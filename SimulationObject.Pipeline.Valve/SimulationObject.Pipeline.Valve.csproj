@@ -67,10 +67,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utils">
-      <HintPath>C:\Program Files (x86)\Process Simulator 2\Utils.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Panels\ValveControl\ValveControlPanel.cs">
@@ -131,6 +127,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Alarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{a3432dd2-e5eb-457e-9ee7-edbc148f7d8a}</Project>
+      <Name>Utils</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

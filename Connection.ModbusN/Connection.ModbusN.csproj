@@ -45,12 +45,12 @@
     <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
-    <Reference Include="NModbus, Version=3.0.36.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NModbus.3.0.36\lib\net45\NModbus.dll</HintPath>
+    <Reference Include="NModbus, Version=3.0.48.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NModbus.3.0.48\lib\net45\NModbus.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NModbus.Serial, Version=3.0.36.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NModbus.Serial.3.0.36\lib\net45\NModbus.Serial.dll</HintPath>
+    <Reference Include="NModbus.Serial, Version=3.0.48.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NModbus.Serial.3.0.48\lib\net45\NModbus.Serial.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -86,13 +86,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils\Utils.csproj">
-      <Project>{a3432dd2-e5eb-457e-9ee7-edbc148f7d8a}</Project>
-      <Name>Utils</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ConnectionSetupForm.resx">
       <DependentUpon>ConnectionSetupForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,6 +93,13 @@
       <DependentUpon>ItemSetupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{a3432dd2-e5eb-457e-9ee7-edbc148f7d8a}</Project>
+      <Name>Utils</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
