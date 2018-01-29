@@ -1222,20 +1222,23 @@ namespace Utils.CSharpScript
                         mValueChanged = true;
                     }
                     else
-                    {
+                    {                     
                         lArray = mVarItemValues[i] as Array;
                         if (lArray != null)
                         {
                             if (lAllArrays.ContainsKey(mVarItemHandles[i]))
                             {
+                                // if SetValue() is used in script
                                 if (ValuesCompare.isNotEqual(lArray, lAllArrays[mVarItemHandles[i]]))
                                 {
-                                    mItemBrowser.notifyItemValueChanged(mVarItemHandles[i]);
+                                    mVarItemChanged[i]  = true;
+                                    mValueChanged       = true;
                                 }
                             }
                             else
                             {
-                                mItemBrowser.notifyItemValueChanged(mVarItemHandles[i]);
+                                mVarItemChanged[i]  = true;
+                                mValueChanged       = true;
                             }
                         }
                     }
