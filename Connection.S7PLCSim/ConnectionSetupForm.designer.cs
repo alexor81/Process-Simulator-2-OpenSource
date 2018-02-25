@@ -17,13 +17,12 @@ namespace Connection.S7PLCSim
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label_S7PlcSimInstNum = new System.Windows.Forms.Label();
             this.groupBox_S7PLCSim = new System.Windows.Forms.GroupBox();
             this.spinEdit_InstNum = new DevExpress.XtraEditors.SpinEdit();
             this.button_Disconnect = new System.Windows.Forms.Button();
             this.button_Connect = new System.Windows.Forms.Button();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider = new System.Windows.Forms.ErrorProvider();
             this.groupBox_Options = new System.Windows.Forms.GroupBox();
             this.label_WriteRequests = new System.Windows.Forms.Label();
             this.label_WR = new System.Windows.Forms.Label();

@@ -43,12 +43,16 @@ namespace Connection.ModbusN
             this.radioButton_1 = new System.Windows.Forms.RadioButton();
             this.radioButton_1_5 = new System.Windows.Forms.RadioButton();
             this.groupBox_Parity = new System.Windows.Forms.GroupBox();
+            this.radioButton_S = new System.Windows.Forms.RadioButton();
+            this.radioButton_M = new System.Windows.Forms.RadioButton();
             this.radioButton_E = new System.Windows.Forms.RadioButton();
             this.radioButton_N = new System.Windows.Forms.RadioButton();
             this.radioButton_O = new System.Windows.Forms.RadioButton();
             this.label_Parity = new System.Windows.Forms.Label();
             this.label_StopBits = new System.Windows.Forms.Label();
             this.groupBox_DataBits = new System.Windows.Forms.GroupBox();
+            this.radioButton_6 = new System.Windows.Forms.RadioButton();
+            this.radioButton_5 = new System.Windows.Forms.RadioButton();
             this.radioButton_8 = new System.Windows.Forms.RadioButton();
             this.radioButton_7 = new System.Windows.Forms.RadioButton();
             this.comboBox_Baud = new System.Windows.Forms.ComboBox();
@@ -67,10 +71,6 @@ namespace Connection.ModbusN
             this.radioButton_Serial = new System.Windows.Forms.RadioButton();
             this.radioButton_TCP = new System.Windows.Forms.RadioButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.radioButton_M = new System.Windows.Forms.RadioButton();
-            this.radioButton_S = new System.Windows.Forms.RadioButton();
-            this.radioButton_5 = new System.Windows.Forms.RadioButton();
-            this.radioButton_6 = new System.Windows.Forms.RadioButton();
             this.okCancelButton = new Utils.SpecialControls.OKCancelButton();
             this.groupBox_Items.SuspendLayout();
             this.groupBox_Options.SuspendLayout();
@@ -427,6 +427,26 @@ namespace Connection.ModbusN
             this.groupBox_Parity.TabIndex = 3;
             this.groupBox_Parity.TabStop = false;
             // 
+            // radioButton_S
+            // 
+            this.radioButton_S.AutoSize = true;
+            this.radioButton_S.Location = new System.Drawing.Point(188, 10);
+            this.radioButton_S.Name = "radioButton_S";
+            this.radioButton_S.Size = new System.Drawing.Size(38, 21);
+            this.radioButton_S.TabIndex = 4;
+            this.radioButton_S.Text = "S";
+            this.radioButton_S.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_M
+            // 
+            this.radioButton_M.AutoSize = true;
+            this.radioButton_M.Location = new System.Drawing.Point(142, 10);
+            this.radioButton_M.Name = "radioButton_M";
+            this.radioButton_M.Size = new System.Drawing.Size(40, 21);
+            this.radioButton_M.TabIndex = 3;
+            this.radioButton_M.Text = "M";
+            this.radioButton_M.UseVisualStyleBackColor = true;
+            // 
             // radioButton_E
             // 
             this.radioButton_E.AutoSize = true;
@@ -488,6 +508,26 @@ namespace Connection.ModbusN
             this.groupBox_DataBits.Size = new System.Drawing.Size(182, 36);
             this.groupBox_DataBits.TabIndex = 2;
             this.groupBox_DataBits.TabStop = false;
+            // 
+            // radioButton_6
+            // 
+            this.radioButton_6.AutoSize = true;
+            this.radioButton_6.Location = new System.Drawing.Point(50, 10);
+            this.radioButton_6.Name = "radioButton_6";
+            this.radioButton_6.Size = new System.Drawing.Size(37, 21);
+            this.radioButton_6.TabIndex = 1;
+            this.radioButton_6.Text = "6";
+            this.radioButton_6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_5
+            // 
+            this.radioButton_5.AutoSize = true;
+            this.radioButton_5.Location = new System.Drawing.Point(5, 10);
+            this.radioButton_5.Name = "radioButton_5";
+            this.radioButton_5.Size = new System.Drawing.Size(37, 21);
+            this.radioButton_5.TabIndex = 0;
+            this.radioButton_5.Text = "5";
+            this.radioButton_5.UseVisualStyleBackColor = true;
             // 
             // radioButton_8
             // 
@@ -747,46 +787,6 @@ namespace Connection.ModbusN
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // radioButton_M
-            // 
-            this.radioButton_M.AutoSize = true;
-            this.radioButton_M.Location = new System.Drawing.Point(142, 10);
-            this.radioButton_M.Name = "radioButton_M";
-            this.radioButton_M.Size = new System.Drawing.Size(40, 21);
-            this.radioButton_M.TabIndex = 3;
-            this.radioButton_M.Text = "M";
-            this.radioButton_M.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_S
-            // 
-            this.radioButton_S.AutoSize = true;
-            this.radioButton_S.Location = new System.Drawing.Point(188, 10);
-            this.radioButton_S.Name = "radioButton_S";
-            this.radioButton_S.Size = new System.Drawing.Size(38, 21);
-            this.radioButton_S.TabIndex = 4;
-            this.radioButton_S.Text = "S";
-            this.radioButton_S.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_5
-            // 
-            this.radioButton_5.AutoSize = true;
-            this.radioButton_5.Location = new System.Drawing.Point(5, 10);
-            this.radioButton_5.Name = "radioButton_5";
-            this.radioButton_5.Size = new System.Drawing.Size(37, 21);
-            this.radioButton_5.TabIndex = 0;
-            this.radioButton_5.Text = "5";
-            this.radioButton_5.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_6
-            // 
-            this.radioButton_6.AutoSize = true;
-            this.radioButton_6.Location = new System.Drawing.Point(50, 10);
-            this.radioButton_6.Name = "radioButton_6";
-            this.radioButton_6.Size = new System.Drawing.Size(37, 21);
-            this.radioButton_6.TabIndex = 1;
-            this.radioButton_6.Text = "6";
-            this.radioButton_6.UseVisualStyleBackColor = true;
-            // 
             // okCancelButton
             // 
             this.okCancelButton.Location = new System.Drawing.Point(211, 550);
@@ -802,7 +802,7 @@ namespace Connection.ModbusN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 595);
+            this.ClientSize = new System.Drawing.Size(605, 583);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_Items);
             this.Controls.Add(this.groupBox_Options);
@@ -818,7 +818,7 @@ namespace Connection.ModbusN
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Modbus Connection";
+            this.Text = "ModbusN Connection";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConnectionSetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ConnectionSetupForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConnectionSetupForm_KeyDown);

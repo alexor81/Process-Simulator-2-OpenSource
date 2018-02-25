@@ -228,7 +228,7 @@ namespace Connection.ModbusN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 230);
+            this.ClientSize = new System.Drawing.Size(300, 232);
             this.ControlBox = false;
             this.Controls.Add(this.spinEdit_Length);
             this.Controls.Add(this.label_Length);
@@ -250,7 +250,7 @@ namespace Connection.ModbusN
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Modbus Item";
+            this.Text = "ModbusN Item";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ItemSetupForm_FormClosed);
             this.Load += new System.EventHandler(this.ItemSetupForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemSetupForm_KeyDown);

@@ -17,6 +17,7 @@ namespace Connection.ModbusN
 
         public                      ConnectionSetupForm(Connection aConnectionModbus, bool aNew)
         {
+            mConnection = aConnectionModbus;
             InitializeComponent();
 
             if (aNew == false)
@@ -24,7 +25,6 @@ namespace Connection.ModbusN
                 okCancelButton.setOkOnlyStyle();
             }
 
-            mConnection                   = aConnectionModbus;
             mConnection.ConnectionState   += new EventHandler(onConnectionState);
             mConnection.ConnectionError   += new EventHandler<MessageStringEventArgs>(onConnectionError);
             updateForm();

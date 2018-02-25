@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.ModbusN", "Connection.ModbusN\Connection.ModbusN.csproj", "{A521AAD4-E687-404D-BA4C-113F30BAF942}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.S7PLCSimAdv2", "Connection.S7PLCSimAdv2\Connection.S7PLCSimAdv2.csproj", "{FFEA2403-01CD-46C8-9B36-8109A55C77AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -249,6 +251,10 @@ Global
 		{A521AAD4-E687-404D-BA4C-113F30BAF942}.Debug|x86.Build.0 = Debug|x86
 		{A521AAD4-E687-404D-BA4C-113F30BAF942}.Release|x86.ActiveCfg = Release|x86
 		{A521AAD4-E687-404D-BA4C-113F30BAF942}.Release|x86.Build.0 = Release|x86
+		{FFEA2403-01CD-46C8-9B36-8109A55C77AA}.Debug|x86.ActiveCfg = Debug|x86
+		{FFEA2403-01CD-46C8-9B36-8109A55C77AA}.Debug|x86.Build.0 = Debug|x86
+		{FFEA2403-01CD-46C8-9B36-8109A55C77AA}.Release|x86.ActiveCfg = Release|x86
+		{FFEA2403-01CD-46C8-9B36-8109A55C77AA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

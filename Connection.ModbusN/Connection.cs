@@ -597,7 +597,11 @@ namespace Connection.ModbusN
 
                     try
                     {
-                        if (lArray.Length > 1)
+                        if (lArray.Length == 1)
+                        {
+                            mMaster.WriteSingleRegister(aItem.SlaveID, aItem.Register, lArray[0]);
+                        }
+                        else
                         {
                             if (lArray.Length <= mFrame)
                             {
@@ -623,10 +627,6 @@ namespace Connection.ModbusN
                                     mMaster.WriteMultipleRegisters(aItem.SlaveID, (ushort)(aItem.Register + lStart), lFrame);
                                 }
                             }
-                        }
-                        else
-                        {
-                            mMaster.WriteSingleRegister(aItem.SlaveID, aItem.Register, lArray[0]);
                         }
                     }
                     catch(Exception lExc)
