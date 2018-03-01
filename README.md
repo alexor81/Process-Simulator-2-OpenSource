@@ -7,6 +7,17 @@ http://automation.ucoz.com/
 Description
 ==============
 
+Connections
+-----------
+
+Converters
+----------
+
+Simulation objects
+------------------
+
+Utils
+-----
 
 Author
 ======
