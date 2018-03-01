@@ -18,7 +18,3 @@ Simulation objects
 
 Utils
 -----
-
-Author
-======
-Alexander Sorokin
