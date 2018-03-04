@@ -36,17 +36,17 @@ http://automation.ucoz.com/
 * **Pipeline.Valve**
 * **Real.Calculator**
 * **Real.Comparator**
-* **Real.Generator**
-* **Real.Lag**
-* **Real.OneOfTwo**
-* **Real.Scale**
-* **Real.XYDependency**
-* **Robot.Conveyor**
-* **Robot.SixAxis**
-* **Script.CSharp**
-* **Script.CSharpFSM**
-* **Sensor.Analog**
-* **Sensor.Discrete**
-* **Voice.Command**
+* **Real.Generator** - for signal generation: Sine, Square, Sawtooth, Random.
+* **Real.Lag** - first order lag.
+* **Real.OneOfTwo** - select one value from two by boolean switch.
+* **Real.Scale** - scales value using configured ranges.
+* **Real.XYDependency** - defines function Y=F(X) as array of points.
+* **Robot.Conveyor** -  for conveyor imitating.
+* **Robot.SixAxis** - for six-axis robot imitating. Can be connected to RoKiSim 1.7 for visualization (http://www.parallemic.org/RoKiSim.html).
+* **Script.CSharp** - for writing simple script using C# language.
+* **Script.CSharpFSM** - for creating Finite-state machine in C# language.
+* **Sensor.Analog** - for display and change of analog signal with scaling and thresholds.
+* **Sensor.Discrete** - for display and change of discrete signal.
+* **Voice.Command** - recognizes predefined phrase and writes corresponding value.
 
 ## Utils
