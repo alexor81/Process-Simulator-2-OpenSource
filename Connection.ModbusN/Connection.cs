@@ -767,9 +767,6 @@ namespace Connection.ModbusN
 
             if (mDisconnect)
             {
-                mMaster.Dispose();
-                mMaster = null;
-
                 mConnected = false;
                 raiseConnectionState();
                 mCycleEndEvent.Set();

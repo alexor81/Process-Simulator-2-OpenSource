@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using Utils;
+using Utils.Logger;
 
 namespace Connection.S7PLCSimAdv2
 {
@@ -154,8 +156,12 @@ namespace Connection.S7PLCSimAdv2
 
         private void                                        onConnectionLost()
         {
-            mDisconnect = true;
-            raiseConnectionError("Connection lost. ");
+            if (mConnected)
+            {
+                mReconnect  = false;
+                mDisconnect = true;
+            }
+            raiseConnectionError("PLC '" + mPLCName + "' connection lost. ");
         }
 
         private void                                        onRemoteConnectionLost(IRemoteRuntimeManager aSender)
@@ -279,20 +285,6 @@ namespace Connection.S7PLCSimAdv2
 End:
             if (mDisconnect)
             {
-                if (mPLC != null)
-                {
-                    mPLC.Dispose();
-                    mPLC = null;
-                }
-
-                if (mRRManager != null)
-                {
-                    mRRManager.OnConnectionLost -= onRemoteConnectionLost;
-                    mRRManager.Disconnect();
-                    mRRManager.Dispose();
-                    mRRManager = null;
-                }
-
                 mConnected = false;
                 raiseConnectionState();
                 mDisconnectEvent.Set();
@@ -309,6 +301,22 @@ End:
             {
                 mTagBrowserForm.Dispose();
                 mTagBrowserForm = null;
+            }
+
+            if (mPLC != null)
+            {
+                mPLC.OnConfigurationChanged     -= onConfigurationChanged;
+                mPLC.OnConfigurationChanging    -= onConfigurationChanging;
+                mPLC.Dispose();
+                mPLC = null;
+            }
+
+            if (mRRManager != null)
+            {
+                mRRManager.OnConnectionLost -= onRemoteConnectionLost;
+                mRRManager.Disconnect();
+                mRRManager.Dispose();
+                mRRManager = null;
             }
 
             if (String.IsNullOrWhiteSpace(mPLCName))
@@ -368,16 +376,62 @@ End:
 
             mPLC.UpdateTagList();
 
+            mPLC.OnConfigurationChanged     += onConfigurationChanged;
+            mPLC.OnConfigurationChanging    += onConfigurationChanging;
+
             mConnected      = true;
             mDisconnect     = false;
+            mReconnect      = false;
             mWriteRequests  = 0;
             mMainCycleTimer.Start();
             raiseConnectionState();
         }
 
+        private volatile bool                               mReconnect  = false;
+        private void                                        onConfigurationChanging(IInstance in_Sender, ERuntimeErrorCode in_ErrorCode, DateTime in_DateTime)
+        {
+            if (mConnected)
+            {
+                mDisconnect = true;
+                mReconnect  = true;
+                Log.Info("PLC '" + mPLCName + "' configuration changing started. ");
+            }
+        }
+
+        private void                                        onConfigurationChanged(IInstance in_Sender, ERuntimeErrorCode in_ErrorCode, DateTime in_DateTime, EInstanceConfigChanged in_InstanceConfigChanged, uint in_Param1, uint in_Param2, uint in_Param3, uint in_Param4)
+        {
+            if (mReconnect)
+            {
+                mReconnect = false;
+                Log.Info("PLC '" + mPLCName + "' configuration changed. ");
+
+                Task.Run(() => { 
+                                    try
+                                    {
+                                        connect();
+                                    }
+                                    catch(Exception lExc)
+                                    {
+                                        if (mRemote)
+                                        {
+                                            Log.Error("Error while reconnecting to Siemens S7-PLCSIM Advanced v2 PLC '"
+                                                    + mPLCName + "' at host '" + mIP + ":" + mIPPort.ToString()
+                                                     + "'. " + lExc.Message, lExc.ToString());
+                                        }
+                                        else
+                                        {
+                                            Log.Error("Error while rconnecting to Siemens S7-PLCSIM Advanced v2 PLC '"
+                                                    + mPLCName + "'. " + lExc.Message, lExc.ToString());
+                                        }
+                                    }
+                               }); 
+            }
+        }
+
         public void                                         disconnect()
         {
             mDisconnectEvent.Reset();
+            mReconnect  = false;
             mDisconnect = true;
             if (mConnected)
             {
@@ -591,6 +645,8 @@ End:
 
                         if (mPLC != null)
                         {
+                            mPLC.OnConfigurationChanged     -= onConfigurationChanged;
+                            mPLC.OnConfigurationChanging    -= onConfigurationChanging;
                             mPLC.Dispose();
                             mPLC = null;
                         }

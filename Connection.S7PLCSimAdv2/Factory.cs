@@ -30,7 +30,7 @@ namespace Connection.S7PLCSimAdv2
                         aError = "Simulation Runtime Manager is not initialized. ";
                         return false;
                     }
-                    
+
                     aError = "";
                     return true;
                 }
