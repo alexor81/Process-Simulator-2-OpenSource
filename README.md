@@ -24,12 +24,12 @@ YouTube channel:  https://youtube.com/channel/UC0CQz6fu2gPb9jaKjqNk2RA
 
 ## Simulation objects
 * **Animation.ImageMove** - move and rotate image.
-* **Binary.Counter** - count positive and negative edge of Boolean value.
-* **Binary.Delay** - delay positive and negative edge of Boolean value.
+* **Binary.Counter** - count positive and negative front of Boolean value.
+* **Binary.Delay** - delay positive and negative front of Boolean value.
 * **Binary.Logic** - logical operations: AND, OR, XOR, NOT, NAND, NOR, NXOR.
 * **Binary.Trigger** - trigger logic.
 * **Item.ArraySplitter** - split Item with array to different Items by index.
-* **Item.BitSplitter** - split bits of Item with real number value to different Items by index.
+* **Item.BitSplitter** - split bits of Item to different Items by index.
 * **Item.Delay** - copy one Item value to another on command with adjustable delay.
 * **Item.TimeLine** - write values to Items at intervals.
 * **Item.WriteToFile** - write values to CSV file.
