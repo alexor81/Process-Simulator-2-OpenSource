@@ -3,16 +3,14 @@
 Open source code of Process Simulator 2
 http://automation.ucoz.com/
 
-# Description
-
 ## Connections
-* Internal
-* ModbusN
-* MQTT
-* OPC UA
-* S7IsoTCP
-* S7PLCSim
-* S7PLCSimAdv2
+* Internal - communication between objects inside application.
+* ModbusN - modbus master for Ethernet and Serial port.
+* MQTT - MQTT client.
+* OPC UA - OPC UA client.
+* S7IsoTCP - communication with Siemens SIMATIC PLC S7-300/400 and S7-1200/1500.
+* S7PLCSim - communication with Siemens SIMATIC S7PLCSim V5.4.
+* S7PLCSimAdv2 - communication with Siemens SIMATIC S7PLCSim Advanced v2.
 
 ## Converters
 * Compare
