@@ -5,10 +5,10 @@ http://automation.ucoz.com/
 
 ## Connections
 * **Internal** - communication between objects inside application.
-* **ModbusN** - modbus master for Ethernet and Serial port. Use NModbus library (https://github.com/NModbus/NModbus).
-* **MQTT** - MQTT client. Use M2Mqtt library (https://m2mqtt.wordpress.com/).
+* **ModbusN** - modbus master for Ethernet and Serial port. Uses NModbus library (https://github.com/NModbus/NModbus).
+* **MQTT** - MQTT client. Uses M2Mqtt library (https://m2mqtt.wordpress.com/).
 * **OPC UA** - OPC UA client.
-* **S7IsoTCP** - communication with Siemens SIMATIC PLC S7-300/400 and S7-1200/1500. Use Snap7 library (http://snap7.sourceforge.net).
+* **S7IsoTCP** - communication with Siemens SIMATIC PLC S7-300/400 and S7-1200/1500. Uses Snap7 library (http://snap7.sourceforge.net).
 * **S7PLCSim** - communication with Siemens SIMATIC S7PLCSim V5.4.
 * **S7PLCSimAdv2** - communication with Siemens SIMATIC S7PLCSim Advanced v2.
 
