@@ -13,13 +13,13 @@ http://automation.ucoz.com/
 * S7PLCSimAdv2 - communication with Siemens SIMATIC S7PLCSim Advanced v2.
 
 ## Converters
-* Compare
-* FilterExp
-* Inverse
-* Round
-* Scale
-* ToBoolean
-* ToString
+* Compare - compares value with configured one and give the result of Boolean type.
+* FilterExp - exponential filter.
+* Inverse - inverts value of Boolean type or array of this type.
+* Round - rounds numeric value or all values in array.
+* Scale - scales value using configured ranges.
+* ToBoolean - converts two values (true/false) to Boolean value and backwards.
+* ToString - converts any value to string and backward.
 
 ## Simulation objects
 * Animation.ImageMove
