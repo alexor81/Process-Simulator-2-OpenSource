@@ -48,4 +48,4 @@ YouTube channel:  https://youtube.com/channel/UC0CQz6fu2gPb9jaKjqNk2RA
 * **Script.CSharpFSM** - Finite-state machine in C# language.
 * **Sensor.Analog** - display and change analog signal with scaling and thresholds.
 * **Sensor.Discrete** - display and change discrete signal.
-* **Voice.Command** - recognize predefined phrase and writes corresponding value.
+* **Voice.Command** - recognize predefined phrase and write corresponding value.
