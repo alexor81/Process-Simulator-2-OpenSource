@@ -23,8 +23,8 @@ YouTube channel:  https://youtube.com/channel/UC0CQz6fu2gPb9jaKjqNk2RA
 * **ToString** - convert any value to string and backward.
 
 ## Simulation objects
-* **Animation.ImageMove** - image moving and rotating.
-* **Binary.Counter** - count positive and negative front of Boolean value.
+* **Animation.ImageMove** - move and rotate image.
+* **Binary.Counter** - count positive and negative edge of Boolean value.
 * **Binary.Delay** - delay positive and negative edge of Boolean value.
 * **Binary.Logic** - logical operations: AND, OR, XOR, NOT, NAND, NOR, NXOR.
 * **Binary.Trigger** - trigger logic.
