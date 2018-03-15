@@ -1,7 +1,7 @@
 # Process Simulator 2 Open Source
 
 Open source code of Process Simulator 2  
-Project's site:   https://automation.ucoz.com  
+Project site:     https://automation.ucoz.com  
 YouTube channel:  https://youtube.com/channel/UC0CQz6fu2gPb9jaKjqNk2RA
 
 ## Connections
