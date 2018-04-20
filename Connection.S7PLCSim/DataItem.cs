@@ -575,8 +575,7 @@ namespace Connection.S7PLCSim
                         mNeedWrite  = true;
                         lUpdate     = true;
                     }
-
-                    if (mMemoryType == EPLCMemoryType.I)
+                    else if (mMemoryType == EPLCMemoryType.I)
                     {
                         mNeedWrite  = true;
                     }

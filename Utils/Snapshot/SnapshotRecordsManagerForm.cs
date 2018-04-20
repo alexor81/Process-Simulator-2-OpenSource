@@ -125,9 +125,10 @@ namespace Utils.Snapshot
 
             private void            updateButtons()
             {
-                bool lSelected          = (dataGridView_Records.SelectedRows.Count >= 1);
-                tsButton_Delete.Enabled = lSelected;
-                tsButton_Setup.Enabled  = lSelected;
+                bool lSelected              = (dataGridView_Records.SelectedRows.Count >= 1);
+                tsButton_Delete.Enabled     = lSelected;
+                tsButton_Setup.Enabled      = lSelected;
+                tsButton_UpdateV.Enabled    = lSelected;
             }
 
             private void            dataGridView_Records_DataBindingComplete(object aSender, DataGridViewBindingCompleteEventArgs aEventArgs)
@@ -349,6 +350,46 @@ namespace Utils.Snapshot
             private void            dataGridView_Records_CellDoubleClick(object aSender, DataGridViewCellEventArgs aEventArgs)
             {
                 tsButton_Setup_Click(aSender, EventArgs.Empty);
+            }
+
+            private void            tsButton_UpdateV_Click(object aSender, EventArgs aEventArgs)
+            {
+                int lCount = dataGridView_Records.SelectedRows.Count;
+                if (lCount > 0)
+                {
+                    string lItem;
+                    object lValue;
+
+                    try
+                    {
+                        if (QuestionForm.askQuestion("Update values for " + lCount.ToString() + " record(s)?", this) == DialogResult.Yes)
+                        {
+                            for (int i = 0; i < lCount; i++)
+                            {
+                                lItem   = dataGridView_Records.SelectedRows[i].Cells[0].Value.ToString();
+                                lValue  = mSnapshot.ItemBrowser.readItemOrInitValue(mSnapshot.ItemBrowser.getItemHandleByName(lItem));
+                                mSnapshot.changeRecord(lItem, lItem, lValue);
+                            }
+                            updateForm();
+                        }
+                    }
+                    catch (Exception lExc)
+                    {
+                        Log.Error("Error while user was updating values for record(s) of snapshot '"
+                                    + mSnapshot.Name + "'. " + lExc.Message, lExc.ToString());
+                        MessageForm.showMessage(lExc.Message, this);
+                    }
+                }
+            }
+
+            private void            tsButton_SelectAll_Click(object aSender, EventArgs aEventArgs)
+            {
+                dataGridView_Records.SelectAll();
+            }
+
+            private void            tsButton_SelectNone_Click(object aSender, EventArgs aEventArgs)
+            {
+                dataGridView_Records.ClearSelection();
             }
 
         #endregion

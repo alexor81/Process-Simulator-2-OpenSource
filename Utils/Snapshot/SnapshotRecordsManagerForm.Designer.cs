@@ -24,6 +24,7 @@ namespace Utils.Snapshot
             this.tsButton_AddWizard = new System.Windows.Forms.ToolStripButton();
             this.tsButton_Delete = new System.Windows.Forms.ToolStripButton();
             this.tsButton_Setup = new System.Windows.Forms.ToolStripButton();
+            this.tsButton_UpdateV = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsLabel_Name = new System.Windows.Forms.ToolStripLabel();
             this.tsTextBox_Name = new System.Windows.Forms.ToolStripTextBox();
@@ -31,6 +32,9 @@ namespace Utils.Snapshot
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.ssLabel_Records = new System.Windows.Forms.ToolStripStatusLabel();
             this.dataGridView_Records = new System.Windows.Forms.DataGridView();
+            this.tsButton_SelectAll = new System.Windows.Forms.ToolStripButton();
+            this.tsButton_SelectNone = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ts_Records.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Records)).BeginInit();
@@ -46,6 +50,10 @@ namespace Utils.Snapshot
             this.tsButton_AddWizard,
             this.tsButton_Delete,
             this.tsButton_Setup,
+            this.tsButton_UpdateV,
+            this.toolStripSeparator3,
+            this.tsButton_SelectAll,
+            this.tsButton_SelectNone,
             this.toolStripSeparator2,
             this.tsLabel_Name,
             this.tsTextBox_Name,
@@ -110,6 +118,17 @@ namespace Utils.Snapshot
             this.tsButton_Setup.Size = new System.Drawing.Size(23, 22);
             this.tsButton_Setup.Text = "Setup";
             this.tsButton_Setup.Click += new System.EventHandler(this.tsButton_Setup_Click);
+            // 
+            // tsButton_UpdateV
+            // 
+            this.tsButton_UpdateV.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsButton_UpdateV.Image = global::Utils.Properties.Resources.Refresh;
+            this.tsButton_UpdateV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsButton_UpdateV.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButton_UpdateV.Name = "tsButton_UpdateV";
+            this.tsButton_UpdateV.Size = new System.Drawing.Size(23, 22);
+            this.tsButton_UpdateV.Text = "Update from current values";
+            this.tsButton_UpdateV.Click += new System.EventHandler(this.tsButton_UpdateV_Click);
             // 
             // toolStripSeparator2
             // 
@@ -193,6 +212,33 @@ namespace Utils.Snapshot
             this.dataGridView_Records.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_Records_DataBindingComplete);
             this.dataGridView_Records.SelectionChanged += new System.EventHandler(this.dataGridView_Records_SelectionChanged);
             // 
+            // tsButton_SelectAll
+            // 
+            this.tsButton_SelectAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsButton_SelectAll.Image = global::Utils.Properties.Resources.SelectAll_Items;
+            this.tsButton_SelectAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsButton_SelectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButton_SelectAll.Name = "tsButton_SelectAll";
+            this.tsButton_SelectAll.Size = new System.Drawing.Size(23, 22);
+            this.tsButton_SelectAll.Text = "Select All";
+            this.tsButton_SelectAll.Click += new System.EventHandler(this.tsButton_SelectAll_Click);
+            // 
+            // tsButton_SelectNone
+            // 
+            this.tsButton_SelectNone.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsButton_SelectNone.Image = global::Utils.Properties.Resources.SelectNone_Items;
+            this.tsButton_SelectNone.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsButton_SelectNone.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButton_SelectNone.Name = "tsButton_SelectNone";
+            this.tsButton_SelectNone.Size = new System.Drawing.Size(23, 22);
+            this.tsButton_SelectNone.Text = "Select None";
+            this.tsButton_SelectNone.Click += new System.EventHandler(this.tsButton_SelectNone_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // SnapshotRecordsManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -235,5 +281,9 @@ namespace Utils.Snapshot
         private System.Windows.Forms.ToolStripLabel tsLabel_Name;
         private System.Windows.Forms.ToolStripTextBox tsTextBox_Name;
         private System.Windows.Forms.ToolStripButton tsButton_Filter;
+        private System.Windows.Forms.ToolStripButton tsButton_UpdateV;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton tsButton_SelectAll;
+        private System.Windows.Forms.ToolStripButton tsButton_SelectNone;
     }
 }

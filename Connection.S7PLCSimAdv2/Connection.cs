@@ -158,7 +158,6 @@ namespace Connection.S7PLCSimAdv2
         {
             if (mConnected)
             {
-                mReconnect  = false;
                 mDisconnect = true;
             }
             raiseConnectionError("PLC '" + mPLCName + "' connection lost. ");
@@ -185,6 +184,7 @@ namespace Connection.S7PLCSimAdv2
 
         public long                                         mWriteRequests;
 
+        private volatile bool                               mTagUpdateNeeded = false;
         private void                                        MainCycle(object aSender, ElapsedEventArgs aEventArgs)
         {
             long lStartMS = MiscUtils.TimerMS;
@@ -229,46 +229,91 @@ namespace Connection.S7PLCSimAdv2
                     if (mDisconnect) goto End;
 
                     bool lNewValues;
-                    try
+
+                    if (mTagUpdateNeeded)
                     {
-                        mPLC.ReadSignals(ref mSDataValue, out lNewValues);
-                    }
-                    catch(SimulationRuntimeException lExc)
-                    {
-                        if (lExc.RuntimeErrorCode != ERuntimeErrorCode.SignalConfigurationError)
+                        try
+                        {
+                            mPLC.UpdateTagList();
+                        }
+                        catch(SimulationRuntimeException lExc)
                         {
                             throw new InvalidOperationException(ErrorCodeMessage(lExc.RuntimeErrorCode), lExc);
                         }
+
+                        try
+                        {
+                            mPLC.ReadSignals(ref mSDataValue, out lNewValues);
+                            mTagUpdateNeeded = false;             
+                        }
+                        catch(SimulationRuntimeException lExc)
+                        {
+                            if (lExc.RuntimeErrorCode != ERuntimeErrorCode.SignalConfigurationError 
+                                && lExc.RuntimeErrorCode != ERuntimeErrorCode.NotUpToDate)
+                            {
+                                throw new InvalidOperationException(ErrorCodeMessage(lExc.RuntimeErrorCode), lExc);
+                            }
+
+                            if (lExc.RuntimeErrorCode != ERuntimeErrorCode.NotUpToDate)
+                            {
+                                mTagUpdateNeeded = false;
+                            }  
+                        }
+
+                        if (mTagUpdateNeeded == false)
+                        {   
+                            Log.Info("PLC '" + mPLCName + "'. The stored tag list update completed. ");
+
+                            foreach(var lItem in mItemRWList)
+                            {
+                                lItem.mUnlockWrite = true;
+                            }
+
+                            for (int i = 0; i < mSDataValue.Length; i++)
+                            {
+                                if (mDisconnect) goto End;
+
+                                if (mItemRWList[i].mNeedWrite == false)
+                                {
+                                    if (mSDataValue[i].ErrorCode == ERuntimeErrorCode.OK)
+                                    {
+                                        mItemRWList[i].Access = EAccess.READ_WRITE;
+                                    }
+                                    else
+                                    {
+                                        mItemRWList[i].Access = EAccess.NO_ACCESS;
+                                    }
+
+                                    if (mSDataValue[i].ValueHasChanged)
+                                    {
+                                        mItemRWList[i].setValue(mSDataValue[i].DataValue);
+                                    }
+                                }      
+                            }
+                        }
                     }
-
-                    if (mDisconnect) goto End;
-
-                    for (int i = 0; i < mSDataValue.Length; i++)
-                    {
-                        if (mItemRWList[i].mNeedWrite)
+                    else
+                    {       
+                        try
                         {
-                            mItemRWList[i].mNeedWrite   = false;
-                            mWriteRequests              = mWriteRequests + 1;
-
-                            mPLC.Write(mItemRWList[i].mTagName, mItemRWList[i].getValue());
+                            mPLC.ReadSignals(ref mSDataValue, out lNewValues);
                         }
-                        else
+                        catch(SimulationRuntimeException lExc)
                         {
-                            if (mSDataValue[i].ErrorCode == ERuntimeErrorCode.OK)
+                            if (lExc.RuntimeErrorCode == ERuntimeErrorCode.NotUpToDate)
                             {
-                                mItemRWList[i].Access = EAccess.READ_WRITE;
+                                mTagUpdateNeeded = true;
+                                Log.Info("PLC '" + mPLCName + "'. The stored tag list must be updated. ");
                             }
-                            else
+                            else if (lExc.RuntimeErrorCode != ERuntimeErrorCode.SignalConfigurationError)
                             {
-                                mItemRWList[i].Access = EAccess.NO_ACCESS;
-                            }
-
-                            if (mSDataValue[i].ValueHasChanged)
-                            {
-                                mItemRWList[i].setValue(mSDataValue[i].DataValue);
+                                throw new InvalidOperationException(ErrorCodeMessage(lExc.RuntimeErrorCode), lExc);
                             }
                         }
+
                         if (mDisconnect) goto End;
+
+                        handleValues();
                     }
 
                     pause();
@@ -291,7 +336,48 @@ End:
             }
             else
             {
+                if (mTagUpdateNeeded)
+                {
+                    mMainCycleTimer.Interval = 5000;
+                }
+                else
+                {
+                    mMainCycleTimer.Interval = MiscUtils.TimeSlice;
+                }
+
                 mMainCycleTimer.Start();
+            }
+        }
+
+        private void                                        handleValues()
+        {
+            for (int i = 0; i < mSDataValue.Length; i++)
+            {
+                if (mDisconnect) return;
+
+                if (mItemRWList[i].mNeedWrite)
+                {
+                    mItemRWList[i].mNeedWrite   = false;
+                    mWriteRequests              = mWriteRequests + 1;
+
+                    mPLC.Write(mItemRWList[i].mTagName, mItemRWList[i].getValue());
+                }
+                else
+                {
+                    if (mSDataValue[i].ErrorCode == ERuntimeErrorCode.OK)
+                    {
+                        mItemRWList[i].Access = EAccess.READ_WRITE;
+                    }
+                    else
+                    {
+                        mItemRWList[i].Access = EAccess.NO_ACCESS;
+                    }
+
+                    if (mSDataValue[i].ValueHasChanged)
+                    {
+                        mItemRWList[i].setValue(mSDataValue[i].DataValue);
+                    }
+                }
             }
         }
 
@@ -305,8 +391,6 @@ End:
 
             if (mPLC != null)
             {
-                mPLC.OnConfigurationChanged     -= onConfigurationChanged;
-                mPLC.OnConfigurationChanging    -= onConfigurationChanging;
                 mPLC.Dispose();
                 mPLC = null;
             }
@@ -369,69 +453,24 @@ End:
 
             if (mMainCycleTimer == null)
             {
-                mMainCycleTimer             = new System.Timers.Timer(MiscUtils.TimeSlice);
+                mMainCycleTimer             = new System.Timers.Timer();
                 mMainCycleTimer.Elapsed     += new ElapsedEventHandler(MainCycle);
                 mMainCycleTimer.AutoReset   = false;
             }
 
             mPLC.UpdateTagList();
 
-            mPLC.OnConfigurationChanged     += onConfigurationChanged;
-            mPLC.OnConfigurationChanging    += onConfigurationChanging;
-
-            mConnected      = true;
-            mDisconnect     = false;
-            mReconnect      = false;
-            mWriteRequests  = 0;
+            mConnected          = true;
+            mDisconnect         = false;
+            mTagUpdateNeeded    = false;
+            mWriteRequests      = 0;
             mMainCycleTimer.Start();
             raiseConnectionState();
-        }
-
-        private volatile bool                               mReconnect  = false;
-        private void                                        onConfigurationChanging(IInstance in_Sender, ERuntimeErrorCode in_ErrorCode, DateTime in_DateTime)
-        {
-            if (mConnected)
-            {
-                mDisconnect = true;
-                mReconnect  = true;
-                Log.Info("PLC '" + mPLCName + "' configuration changing started. ");
-            }
-        }
-
-        private void                                        onConfigurationChanged(IInstance in_Sender, ERuntimeErrorCode in_ErrorCode, DateTime in_DateTime, EInstanceConfigChanged in_InstanceConfigChanged, uint in_Param1, uint in_Param2, uint in_Param3, uint in_Param4)
-        {
-            if (mReconnect)
-            {
-                mReconnect = false;
-                Log.Info("PLC '" + mPLCName + "' configuration changed. ");
-
-                Task.Run(() => { 
-                                    try
-                                    {
-                                        connect();
-                                    }
-                                    catch(Exception lExc)
-                                    {
-                                        if (mRemote)
-                                        {
-                                            Log.Error("Error while reconnecting to Siemens S7-PLCSIM Advanced v2 PLC '"
-                                                    + mPLCName + "' at host '" + mIP + ":" + mIPPort.ToString()
-                                                     + "'. " + lExc.Message, lExc.ToString());
-                                        }
-                                        else
-                                        {
-                                            Log.Error("Error while rconnecting to Siemens S7-PLCSIM Advanced v2 PLC '"
-                                                    + mPLCName + "'. " + lExc.Message, lExc.ToString());
-                                        }
-                                    }
-                               }); 
-            }
         }
 
         public void                                         disconnect()
         {
             mDisconnectEvent.Reset();
-            mReconnect  = false;
             mDisconnect = true;
             if (mConnected)
             {
@@ -645,8 +684,6 @@ End:
 
                         if (mPLC != null)
                         {
-                            mPLC.OnConfigurationChanged     -= onConfigurationChanged;
-                            mPLC.OnConfigurationChanging    -= onConfigurationChanging;
                             mPLC.Dispose();
                             mPLC = null;
                         }

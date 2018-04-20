@@ -12,6 +12,7 @@ namespace Connection.S7PLCSimAdv2
     {
         public Connection           mConnection;
         public string               mTagName;
+        public volatile bool        mUnlockWrite    = false;
 
         public object               mValue          = 0;
         private readonly object     mValueLock      = new object();
@@ -128,9 +129,15 @@ namespace Connection.S7PLCSimAdv2
                 {
                     if (ValuesCompare.isNotEqual(mValue, lNewValue))
                     {
-                        mValue      = lNewValue;
-                        mNeedWrite  = true;
-                        lUpdate     = true;
+                        mValue          = lNewValue;
+                        mNeedWrite      = true;
+                        lUpdate         = true;
+                        mUnlockWrite    = false;
+                    }
+                    else if (mUnlockWrite)
+                    {
+                        mUnlockWrite    = false;
+                        mNeedWrite      = true;
                     }
                 }
                 finally
