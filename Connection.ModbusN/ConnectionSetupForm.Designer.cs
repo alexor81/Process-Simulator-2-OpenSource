@@ -802,7 +802,7 @@ namespace Connection.ModbusN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 583);
+            this.ClientSize = new System.Drawing.Size(609, 587);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox_Items);
             this.Controls.Add(this.groupBox_Options);

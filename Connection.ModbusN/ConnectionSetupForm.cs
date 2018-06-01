@@ -339,10 +339,20 @@ namespace Connection.ModbusN
 
         private void                okCancelButton_ButtonClick(object aSender, EventArgs aEventArgs)
         {
-            if (mConnection.Connected == false)
+            if (mConnection.Connected == false && okCancelButton.DialogResult == DialogResult.OK)
             {
-                updateTransport();
+                try
+                {
+                    updateTransport();
+                }
+                catch(Exception lExc)
+                {
+                    Log.Error("Error while user was changing connection properties. " + lExc.Message, lExc.ToString());
+                    MessageForm.showMessage(lExc.Message, this);
+                    return;
+                }
             }
+
             DialogResult = okCancelButton.DialogResult;
         }
 
