@@ -19,7 +19,7 @@ YouTube channel:  https://youtube.com/channel/UC0CQz6fu2gPb9jaKjqNk2RA
 * **Inverse** - invert value of Boolean type or array of this type.
 * **Round** - round numeric value or all values in array.
 * **Scale** - scale value using configured ranges.
-* **ToBoolean** - convert two values (true/false) to Boolean value and backwards.
+* **ToBoolean** - convert two values (true/false) to Boolean value and backward.
 * **ToString** - convert any value to string and backward.
 
 ## Simulation objects
