@@ -96,5 +96,18 @@ namespace Utils
                 return true;
             }
         }
+    
+        private static string       mOPCServerName      = "";
+        public static string        OPCServerName
+        {
+            get
+            {
+                return mOPCServerName;
+            }
+            set
+            {
+                mOPCServerName = value;
+            }
+        }
     }
 }
