@@ -1,7 +1,8 @@
 # Process Simulator 2 Open Source
 
 Open source code of Process Simulator 2  
-Project site:     https://automation.ucoz.com  
+
+Latest version: [2.8.6743](https://www.dropbox.com/scl/fi/m90uw9ehbepu6nvt855m0/Process-Simulator-2.8.6743.exe?rlkey=4ay8vjgx7bxaenyz64v22tz4b&st=6jr19cg9&dl=0)  
 YouTube channel:  https://youtube.com/channel/UC0CQz6fu2gPb9jaKjqNk2RA
 
 ## Connections
