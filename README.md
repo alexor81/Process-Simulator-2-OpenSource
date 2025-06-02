@@ -1,9 +1,8 @@
-# Process Simulator 2 Open Source
+# Process Simulator 2
 
-Open source code of Process Simulator 2  
+You can download the full latest version of Process Simulator 2 from this link (install exe, dropbox): [Process Simulator 2.8.6743](https://www.dropbox.com/scl/fi/m90uw9ehbepu6nvt855m0/Process-Simulator-2.8.6743.exe?rlkey=4ay8vjgx7bxaenyz64v22tz4b&st=6jr19cg9&dl=0)  
 
-Latest version: [2.8.6743](https://www.dropbox.com/scl/fi/m90uw9ehbepu6nvt855m0/Process-Simulator-2.8.6743.exe?rlkey=4ay8vjgx7bxaenyz64v22tz4b&st=6jr19cg9&dl=0)  
-YouTube channel:  https://youtube.com/channel/UC0CQz6fu2gPb9jaKjqNk2RA
+This repository contains only a part of the open source code as an example to learn how to develop your own plugins.
 
 ## Connections
 * **Internal** - communication between objects inside application.
